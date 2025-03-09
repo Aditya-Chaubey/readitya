@@ -4,6 +4,10 @@ body{
     padding: 0 10px;
     margin: 50px auto;
     max-width: 650px;
+
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
 }
         
 #maincontent
@@ -14,7 +18,11 @@ body{
 }
 
 h1 {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 800;
+    font-size: 3em;
+    color:rgb(114, 119, 117);
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.3em;
 }
