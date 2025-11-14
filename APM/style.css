@@ -1,0 +1,1646 @@
+/* --- Saira - Luxury Perfume Brand Stylesheet (White & Light Brown Theme) --- */
+
+/* --- 1. Global Reset & Body Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    color: #4A3C32; /* Deep Rich Brown for main text */
+    background: #F8F0E3; /* Soft Warm White */
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+a {
+    color: #B89F7D; /* Light Brown Accent */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #4A3C32; /* Deep Rich Brown on hover */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #4A3C32; /* Deep Rich Brown for headers */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.8rem; }
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- 2. Header & Navigation --- */
+.header {
+    background: rgba(248, 240, 227, 0.9); /* Slightly transparent warm white */
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(184, 159, 125, 0.3); /* Light brown subtle line */
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4A3C32; /* Deep Rich Brown */
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2.5rem;
+}
+
+.nav-links a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
+    color: #7D6B5E; /* Lighter brown for nav links */
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #B89F7D; /* Light Brown Accent */
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #4A3C32; /* Deep Rich Brown on hover */
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+    background: #4A3C32; /* Deep Rich Brown on hover */
+}
+
+/* --- 3. Hero Section --- */
+.hero {
+    height: 100vh;
+    background: url('FP1.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay for text readability (lighter for this theme) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(248, 240, 227, 0.3); /* Very light overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    font-weight: 400;
+    padding-top: 20%;
+    color: #ffffff; /* Deep Rich Brown */
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 22.5rem;
+    color: #ffffff; /* Lighter brown for sub-text */
+    letter-spacing: 1px;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #B89F7D; /* Light Brown Accent */
+    color: #F8F0E3; /* Soft Warm White */
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid #B89F7D;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: transparent;
+    color: #4A3C32; /* Deep Rich Brown */
+    border-color: #4A3C32;
+}
+
+/* --- 4. Saira Promise Section --- */
+.saira-promise {
+    background: #F8F0E3; /* Soft Warm White */
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.saira-promise h2 {
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+.promise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    padding-top: 2rem;
+}
+
+.promise-item {
+    background: rgba(184, 159, 125, 0.1); /* Very subtle light brown tint */
+    padding: 2.5rem;
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.promise-item:hover {
+    background: rgba(184, 159, 125, 0.2);
+}
+
+.promise-item h3 {
+    color: #B89F7D; /* Light Brown Accent */
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.promise-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+/* --- 5. Explore Collection Section --- */
+.explore-collection {
+    background: #F8F0E3; /* Soft Warm White */
+    padding: 5rem 0;
+}
+
+.explore-collection h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+.collection-overview {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    background: rgba(184, 159, 125, 0.05); /* Very subtle light brown tint */
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 3rem;
+}
+
+.collection-overview img {
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+}
+
+.collection-text {
+    flex: 2;
+    min-width: 300px;
+    text-align: left;
+    max-width: 500px;
+}
+
+.collection-text h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+.collection-text p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+/* --- 6. Footer --- */
+footer {
+    background: #E8E0D7; /* Slightly darker warm white for contrast */
+    color: #4A3C32;
+    padding: 3rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(184, 159, 125, 0.3);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+footer p {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #7D6B5E; /* Lighter brown for copyright */
+}
+
+.social-links a {
+    margin: 0 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #B89F7D; /* Light Brown Accent */
+}
+
+.social-links a:hover {
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+/* --- Fade-in Animations (no change needed here) --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in-up.delay-1 { animation-delay: 0.2s; }
+.fade-in-up.delay-2 { animation-delay: 0.4s; }
+.fade-in-up.delay-3 { animation-delay: 0.6s; }
+
+
+/* --- Media Queries for Responsiveness (no change needed here) --- */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+    }
+    .nav-links {
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-links li {
+        margin: 0.5rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .promise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .collection-overview {
+        flex-direction: column;
+        text-align: center;
+    }
+    .collection-text {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    footer p {
+        margin-bottom: 1rem;
+    }
+    .social-links a {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Page Header (General style for all inner pages) */
+.page-header {
+    background: #E8E0D7; /* Slightly darker warm white for header background */
+    color: #4A3C32;
+    /* --- CHANGE THIS LINE --- */
+    padding: 8rem 0 4rem 0; /* Original: 8rem 0 4rem 0. Changed to accommodate navbar height. */
+    /* --- TO THIS --- */
+    padding-top: 10rem; /* Increased top padding to push content below the fixed navbar */
+    padding-bottom: 4rem; /* Keep existing bottom padding */
+    /* --- OR SIMPLY MODIFY THE ORIGINAL LINE TO BE CLEARER --- */
+    /* padding: 10rem 0 4rem 0; */ /* Make the top padding larger */
+
+    text-align: center;
+    border-bottom: 1px solid rgba(184, 159, 125, 0.3);
+}
+/* --- Saira - Elixirs Page Specific Styles --- */
+
+.elixirs-grid {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.elixir-item {
+    display: flex;
+    flex-wrap: wrap; /* Allows image and text to stack on smaller screens */
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    background: rgba(184, 159, 125, 0.05); /* Subtle tint for each item */
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    margin-bottom: 5rem; /* Space between elixir items */
+    padding: 3rem;
+}
+
+/* Alternate layout for every second item */
+.elixir-item:nth-child(even) {
+    flex-direction: row-reverse; /* Image on right, text on left */
+    background: rgba(232, 224, 215, 0.7); /* Slightly darker background for contrast */
+}
+
+.elixir-item img {
+    flex: 1;
+    min-width: 500px; /* Ensures image doesn't get too small */
+    height: 400px;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.elixir-details {
+    flex: 2;
+    min-width: 300px;
+    max-width: 600px;
+    text-align: left;
+}
+
+.elixir-details h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+    letter-spacing: 1px;
+}
+
+.elixir-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+}
+
+.elixir-notes {
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: #7D6B5E; /* Lighter brown for notes */
+}
+
+.elixir-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #B89F7D; /* Light Brown Accent */
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.btn-small {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+}
+
+
+/* Media Queries for Elixirs Page */
+@media (max-width: 992px) {
+    .elixir-item {
+        flex-direction: column; /* Stack image and text */
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    .elixir-item:nth-child(even) {
+        flex-direction: column; /* Ensure stacking for even items too */
+    }
+    .elixir-details {
+        text-align: center;
+        max-width: 100%;
+    }
+    .elixir-item img {
+        max-width: 100%; /* Smaller image on mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    .elixir-details h2 {
+        font-size: 2.5rem;
+    }
+    .elixir-description, .elixir-notes {
+        font-size: 1rem;
+    }
+    .elixir-price {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 480px) {
+    .elixir-details h2 {
+        font-size: 2rem;
+    }
+    .elixir-price {
+        font-size: 1.8rem;
+    }
+    .btn-small {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.8rem;
+    }
+}
+/* --- Saira - Market Insight Page Specific Styles --- */
+
+/* Target Market Section */
+.target-market {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.market-profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.profile-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    background: rgba(184, 159, 125, 0.07);
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.profile-item h3 {
+    color: #B89F7D;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.profile-item ul {
+    list-style: none; /* Remove default list bullets */
+    padding-left: 0;
+}
+
+.profile-item ul li {
+    font-size: 1.1rem;
+    color: #4A3C32;
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.profile-item ul li::before {
+    content: '—'; /* Custom bullet point */
+    color: #B89F7D;
+    position: absolute;
+    left: 0;
+}
+
+/* Market Opportunity Section */
+.market-opportunity {
+    padding: 5rem 0;
+    background: #E8E0D7; /* Slightly darker warm white */
+}
+
+.opportunity-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.opportunity-content img {
+    flex: 1;
+    min-width: 350px;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.opportunity-text {
+    flex: 1.5;
+    min-width: 350px;
+    max-width: 600px;
+    text-align: left;
+}
+
+.opportunity-text h3 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+}
+
+.opportunity-text p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+}
+
+/* Positioning Map Section */
+.positioning-map {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 3rem auto 0 auto;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.map-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.map-overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(232, 224, 215, 0.8); /* Semi-transparent darker white */
+    padding: 1.5rem 2rem;
+    color: #4A3C32;
+    text-align: left;
+    border-top: 1px solid rgba(184, 159, 125, 0.2);
+}
+
+.map-overlay-text h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #4A3C32;
+}
+
+.map-overlay-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: #7D6B5E;
+}
+
+
+/* Media Queries for Market Insight Page */
+@media (max-width: 992px) {
+    .market-profile {
+        flex-direction: column;
+        align-items: center;
+    }
+    .market-profile .profile-item {
+        max-width: 100%;
+    }
+    .opportunity-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .opportunity-text {
+        text-align: center;
+        max-width: 100%;
+    }
+    .map-overlay-text {
+        position: relative; /* Remove absolute positioning for stacking */
+        width: auto;
+        padding: 1rem;
+        border-top: none;
+    }
+    .map-container {
+        margin: 3rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .maison-story h2, .maison-process h2 { /* Re-using h2 from Maison for consistency */
+        font-size: 2.5rem;
+    }
+    .profile-item h3 {
+        font-size: 1.6rem;
+    }
+    .profile-item ul li {
+        font-size: 1rem;
+    }
+    .opportunity-text h3 {
+        font-size: 2rem;
+    }
+    .opportunity-text p {
+        font-size: 1rem;
+    }
+    .map-overlay-text h3 {
+        font-size: 1.5rem;
+    }
+    .map-overlay-text p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .maison-story h2, .maison-process h2 {
+        font-size: 2rem;
+    }
+    .profile-item h3 {
+        font-size: 1.4rem;
+    }
+    .profile-item ul li {
+        font-size: 0.9rem;
+    }
+    .opportunity-text h3 {
+        font-size: 1.8rem;
+    }
+    .opportunity-text p {
+        font-size: 0.9rem;
+    }
+    .map-overlay-text h3 {
+        font-size: 1.3rem;
+    }
+}
+/* --- Saira - The Art of Presence Page Specific Styles --- */
+
+.imc-overview {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.imc-mix {
+    padding: 5rem 0;
+    background: #E8E0D7; /* Slightly darker warm white */
+}
+
+.imc-mix h2, .what-we-dont-do h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    color: #4A3C32;
+    text-align: center;
+}
+
+.strategy-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    background: rgba(184, 159, 125, 0.05); /* Subtle tint for each item */
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 3rem;
+}
+
+/* Reverse layout for alternating items */
+.strategy-item.reverse-layout {
+    flex-direction: row-reverse;
+}
+
+.strategy-item img {
+    flex: 1;
+    min-width: 350px;
+    height: auto;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.strategy-text {
+    flex: 1.5;
+    min-width: 350px;
+    max-width: 600px;
+    text-align: left;
+}
+
+.strategy-text h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+    letter-spacing: 1px;
+}
+
+.strategy-text p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #4A3C32;
+}
+
+/* What We Don't Do Section */
+.what-we-dont-do {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.dont-do-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.dont-do-item {
+    background: rgba(248, 240, 227, 0.7); /* Slightly transparent warm white for item background */
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.dont-do-item h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #B89F7D; /* Light Brown Accent */
+}
+
+.dont-do-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4A3C32;
+}
+
+
+/* Media Queries for The Art of Presence Page */
+@media (max-width: 992px) {
+    .strategy-item {
+        flex-direction: column; /* Stack image and text */
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    .strategy-item.reverse-layout {
+        flex-direction: column; /* Ensure stacking for reversed items too */
+    }
+    .strategy-item img {
+        max-width: 80%;
+    }
+    .strategy-text {
+        text-align: center;
+        max-width: 100%;
+    }
+    .dont-do-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .imc-mix h2, .what-we-dont-do h2 {
+        font-size: 2.5rem;
+    }
+    .strategy-text h3 {
+        font-size: 2rem;
+    }
+    .strategy-text p, .dont-do-item p {
+        font-size: 1rem;
+    }
+    .dont-do-item h3 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .imc-mix h2, .what-we-dont-do h2 {
+        font-size: 2rem;
+    }
+    .strategy-text h3 {
+        font-size: 1.8rem;
+    }
+    .strategy-item img {
+        min-width: unset;
+    }
+    .dont-do-item h3 {
+        font-size: 1.6rem;
+    }
+}
+/* --- Saira - Investment Page Specific Styles --- */
+
+.budget-overview, .roi-model {
+    padding: 5rem 0;
+}
+
+.budget-overview {
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.roi-model {
+    background: #E8E0D7; /* Slightly darker warm white */
+}
+
+.budget-grid, .roi-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.budget-item, .roi-item {
+    background: rgba(184, 159, 125, 0.07);
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.budget-item h3, .roi-item h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #B89F7D; /* Light Brown Accent */
+}
+
+.budget-item .percentage, .roi-item .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4A3C32; /* Deep Rich Brown */
+    margin-bottom: 1.5rem;
+    display: block; /* Ensures it sits on its own line */
+}
+
+.roi-item .value {
+    font-size: 2.5rem; /* Slightly smaller for 'Exceptional' */
+}
+
+
+.budget-item p, .roi-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4A3C32;
+    margin-bottom: 0;
+}
+
+/* Media Queries for Investment Page */
+@media (max-width: 992px) {
+    .budget-grid, .roi-breakdown {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .budget-item h3, .roi-item h3 {
+        font-size: 1.8rem;
+    }
+    .budget-item .percentage, .roi-item .value {
+        font-size: 2.5rem;
+    }
+    .roi-item .value {
+        font-size: 2rem;
+    }
+    .budget-item p, .roi-item p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .budget-grid, .roi-breakdown {
+        grid-template-columns: 1fr;
+    }
+    .budget-item h3, .roi-item h3 {
+        font-size: 1.6rem;
+    }
+    .budget-item .percentage, .roi-item .value {
+        font-size: 2rem;
+    }
+    .roi-item .value {
+        font-size: 1.8rem;
+    }
+}
+/* --- Saira - The Proposition Page Specific Styles --- */
+
+.proposition-summary {
+    padding: 5rem 0;
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.proposition-summary h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    color: #4A3C32;
+    text-align: center;
+}
+
+.proposition-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.point-item {
+    background: rgba(184, 159, 125, 0.07);
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.point-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.point-item h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #B89F7D; /* Light Brown Accent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between icon and text */
+}
+
+.point-item .icon {
+    font-size: 1.5rem;
+    line-height: 1; /* Align icon vertically */
+}
+
+.point-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4A3C32;
+    margin-bottom: 0;
+}
+
+.call-to-action {
+    padding: 6rem 0;
+    background: #E8E0D7; /* Slightly darker warm white */
+    text-align: center;
+}
+
+.call-to-action h2 {
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: #4A3C32;
+}
+
+.call-to-action p {
+    font-size: 1.2rem;
+    color: #7D6B5E;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+}
+
+.btn-large {
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    border-width: 2px; /* Thicker border for emphasis */
+}
+
+
+/* Media Queries for The Proposition Page */
+@media (max-width: 992px) {
+    .proposition-points {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .proposition-summary h2, .call-to-action h2 {
+        font-size: 2.8rem;
+    }
+    .proposition-summary .section-subtitle, .call-to-action p {
+        font-size: 1rem;
+    }
+    .point-item h3 {
+        font-size: 1.6rem;
+    }
+    .point-item p {
+        font-size: 0.95rem;
+    }
+    .btn-large {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .proposition-summary h2, .call-to-action h2 {
+        font-size: 2.2rem;
+    }
+    .point-item h3 {
+        font-size: 1.4rem;
+    }
+    .point-item .icon {
+        font-size: 1.2rem;
+    }
+    .point-item p {
+        font-size: 0.9rem;
+    }
+    .btn-large {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+/* --- Saira - The Proposition Page Specific Styles (REVISED for Investment Pitch) --- */
+
+.executive-summary, .market-validation, .competitive-advantage, .financial-projections, .the-team {
+    padding: 5rem 0;
+}
+
+.executive-summary {
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.executive-summary .section-subtitle {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+.executive-summary p.text-center {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4A3C32;
+}
+
+.market-validation {
+    background: #E8E0D7; /* Slightly darker warm white */
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.data-item {
+    background: rgba(184, 159, 125, 0.1);
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 2.5rem 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.data-item h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #B89F7D; /* Light Brown Accent */
+}
+
+.data-item .metric {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #4A3C32; /* Deep Rich Brown */
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.data-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4A3C32;
+    margin-bottom: 0;
+}
+
+.strategy-summary {
+    font-style: italic;
+    margin-top: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #7D6B5E;
+}
+
+
+.competitive-advantage {
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.advantage-item {
+    background: rgba(184, 159, 125, 0.05);
+    border: 1px solid rgba(184, 159, 125, 0.15);
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.advantage-item h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #4A3C32; /* Deep Rich Brown */
+}
+
+.advantage-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #7D6B5E;
+    margin-bottom: 0;
+}
+
+
+.financial-projections {
+    background: #E8E0D7; /* Slightly darker warm white */
+}
+
+.financial-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.metric-item {
+    background: rgba(184, 159, 125, 0.15);
+    border: 1px solid rgba(184, 159, 125, 0.25);
+    padding: 2rem 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+}
+
+.metric-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #B89F7D;
+}
+
+.metric-item .metric {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4A3C32;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.metric-item p {
+    font-size: 0.95rem;
+    color: #7D6B5E;
+    margin-bottom: 0;
+}
+
+.ask-details {
+    background: #F8F0E3;
+    border: 1px solid rgba(184, 159, 125, 0.2);
+    padding: 3rem;
+    margin-top: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.ask-details h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #4A3C32;
+}
+
+.ask-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ask-details ul li {
+    font-size: 1.1rem;
+    color: #4A3C32;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.8rem;
+}
+
+.ask-details ul li::before {
+    content: '•';
+    color: #B89F7D;
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.ask-details ul li .highlight {
+    font-weight: 700;
+    color: #B89F7D;
+}
+
+.the-team {
+    background: #F8F0E3; /* Soft Warm White */
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.team-member {
+    background: rgba(184, 159, 125, 0.05);
+    border: 1px solid rgba(184, 159, 125, 0.15);
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem auto;
+    border: 3px solid #B89F7D;
+}
+
+.team-member h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #4A3C32;
+}
+
+.team-member .title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #7D6B5E;
+    margin-bottom: 1rem;
+}
+
+.team-member p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4A3C32;
+    margin-bottom: 0;
+}
+
+
+/* Call to Action - Re-using existing styles, ensuring they look good */
+.call-to-action {
+    padding: 6rem 0;
+    background: #E8E0D7; /* Slightly darker warm white */
+    text-align: center;
+}
+
+.call-to-action h2 {
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: #4A3C32;
+}
+
+.call-to-action p {
+    font-size: 1.2rem;
+    color: #7D6B5E;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+}
+
+.btn-large {
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    border-width: 2px;
+}
+
+
+/* Media Queries for The Proposition Page */
+@media (max-width: 992px) {
+    .data-grid, .advantage-grid, .financial-metrics, .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .ask-details {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .executive-summary h2, .market-validation h2, .competitive-advantage h2, .financial-projections h2, .the-team h2, .call-to-action h2 {
+        font-size: 2.8rem;
+    }
+    .executive-summary .section-subtitle, .market-validation .strategy-summary, .call-to-action p {
+        font-size: 1rem;
+    }
+    .data-item h3, .advantage-item h3 {
+        font-size: 1.4rem;
+    }
+    .data-item .metric {
+        font-size: 2.2rem;
+    }
+    .metric-item h3 {
+        font-size: 1.3rem;
+    }
+    .metric-item .metric {
+        font-size: 2rem;
+    }
+    .ask-details h3 {
+        font-size: 1.8rem;
+    }
+    .ask-details ul li {
+        font-size: 1rem;
+    }
+    .team-member h3 {
+        font-size: 1.6rem;
+    }
+    .team-member .title {
+        font-size: 1rem;
+    }
+    .team-member p {
+        font-size: 0.9rem;
+    }
+    .btn-large {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .executive-summary h2, .market-validation h2, .competitive-advantage h2, .financial-projections h2, .the-team h2, .call-to-action h2 {
+        font-size: 2.2rem;
+    }
+    .data-grid, .advantage-grid, .financial-metrics, .team-grid {
+        grid-template-columns: 1fr;
+    }
+    .data-item h3, .advantage-item h3 {
+        font-size: 1.3rem;
+    }
+    .data-item .metric {
+        font-size: 1.8rem;
+    }
+    .metric-item h3 {
+        font-size: 1.2rem;
+    }
+    .metric-item .metric {
+        font-size: 1.6rem;
+    }
+    .ask-details h3 {
+        font-size: 1.6rem;
+    }
+    .ask-details ul li {
+        font-size: 0.9rem;
+    }
+    .team-member h3 {
+        font-size: 1.4rem;
+    }
+    .team-member .title {
+        font-size: 0.9rem;
+    }
+    .team-member img {
+        width: 100px;
+        height: 100px;
+    }
+    .btn-large {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Saira - Competitor Page Specific Styles --- */
+
+.positioning-map {
+    padding: 5rem 0;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 3rem auto 0 auto;
+    border: 1px solid rgba(184, 159, 125, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    background: #F8F0E3;
+}
+
+.map-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.8;
+}
+
+.map-key {
+    background: rgba(248, 240, 227, 0.9); /* Semi-transparent warm white */
+    border-top: 1px solid rgba(184, 159, 125, 0.3);
+    padding: 1.5rem 2rem;
+}
+
+.map-key p {
+    font-size: 1rem;
+    font-style: italic;
+    color: #4A3C32;
+    margin-bottom: 0.5rem;
+}
+
+.map-key p strong {
+    font-style: normal;
+    color: #B89F7D;
+}
+
+.competitor-table-section {
+    padding: 5rem 0;
+}
+
+.competitor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    font-size: 1rem;
+}
+
+.competitor-table th,
+.competitor-table td {
+    padding: 1.5rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(184, 159, 125, 0.2);
+    color: #4A3C32;
+}
+
+.competitor-table th {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #B89F7D; /* Light Brown Accent */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.competitor-table td {
+    line-height: 1.7;
+}
+
+.competitor-table td:first-child strong {
+    font-size: 1.25rem;
+    font-family: 'Playfair Display', serif;
+    color: #4A3C32;
+    font-weight: 700;
+}
+
+.competitor-table tbody tr:nth-child(even) {
+    background: rgba(184, 159, 125, 0.05); /* Subtle row stripe */
+}
+
+/* Highlight row for Saira */
+.competitor-table tr.saira-row {
+    background: rgba(184, 159, 125, 0.15);
+    border-top: 2px solid #B89F7D;
+    border-bottom: 2px solid #B89F7D;
+}
+
+.competitor-table tr.saira-row td {
+    color: #4A3C32;
+}
+
+.advantage-summary {
+    padding: 5rem 0;
+}
+
+/* Re-use advantage-grid styles from proposition.html */
+.advantage-summary .advantage-item {
+    text-align: left;
+}
+
+.advantage-summary .advantage-item h3 {
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .competitor-table {
+        display: block;
+        overflow-x: auto; /* Allow horizontal scrolling on table */
+    }
+    .competitor-table th,
+    .competitor-table td {
+        min-width: 200px; /* Ensure columns have a minimum width */
+        font-size: 0.9rem;
+    }
+    .competitor-table td:first-child strong {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-key {
+        padding: 1rem;
+    }
+    .map-key p {
+        font-size: 0.9rem;
+    }
+}
