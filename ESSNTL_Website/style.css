@@ -1,0 +1,1150 @@
+/* --- 1. General & Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* --- 2. Buttons --- */
+.btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background: #444;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+    background: #f0f0f0;
+}
+
+/* --- 3. Header & Navigation --- */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header .container nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9rem;
+}
+.nav-links a:hover {
+    color: #000;
+}
+
+/* --- 4. Hero Section --- */
+.hero {
+    /* Using a placeholder image */
+    /* background: url("https://images.fastcompany.com/image/upload/f_webp,q_auto,c_fit/wp-cms-2/2024/11/p-1-91230748-uniqlo.jpg"); */
+    /* background-image: url('https://images.fastcompany.com/image/upload/f_webp,q_auto,c_fit/wp-cms-2/2024/11/p-1-91230748-uniqlo.jpg');  <-- Put your image path here */
+    background-image: url("https://media.gq.com/photos/68fbdde6eeefcbc1b0429d4d/16:9/w_2000,h_1125,c_limit/uniqlo%20lede%20v1.png");  /* <-- Put your image path here */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 70vh;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    /* Dark overlay for text readability */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- 5. Value Propositions --- */
+.value-props {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.value-props h2 {
+    font-size: 2rem;
+}
+
+.props-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.prop-item {
+    flex: 1;
+}
+
+.prop-item .icon {
+    font-size: 2.5rem;
+}
+
+.prop-item h3 {
+    margin: 1rem 0 0.5rem;
+}
+
+/* --- 6. Featured Collections --- */
+.featured-collections {
+    padding: 4rem 0;
+    background: #f9f9f9;
+}
+
+.collections-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.collection-item {
+    flex: 1;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.collection-core-heading {
+    color:#eee ;
+}
+/* Using placeholder images */
+.collection-core {
+    /* background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/466885/item/goods_74_466885_3x4.jpg?width=600'); */
+    background-image: url('https://image.uniqlo.com/UQ/ST3/jp/imagesother/000_PLP/PoloShirt/25SS/MEN/KV-men-sp-01.jpg');  /* <-- Put your image path here */
+    background-size:cover ;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.collection-tech {
+    /* background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x400/bbbbbb/444444?text=TECH+Collection'); */
+    
+    background-image: url('https://static.fibre2fashion.com/Newsresource/images/291/uniqlo_302682.jpg');  /* <-- Put your image path here */
+    background-size:cover ;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* --- 7. Brand Spotlight --- */
+.spotlight {
+    padding: 4rem 0;
+}
+
+.spotlight-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.spotlight-image {
+    flex: 1;
+}
+.spotlight-image img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.spotlight-content {
+    flex: 1;
+}
+.spotlight-content h2 {
+    font-size: 2rem;
+}
+.spotlight-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- 8. Email Signup --- */
+.signup {
+    background: #f4f4f4;
+    color: #333;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.signup form {
+    margin-top: 1rem;
+}
+
+.signup input[type="email"] {
+    padding: 12px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+}
+
+.signup button {
+    padding: 12px 20px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* --- 9. Footer --- */
+footer {
+    background: #f9f9f9;
+    padding: 3rem 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+}
+
+.footer-column:first-child {
+    flex: 1.5; /* Give the brand column a bit more space */
+}
+
+.footer-column h4 {
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+}
+.footer-column ul li a {
+    color: #555;
+}
+.footer-column ul li a:hover {
+    color: #000;
+}
+.footer-column p {
+    margin-top: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* --- 10. About Page Styles --- */
+
+.page-header {
+    background: #f9f9f9;
+    padding: 3rem 0;
+    text-align: center;
+}
+.page-header h1 {
+    font-size: 2.5rem;
+}
+
+/* --- Content Split (for Story) --- */
+.content-split {
+    padding: 4rem 0;
+}
+
+.split-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.split-image {
+    flex: 1;
+}
+.split-image img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.split-content {
+    flex: 1;
+}
+.split-content h2 {
+    font-size: 2rem;
+}
+.split-content p {
+    margin-bottom: 1rem;
+}
+
+/* --- Mission & Vision --- */
+.mission-vision {
+    padding: 4rem 0;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+.mission-vision h2 {
+    font-size: 2rem;
+}
+
+.mv-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.mv-item {
+    flex: 1;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: left;
+}
+
+/* --- Call to Action Banner --- */
+.cta-banner {
+    background: #333;
+    color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.cta-banner h2 {
+    font-size: 2rem;
+    color: #fff;
+}
+.cta-banner p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Inverted button style for dark backgrounds */
+.btn-inverted {
+    background: #fff;
+    color: #000;
+}
+.btn-inverted:hover {
+    background: #f0f0f0;
+}
+
+/* --- Responsive (Small Add-on) --- */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+    .mv-container {
+        flex-direction: column;
+    }
+}
+/* --- 11. Collections Page Styles --- */
+
+.pricing-strategy {
+    padding: 3rem 0;
+    border-bottom: 1px solid #eee;
+    background: #f9f9f9;
+}
+.pricing-strategy h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+.pricing-strategy p {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.collections-page {
+    padding: 4rem 0;
+}
+
+.collections-page h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.collection-description {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.collection-divider {
+    margin-top: 4rem;
+}
+
+/* --- Product Grid --- */
+.product-grid {
+    display: grid;
+    /* This creates a responsive grid: 
+       - auto-fit: adds as many columns as fit
+       - minmax: each column is at least 280px wide, and max is 1 fraction (1fr)
+    */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    overflow: hidden; /* To contain the image */
+    transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.product-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover; /* Ensures image covers the space nicely */
+    display: block;
+}
+
+.product-card-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.product-card h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.product-card .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- 12. Analysis Page Styles --- */
+
+.analysis-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.analysis-section.section-light {
+    background: #f9f9f9;
+}
+
+.analysis-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: -2rem auto 2.5rem auto;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* --- Target Market Segments --- */
+.market-segments {
+    display: flex;
+    gap: 2rem;
+}
+
+.segment {
+    flex: 1;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.segment h3 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.segment ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.segment ul li {
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+/* --- Market Size Stats --- */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    flex: 1;
+}
+
+.stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.stat-label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* --- Financials Grid --- */
+.financials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.financial-item {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 4px;
+    text-align: left; /* <-- Add this line */
+}
+
+.financial-item h3 {
+    font-size: 1.25rem;
+}
+
+/* --- Competitor Table --- */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+.comparison-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* --- Positioning Map --- */
+.positioning-title {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+}
+
+.positioning-map {
+    width: 100%;
+    max-width: 800px;
+    margin: 1rem auto 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.positioning-map img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+}
+
+/* --- Add to Responsive --- */
+@media (max-width: 768px) {
+    .market-segments {
+        flex-direction: column;
+    }
+    .stats-container {
+        flex-direction: column;
+    }
+}
+
+/* --- 13. IMC Plan Page Styles --- */
+
+.imc-tool {
+    padding: 4rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.imc-tool h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.imc-strategy {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.imc-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.imc-item {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    overflow: hidden;
+}
+/* Apply hover shadow from product card */
+.imc-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.imc-item img {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Good for video/digital mockups */
+    object-fit: cover;
+    display: block;
+    background: #f0f0f0;
+    border-bottom: 1px solid #eee;
+}
+
+.imc-item-content {
+    padding: 1.5rem;
+}
+
+.imc-item-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.imc-item-content p {
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.imc-item-content p strong {
+    color: #000;
+}
+
+/* --- IMC Exclusions Section --- */
+.imc-exclusions {
+    padding: 3rem;
+    background: #fcf2f2; /* Light red/warning */
+    border: 1px solid #e5c6c6;
+    border-radius: 4px;
+    margin: 3rem auto;
+}
+
+.imc-exclusions h2 {
+    text-align: left;
+    color: #a94442;
+    margin-bottom: 1.5rem;
+}
+
+.imc-exclusions h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.imc-exclusions p {
+    color: #a94442;
+}
+
+/* --- 14. Budget & ROI Page Styles --- */
+
+.budget-section {
+    padding: 4rem 0;
+}
+
+.budget-section h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* --- Budget Table --- */
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+
+.budget-table th,
+.budget-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.budget-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+.budget-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Total Row */
+.budget-table tfoot th {
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.budget-table tfoot td {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+    background: #f0f0f0;
+}
+
+/* --- ROI Justification --- */
+.roi-justification {
+    padding: 4rem 0;
+}
+
+.roi-justification h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.roi-justification h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.roi-justification ul {
+    margin-left: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.roi-justification ul li {
+    margin-bottom: 0.5rem;
+}
+/* --- 15. Pitch Page Styles --- */
+
+.pitch-ask {
+    padding: 3rem 0;
+    background: #f9f9f9;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.pitch-ask h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.pitch-ask .total-budget {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* This container ensures the text is readable */
+.pitch-content {
+    padding: 4rem 0;
+}
+
+/* This is the key: max-width makes it look like 
+   a professional article, not a weird, wide page */
+.pitch-content .container {
+    max-width: 800px; /* Set a max-width for readability */
+}
+
+.pitch-content h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.pitch-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.pitch-content ul {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-left: 20px;
+    margin-bottom: 1.5rem;
+}
+.pitch-content ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Center the stats-container on this page */
+.pitch-content .stats-container {
+    padding: 2rem 0;
+}
+
+.pitch-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+.pitch-cta .btn,
+.pitch-cta .btn-secondary {
+    margin: 0 0.5rem;
+}
+
+/* --- 14. Budget & ROI Page Styles --- */
+
+.budget-section {
+    padding: 4rem 0;
+}
+
+.budget-section h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* --- Budget Table --- */
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+
+.budget-table th,
+.budget-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.budget-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+.budget-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Total Row */
+.budget-table tfoot th {
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.budget-table tfoot td {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+    background: #f0f0f0;
+}
+
+/* --- ROI Justification --- */
+.roi-justification {
+    padding: 4rem 0;
+}
+
+.roi-justification h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.roi-justification h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.roi-justification ul {
+    margin-left: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.roi-justification ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- 15. Pitch Page Styles --- */
+
+.pitch-ask {
+    padding: 3rem 0;
+    background: #f9f9f9;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.pitch-ask h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.pitch-ask .total-budget {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* This container ensures the text is readable */
+.pitch-content {
+    padding: 4rem 0;
+}
+
+/* This is the key: max-width makes it look like 
+   a professional article, not a wide, full-width page */
+.pitch-content .container {
+    max-width: 800px; /* Set a max-width for readability */
+}
+
+.pitch-content h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.pitch-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.pitch-content ul {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-left: 20px;
+    margin-bottom: 1.5rem;
+}
+.pitch-content ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Center the stats-container on this page */
+.pitch-content .stats-container {
+    padding: 2rem 0;
+}
+
+.pitch-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+.pitch-cta .btn,
+.pitch-cta .btn-secondary {
+    margin: 0 0.5rem;
+}
+
+/* --- 16. Expanded Pricing Strategy (Collections Page) --- */
+
+.pricing-strategy-expanded {
+    padding: 4rem 0;
+    background: #f9f9f9; /* Matches other light sections */
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-strategy-expanded h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Uses .section-subtitle class from Analysis page */
+.pricing-strategy-expanded .section-subtitle {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.pricing-pillars {
+    display: grid;
+    /* Responsive grid: 2 columns on medium screens, 4 on large */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.pillar-item {
+    background: #ffffff;
+    border: 1px solid #eee;
+    padding: 2rem;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Re-use hover effect from product cards */
+.pillar-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.pillar-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-conclusion {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.pricing-conclusion h3 {
+    font-size: 1.5rem;
+}
+
+/* --- 17. Expanded Competitor Table (Analysis Page) --- */
+
+/* Base style for the new table */
+.comparison-table-expanded {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    text-align: left;
+    font-size: 0.95rem; /* Slightly smaller to fit more content */
+}
+
+.comparison-table-expanded th,
+.comparison-table-expanded td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    vertical-align: top; /* Align content to the top */
+}
+
+.comparison-table-expanded th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+/* This is the key style for the grouping */
+.comparison-table-expanded .segment-header td {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+/* Alternating row color for readbility, skipping the header */
+.comparison-table-expanded tbody tr:not(.segment-header):nth-child(even) {
+    background: #f9f9f9;
+}
+
+.comparison-table-expanded tbody tr:hover:not(.segment-header) {
+    background: #f0f0f0; /* Add a hover state */
+}
+
+/* Style for your brand */
+.comparison-table-expanded td strong {
+    color: #000;
+}
