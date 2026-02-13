@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="music-overlay" onclick="startExperience()">
+        <div class="overlay-content">
+            <h1>Tap to Open ❤️</h1>
+            <p>(Turn up your volume!)</p>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="./song.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+
+    <div class="bg-decorations">
+        <div class="heart h1">❤️</div>
+        <div class="heart h2">💖</div>
+        <div class="heart h3">💕</div>
+    </div>
+
+    <main class="story-container">
+
+        <section class="story-section" id="section1">
+            <div class="content-box">
+                <div class="photo-frame">
+                    <img src="pic1.jpg" alt="First Met">
+                </div>
+                <div class="text-box">
+                    <h2>When We First Met...</h2>
+                    <p>Taking French was the best decision I made here. Little did I know that a little bit of flirting would lead me here...</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">↓ Scroll ↓</div>
+        </section>
+
+        <section class="story-section" id="section2">
+            <div class="content-box reverse-layout">
+                <div class="text-box">
+                    <h2>Becoming Friends</h2>
+                    <p>We started hanging out more, talking about everything and nothing. Those were some of my favorite days. I regret not being more upfront. But still... our 'situationship' days were fun nonetheless</p>
+                </div>
+                <div class="photo-frame">
+                    <img src="pic2.HEIC" alt="Hanging Out">
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="section3">
+            <div class="content-box">
+                <div class="photo-frame">
+                    <img src="pic3.jpeg" alt="Relationship">
+                </div>
+                <div class="text-box">
+                    <h2>Us. Finally.</h2>
+                    <p>And then, we became "Us". Life just got a million times better with you by my side. My 'emotionally unavailable' ass suddenly became always available for you. </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="section4">
+            <div class="content-box reverse-layout">
+                <div class="text-box">
+                    <h2>Our Trip to Malaysia</h2>
+                    <p>Remember Malaysia? The adventures, the food, the memories? Our first international trip... and it was with each other. It was perfect because I was with you. Can't wait for another international trip with my love</p>
+                </div>
+                <div class="photo-frame">
+                    <img src="pic4.jpeg" alt="Malaysia">
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="ask-section">
+            <div class="question-wrapper">
+                <img class="ask-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3RxeXF1eGZ0cDN0N2w1eGZ0cDN0N2w1eGZ0cDN0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Please">
+                <h1 class="big-question">Will you be my Valentine?</h1>
+                
+                <div class="buttons">
+                    <button id="yesBtn" onclick="acceptLove()">Yes! ❤️</button>
+                    <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="success-container" id="successView">
+        <button class="close-btn" onclick="closeSuccess()">✖</button>
+        <h1 class="success-text">YAY! I Love You! ❤️</h1>
+        <img class="success-img" src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" alt="Happy">
+        <p>Best Valentine Ever!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
