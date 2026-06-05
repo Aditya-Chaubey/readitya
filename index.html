@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~/portfolio — index</title>
+  <meta name="description" content="Interactive portfolio. Type a command to explore." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+  <main class="page home">
+    <div class="wrap" style="width:100%; display:grid; place-items:center;">
+      <section class="terminal boot" aria-label="interactive console">
+        <div class="terminal__bar">
+          <div class="lights"><i></i><i></i><i></i></div>
+          <span>visitor@portfolio — console</span>
+          <span class="tt">80×24</span>
+        </div>
+
+        <div class="terminal__body" id="term-body">
+          <!-- intro lines injected by terminal.js -->
+        </div>
+
+        <div class="terminal__body" style="min-height:auto; padding-top:0;">
+          <div class="prompt">
+            <span class="ps1"><span style="color:var(--accent)">visitor@portfolio</span>:<span class="path">~/portfolio</span>$</span>
+            <span class="prompt__field">
+              <input id="term-input" type="text" autocomplete="off" autocapitalize="off"
+                     spellcheck="false" aria-label="command input" />
+              <span id="term-mirror" style="position:absolute;visibility:hidden;white-space:pre;font:inherit;"></span>
+              <span class="cursor-block" id="term-cursor"></span>
+            </span>
+          </div>
+
+          <div class="suggest" aria-label="quick navigation">
+            <button class="chip" data-chip="about"    data-scramble>about<span class="k"> ↵</span></button>
+            <button class="chip" data-chip="projects" data-scramble>projects<span class="k"> ↵</span></button>
+            <button class="chip" data-chip="contact"  data-scramble>contact<span class="k"> ↵</span></button>
+            <button class="chip" data-chip="help"     data-scramble>help<span class="k"> ↵</span></button>
+          </div>
+        </div>
+      </section>
+
+      <p class="home__hint">use ↑ ↓ for history · tab to autocomplete · esc to return home</p>
+    </div>
+  </main>
+
+  <script src="js/rain.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/terminal.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~/portfolio — contact</title>
+  <meta name="description" content="Open a channel — ways to get in touch." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="contact">
+
+  <main class="page boot">
+    <div class="wrap">
+      <p class="crumb">~/portfolio/<b>contact</b></p>
+      <span class="section-tag" data-reveal="0">uplink // 03</span>
+      <h1 class="title" data-reveal="1">Open a<br>channel.</h1>
+
+      <div class="contact-grid">
+        <!-- channels -->
+        <div class="channels" data-reveal="2">
+          <div class="channel" data-copy="hello@placeholder.dev">
+            <span class="cidx">01</span>
+            <span>
+              <span class="ctype">email</span>
+              <div class="cval">hello@placeholder.dev</div>
+            </span>
+            <span class="caction">click to copy ⧉</span>
+          </div>
+
+          <div class="channel" data-href="https://github.com">
+            <span class="cidx">02</span>
+            <span>
+              <span class="ctype">github</span>
+              <div class="cval">github.com/placeholder</div>
+            </span>
+            <span class="caction">open ↗</span>
+          </div>
+
+          <div class="channel" data-href="https://linkedin.com">
+            <span class="cidx">03</span>
+            <span>
+              <span class="ctype">linkedin</span>
+              <div class="cval">in/placeholder</div>
+            </span>
+            <span class="caction">open ↗</span>
+          </div>
+
+          <div class="channel" data-copy="+00 000 000 0000">
+            <span class="cidx">04</span>
+            <span>
+              <span class="ctype">signal / phone</span>
+              <div class="cval">+00 000 000 0000</div>
+            </span>
+            <span class="caction">click to copy ⧉</span>
+          </div>
+        </div>
+
+        <!-- status card -->
+        <aside class="contact-card" data-reveal="3">
+          <h3>// transmission_status</h3>
+          <div class="row"><span class="k">availability</span><span class="v ok"><span class="blink-dot"></span>open to work</span></div>
+          <div class="row"><span class="k">response time</span><span class="v">&lt; 24h</span></div>
+          <div class="row"><span class="k">timezone</span><span class="v">UTC+00 · placeholder</span></div>
+          <div class="row"><span class="k">location</span><span class="v">remote / anywhere</span></div>
+          <div class="row"><span class="k">encryption</span><span class="v ok">enabled</span></div>
+
+          <div class="socials">
+            <a href="https://twitter.com" target="_blank" rel="noopener" data-scramble>x / twitter</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" data-scramble>instagram</a>
+          </div>
+        </aside>
+      </div>
+
+      <a class="back-link" href="index.html" data-scramble>← back to console</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/command.js"></script>
+</body>
+</html>
