@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~/portfolio — projects</title>
+  <meta name="description" content="Selected work — browse the archive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="projects">
+
+  <main class="page boot">
+    <div class="wrap">
+      <p class="crumb">~/portfolio/<b>projects</b></p>
+      <span class="section-tag" data-reveal="0">archive // 02</span>
+      <h1 class="title" data-reveal="1">Selected<br>work.</h1>
+      <p class="lead" data-reveal="2" style="margin-top:1rem">
+        <span style="color:var(--accent)">$</span> ls ./projects — select an entry to inspect it.
+        Use ↑ ↓ keys or click.
+      </p>
+
+      <section class="explorer" data-reveal="3" aria-label="project explorer">
+        <div class="explorer__list">
+          <div class="explorer__head"><span>NAME</span><span>SIZE</span></div>
+          <div id="file-list" role="listbox" aria-label="projects"></div>
+        </div>
+        <div class="explorer__detail" id="detail" aria-live="polite">
+          <!-- detail injected by projects.js -->
+        </div>
+      </section>
+
+      <a class="back-link" href="index.html" data-scramble>← back to console</a>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/command.js"></script>
+</body>
+</html>
