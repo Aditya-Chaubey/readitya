@@ -9,7 +9,7 @@ const PROJECTS = [
     name: 'hanok_notes', ext: '.app', size: '7.6kb',
     title: 'Hanok — Notes', role: 'Design + Build',
     year: '2026', type: 'Notes App / PWA', status: 'Live', client: 'Self',
-    desc: 'A quiet, local-first notes app with Korean-gallery minimalism at its core — Notion-style rich editing, Obsidian-style backlinks, and an optional local-folder mode that stores notes as real, Obsidian-compatible Markdown files. Installable as a PWA; works fully offline.',
+    desc: 'A quiet, local-first notes app with Korean-gallery minimalism at its core — rich editing, backlinks with an orbit-style connection graph, tables, inline tags, daily notes, and a trash with soft-delete. An optional local-folder mode stores notes as real, Obsidian-compatible Markdown files. Installable as a PWA; works fully offline, on desktop or mobile.',
     stack: ['React', 'TipTap', 'IndexedDB', 'PWA'],
     link: 'hanok/',
   },
