@@ -201,7 +201,9 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
     user-select: none;
     -webkit-user-select: none;
   }
-  .stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+  /* pointer-events: Firefox hit-tests this layer in front of tapes pushed back in 3D */
+  .stage { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+  .stage .tape { pointer-events: auto; }
   .tape {
     --h: calc(var(--tw) * 0.625);
     --t: calc(var(--tw) * 0.07);

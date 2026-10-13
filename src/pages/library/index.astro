@@ -116,9 +116,12 @@ const stack = [
     height: calc(236px * var(--k));
     padding: 0 calc(18px * var(--k));
     transform-style: preserve-3d;
+    /* Firefox hit-tests this flat layer in front of books pushed back in 3D, so let clicks pass through it */
+    pointer-events: none;
   }
 
   .vol {
+    pointer-events: auto;
     position: relative;
     flex: none;
     width: calc(var(--w) * 1px * var(--k));
