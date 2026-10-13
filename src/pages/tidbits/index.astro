@@ -1,0 +1,14 @@
+---
+import Page from '../../layouts/Page.astro';
+import TidbitFeed from '../../components/TidbitFeed.astro';
+import { getTidbits } from '../../lib/utils';
+import { SITE } from '../../site.config';
+
+const all = await getTidbits();
+const per = SITE.tidbitsPerPage;
+const pages = Math.max(1, Math.ceil(all.length / per));
+---
+
+<Page title="Tidbits" section="Tidbits" description="Short-form notes, links and passing thoughts.">
+  <TidbitFeed items={all.slice(0, per)} page={1} pages={pages} total={all.length} />
+</Page>

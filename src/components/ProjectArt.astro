@@ -1,0 +1,121 @@
+---
+/**
+ * Generative retro "plate" artwork for a project without a cover image.
+ * The pattern and palette are picked from a hash of the title, so each
+ * project gets its own stable illustration.
+ */
+import { hash } from '../lib/utils';
+
+interface Props {
+  seed: string;
+  color?: string;
+  class?: string;
+}
+const { seed, color, class: className } = Astro.props;
+
+const PALETTE = ['#9a3324', '#2f5d62', '#d9a13b', '#4a3b6b', '#3d5a3a', '#c4583f', '#1f3b5a'];
+const h = hash(seed);
+const main = color ?? PALETTE[h % PALETTE.length];
+const second = PALETTE[(h >>> 3) % PALETTE.length] === main ? PALETTE[(h >>> 5) % PALETTE.length] : PALETTE[(h >>> 3) % PALETTE.length];
+const bg = '#efe3c6';
+const ink = '#2a1f17';
+const kind = (h >>> 7) % 5;
+const W = 400;
+const H = 250;
+const id = `pa-${h.toString(36)}`;
+
+// sunburst rays
+const rays = Array.from({ length: 18 }, (_, i) => {
+  const a1 = Math.PI + (i * Math.PI) / 18;
+  const a2 = Math.PI + ((i + 0.5) * Math.PI) / 18;
+  const r = 520;
+  const cx = W / 2;
+  const cy = H + 10;
+  return `M${cx} ${cy} L${(cx + r * Math.cos(a1)).toFixed(1)} ${(cy + r * Math.sin(a1)).toFixed(1)} L${(cx + r * Math.cos(a2)).toFixed(1)} ${(cy + r * Math.sin(a2)).toFixed(1)} Z`;
+});
+// halftone dots
+const dots: { x: number; y: number; r: number }[] = [];
+if (kind === 3) {
+  const fx = 80 + (h % 240);
+  const fy = 60 + ((h >>> 4) % 130);
+  for (let y = 10; y < H; y += 16) {
+    for (let x = ((y / 16) % 2) * 8 + 8; x < W; x += 16) {
+      const d = Math.hypot(x - fx, y - fy);
+      const r = Math.max(0, 7.5 - d / 34);
+      if (r > 0.6) dots.push({ x, y, r });
+    }
+  }
+}
+const ringCx = 120 + (h % 160);
+---
+
+<svg class:list={['project-art', className]} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <filter id={`${id}-grain`}>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed={h % 100} />
+      <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.12  0 0 0 0 0.05  0 0 0 0.28 0" />
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  <rect width={W} height={H} fill={bg} />
+
+  {
+    kind === 0 && (
+      <g>
+        {rays.map((d) => <path d={d} fill={main} opacity="0.16" />)}
+        <circle cx={W / 2} cy={H + 10} r="96" fill={second} />
+        <circle cx={W / 2} cy={H + 10} r="70" fill={main} />
+        <path d={`M0 ${H - 34} H${W}`} stroke={ink} stroke-width="2" />
+        <path d={`M0 ${H - 26} H${W}`} stroke={ink} stroke-width="1" opacity="0.6" />
+      </g>
+    )
+  }
+  {
+    kind === 1 && (
+      <g fill="none" stroke-width="16">
+        {[0, 1, 2, 3].map((i) => (
+          <path
+            d={`M-20 ${70 + i * 34} C ${W * 0.3} ${70 + i * 34}, ${W * 0.45} ${H + 40}, ${W + 20} ${150 + i * 34}`}
+            stroke={[main, second, '#d9a13b', ink][i]}
+          />
+        ))}
+      </g>
+    )
+  }
+  {
+    kind === 2 && (
+      <g fill="none">
+        {Array.from({ length: 9 }, (_, i) => (
+          <circle cx={ringCx} cy={H / 2} r={18 + i * 22} stroke={i % 2 ? second : main} stroke-width={i % 3 === 0 ? 9 : 4} opacity={1 - i * 0.07} />
+        ))}
+        <circle cx={ringCx} cy={H / 2} r="10" fill={ink} />
+      </g>
+    )
+  }
+  {
+    kind === 3 && (
+      <g>
+        {dots.map((d) => <circle cx={d.x} cy={d.y} r={d.r.toFixed(2)} fill={main} />)}
+        <rect x="24" y={H - 58} width="120" height="34" fill={second} />
+      </g>
+    )
+  }
+  {
+    kind === 4 && (
+      <g>
+        <rect x="0" y="0" width={W} height={H * 0.55} fill={second} opacity="0.85" />
+        <circle cx={W * 0.68} cy={H * 0.55} r="62" fill={main} />
+        <rect x="0" y={H * 0.55} width={W} height={H} fill={bg} />
+        {[0, 1, 2, 3, 4].map((i) => (
+          <rect x="0" y={H * 0.55 + 10 + i * 14} width={W} height={6 - i} fill={ink} opacity={0.8 - i * 0.12} />
+        ))}
+      </g>
+    )
+  }
+
+  <rect width={W} height={H} fill={bg} filter={`url(#${id}-grain)`} />
+</svg>
+
+<style>
+  .project-art { display: block; width: 100%; height: 100%; }
+</style>

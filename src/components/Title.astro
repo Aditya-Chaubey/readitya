@@ -1,0 +1,48 @@
+---
+/**
+ * A heading whose words rise into place one after another.
+ * Split at build time, so there's no JavaScript and no flash of unstyled text.
+ */
+interface Props {
+  text: string;
+  as?: 'h1' | 'h2';
+  class?: string;
+  /** Delay before the first word, in seconds. */
+  delay?: number;
+}
+const { text, as: Tag = 'h1', class: className, delay = 0.1 } = Astro.props;
+const words = text.trim().split(/\s+/);
+---
+
+<Tag class:list={['split', className]} aria-label={text} style={`--d0:${delay}s`}>
+  {
+    words.map((w, i) => (
+      <>
+        <span class="w" aria-hidden="true">
+          <span style={`--i:${i}`}>{w}</span>
+        </span>{' '}
+      </>
+    ))
+  }
+</Tag>
+
+<style>
+  .split { text-wrap: balance; }
+  .w {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    /* room for descenders inside the clipping box */
+    padding: 0.04em 0.02em 0.16em;
+    margin: -0.04em -0.02em -0.16em;
+  }
+  .w > span {
+    display: inline-block;
+    animation: word-up 1s var(--ease-out) backwards;
+    animation-delay: calc(var(--d0) + var(--i) * 75ms);
+  }
+  @keyframes word-up {
+    from { transform: translateY(110%) rotate(3deg); opacity: 0; }
+    40% { opacity: 1; }
+  }
+</style>

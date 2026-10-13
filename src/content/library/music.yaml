@@ -1,0 +1,13 @@
+title: Music
+description: Albums that lived on repeat.
+creatorLabel: Artist
+verb: Listened
+order: 4
+color: '#4a3b6b'
+items:
+  - title: A Placeholder Album
+    creator: Some Band
+    year: 1977
+    rating: 5
+    logs:
+      - { date: 2026, status: On repeat }

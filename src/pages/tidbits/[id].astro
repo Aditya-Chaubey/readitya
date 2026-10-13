@@ -1,0 +1,51 @@
+---
+import Page from '../../layouts/Page.astro';
+import TidbitCard from '../../components/TidbitCard.astro';
+import { formatDateTime, getTidbits, type Tidbit } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const all = await getTidbits();
+  return all.map((tidbit, i) => ({
+    params: { id: tidbit.id },
+    props: { tidbit, newer: all[i - 1], older: all[i + 1] },
+  }));
+}
+
+interface Props {
+  tidbit: Tidbit;
+  newer?: Tidbit;
+  older?: Tidbit;
+}
+const { tidbit, newer, older } = Astro.props;
+const title = tidbit.data.title ?? `Tidbit from ${formatDateTime(tidbit.data.date)}`;
+const excerpt = (tidbit.body ?? '').replace(/[#*_>`\[\]]/g, '').trim().slice(0, 150);
+---
+
+<Page title={title} description={excerpt} section="Tidbits" type="article">
+  <div class="content">
+    {!tidbit.data.title && <h1 class="sr-only">{title}</h1>}
+    <TidbitCard tidbit={tidbit} standalone />
+    <nav class="pager" aria-label="More tidbits">
+      {older ? <a href={`/tidbits/${older.id}/`}>← Older</a> : <span />}
+      <a href="/tidbits">All</a>
+      {newer ? <a href={`/tidbits/${newer.id}/`}>Newer →</a> : <span />}
+    </nav>
+  </div>
+</Page>
+
+<style>
+  .crumbs {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.75rem;
+  }
+  .crumbs a { color: var(--ink-soft); }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+</style>

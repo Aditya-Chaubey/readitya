@@ -1,0 +1,18 @@
+# One shelf of the library. Add an item by copying the block under `items:`.
+title: Books
+description: Everything I've read, cover to cover — and the ones I abandoned.
+creatorLabel: Author
+verb: Read
+order: 1
+color: '#7a2e22'
+items:
+  - title: A Placeholder Book
+    creator: Some Author
+    year: 1965
+    rating: 4.5          # 0 – 5, halves allowed. Delete the line if unrated.
+    notes: |
+      Notes are optional. Write a sentence or a full review here — blank lines make new paragraphs.
+    logs:                # one line per read; dates can be 2026, 2026-10 or 2026-10-01
+      - { date: 2026-09-01, end: 2026-09-14, status: Read }
+    # cover: /images/covers/placeholder-book.jpg
+    # link: https://example.com

@@ -1,0 +1,24 @@
+---
+/** Five ink dots: ● full, ◐ half, ○ empty. */
+interface Props {
+  value: number;
+}
+const { value } = Astro.props;
+const dots = Array.from({ length: 5 }, (_, i) => (value >= i + 1 ? 'full' : value >= i + 0.5 ? 'half' : 'empty'));
+---
+
+<span class="rating" role="img" aria-label={`Rated ${value} out of 5`} title={`${value} / 5`}>
+  {dots.map((d) => <i class={d}></i>)}
+</span>
+
+<style>
+  .rating { display: inline-flex; gap: 4px; vertical-align: middle; }
+  i {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+  }
+  .full { background: var(--accent); }
+  .half { background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); }
+</style>

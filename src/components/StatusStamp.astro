@@ -1,0 +1,35 @@
+---
+/** A rubber stamp coloured by project status. */
+interface Props {
+  status: string;
+}
+const { status } = Astro.props;
+const s = status.toLowerCase();
+const tone = /ship|done|live|released|complete/.test(s)
+  ? 'done'
+  : /pause|hold|archiv|abandon|shelved/.test(s)
+    ? 'paused'
+    : /idea|plan|someday/.test(s)
+      ? 'idea'
+      : 'active';
+---
+
+<span class:list={['stamp', 'status', tone]}>
+  {tone === 'active' && <i class="pulse" aria-hidden="true"></i>}
+  {status}
+</span>
+
+<style>
+  .status { display: inline-flex; align-items: center; gap: 0.4em; white-space: nowrap; }
+  .done { color: var(--teal); }
+  .paused { color: var(--ink-faint); }
+  .idea { color: var(--gold); }
+  .pulse {
+    width: 0.45em;
+    height: 0.45em;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { opacity: 0.25; } }
+</style>

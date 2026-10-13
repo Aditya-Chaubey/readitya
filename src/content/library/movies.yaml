@@ -1,0 +1,13 @@
+title: Movies
+description: Films I've watched, from the multiplex to the midnight streaming binge.
+creatorLabel: Director
+verb: Watched
+order: 2
+color: '#2f5d62'
+items:
+  - title: A Placeholder Film
+    creator: Some Director
+    year: 1982
+    rating: 4
+    logs:
+      - { date: 2026-10-05, status: Watched }

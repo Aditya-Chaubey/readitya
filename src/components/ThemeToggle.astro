@@ -1,0 +1,68 @@
+<button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+    <mask id="tt-moon">
+      <rect width="24" height="24" fill="#fff"></rect>
+      <circle class="tt-bite" cx="24" cy="4" r="7" fill="#000"></circle>
+    </mask>
+    <circle class="tt-core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#tt-moon)"></circle>
+    <g class="tt-rays" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path>
+    </g>
+  </svg>
+</button>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.theme-toggle')) {
+    btn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      const apply = () => {
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch {}
+      };
+      if (reduced || !document.startViewTransition) return apply();
+
+      // the new theme spreads out from the button like lamplight
+      const r = btn.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('theme-vt');
+      const t = document.startViewTransition(apply);
+      t.ready
+        .then(() => {
+          root.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+            { duration: 700, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' },
+          );
+        })
+        .catch(() => {});
+      t.finished.finally(() => root.classList.remove('theme-vt')).catch(() => {});
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+  }
+  .theme-toggle:hover { color: var(--accent); background: color-mix(in srgb, var(--ink) 6%, transparent); }
+  .theme-toggle svg { overflow: visible; }
+  .tt-core { transition: r 0.5s var(--ease-spring); }
+  .tt-bite { transition: cx 0.5s var(--ease-out), cy 0.5s var(--ease-out); }
+  .tt-rays { transform-origin: 12px 12px; transition: transform 0.5s var(--ease-out), opacity 0.3s; }
+  :global(:root[data-theme='dark']) .tt-core { r: 8; }
+  :global(:root[data-theme='dark']) .tt-bite { cx: 17; cy: 7; }
+  :global(:root[data-theme='dark']) .tt-rays { transform: rotate(-60deg) scale(0.4); opacity: 0; }
+</style>

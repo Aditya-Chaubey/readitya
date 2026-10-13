@@ -1,0 +1,40 @@
+---
+/**
+ * A single "book page": ribbon bookmark, paper sheet and dog-eared corner. Every page except the cassette
+ * home page renders inside this.
+ */
+import Base from './Base.astro';
+import { NAV } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  section?: string;
+  type?: 'website' | 'article';
+  /** Text on the right of the running head (defaults to the section). */
+  headRight?: string;
+  /** Colour of the ribbon bookmark. */
+  ribbon?: string;
+  /** Show a reading-progress bar at the top (long posts). */
+  progress?: boolean;
+}
+const { title, description, section, type, progress = false } = Astro.props;
+const ribbon = Astro.props.ribbon ?? NAV.find((n) => n.label === section)?.ribbon;
+---
+
+<Base title={title} description={description} section={section} type={type}>
+  <slot name="head" slot="head" />
+  {progress && <div class="progress" aria-hidden="true" />}
+  <main id="main" class="book">
+    <article class="page">
+      <span class="ribbon" aria-hidden="true" style={ribbon ? `--ribbon:${ribbon}` : undefined}></span>
+      <slot />
+      <span class="dogear" aria-hidden="true"></span>
+    </article>
+  </main>
+</Base>
+
+<script>
+  import { tilt } from '../scripts/tilt';
+  tilt();
+</script>

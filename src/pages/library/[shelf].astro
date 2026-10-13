@@ -1,0 +1,269 @@
+---
+import Page from '../../layouts/Page.astro';
+import Rating from '../../components/Rating.astro';
+import Title from '../../components/Title.astro';
+import { formatLoose, getShelves, looseKey, type Shelf } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const shelves = await getShelves();
+  return shelves.map((shelf) => ({ params: { shelf: shelf.id }, props: { shelf } }));
+}
+
+interface Props {
+  shelf: Shelf;
+}
+const { shelf } = Astro.props;
+const { title, description, creatorLabel, verb, items } = shelf.data;
+
+const rows = items
+  .map((item) => {
+    const last = item.logs.reduce((best, l) => {
+      const k = looseKey(l.end ?? l.date);
+      return k > best ? k : best;
+    }, '');
+    return { ...item, last };
+  })
+  .sort((a, b) => b.last.localeCompare(a.last) || a.title.localeCompare(b.title));
+---
+
+<Page title={title} description={description ?? `My ${title.toLowerCase()} log.`} section="Library">
+  <div class="content">
+    <header class="page-title">
+      <Title text={title} />
+      {description && <p class="lede">{description}</p>}
+      <hr class="title-rule" />
+    </header>
+
+    {
+      rows.length > 1 && (
+        <form class="controls" aria-label="Sort and filter" onsubmit="return false">
+          <label>
+            <span>Sort</span>
+            <select name="sort">
+              <option value="last:desc">{verb} — newest</option>
+              <option value="last:asc">{verb} — oldest</option>
+              <option value="rating:desc">Rating — high to low</option>
+              <option value="rating:asc">Rating — low to high</option>
+              <option value="year:desc">Released — newest</option>
+              <option value="year:asc">Released — oldest</option>
+              <option value="title:asc">Title — A to Z</option>
+            </select>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="notes" /> <span>Only with notes</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="rated" /> <span>Only rated</span>
+          </label>
+        </form>
+      )
+    }
+
+    {rows.length === 0 && <p class="muted"><em>Nothing here yet.</em></p>}
+
+    <ol class="items" id="items">
+      {
+        rows.map((item) => (
+          <li
+            class="item reveal"
+            data-title={item.title.toLowerCase()}
+            data-year={String(item.year ?? '')}
+            data-rating={String(item.rating ?? -1)}
+            data-last={item.last}
+            data-notes={item.notes ? '1' : '0'}
+          >
+            {item.cover && <img class="cover" src={item.cover} alt="" loading="lazy" width="72" height="108" />}
+            <div class="body">
+              <h2 class="t">
+                {item.link ? <a href={item.link} rel="noopener">{item.title}</a> : item.title}
+                {item.year && <span class="yr">({item.year})</span>}
+              </h2>
+              {item.creator && (
+                <p class="by">
+                  <span class="k">{creatorLabel}</span> {item.creator}
+                </p>
+              )}
+              {item.rating !== undefined && (
+                <p class="rate">
+                  <Rating value={item.rating} />
+                </p>
+              )}
+              {item.notes && (
+                <blockquote class="notes">
+                  {item.notes.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
+                </blockquote>
+              )}
+              {item.logs.length > 0 && (
+                <ul class="logs" aria-label="Log">
+                  {item.logs.map((l) => (
+                    <li>
+                      <span class="dates">
+                        {formatLoose(l.date)}
+                        {l.end && <> → {formatLoose(l.end)}</>}
+                      </span>
+                      <span class="status">{l.status ?? verb}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {item.tags.length > 0 && <p class="tags">{item.tags.map((t) => `#${t}`).join('  ')}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="empty-filter muted" hidden><em>Nothing matches those filters.</em></p>
+
+  </div>
+</Page>
+
+<style>
+  .crumbs {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.75rem;
+  }
+  .crumbs a { color: var(--ink-soft); }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    margin-bottom: 2rem;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .controls label { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+  .controls select {
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.25rem 0.4rem;
+  }
+  .controls input { accent-color: var(--accent); }
+
+  .items { list-style: none; padding: 0; counter-reset: item; }
+  .item {
+    counter-increment: item;
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.4rem 0 1.4rem 3.1rem;
+    position: relative;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .item::before {
+    content: counter(item) '.';
+    position: absolute;
+    left: 0;
+    top: 1.3rem;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--accent);
+    width: 2.6rem;
+    text-align: right;
+  }
+  .cover {
+    flex: none;
+    width: 72px;
+    height: 108px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 3px 4px 10px -3px rgb(var(--shadow) / 0.5);
+  }
+  .body { flex: 1; min-width: 0; }
+  .t {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+  .t a { text-decoration-color: var(--rule); }
+  .yr { margin-left: 0.4rem; font-size: 0.75em; color: var(--ink-faint); font-family: var(--font-body); }
+  .by { margin-top: 0.15rem; color: var(--ink-soft); }
+  .k {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-right: 0.3rem;
+  }
+  .rate { margin-top: 0.4rem; }
+  .notes {
+    margin-top: 0.75rem;
+    padding: 0.1rem 0 0.1rem 1rem;
+    border-left: 2px solid var(--accent);
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .notes p + p { margin-top: 0.6em; }
+  .logs {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .logs li { display: flex; gap: 0.75rem; }
+  .logs li::before { content: '⌁'; color: var(--accent); }
+  .status {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.68rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+  .tags { margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint); }
+  .back { margin-top: 2.5rem; text-align: center; font-family: var(--font-mono); font-size: 0.85rem; }
+  @media (max-width: 520px) {
+    .item { padding-left: 2.3rem; }
+    .item::before { width: 1.9rem; font-size: 1.25rem; }
+    .cover { width: 56px; height: 84px; }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.controls');
+  const list = document.getElementById('items');
+  const empty = document.querySelector<HTMLElement>('.empty-filter');
+
+  if (form && list) {
+    const items = Array.from(list.querySelectorAll<HTMLLIElement>('.item'));
+    const apply = () => {
+      const [key, dir] = (form.elements.namedItem('sort') as HTMLSelectElement).value.split(':');
+      const onlyNotes = (form.elements.namedItem('notes') as HTMLInputElement).checked;
+      const onlyRated = (form.elements.namedItem('rated') as HTMLInputElement).checked;
+      const sign = dir === 'asc' ? 1 : -1;
+      const val = (el: HTMLElement) => el.dataset[key] ?? '';
+      const sorted = [...items].sort((a, b) => {
+        if (key === 'rating') return sign * (Number(val(a)) - Number(val(b)));
+        const A = val(a);
+        const B = val(b);
+        // keep blanks at the end regardless of direction
+        if (!A && B) return 1;
+        if (A && !B) return -1;
+        return sign * A.localeCompare(B, undefined, { numeric: true });
+      });
+      let shown = 0;
+      for (const el of sorted) {
+        const hide = (onlyNotes && el.dataset.notes !== '1') || (onlyRated && Number(el.dataset.rating) < 0);
+        el.hidden = hide;
+        if (!hide) shown++;
+        list.append(el);
+      }
+      if (empty) empty.hidden = shown > 0;
+    };
+    form.addEventListener('change', apply);
+  }
+</script>

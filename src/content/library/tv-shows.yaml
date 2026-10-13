@@ -1,0 +1,13 @@
+title: TV Shows
+description: Series I've followed, season by season.
+creatorLabel: Created by
+verb: Watched
+order: 3
+color: '#b8862b'
+items:
+  - title: A Placeholder Series
+    creator: Some Showrunner
+    year: 2019
+    rating: 3.5
+    logs:
+      - { date: 2026-08, end: 2026-09, status: Season 1 }

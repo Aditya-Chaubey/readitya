@@ -1,0 +1,103 @@
+---
+import { NAV, SITE } from '../site.config';
+import ThemeToggle from './ThemeToggle.astro';
+
+const { section } = Astro.props as { section?: string };
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header book">
+  <a class="wordmark" href="/" aria-label={`${SITE.author} — back to the tapes`}>
+    <svg class="tape-icon" viewBox="0 0 32 20" width="30" height="19" aria-hidden="true">
+      <rect x="1" y="1" width="30" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+      <rect x="6" y="5" width="20" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.2"></rect>
+      <circle cx="10.5" cy="8.5" r="1.6" fill="currentColor"></circle>
+      <circle cx="21.5" cy="8.5" r="1.6" fill="currentColor"></circle>
+      <path d="M9 19l2-4h10l2 4" fill="none" stroke="currentColor" stroke-width="1.2"></path>
+    </svg>
+    <span>{SITE.author}</span>
+  </a>
+  <nav aria-label="Main">
+    <ol>
+      {
+        NAV.map((item) => {
+          const active = path === item.href || path.startsWith(item.href + '/') || section === item.label;
+          return (
+            <li>
+              <a href={item.href} aria-current={active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+    <ThemeToggle />
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding: 1.4rem 0.25rem 1.6rem;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .wordmark:hover { color: var(--accent); }
+  .wordmark:hover .tape-icon circle { animation: spin 0.8s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .tape-icon { color: var(--accent); flex: none; }
+  nav { display: flex; align-items: center; gap: 0.75rem; }
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+  ol a {
+    position: relative;
+    font-size: 1.05rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding-block: 0.2rem;
+  }
+  /* a hand-inked underline that draws itself in */
+  ol a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 6px;
+    background: var(--accent);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 4 C 20 1.5, 45 5.5, 70 3 S 95 2.5, 99 3.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/></svg>") center / 100% 100% no-repeat, linear-gradient(90deg, #000 50%, transparent 50%) 100% 0 / 200% 100% no-repeat;
+    -webkit-mask-composite: source-in;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 4 C 20 1.5, 45 5.5, 70 3 S 95 2.5, 99 3.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/></svg>") center / 100% 100% no-repeat, linear-gradient(90deg, #000 50%, transparent 50%) 100% 0 / 200% 100% no-repeat;
+    mask-composite: intersect;
+    transition: mask-position 0.45s var(--ease-out), -webkit-mask-position 0.45s var(--ease-out);
+  }
+  ol a:hover { color: var(--accent); }
+  ol a:hover::after, ol a[aria-current='page']::after {
+    -webkit-mask-position: center, 0 0;
+    mask-position: center, 0 0;
+  }
+  ol a[aria-current='page'] { color: var(--ink); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 560px) {
+    .site-header { justify-content: center; text-align: center; }
+    nav { flex-wrap: wrap; justify-content: center; }
+    ol { justify-content: center; }
+  }
+</style>

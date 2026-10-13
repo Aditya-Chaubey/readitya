@@ -1,0 +1,60 @@
+---
+import TidbitCard from './TidbitCard.astro';
+import type { Tidbit } from '../lib/utils';
+import Title from './Title.astro';
+
+interface Props {
+  items: Tidbit[];
+  page: number;
+  pages: number;
+  total: number;
+}
+const { items, page, pages } = Astro.props;
+const pageUrl = (p: number) => (p <= 1 ? '/tidbits/' : `/tidbits/page/${p}/`);
+---
+
+<div class="content">
+  <header class="page-title">
+    <Title text="Tidbits" />
+    <p class="lede">Small notes from the margins.</p>
+    <hr class="title-rule" />
+  </header>
+
+  {items.length === 0 && <p class="muted"><em>Nothing here yet.</em></p>}
+
+  <ol class="feed">
+    {items.map((t) => <li class="reveal"><TidbitCard tidbit={t} /></li>)}
+  </ol>
+
+  {
+    pages > 1 && (
+      <nav class="pagination" aria-label="Pagination">
+        {page > 1 ? <a href={pageUrl(page - 1)} rel="prev">← Newer</a> : <span />}
+        <span class="where">Page {page} of {pages}</span>
+        {page < pages ? <a href={pageUrl(page + 1)} rel="next">Older →</a> : <span />}
+      </nav>
+    )
+  }
+</div>
+
+<style>
+  .sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .feed { list-style: none; padding: 0; display: grid; gap: 1.75rem; }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .where { color: var(--ink-faint); }
+</style>

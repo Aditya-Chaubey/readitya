@@ -1,0 +1,147 @@
+---
+/**
+ * A hand-drawn-ish compact cassette, as an inline SVG.
+ * Colours come from props → CSS custom properties, so the same
+ * markup can be recoloured on the fly (the deck does exactly that).
+ */
+interface Props {
+  id: string;
+  label: string;
+  side?: string;
+  length?: string;
+  note?: string;
+  shell?: string;
+  band?: string;
+  ink?: string;
+  class?: string;
+}
+const {
+  id,
+  label,
+  side = 'A',
+  length = 'C-60',
+  note = '',
+  shell = '#e9dcc0',
+  band = '#b5412f',
+  ink = '#2a1f17',
+  class: className,
+} = Astro.props;
+
+const teeth = [0, 60, 120, 180, 240, 300];
+const screws = [
+  [18, 18],
+  [302, 18],
+  [18, 182],
+  [302, 182],
+];
+---
+
+<svg
+  class:list={['cassette', className]}
+  viewBox="0 0 320 200"
+  role="img"
+  aria-label={`Cassette tape labelled ${label}`}
+  style={`--shell:${shell};--band:${band};--hub:${ink}`}
+  data-shell={shell}
+  data-band={band}
+  data-ink={ink}
+>
+  <defs>
+    <linearGradient id={`${id}-sheen`} x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.28"></stop>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0.02"></stop>
+      <stop offset="1" stop-color="#000" stop-opacity="0.22"></stop>
+    </linearGradient>
+    <linearGradient id={`${id}-glass`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.18"></stop>
+      <stop offset="0.4" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.6" stop-color="#fff" stop-opacity="0.07"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+    <clipPath id={`${id}-win`}><rect x="80" y="86" width="160" height="42" rx="21"></rect></clipPath>
+    <clipPath id={`${id}-lbl`}><rect x="22" y="16" width="276" height="124" rx="7"></rect></clipPath>
+  </defs>
+
+  <!-- shell -->
+  <rect x="3" y="3" width="314" height="194" rx="14" fill="var(--shell)"></rect>
+  <rect x="3" y="3" width="314" height="194" rx="14" fill={`url(#${id}-sheen)`}></rect>
+  <rect x="3.75" y="3.75" width="312.5" height="192.5" rx="13.5" fill="none" stroke="#000" stroke-opacity="0.35" stroke-width="1.5"></rect>
+  <rect x="9" y="9" width="302" height="182" rx="10" fill="none" stroke="#fff" stroke-opacity="0.12"></rect>
+
+  <!-- screws -->
+  {
+    screws.map(([x, y]) => (
+      <g transform={`translate(${x} ${y})`}>
+        <circle r="5" fill="#000" fill-opacity="0.25"></circle>
+        <circle r="3.6" fill="#cfc6b4"></circle>
+        <path d="M-2.4 0H2.4M0 -2.4V2.4" stroke="#6b6152" stroke-width="1"></path>
+      </g>
+    ))
+  }
+
+  <!-- label sticker -->
+  <g clip-path={`url(#${id}-lbl)`}>
+    <rect x="22" y="16" width="276" height="124" fill="#f5ecd6"></rect>
+    <rect x="22" y="16" width="276" height="30" fill="var(--band)"></rect>
+    <rect x="22" y="48" width="276" height="2.5" fill="var(--band)" opacity="0.55"></rect>
+    <line x1="40" x2="280" y1="80.5" y2="80.5" stroke="#c9b99a" stroke-width="1"></line>
+    <rect x="22" y="16" width="276" height="124" fill="none" stroke="#000" stroke-opacity="0.12"></rect>
+  </g>
+  <circle cx="42" cy="31" r="10" fill="#f5ecd6"></circle>
+  <text x="42" y="35.6" text-anchor="middle" class="c-side" fill="var(--band)">{side}</text>
+  <text x="280" y="35" text-anchor="end" class="c-len" fill="#f5ecd6">{length}</text>
+  <text x="160" y="74" text-anchor="middle" class="c-title" fill="#1f2b55">{label}</text>
+
+  <!-- tape window -->
+  <rect x="78" y="84" width="164" height="46" rx="23" fill="#000" fill-opacity="0.25"></rect>
+  <rect x="80" y="86" width="160" height="42" rx="21" fill="#17120f"></rect>
+  <g clip-path={`url(#${id}-win)`}>
+    <circle class="pack pack-l" cx="118" cy="107" r="30" fill="#4b3427"></circle>
+    <circle class="pack pack-r" cx="202" cy="107" r="19" fill="#4b3427"></circle>
+    <circle cx="118" cy="107" r="30" fill="none" stroke="#000" stroke-opacity="0.35"></circle>
+    <circle cx="202" cy="107" r="19" fill="none" stroke="#000" stroke-opacity="0.35"></circle>
+    <rect x="146" y="98" width="28" height="18" rx="2" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.18"></rect>
+    <path d="M150 103h20M150 107h20M150 111h20" stroke="#fff" stroke-opacity="0.15" stroke-width="0.8"></path>
+  </g>
+  {
+    [118, 202].map((cx) => (
+      <g transform={`translate(${cx} 107)`}>
+        <g class="hub">
+          <circle r="11" fill="#efe6d2"></circle>
+          <circle r="11" fill="none" stroke="#000" stroke-opacity="0.25"></circle>
+          {teeth.map((a) => (
+            <rect x="-1.7" y="-6.5" width="3.4" height="3.6" rx="0.6" fill="var(--hub)" transform={`rotate(${a})`}></rect>
+          ))}
+          <circle r="3.2" fill="#17120f"></circle>
+        </g>
+      </g>
+    ))
+  }
+  <rect x="80" y="86" width="160" height="42" rx="21" fill={`url(#${id}-glass)`}></rect>
+
+  <!-- bits of print on the label -->
+  <text x="40" y="133" class="c-small" fill="#8b7862">TYPE I · NORMAL</text>
+  <text x="280" y="133" text-anchor="end" class="c-small" fill="#8b7862">{note}</text>
+
+  <!-- bottom trapezoid with the tape guides -->
+  <path d="M66 197 L82 150 H238 L254 197 Z" fill="#000" fill-opacity="0.16"></path>
+  <path d="M82 150 H238" stroke="#fff" stroke-opacity="0.12"></path>
+  <circle cx="106" cy="178" r="6.5" fill="#17120f" fill-opacity="0.85"></circle>
+  <circle cx="214" cy="178" r="6.5" fill="#17120f" fill-opacity="0.85"></circle>
+  <rect x="136" y="170" width="9" height="9" rx="1.5" fill="#17120f" fill-opacity="0.7"></rect>
+  <rect x="175" y="170" width="9" height="9" rx="1.5" fill="#17120f" fill-opacity="0.7"></rect>
+  <circle cx="160" cy="186" r="3" fill="#17120f" fill-opacity="0.6"></circle>
+  <path d="M84 197 h152" stroke="#2a1d14" stroke-opacity="0.9" stroke-width="2.5"></path>
+</svg>
+
+<style>
+  .cassette { display: block; width: 100%; height: auto; overflow: visible; }
+  .c-title { font-family: var(--font-hand); font-size: 27px; letter-spacing: 0.5px; }
+  .c-side { font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
+  .c-len { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+  .c-small { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; }
+  .hub { transform-box: fill-box; transform-origin: center; }
+  :global(.spinning) .hub { animation: reel 1.6s linear infinite; }
+  :global(.spinning.fast) .hub { animation-duration: 0.45s; }
+  @keyframes reel { to { transform: rotate(-360deg); } }
+</style>

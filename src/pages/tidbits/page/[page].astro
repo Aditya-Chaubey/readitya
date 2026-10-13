@@ -1,0 +1,32 @@
+---
+import Page from '../../../layouts/Page.astro';
+import TidbitFeed from '../../../components/TidbitFeed.astro';
+import { getTidbits, type Tidbit } from '../../../lib/utils';
+import { SITE } from '../../../site.config';
+
+export async function getStaticPaths() {
+  const all = await getTidbits();
+  const per = SITE.tidbitsPerPage;
+  const pages = Math.max(1, Math.ceil(all.length / per));
+  // page 1 lives at /tidbits/
+  return Array.from({ length: Math.max(0, pages - 1) }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: { items: all.slice((page - 1) * per, page * per), page, pages, total: all.length },
+    };
+  });
+}
+
+interface Props {
+  items: Tidbit[];
+  page: number;
+  pages: number;
+  total: number;
+}
+const { items, page, pages, total } = Astro.props;
+---
+
+<Page title={`Tidbits — page ${page}`} section="Tidbits">
+  <TidbitFeed items={items} page={page} pages={pages} total={total} />
+</Page>

@@ -1,0 +1,13 @@
+title: Anime
+description: Series and films from the world of anime.
+creatorLabel: Studio
+verb: Watched
+order: 5
+color: '#9a3324'
+items:
+  - title: A Placeholder Anime
+    creator: Some Studio
+    year: 1998
+    rating: 4.5
+    logs:
+      - { date: 2026-07-01, end: 2026-07-20, status: Completed }

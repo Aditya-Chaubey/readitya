@@ -1,0 +1,757 @@
+---
+/**
+ * The cassette deck at the centre of the home page.
+ * Purely presentational — behaviour lives in pages/index.astro.
+ */
+import Cassette from './Cassette.astro';
+import { SITE, TAPES } from '../site.config';
+
+// VU meter scale: angles from -50° to +50° around a pivot below the face
+const PIVOT = { x: 60, y: 84 };
+const ticks = Array.from({ length: 21 }, (_, i) => -50 + i * 5);
+const pt = (deg: number, r: number, c = PIVOT) => {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return [c.x + r * Math.cos(a), c.y + r * Math.sin(a)];
+};
+const arc = (from: number, to: number, r: number) => {
+  const [x1, y1] = pt(from, r);
+  const [x2, y2] = pt(to, r);
+  return `M${x1.toFixed(2)} ${y1.toFixed(2)} A${r} ${r} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+};
+const labels: [number, string][] = [
+  [-46, '20'],
+  [-30, '10'],
+  [-14, '5'],
+  [6, '0'],
+  [26, '+3'],
+];
+const brand = SITE.author.split(' ').map((w) => w[0]).join('').toUpperCase();
+
+// "Tape select" dial: one tick per tape, sweeping -130° … +130°
+const n = TAPES.length;
+const DIAL = { x: 50, y: 50 };
+const dialTicks = Array.from({ length: n }, (_, i) => -130 + (260 * i) / Math.max(1, n - 1));
+const minorTicks = Array.from({ length: 27 }, (_, i) => -130 + i * 10);
+---
+
+<div class="deck" id="deck">
+  <div class="lid" aria-hidden="true"></div>
+  <div class="face">
+    <i class="screw s-tl" aria-hidden="true"></i><i class="screw s-tr" aria-hidden="true"></i>
+    <i class="screw s-bl" aria-hidden="true"></i><i class="screw s-br" aria-hidden="true"></i>
+
+    <div class="topline">
+      <span class="brand">{brand}<span class="dot">·</span>77</span>
+      <span class="model"></span>
+      <button class="switch" id="sound-toggle" type="button" aria-pressed="true" aria-label="Sound" title="Sound">
+        <svg class="spk" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M3 8h3l4-3.5v11L6 12H3z" fill="currentColor"></path>
+          <path class="wave" d="M13 7.5a3.5 3.5 0 0 1 0 5M15 5.5a6.5 6.5 0 0 1 0 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+        </svg>
+        <span class="lever" aria-hidden="true"></span>
+      </button>
+      <span class="power" title="Power"><i class="led" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="main">
+      <!-- VU meters -->
+      <div class="meters" aria-hidden="true">
+        <div class="meter-panel">
+          {
+            ['L', 'R'].map((ch) => (
+              <div class="vu">
+                <svg viewBox="0 0 120 70">
+                  <defs>
+                    <radialGradient id={`vu-light-${ch}`} cx="50%" cy="100%" r="90%">
+                      <stop offset="0" stop-color="#fff6d8" stop-opacity="0.9" />
+                      <stop offset="1" stop-color="#fff6d8" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <rect x="0" y="0" width="120" height="70" class="vu-face" />
+                  <rect x="0" y="0" width="120" height="70" fill={`url(#vu-light-${ch})`} class="vu-lamp" />
+                  <path d={arc(-50, 50, 52)} class="vu-arc" />
+                  <path d={arc(14, 50, 52)} class="vu-red" />
+                  {ticks.map((t, i) => {
+                    const [x1, y1] = pt(t, 52);
+                    const [x2, y2] = pt(t, i % 2 === 0 ? 59 : 56);
+                    return <line x1={x1} y1={y1} x2={x2} y2={y2} class={t >= 14 ? 'vu-tick red' : 'vu-tick'} />;
+                  })}
+                  {labels.map(([deg, txt]) => {
+                    const [x, y] = pt(deg, 66);
+                    return (
+                      <text x={x} y={y + 2} text-anchor="middle" class="vu-num">
+                        {txt}
+                      </text>
+                    );
+                  })}
+                  <text x="60" y="50" text-anchor="middle" class="vu-label">VU</text>
+                  <text x="8" y="60" class="vu-ch">{ch}</text>
+                  <line x1={PIVOT.x} y1={PIVOT.y} x2={PIVOT.x} y2="22" class="needle" />
+                  <rect x="0" y="61" width="120" height="9" class="vu-cover" />
+                  <circle cx="60" cy="64" r="3" class="vu-pivot" />
+                  <rect x="0" y="0" width="120" height="70" class="vu-glass" />
+                </svg>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Cassette door -->
+      <div class="door-col">
+        <div class="door-trim">
+          <div class="door" id="door">
+            <div class="recess" aria-hidden="true"><div class="spindles"><i></i><i></i></div></div>
+            <div class="window" id="door-window">
+              <div class="spindles" aria-hidden="true"><i></i><i></i></div>
+              <div class="slot" id="door-slot">
+                <Cassette id="deck-cassette" label="" class="deck-tape" />
+              </div>
+              <div class="glass" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="keys" role="group" aria-label="Transport controls">
+          <button class="key rec" type="button" data-act="rec" aria-label="Record" title="Record">
+            <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="4.5"></circle></svg>
+          </button>
+          <button class="key" type="button" data-act="prev" aria-label="Previous tape" title="Previous tape">
+            <svg viewBox="0 0 20 20"><path d="M10 5.5v9L3.5 10zM16.5 5.5v9L10 10z"></path></svg>
+          </button>
+          <button class="key play" type="button" data-act="play" aria-label="Play selected tape" title="Play">
+            <svg viewBox="0 0 20 20"><path d="M6.5 4.5l9 5.5-9 5.5z"></path></svg>
+          </button>
+          <button class="key" type="button" data-act="next" aria-label="Next tape" title="Next tape">
+            <svg viewBox="0 0 20 20"><path d="M3.5 5.5v9L10 10zM10 5.5v9l6.5-4.5z"></path></svg>
+          </button>
+          <button class="key" type="button" data-act="stop" aria-label="Stop" title="Stop">
+            <svg viewBox="0 0 20 20"><rect x="5.5" y="5.5" width="9" height="9" rx="0.5"></rect></svg>
+          </button>
+          <button class="key" type="button" data-act="eject" aria-label="Eject" title="Eject">
+            <svg viewBox="0 0 20 20"><path d="M10 4.5l5.5 6.2h-11zM4.5 12.7h11v2.6h-11z"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Display + dial -->
+      <div class="side">
+        <div class="lcd">
+          <div class="lcd-row">
+            <span class="lcd-dim" aria-hidden="true">▸</span>
+            <span class="counter-wrap">
+              <span class="ghost-digits" aria-hidden="true">888</span>
+              <span class="counter" id="counter">000</span>
+            </span>
+          </div>
+          <div class="lcd-text" id="lcd-text" aria-live="polite">Select a tape</div>
+          <div class="lcd-bars" aria-hidden="true">{Array.from({ length: 14 }, () => <i></i>)}</div>
+        </div>
+        <div class="knob-wrap" aria-hidden="true">
+          <svg class="dial" viewBox="0 0 100 100">
+            {
+              minorTicks.map((a) => {
+                const [x1, y1] = pt(a, 44, DIAL);
+                const [x2, y2] = pt(a, 46.5, DIAL);
+                return <line x1={x1} y1={y1} x2={x2} y2={y2} class="dial-minor" />;
+              })
+            }
+            {
+              dialTicks.map((a) => {
+                const [x1, y1] = pt(a, 42.5, DIAL);
+                const [x2, y2] = pt(a, 48, DIAL);
+                return <line x1={x1} y1={y1} x2={x2} y2={y2} class="dial-major" />;
+              })
+            }
+          </svg>
+          <div class="knob">
+            <div class="knob-turn" id="knob"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="feet" aria-hidden="true"><i></i><i></i></div>
+</div>
+
+<style>
+  .deck {
+    --wood-1: #7c4b2b;
+    --wood-2: #4b2914;
+    --wood-hi: #a26a43;
+    --plate-1: #eee8db;
+    --plate-2: #cbc0a9;
+    --plate-ink: #2f271f;
+    --print: #6d5f4d;
+    --chrome: linear-gradient(180deg, #fdfcf8 0%, #bdb6a6 38%, #f4f1ea 52%, #8d8678 100%);
+    --panel: #120f0c;
+    --key-1: #f4f0e7;
+    --key-2: #c9c0ae;
+    --key-shade: #5d5547;
+    --key-ink: #3a3128;
+    --vu-face: #f3e2ad;
+    --vu-lamp: 0;
+    position: relative;
+    width: min(100%, 780px);
+    margin-inline: auto;
+    padding: 0 16px;
+    border-radius: 3px 3px 12px 12px;
+    /* walnut cheeks */
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.45), transparent 1.2%, rgb(255 255 255 / 0.1) 1.6%, transparent 2.6%, transparent 97.4%, rgb(255 255 255 / 0.08) 98.2%, transparent 98.6%, rgb(0 0 0 / 0.45)),
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.09) 0 1px, transparent 1px 3px, rgb(255 255 255 / 0.035) 3px 4px, transparent 4px 9px, rgb(0 0 0 / 0.05) 9px 11px, transparent 11px 16px),
+      linear-gradient(180deg, var(--wood-hi), var(--wood-1) 18%, var(--wood-2));
+    box-shadow:
+      0 50px 70px -40px rgb(0 0 0 / 0.65),
+      0 14px 24px -12px rgb(0 0 0 / 0.45),
+      inset 0 -3px 0 rgb(0 0 0 / 0.3);
+  }
+  :global(:root[data-theme='dark']) .deck {
+    --wood-1: #4a2b16;
+    --wood-2: #22130a;
+    --wood-hi: #6b4226;
+    --plate-1: #2b2622;
+    --plate-2: #171411;
+    --plate-ink: #e6cd96;
+    --print: #b39a68;
+    --chrome: linear-gradient(180deg, #a59d90 0%, #4b453e 38%, #8b8479 52%, #2b2723 100%);
+    --panel: #0a0807;
+    --key-1: #575049;
+    --key-2: #2c2723;
+    --key-shade: #0d0b09;
+    --key-ink: #ecdcbc;
+    --vu-face: #f7c56b;
+    --vu-lamp: 1;
+    box-shadow:
+      0 50px 80px -40px rgb(0 0 0 / 0.95),
+      0 0 0 1px rgb(255 200 140 / 0.05),
+      0 -40px 120px -60px rgb(255 160 80 / 0.35);
+  }
+
+  /* top of the cabinet, seen from slightly above */
+  .lid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 20px;
+    clip-path: polygon(2.2% 0, 97.8% 0, 100% 100%, 0 100%);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.14), transparent 40%, rgb(0 0 0 / 0.25)),
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.07) 0 2px, transparent 2px 9px, rgb(255 255 255 / 0.04) 9px 10px, transparent 10px 23px),
+      var(--wood-1);
+  }
+
+  /* brushed aluminium faceplate */
+  .face {
+    position: relative;
+    padding: 16px 22px 20px;
+    color: var(--plate-ink);
+    border-radius: 2px;
+    background:
+      radial-gradient(ellipse 70% 140% at 28% -10%, rgb(255 255 255 / 0.32), transparent 60%),
+      repeating-linear-gradient(0deg, rgb(255 255 255 / 0.07) 0 1px, transparent 1px 2px, rgb(0 0 0 / 0.025) 2px 3px),
+      repeating-linear-gradient(0deg, rgb(0 0 0 / 0.025) 0 1px, transparent 1px 7px, rgb(255 255 255 / 0.04) 7px 8px, transparent 8px 13px),
+      linear-gradient(180deg, var(--plate-1), var(--plate-2));
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.45),
+      inset 0 1px 0 rgb(255 255 255 / 0.6),
+      inset 0 -1px 0 rgb(0 0 0 / 0.3),
+      inset 1px 0 0 rgb(255 255 255 / 0.25),
+      inset -1px 0 0 rgb(0 0 0 / 0.15);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+  :global(:root[data-theme='dark']) .face {
+    background:
+      radial-gradient(ellipse 70% 140% at 28% -10%, rgb(255 255 255 / 0.07), transparent 60%),
+      repeating-linear-gradient(0deg, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 2px, rgb(0 0 0 / 0.08) 2px 3px),
+      linear-gradient(180deg, var(--plate-1), var(--plate-2));
+    box-shadow: 0 0 0 1px #000, inset 0 1px 0 rgb(255 255 255 / 0.12), inset 0 -1px 0 rgb(0 0 0 / 0.5);
+  }
+
+  .screw {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff, #bdb5a5 45%, #6d665a 100%);
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.45), 0 1px 0 rgb(255 255 255 / 0.45);
+  }
+  .screw::after {
+    content: '';
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 50%;
+    height: 1.2px;
+    margin-top: -0.6px;
+    background: rgb(0 0 0 / 0.55);
+    transform: rotate(var(--r, 35deg));
+  }
+  :global(:root[data-theme='dark']) .screw { background: radial-gradient(circle at 35% 30%, #8d867b, #3c3732 55%, #1a1715); }
+  .s-tl { left: 6px; top: 6px; }
+  .s-tr { right: 6px; top: 6px; --r: -20deg; }
+  .s-bl { left: 6px; bottom: 6px; --r: 70deg; }
+  .s-br { right: 6px; bottom: 6px; --r: 10deg; }
+
+  .print {
+    display: block;
+    font-size: 0.5rem;
+    letter-spacing: 0.24em;
+    color: var(--print);
+    margin-bottom: 5px;
+  }
+
+  .topline, .bottomline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+  }
+  .topline {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.14);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.4);
+  }
+  :global(:root[data-theme='dark']) .topline { border-bottom-color: rgb(0 0 0 / 0.6); box-shadow: 0 1px 0 rgb(255 255 255 / 0.05); }
+  .brand {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.5);
+  }
+  :global(:root[data-theme='dark']) .brand { text-shadow: 0 0 12px rgb(230 200 140 / 0.25); }
+  .brand .dot { color: #c0392b; margin-inline: 1px; }
+  .model { flex: 1; color: var(--print); }
+  .model em { font-style: normal; margin-left: 0.6em; padding: 1px 5px; border: 1px solid currentColor; border-radius: 2px; font-size: 0.5rem; }
+  .power { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--print); }
+  .led {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #ffd2c4, #ff4d2a 45%, #a41d07);
+    box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.5), 0 0 8px 2px rgb(255 77 42 / 0.55);
+    animation: led 4s ease-in-out infinite;
+  }
+  @keyframes led { 50% { box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.5), 0 0 12px 3px rgb(255 77 42 / 0.75); } }
+
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: var(--print);
+    cursor: pointer;
+  }
+  .lever {
+    position: relative;
+    width: 24px;
+    height: 12px;
+    border-radius: 7px;
+    background: #1d1814;
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.8), 0 1px 0 rgb(255 255 255 / 0.35);
+  }
+  .lever::after {
+    content: '';
+    position: absolute;
+    top: 1.5px;
+    left: 13px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff, #b8ad97);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+    transition: left 0.2s var(--ease-spring);
+  }
+  .switch[aria-pressed='false'] .lever::after { left: 2px; }
+  .spk { width: 15px; height: 15px; }
+  .spk .wave { transition: opacity 0.25s; }
+  .switch[aria-pressed='false'] .wave { opacity: 0.15; }
+  .switch[aria-pressed='true'] .lever { background: #4a2e18; }
+
+  .bottomline {
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 9px;
+    font-size: 0.52rem;
+    color: var(--print);
+    border-top: 1px solid rgb(0 0 0 / 0.12);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
+  }
+  :global(:root[data-theme='dark']) .bottomline { border-top-color: rgb(0 0 0 / 0.6); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05); }
+
+  .main {
+    display: grid;
+    grid-template-columns: minmax(118px, 0.8fr) minmax(0, 2fr) minmax(118px, 0.8fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* VU meters, in a recessed black panel */
+  .meter-panel {
+    display: grid;
+    gap: 8px;
+    padding: 7px;
+    border-radius: 5px;
+    background: var(--panel);
+    box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.9), 0 1px 0 rgb(255 255 255 / 0.45), 0 0 0 1px rgb(0 0 0 / 0.5);
+  }
+  :global(:root[data-theme='dark']) .meter-panel { box-shadow: inset 0 2px 6px #000, 0 1px 0 rgb(255 255 255 / 0.06), 0 0 0 1px #000; }
+  .vu {
+    padding: 2px;
+    border-radius: 3px;
+    background: var(--chrome);
+    box-shadow: 0 0 calc(var(--vu-lamp) * 18px) calc(var(--vu-lamp) * -2px) rgb(255 170 70 / 0.5);
+    transition: box-shadow 0.4s;
+  }
+  .vu svg { display: block; width: 100%; height: auto; border-radius: 2px; overflow: hidden; }
+  .vu-face { fill: var(--vu-face); transition: fill 0.4s; }
+  .vu-lamp { opacity: calc(0.35 + var(--vu-lamp) * 0.4); transition: opacity 0.4s; }
+  .playing .vu-lamp { opacity: 0.95; }
+  .playing .vu { box-shadow: 0 0 22px -2px rgb(255 180 80 / 0.6); }
+  .vu-arc { fill: none; stroke: #2a1f17; stroke-width: 0.9; }
+  .vu-red { fill: none; stroke: #c33a22; stroke-width: 3.5; }
+  .vu-tick { stroke: #2a1f17; stroke-width: 0.9; }
+  .vu-tick.red { stroke: #c33a22; }
+  .vu-num { font-family: var(--font-mono); font-size: 7px; fill: #2a1f17; }
+  .vu-label { font-family: var(--font-body); font-style: italic; font-size: 13px; fill: #2a1f17; }
+  .vu-ch { font-family: var(--font-mono); font-size: 8px; fill: #2a1f17; font-weight: 700; }
+  .vu-cover { fill: #1c1612; }
+  .vu-pivot { fill: #3a2f26; stroke: #000; stroke-width: 0.5; }
+  .vu-glass { fill: rgb(255 255 255 / 0.07); }
+  .needle {
+    stroke: #b4261a;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    transform-origin: 60px 84px;
+    transform: rotate(-48deg);
+    transition: transform 0.6s var(--ease-spring);
+    filter: drop-shadow(1px 1px 0.5px rgb(0 0 0 / 0.25));
+  }
+  .playing .vu:nth-child(1) .needle { animation: vu-l 0.9s ease-in-out infinite alternate; }
+  .playing .vu:nth-child(2) .needle { animation: vu-r 0.7s ease-in-out infinite alternate; }
+  @keyframes vu-l {
+    0% { transform: rotate(-20deg); } 30% { transform: rotate(8deg); } 55% { transform: rotate(-6deg); }
+    80% { transform: rotate(22deg); } 100% { transform: rotate(2deg); }
+  }
+  @keyframes vu-r {
+    0% { transform: rotate(-12deg); } 25% { transform: rotate(16deg); } 50% { transform: rotate(-2deg); }
+    75% { transform: rotate(28deg); } 100% { transform: rotate(-8deg); }
+  }
+
+  /* ── Door ── chrome trim → dark bezel → glass window that hinges at the bottom */
+  .door-trim {
+    padding: 2px;
+    border-radius: 9px;
+    background: var(--chrome);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.35);
+  }
+  .door {
+    --door-angle: -17deg;
+    position: relative;
+    padding: 9px 9px 14px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, #221c17, #110e0b);
+    box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.8);
+    perspective: 950px;
+  }
+  .door.clunk { animation: clunk 0.32s ease-out; }
+  @keyframes clunk { 30% { transform: translateY(3px); } 60% { transform: translateY(-1px); } }
+  .recess {
+    position: absolute;
+    inset: 9px 9px 14px;
+    border-radius: 5px;
+    background:
+      radial-gradient(ellipse at 50% 20%, #2e2219, #070504 75%);
+    box-shadow: inset 0 8px 16px rgb(0 0 0 / 0.95);
+  }
+  .recess .spindles { opacity: 0.55; }
+  .window {
+    position: relative;
+    aspect-ratio: 320 / 200;
+    border-radius: 5px;
+    /* only clip the sides & bottom — tapes slide in from above */
+    clip-path: inset(-220% 0 0 0 round 0 0 5px 5px);
+    background: radial-gradient(ellipse at 50% 120%, #3a2c22 0%, #120e0b 70%);
+    box-shadow: inset 0 0 18px rgb(0 0 0 / 0.85);
+    transform-origin: 50% 100%;
+    transition: transform 0.45s var(--ease-spring);
+  }
+  .door.open .window {
+    transform: rotateX(var(--door-angle));
+    transition: transform 0.34s cubic-bezier(.35, 0, .2, 1);
+  }
+  .spindles {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22%;
+    padding-bottom: 4%;
+  }
+  .spindles i {
+    width: 9%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: repeating-conic-gradient(#d9d0bf 0 20deg, #8f8676 20deg 60deg);
+    box-shadow: 0 0 0 3px #2a221c, 0 0 10px rgb(0 0 0 / 0.8);
+  }
+  .slot {
+    position: absolute;
+    inset: 5% 5% 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .door.loaded .slot { opacity: 1; }
+  .glass {
+    position: absolute;
+    inset: 0;
+    border-radius: 5px;
+    pointer-events: none;
+    background:
+      linear-gradient(112deg, rgb(255 255 255 / 0.2) 0%, rgb(255 255 255 / 0.05) 22%, transparent 30%, transparent 62%, rgb(255 255 255 / 0.07) 68%, transparent 76%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.06), transparent 30%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.18);
+    transition: background-color 0.4s;
+  }
+  .playing .glass { background-color: rgb(255 190 110 / 0.07); }
+  .door-print {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.5rem;
+    letter-spacing: 0.22em;
+    color: #b8ab92;
+    opacity: 0.65;
+  }
+
+  /* ── Piano keys ── */
+  .keys {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-top: 14px;
+    padding: 5px 5px 7px;
+    border-radius: 5px;
+    background: linear-gradient(#0c0a08, #1a1511);
+    box-shadow: inset 0 3px 5px rgb(0 0 0 / 0.9), 0 1px 0 rgb(255 255 255 / 0.45), 0 0 0 1px rgb(0 0 0 / 0.5);
+  }
+  :global(:root[data-theme='dark']) .keys { box-shadow: inset 0 3px 5px #000, 0 1px 0 rgb(255 255 255 / 0.06), 0 0 0 1px #000; }
+  .key {
+    position: relative;
+    height: 40px;
+    border: 0;
+    border-radius: 2px 2px 4px 4px;
+    cursor: pointer;
+    color: var(--key-ink);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0) 35%),
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.03) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, var(--key-1), var(--key-2));
+    box-shadow:
+      0 5px 0 var(--key-shade),
+      0 6px 4px rgb(0 0 0 / 0.6),
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      inset 0 -2px 0 rgb(0 0 0 / 0.12);
+    transition: transform 0.07s, box-shadow 0.07s, filter 0.2s;
+  }
+  :global(:root[data-theme='dark']) .key {
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0) 35%),
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.1) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, var(--key-1), var(--key-2));
+    box-shadow: 0 5px 0 var(--key-shade), 0 6px 4px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.2), inset 0 -2px 0 rgb(0 0 0 / 0.3);
+  }
+  .key svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    vertical-align: middle;
+    /* engraved */
+    filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.6));
+  }
+  :global(:root[data-theme='dark']) .key svg { filter: drop-shadow(0 -1px 0 rgb(0 0 0 / 0.6)); }
+  .key.rec, :global(:root[data-theme='dark']) .key.rec { color: #d6452a; }
+  .key:hover { filter: brightness(1.05); }
+  .key:active, .key.pressed {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--key-shade), 0 2px 2px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.4), inset 0 -1px 0 rgb(0 0 0 / 0.12);
+  }
+  .key.play.pressed { color: #3c9a4a; }
+  .key.play.pressed::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    margin-left: -2.5px;
+    border-radius: 50%;
+    background: #74e683;
+    box-shadow: 0 0 6px 1px #74e683;
+  }
+  .key:focus-visible { outline: 2px dashed #e0a43a; outline-offset: 2px; }
+  .key-labels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-top: 7px;
+    padding-inline: 5px;
+    text-align: center;
+    font-size: 0.48rem;
+    letter-spacing: 0.18em;
+    color: var(--print);
+  }
+
+  /* ── Display & dial ── */
+  .side { display: grid; gap: 4px; padding-top: 2px; }
+  .lcd {
+    position: relative;
+    padding: 8px 10px 7px;
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(0deg, rgb(0 0 0 / 0.3) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at 50% 0%, rgb(255 170 60 / 0.1), transparent 70%),
+      #0b0806;
+    box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.95), 0 1px 0 rgb(255 255 255 / 0.45), 0 0 0 1px rgb(0 0 0 / 0.6), 0 0 0 3px rgb(0 0 0 / 0.08);
+    color: #ffb347;
+    text-shadow: 0 0 6px rgb(255 160 60 / 0.75);
+    overflow: hidden;
+  }
+  .lcd::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(160deg, rgb(255 255 255 / 0.1), transparent 35%);
+    pointer-events: none;
+  }
+  .lcd-row { display: flex; justify-content: space-between; align-items: center; }
+  .lcd-dim { font-size: 0.48rem; line-height: 1.3; letter-spacing: 0.2em; opacity: 0.5; }
+  .counter-wrap { position: relative; font-size: 1.45rem; font-weight: 700; letter-spacing: 0.12em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .ghost-digits { position: absolute; inset: 0; opacity: 0.08; text-shadow: none; }
+  .counter { position: relative; }
+  .lcd-text {
+    margin-top: 6px;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 1.2em;
+  }
+  .lcd-bars { display: flex; gap: 2px; align-items: flex-end; height: 10px; margin-top: 5px; }
+  .lcd-bars i {
+    flex: 1;
+    height: 15%;
+    background: #ffb347;
+    box-shadow: 0 0 4px rgb(255 160 60 / 0.8);
+    opacity: 0.3;
+  }
+  .playing .lcd-bars i { opacity: 0.9; animation: eq 0.5s ease-in-out infinite alternate; }
+  .playing .lcd-bars i:nth-child(3n) { animation-duration: 0.37s; }
+  .playing .lcd-bars i:nth-child(3n + 1) { animation-duration: 0.61s; animation-delay: -0.2s; }
+  .playing .lcd-bars i:nth-child(4n) { animation-duration: 0.43s; animation-delay: -0.1s; }
+  @keyframes eq { from { height: 15%; } to { height: 100%; } }
+
+  .knob-wrap {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    margin-top: 12px;
+  }
+  .dial { width: 92px; height: 92px; }
+  .dial-minor { stroke: var(--print); stroke-width: 0.8; opacity: 0.6; }
+  .dial-major { stroke: var(--plate-ink); stroke-width: 1.8; stroke-linecap: round; }
+  .knob {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    margin-left: -33px;
+    width: 66px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    /* knurled skirt */
+    background: repeating-conic-gradient(#3b342d 0 5deg, #191512 5deg 10deg);
+    box-shadow: 0 7px 12px rgb(0 0 0 / 0.5), 0 2px 3px rgb(0 0 0 / 0.5);
+  }
+  .knob::before {
+    /* machined aluminium cap — the light stays put while the knob turns */
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background:
+      repeating-radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.1) 0 1px, rgb(0 0 0 / 0.05) 1px 2px),
+      conic-gradient(from 10deg, #f6f3ed, #9e978a 12%, #ece8e0 26%, #8a8376 40%, #f3efe9 52%, #a19a8d 64%, #e7e3db 78%, #8b8477 90%, #f6f3ed);
+    box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.9), inset 0 -2px 3px rgb(0 0 0 / 0.35);
+  }
+  :global(:root[data-theme='dark']) .knob::before {
+    background:
+      repeating-radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.05) 0 1px, rgb(0 0 0 / 0.08) 1px 2px),
+      conic-gradient(from 10deg, #d9cdb4, #6e665a 12%, #c9bda5 26%, #5e574c 40%, #d6cab2 52%, #6f675b 64%, #c4b8a0 78%, #5d564b 90%, #d9cdb4);
+  }
+  .knob-turn {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    transform: rotate(var(--knob, 0deg));
+    transition: transform 0.55s var(--ease-spring);
+  }
+  .knob-turn i {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 4px;
+    height: 13px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: linear-gradient(#e2553a, #a52a14);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4), 0 0 0 0.5px rgb(0 0 0 / 0.3);
+  }
+  .knob-wrap .print { margin: 2px 0 0; }
+
+  .feet { display: flex; justify-content: space-between; padding: 0 9%; }
+  .feet i {
+    width: 64px;
+    height: 9px;
+    border-radius: 0 0 7px 7px;
+    background: linear-gradient(#2a221c, #0e0b09);
+    box-shadow: 0 3px 4px rgb(0 0 0 / 0.35);
+  }
+
+  @media (max-width: 680px) {
+    .main { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .door-col { grid-column: 1 / -1; order: -1; }
+    .meter-panel { grid-template-columns: 1fr 1fr; gap: 5px; padding: 5px; }
+    .knob-wrap { display: none; }
+    .hide-sm { display: none; }
+    .key { height: 36px; }
+    .model em { display: none; }
+  }
+  @media (max-width: 420px) {
+    .face { padding-inline: 12px; }
+    .deck { padding: 0 9px; }
+    .model { display: none; }
+    .topline { justify-content: space-between; }
+    .door-print span:first-child { display: none; }
+    .door-print { justify-content: center; }
+  }
+</style>

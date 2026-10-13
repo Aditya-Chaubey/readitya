@@ -1,0 +1,75 @@
+---
+import '@fontsource/eb-garamond/400.css';
+import '@fontsource/eb-garamond/400-italic.css';
+import '@fontsource/eb-garamond/500.css';
+import '@fontsource/eb-garamond/600.css';
+import '@fontsource/im-fell-english/400.css';
+import '@fontsource/im-fell-english/400-italic.css';
+import '@fontsource/im-fell-english-sc/400.css';
+import '@fontsource/courier-prime/400.css';
+import '@fontsource/courier-prime/700.css';
+import '@fontsource/special-elite/400.css';
+import '@fontsource/permanent-marker/400.css';
+import '../styles/global.css';
+import bodyFont from '@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff2?url';
+import displayFont from '@fontsource/im-fell-english/files/im-fell-english-latin-400-normal.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Hide the header/footer (used by the cassette home page). */
+  bare?: boolean;
+  /** Section name for the header highlight & running head. */
+  section?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description = SITE.description, bare = false, section, type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.title} — Writings`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.title} — Tidbits`} href="/tidbits/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={title ?? SITE.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#ddd0b3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#120e0b" media="(prefers-color-scheme: dark)" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      (() => {
+        let t = null;
+        try { t = localStorage.getItem('theme'); } catch {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body class:list={{ bare }}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {!bare && <Header section={section} />}
+    <slot />
+    {!bare && <Footer />}
+  </body>
+</html>
