@@ -10,7 +10,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
 <header class="site-header" id="site-header">
   <div class="inner">
     <a class="brand" href="/" aria-label={`${SITE.author} — home`}>
-      <svg class="tape" viewBox="0 0 32 20" width="28" height="18" aria-hidden="true">
+      <svg class="brand-tape" viewBox="0 0 32 20" width="28" height="18" aria-hidden="true">
         <rect x="1" y="1" width="30" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
         <rect x="6" y="5" width="20" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.3"></rect>
         <circle class="hub" cx="10.5" cy="8.5" r="1.7" fill="currentColor"></circle>
@@ -20,18 +20,16 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
       <span>{SITE.author}</span>
     </a>
 
-    <nav class="nav" aria-label="Main">
-      <ul>
-        {
-          NAV.map((item) => (
-            <li>
-              <a href={item.href} style={`--c:${item.color}`} aria-current={isActive(item.href, item.label) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <!-- the navigation is a bank of tape-deck keys -->
+    <nav class="bank" aria-label="Main">
+      {
+        NAV.map((item) => (
+          <a class="nkey" href={item.href} style={`--c:${item.color}`} aria-current={isActive(item.href, item.label) ? 'page' : undefined}>
+            <i class="led" aria-hidden="true" />
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="tools">
@@ -48,7 +46,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
         NAV.map((item, i) => (
           <li style={`--i:${i};--c:${item.color}`}>
             <a href={item.href} aria-current={isActive(item.href, item.label) ? 'page' : undefined}>
-              <span class="dot" aria-hidden="true"></span>
+              <i class="led" aria-hidden="true" />
               {item.label}
             </a>
           </li>
@@ -64,12 +62,10 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
   const btn = header?.querySelector<HTMLButtonElement>('.menu-btn');
   const menu = document.getElementById('menu');
 
-  // hairline under the header once the page scrolls
   const onScroll = () => header?.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // mobile menu
   const setOpen = (open: boolean) => {
     if (!btn || !menu) return;
     btn.setAttribute('aria-expanded', String(open));
@@ -92,7 +88,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
     top: 0;
     z-index: 60;
     height: var(--head-h);
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    background: color-mix(in srgb, var(--bg) 84%, transparent);
     backdrop-filter: blur(14px) saturate(1.3);
     -webkit-backdrop-filter: blur(14px) saturate(1.3);
     border-bottom: 1px solid transparent;
@@ -101,12 +97,12 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
   .site-header.scrolled { border-bottom-color: var(--line); }
   .inner {
     height: 100%;
-    max-width: calc(var(--wide) + var(--rail) + var(--gutter) * 2);
+    max-width: calc(var(--wide) + var(--gutter) * 2);
     margin-inline: auto;
     padding-inline: var(--gutter);
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .brand {
@@ -124,45 +120,63 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
     color: var(--fg);
     white-space: nowrap;
   }
-  .brand .tape { color: var(--stripe-2); flex: none; transition: transform 0.4s var(--ease-spring); }
+  .brand .brand-tape { color: var(--stripe-2); flex: none; transition: transform 0.4s var(--ease-spring); }
   .brand:hover { color: var(--fg); }
-  .brand:hover .tape { transform: rotate(-8deg) scale(1.08); }
+  .brand:hover .brand-tape { transform: rotate(-8deg) scale(1.08); }
   .brand:hover .hub { animation: spin 0.8s linear infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .nav ul { display: flex; gap: 0.25rem; list-style: none; padding: 0; }
-  .nav a {
+  /* key bank */
+  .bank {
+    display: flex;
+    gap: 4px;
+    padding: 4px 4px 6px;
+    border-radius: 11px;
+    background: var(--plastic-2);
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.28), 0 1px 0 rgb(255 255 255 / 0.55);
+  }
+  :global(:root[data-theme='dark']) .bank { box-shadow: inset 0 1px 3px #000, 0 1px 0 rgb(255 255 255 / 0.05); }
+  .nkey {
     position: relative;
-    display: block;
-    padding: 0.45rem 0.75rem;
-    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.75rem 0.4rem 0.6rem;
+    border-radius: 7px;
     font-family: var(--font-ui);
-    font-size: 0.74rem;
+    font-size: 0.66rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--fg-soft);
-    transition: color 0.2s, background-color 0.25s;
+    background: linear-gradient(180deg, var(--key), var(--key-2));
+    box-shadow: 0 2px 0 var(--key-edge), 0 3px 4px -1px rgb(0 0 0 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.6);
+    transition: transform 0.12s, box-shadow 0.12s, color 0.2s;
   }
-  .nav a:hover { color: var(--fg); background: color-mix(in srgb, var(--c) 14%, transparent); }
-  .nav a[aria-current='page'] { color: var(--fg); }
-  /* the active section gets a little tape-coloured tab */
-  .nav a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0.1rem;
-    width: 1.1rem;
-    height: 3px;
-    margin-left: -0.55rem;
-    border-radius: 2px;
+  :global(:root[data-theme='dark']) .nkey { box-shadow: 0 2px 0 var(--key-edge), 0 3px 4px -1px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.08); }
+  .nkey:hover { color: var(--fg); transform: translateY(1px); box-shadow: 0 1px 0 var(--key-edge), inset 0 1px 0 rgb(255 255 255 / 0.4); }
+  .nkey[aria-current='page'] {
+    color: var(--fg);
+    transform: translateY(2px);
+    background: linear-gradient(180deg, var(--key-2), var(--key));
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.25);
+  }
+  .led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex: none;
+    background: color-mix(in srgb, var(--c) 30%, var(--key-2));
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  .nkey:hover .led { background: color-mix(in srgb, var(--c) 65%, var(--key-2)); }
+  .nkey[aria-current='page'] .led, .menu a[aria-current='page'] .led {
     background: var(--c);
-    transform: scaleX(0);
-    transition: transform 0.35s var(--ease-out);
+    box-shadow: 0 0 6px 1px var(--c), inset 0 -1px 1px rgb(0 0 0 / 0.2);
   }
-  .nav a[aria-current='page']::after { transform: scaleX(1); }
 
-  .tools { display: flex; align-items: center; gap: 0.25rem; }
+  .tools { display: flex; align-items: center; gap: 0.15rem; }
   .menu-btn {
     display: none;
     position: relative;
@@ -188,7 +202,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
   .menu-btn[aria-expanded='true'] span:first-child { top: calc(50% - 1px); transform: rotate(45deg); }
   .menu-btn[aria-expanded='true'] span:last-child { top: calc(50% - 1px); transform: rotate(-45deg); }
 
-  /* mobile menu: a full panel that slides in from the side */
+  /* mobile menu */
   .menu {
     position: fixed;
     top: var(--head-h);
@@ -200,7 +214,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
     flex-direction: column;
     justify-content: space-between;
     background:
-      radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--stripe-1) 30%, transparent), transparent 60%),
+      radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--stripe-1) 28%, transparent), transparent 60%),
       var(--surface);
     border-left: 1px solid var(--line);
     transform: translateX(100%);
@@ -208,12 +222,7 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
   }
   .menu.open { transform: none; }
   .menu ul { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
-  .menu li {
-    opacity: 0;
-    transform: translateX(24px);
-    transition: opacity 0.4s, transform 0.5s var(--ease-out);
-    transition-delay: calc(var(--i) * 45ms + 0.1s);
-  }
+  .menu li { opacity: 0; transform: translateX(24px); transition: opacity 0.4s, transform 0.5s var(--ease-out); transition-delay: calc(var(--i) * 45ms + 0.1s); }
   .menu.open li { opacity: 1; transform: none; }
   .menu a {
     display: flex;
@@ -229,11 +238,11 @@ const isActive = (href: string, label: string) => path === href || path.startsWi
     color: var(--fg);
   }
   .menu a:hover, .menu a[aria-current='page'] { color: var(--c); }
-  .menu .dot { width: 0.6rem; height: 0.6rem; border-radius: 2px; background: var(--c); flex: none; }
+  .menu .led { width: 0.6rem; height: 0.6rem; }
   .menu .stripes { width: 6rem; }
 
-  @media (max-width: 760px) {
-    .nav { display: none; }
+  @media (max-width: 820px) {
+    .bank { display: none; }
     .menu-btn { display: inline-block; }
   }
 </style>

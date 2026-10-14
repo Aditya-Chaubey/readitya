@@ -2,42 +2,19 @@
 import Base from '../layouts/Base.astro';
 import Cassette from '../components/Cassette.astro';
 import Deck from '../components/Deck.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
 import Title from '../components/Title.astro';
 import { SITE, TAPES } from '../site.config';
-
-// dust motes drifting through the light (deterministic, so no layout shift)
-const motes = Array.from({ length: 16 }, (_, i) => ({
-  x: (i * 37 + 11) % 100,
-  y: 18 + ((i * 53) % 70),
-  s: 1.5 + ((i * 7) % 3),
-  dur: 16 + ((i * 5) % 12),
-  delay: -((i * 3.7) % 20),
-  dx: ((i % 5) - 2) * 18,
-  o: 0.35 + ((i * 13) % 5) / 10,
-}));
 ---
 
-<Base bare>
-  <div class="ambience" aria-hidden="true">
-    <span class="beam"></span>
-    {
-      motes.map((m) => (
-        <span
-          class="mote"
-          style={`left:${m.x}%;top:${m.y}%;width:${m.s}px;height:${m.s}px;--dur:${m.dur}s;--delay:${m.delay}s;--dx:${m.dx}px;--o:${m.o}`}
-        />
-      ))
-    }
-  </div>
-
+<Base home>
   <main id="main" class="home">
     <header class="home-head">
-      <div class="title-block">
-        <Title text={SITE.author} />
-        <p class="tagline">{SITE.tagline}</p>
-      </div>
-      <div class="toggle-slot"><ThemeToggle /></div>
+      <p class="display" aria-hidden="true">
+        <span class="reels"><i></i><i></i></span>
+        <span class="txt"><span class="dim">Side A ▸</span> <span class="lit">Select a tape</span></span>
+      </p>
+      <Title text={SITE.author} class="home-title" />
+      <p class="tagline">{SITE.tagline}</p>
     </header>
 
     <section class="rack" id="rack" aria-roledescription="carousel" aria-label="Choose a tape">
@@ -95,98 +72,40 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
 </Base>
 
 <style>
-  /* ── Room ─────────────────────────────────────────── */
-  :global(body.bare) {
-    overflow-x: hidden;
-    background-image:
-      radial-gradient(ellipse 70% 55% at 50% 60%, rgb(255 240 200 / 0.5), transparent 70%),
-      repeating-linear-gradient(90deg, rgb(120 80 40 / 0.04) 0 22px, transparent 22px 44px),
-      radial-gradient(ellipse 120% 90% at 50% 40%, transparent 50%, rgb(60 30 10 / 0.18)),
-      linear-gradient(var(--desk), var(--desk-2));
-  }
-  :global(:root[data-theme='dark'] body.bare) {
-    background-image:
-      radial-gradient(ellipse 55% 45% at 50% 62%, rgb(255 160 70 / 0.13), transparent 70%),
-      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.012) 0 22px, transparent 22px 44px),
-      radial-gradient(ellipse 110% 90% at 50% 40%, transparent 45%, rgb(0 0 0 / 0.55)),
-      linear-gradient(var(--desk), var(--desk-2));
-  }
-
-  .ambience { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-  .beam {
-    --beam: rgb(255 250 232 / 0.4);
-    position: absolute;
-    left: 62%;
-    top: -12%;
-    width: 140vmax;
-    height: 140vh;
-    transform: translateX(-50%) rotate(-24deg);
-    transform-origin: 50% 0;
-    background: conic-gradient(from 180deg at 50% 0%, transparent 0 158deg, var(--beam) 172deg, var(--beam) 188deg, transparent 202deg 360deg);
-    -webkit-mask: linear-gradient(#000 10%, transparent 85%);
-    mask: linear-gradient(#000 10%, transparent 85%);
-    animation: beam 14s ease-in-out infinite alternate;
-  }
-  :global(:root[data-theme='dark']) .beam {
-    --beam: rgb(255 176 92 / 0.09);
-    left: 50%;
-    transform: translateX(-50%);
-    animation: none;
-  }
-  @keyframes beam { to { opacity: 0.7; transform: translateX(-50%) rotate(-21deg); } }
-  .mote {
-    position: absolute;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 0.95);
-    box-shadow: 0 0 6px 1px rgb(255 240 210 / 0.7);
-    opacity: 0;
-    animation: drift var(--dur) linear infinite;
-    animation-delay: var(--delay);
-  }
-  :global(:root[data-theme='dark']) .mote {
-    background: rgb(255 214 150 / 0.95);
-    box-shadow: 0 0 8px 2px rgb(255 170 80 / 0.55);
-  }
-  @keyframes drift {
-    0% { transform: translate(0, 0); opacity: 0; }
-    15%, 80% { opacity: var(--o); }
-    100% { transform: translate(var(--dx), -140px); opacity: 0; }
+  /* ── Room: the same calm surface as the rest of the site, with a soft pool of light behind the deck ── */
+  :global(body.home) {
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 65%, color-mix(in srgb, var(--stripe-1) 14%, transparent), transparent 70%),
+      var(--bg);
   }
 
   .home {
-    --tw: clamp(150px, min(30vw, 31svh), 300px);
-    --spread: clamp(125px, 24vw, 250px);
+    --sec: var(--stripe-2);
+    --tw: clamp(150px, min(28vw, 28svh), 280px);
+    --spread: clamp(125px, 23vw, 240px);
     position: relative;
-    z-index: 1;
-    min-height: 100svh;
+    min-height: calc(100svh - var(--head-h));
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: clamp(1rem, 3vh, 2rem) 1rem 2rem;
-    overflow-x: clip;
   }
 
-  .home-head {
-    position: relative;
-    width: min(100%, 780px);
-    text-align: center;
-    padding-top: clamp(0.5rem, 2vh, 1.25rem);
+  .home-head { display: grid; justify-items: center; gap: 0.6rem; text-align: center; }
+  .home-head .display { margin-bottom: 0.4rem; }
+  .home-head :global(.home-title) {
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-stretch: 118%;
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
   }
-  .toggle-slot { position: absolute; top: 0; right: 0; }
-  .title-block :global(h1) {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(2.2rem, 5vw, 3.3rem);
-    line-height: 1;
-    /* letterpress */
-    text-shadow: 0 1px 0 rgb(255 255 255 / 0.55), 0 -1px 0 rgb(0 0 0 / 0.08);
-  }
-  :global(:root[data-theme='dark']) .title-block :global(h1) { text-shadow: 0 0 28px rgb(255 170 90 / 0.25), 0 1px 0 rgb(0 0 0 / 0.6); }
   .tagline {
     font-style: italic;
-    color: var(--ink-soft);
-    margin-top: 0.4rem;
-    animation: ink-in 0.9s var(--ease-out) both 0.45s;
+    color: var(--fg-soft);
+    animation: rise 0.9s var(--ease-out) both 0.45s;
   }
 
   /* ── Tape carousel, in real 3D ─────────────────────── */
@@ -363,7 +282,8 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
   @keyframes deck-in { from { opacity: 0; transform: translateY(30px); } }
 
   .hint {
-    margin-top: 1.4rem;
+    margin-top: 1.6rem;
+    text-transform: uppercase;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
@@ -390,7 +310,11 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
     margin-top: 0.4rem;
   }
   .plain-nav a {
-    color: var(--ink-faint);
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -434,8 +358,8 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
     .hint { display: none; }
   }
   @media (max-height: 820px) and (min-width: 681px) {
-    .title-block :global(h1) { font-size: 2.3rem; }
-    .tagline { margin-top: 0.1rem; }
+    .home-head :global(.home-title) { font-size: 2.4rem; }
+    .home-head .display { display: none; }
     .deck-wrap { margin-top: 2.25rem; }
     .hint { margin-top: 0.9rem; }
   }
@@ -443,8 +367,8 @@ const motes = Array.from({ length: 16 }, (_, i) => ({
 
 <script>
   const root = document.documentElement;
-  const tapes = Array.from(document.querySelectorAll<HTMLAnchorElement>('.tape'));
-  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.dot'));
+  const tapes = Array.from(document.querySelectorAll<HTMLAnchorElement>('.stage .tape'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.picker .dot'));
   const rack = document.getElementById('rack')!;
   const deck = document.getElementById('deck')!;
   const door = document.getElementById('door')!;

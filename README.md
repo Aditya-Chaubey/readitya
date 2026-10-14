@@ -93,7 +93,7 @@ items:
     # link: https://…
 ```
 
-**Add a new shelf** (games, podcasts, papers…) by copying any shelf file, e.g. `games.yaml`, and changing `title`, `creatorLabel`, `verb`, `order` and `color`. It appears on the bookcase automatically.
+**Add a new shelf** (games, podcasts, papers…) by copying any shelf file, e.g. `games.yaml`, and changing `title`, `creatorLabel`, `verb`, `order` and `color`. It appears as a new tape in the cassette tower automatically.
 
 ## Publishing to the world
 

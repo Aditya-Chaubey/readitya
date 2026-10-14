@@ -5,51 +5,83 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="inner">
-    <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
-    <div class="row">
-      <a class="sign" href="/">{SITE.author}</a>
-      <ul class="links">
-        {SOCIALS.map((s) => <li><a href={s.href} rel="me noopener">{s.label}</a></li>)}
-        <li><a href="/rss.xml">RSS</a></li>
-      </ul>
+    <div class="plate">
+      <i class="screw" aria-hidden="true"></i><i class="screw" aria-hidden="true"></i>
+      <div class="row">
+        <a class="sign" href="/">
+          <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
+          {SITE.author}
+        </a>
+        <ul class="links">
+          {SOCIALS.map((s) => <li><a href={s.href} rel="me noopener">{s.label}</a></li>)}
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+      </div>
+      <p class="fine"><span>© {year}</span><span>Made by hand · played on tape</span></p>
     </div>
-    <p class="fine">© {year} · made by hand, played on tape</p>
   </div>
 </footer>
 
 <style>
-  .site-footer { border-top: 1px solid var(--line); }
   .inner {
-    max-width: calc(var(--wide) + var(--rail) + var(--gutter) * 2);
+    max-width: calc(var(--wide) + var(--gutter) * 2);
     margin-inline: auto;
-    padding: 2.5rem var(--gutter) 3rem;
+    padding: 0 var(--gutter) 2rem;
   }
-  .stripes { width: 4.5rem; margin-bottom: 1.75rem; }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem 2rem;
+  /* a deck's bottom plate: plastic, screwed down */
+  .plate {
+    position: relative;
+    padding: 1.75rem clamp(1.25rem, 3vw, 2.25rem) 1.4rem;
+    border-radius: 16px;
+    background: linear-gradient(180deg, var(--plastic), var(--plastic-2));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 1px 2px rgb(0 0 0 / 0.08);
   }
+  :global(:root[data-theme='dark']) .plate { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 0 0 1px #000; }
+  .screw {
+    position: absolute;
+    top: 0.75rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff, #b5ad9e 50%, #6d665a);
+    opacity: 0.7;
+  }
+  .screw:first-child { left: 0.75rem; }
+  .screw:nth-child(2) { right: 0.75rem; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
   .sign {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
     font-family: var(--font-head);
     font-weight: 800;
     font-stretch: 115%;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    letter-spacing: -0.01em;
+    font-size: clamp(1.2rem, 2.4vw, 1.6rem);
     text-transform: uppercase;
     text-decoration: none;
   }
-  .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; list-style: none; padding: 0; }
+  .sign .stripes { width: 2.4rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; list-style: none; padding: 0; }
   .links a {
     font-family: var(--font-ui);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--fg-soft);
   }
   .links a:hover { color: var(--stripe-2); }
-  .fine { margin-top: 1.25rem; font-family: var(--font-ui); font-size: 0.7rem; color: var(--fg-faint); }
+  .fine {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--line);
+    font-family: var(--font-ui);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+  }
 </style>

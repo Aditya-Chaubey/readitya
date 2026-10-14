@@ -11,7 +11,10 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
   <div class="about">
     <div class="text">
       <header class="hero">
-        <p class="meta-row"><span class="stamp">Liner notes</span></p>
+        <p class="display" aria-hidden="true">
+          <span class="reels"><i></i><i></i></span>
+          <span class="txt"><span class="dim">▶ Liner notes</span> <span class="lit">About</span></span>
+        </p>
         <Title text={frontmatter.lede ?? frontmatter.title ?? 'About me'} class="headline" />
       </header>
       <div class="prose">

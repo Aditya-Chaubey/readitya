@@ -85,7 +85,7 @@ Open the right file in `src/content/library/` — `books.yaml`, `movies.yaml`, `
 
 - `rating` is 0–5 (halves allowed). Delete the line if you don't want to rate it.
 - Keep the spaces at the start of each line exactly as shown — they matter.
-- **New category?** Copy any of those files, rename it (e.g. `games.yaml`), and change its `title`. A new book appears on the shelf.
+- **New category?** Copy any of those files, rename it (e.g. `games.yaml`), and change its `title`. A new tape appears in the tower.
 
 ---
 

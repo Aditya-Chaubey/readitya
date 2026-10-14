@@ -1,387 +1,309 @@
 ---
 import Page from '../../layouts/Page.astro';
-import { getShelves, hash } from '../../lib/utils';
+import SectionHead from '../../components/SectionHead.astro';
+import { getShelves } from '../../lib/utils';
 
 const shelves = await getShelves();
-
-// each shelf is a book; vary the sizes a little (stable per shelf) so it looks lived-in
-const books = shelves.map((s, i) => {
-  const h = hash(s.id);
-  return {
-    shelf: s,
-    i,
-    w: 46 + (h % 5) * 4, // spine thickness
-    ht: 168 + ((h >>> 4) % 6) * 9, // height
-  };
-});
-// seven books per shelf; the last shelf also gets a little stack of books lying flat
-const PER_ROW = 10;
-const rows: (typeof books)[] = [];
-for (let i = 0; i < books.length; i += PER_ROW) rows.push(books.slice(i, i + PER_ROW));
-if (rows.length === 0) rows.push([]);
-const showStack = rows[rows.length - 1].length <= PER_ROW - 1;
-const stack = [
-  { len: 132, th: 17, c: '#5c3f27' },
-  { len: 118, th: 22, c: '#2c4a55' },
-  { len: 126, th: 15, c: '#8a2f25' },
-];
+const total = shelves.reduce((n, s) => n + s.data.items.length, 0);
+/** "C-60" style tape length from how many entries a shelf holds */
+const tapeLen = (n: number) => `C-${Math.min(120, Math.max(30, Math.ceil(n / 5) * 30))}`;
+const first = shelves[0];
 ---
 
-<Page title="Library" section="Library" index description="A catalogue of the books, films, shows, music and more that I have consumed.">
-    <header class="intro">
-      <p class="lede">Everything I've read, watched and listened to. Pull a book off the shelf.</p>
-    </header>
+<Page title="Library" section="Library" description="A catalogue of the books, films, shows, music and more that I have consumed.">
+  <SectionHead section="Library" lede="Everything I've read, watched and listened to — one tape per shelf. Pull one out." count={total} />
 
-    <div class="bookcase" role="list" aria-label="Shelves">
-      {
-        rows.map((row, r) => (
-          <div class="shelf">
-            <div class="books">
-              {row.map((b) => (
-                <a
-                  class="vol"
-                  role="listitem"
-                  href={`/library/${b.shelf.id}/`}
-                  style={`--c:${b.shelf.data.color};--w:${b.w};--h:${b.ht};--i:${b.i}`}
-                  aria-label={`${b.shelf.data.title} — ${b.shelf.data.items.length} entries`}
-                >
-                  <span class="f spine">
-                    <span class="band" aria-hidden="true" />
-                    <span class="title">{b.shelf.data.title}</span>
-                    <span class="band" aria-hidden="true" />
-                    <span class="call" aria-hidden="true">{b.shelf.data.items.length}</span>
+  <div class="library">
+    <!-- a tower of cassette cases, spines out -->
+    <div class="tower">
+      <div class="rack" role="list" aria-label="Shelves">
+        {
+          shelves.map((s, i) => (
+            <a
+              class="case"
+              role="listitem"
+              href={`/library/${s.id}/`}
+              style={`--c:${s.data.color};--i:${i}`}
+              data-title={s.data.title}
+              data-desc={s.data.description ?? ''}
+              data-count={s.data.items.length}
+              data-len={tapeLen(s.data.items.length)}
+              aria-label={`${s.data.title} — ${s.data.items.length} entries`}
+            >
+              <span class="f spine">
+                <span class="tab">{String(i + 1).padStart(2, '0')}</span>
+                <span class="paper">
+                  <span class="title">{s.data.title}</span>
+                  <span class="meta">
+                    {s.data.items.length} · {tapeLen(s.data.items.length)}
                   </span>
-                  <span class="f top" aria-hidden="true" />
-                  <span class="f side left" aria-hidden="true" />
-                  <span class="f side right" aria-hidden="true" />
-                </a>
-              ))}
-              {r === rows.length - 1 && showStack && (
-                <span class="stack" aria-hidden="true">
-                  {stack.map((b) => (
-                    <span class="flat" style={`--c:${b.c};--len:${b.len};--th:${b.th}`}>
-                      <span class="f fspine" />
-                      <span class="f ftop" />
-                      <span class="f fend left" />
-                      <span class="f fend right" />
-                    </span>
-                  ))}
                 </span>
-              )}
-            </div>
-            <div class="ledge" aria-hidden="true"><span class="ledge-top" /><span class="ledge-front" /></div>
-          </div>
-        ))
-      }
+                <span class="bars" aria-hidden="true"><i /><i /><i /></span>
+              </span>
+              <span class="f lid" aria-hidden="true">
+                <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+                  <rect x="20" y="10" width="280" height="180" rx="12" class="shell" />
+                  <rect x="40" y="22" width="240" height="96" rx="6" class="lbl" />
+                  <rect x="40" y="22" width="240" height="20" rx="6" class="lbl-band" />
+                  <rect x="88" y="78" width="144" height="36" rx="18" class="win" />
+                  <circle cx="122" cy="96" r="11" class="hub" />
+                  <circle cx="198" cy="96" r="11" class="hub" />
+                  <path d="M70 190 L84 150 H236 L250 190 Z" class="foot" />
+                </svg>
+              </span>
+              <span class="f end" aria-hidden="true" />
+            </a>
+          ))
+        }
+      </div>
+      <div class="plinth" aria-hidden="true"></div>
     </div>
 
-
-    <ul class="shelf-list">
-      {
-        shelves.map((s) => (
-          <li class="reveal">
-            <a href={`/library/${s.id}/`} style={`--c:${s.data.color}`}>
-              <span class="n">{String(s.data.items.length).padStart(2, '0')}</span>
-              <span class="name">{s.data.title}</span>
-              {s.data.description && <span class="desc">{s.data.description}</span>}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <!-- the J-card for whichever tape is pulled out -->
+    {
+      first && (
+        <aside class="jcard" aria-live="polite">
+          <span class="stripes" aria-hidden="true"><i /><i /><i /></span>
+          <p class="label">Now selected</p>
+          <h2 class="j-title" data-j="title">{first.data.title}</h2>
+          <p class="j-desc" data-j="desc">{first.data.description}</p>
+          <p class="j-meta">
+            <span class="count" data-j="count">{String(first.data.items.length).padStart(3, '0')}</span>
+            <span data-j="len">{tapeLen(first.data.items.length)}</span>
+          </p>
+          <a class="btn" href={`/library/${first.id}/`} data-j="href">▶ Play this tape</a>
+        </aside>
+      )
+    }
+  </div>
 </Page>
 
+<script>
+  const card = document.querySelector<HTMLElement>('.jcard');
+  const cases = document.querySelectorAll<HTMLAnchorElement>('.case');
+  if (card) {
+    const q = (k: string) => card.querySelector<HTMLElement>(`[data-j="${k}"]`)!;
+    const show = (c: HTMLAnchorElement) => {
+      const d = c.dataset;
+      card.style.setProperty('--c', c.style.getPropertyValue('--c'));
+      q('title').textContent = d.title ?? '';
+      q('desc').textContent = d.desc ?? '';
+      q('count').textContent = String(d.count ?? 0).padStart(3, '0');
+      q('len').textContent = d.len ?? '';
+      (q('href') as HTMLAnchorElement).href = c.href;
+      card.classList.remove('swap');
+      void card.offsetWidth;
+      card.classList.add('swap');
+    };
+    cases.forEach((c) => {
+      c.addEventListener('pointerenter', () => show(c));
+      c.addEventListener('focus', () => show(c));
+    });
+    if (cases[0]) card.style.setProperty('--c', cases[0].style.getPropertyValue('--c'));
+  }
+</script>
+
 <style>
-  /* ══ The bookcase ══════════════════════════════════════════
-     Each book is a real box in 3D: spine (front), page block (top),
-     and both covers (sides). The shelf is seen from a little above,
-     so you can see the tops of the books and the shelf surface. */
-  .bookcase {
-    --k: 1; /* size scale */
-    --depth: calc(118px * var(--k));
-    margin: 1rem 0 2.5rem;
-    padding: 18px 14px 0;
-    border-radius: 4px 4px 2px 2px;
+  .library {
+    display: grid;
+    grid-template-columns: minmax(0, 36rem) minmax(16rem, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* ── the tower ── */
+  .tower {
+    --h: clamp(3rem, 6vw, 3.75rem);  /* thickness of one case (its spine) */
+    --d: 210px;                      /* depth of a case, front to back */
+    perspective: 1300px;
+    perspective-origin: 30% -30%;
+    padding: 14px 16px 0;
+    border-radius: 16px 16px 0 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgb(255 230 180 / 0.12), transparent 70%),
-      linear-gradient(180deg, rgb(var(--shadow) / 0.2), rgb(var(--shadow) / 0.07));
-    box-shadow: inset 0 14px 22px -14px rgb(var(--shadow) / 0.6), inset 10px 0 18px -14px rgb(var(--shadow) / 0.4), inset -10px 0 18px -14px rgb(var(--shadow) / 0.4);
+      linear-gradient(90deg, rgb(0 0 0 / 0.25), transparent 6%, transparent 94%, rgb(0 0 0 / 0.25)),
+      linear-gradient(180deg, #2a2624, #1b1817);
+    box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.08), 0 30px 50px -30px rgb(0 0 0 / 0.6);
   }
-  :global(:root[data-theme='dark']) .bookcase {
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgb(255 170 90 / 0.08), transparent 70%),
-      linear-gradient(180deg, rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.2));
-    box-shadow: inset 0 16px 26px -12px #000, inset 10px 0 18px -14px #000, inset -10px 0 18px -14px #000;
-  }
-  .shelf {
-    perspective: 1100px;
-    perspective-origin: 50% -60%;
-  }
-  .shelf + .shelf { margin-top: 26px; }
-  .books {
-    display: flex;
-    align-items: flex-end;
-    gap: calc(7px * var(--k));
-    height: calc(236px * var(--k));
-    padding: 0 calc(18px * var(--k));
+  .rack {
+    display: grid;
+    gap: 7px;
+    padding-bottom: 14px;
     transform-style: preserve-3d;
-    /* Firefox hit-tests this flat layer in front of books pushed back in 3D, so let clicks pass through it */
+    /* Firefox hit-tests this flat layer in front of the cases, so let clicks through */
     pointer-events: none;
   }
-
-  .vol {
-    pointer-events: auto;
+  .case {
     position: relative;
-    flex: none;
-    width: calc(var(--w) * 1px * var(--k));
-    height: calc(var(--h) * 1px * var(--k));
+    display: block;
+    height: var(--h);
     text-decoration: none;
+    color: inherit;
     transform-style: preserve-3d;
-    transform: translateZ(calc(var(--depth) * -0.08));
+    pointer-events: auto;
     transition: transform 0.6s var(--ease-spring);
-    animation: book-in 0.9s var(--ease-spring) backwards;
-    animation-delay: calc(var(--i) * 80ms + 0.25s);
+    animation: slot-in 0.8s var(--ease-out) backwards;
+    animation-delay: calc(var(--i) * 70ms + 0.2s);
     outline: none;
   }
-  @keyframes book-in { from { transform: translateY(-60px) translateZ(-20px) rotateZ(-5deg); opacity: 0; } }
-  .vol:hover, .vol:focus-visible {
-    transform: translateZ(calc(var(--depth) * 0.42)) translateY(-8px) rotateX(-6deg) rotateY(-4deg);
+  @keyframes slot-in { from { translate: 60px 0; opacity: 0; } }
+  .case:hover, .case:focus-visible {
+    transform: translateZ(70px) translateX(-10px) rotateX(-10deg);
   }
-  .vol:nth-child(4n + 2):not(:hover):not(:focus-visible) { transform: translateZ(calc(var(--depth) * -0.14)); }
-  .vol:nth-child(5n + 3):not(:hover):not(:focus-visible) { transform: translateZ(calc(var(--depth) * -0.02)); }
   .f { position: absolute; display: block; }
 
-  /* spine — cloth-bound, rounded, with gilt bands */
+  /* the spine: a J-card strip seen through clear plastic */
   .spine {
     inset: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: calc(14px * var(--k)) 0 calc(10px * var(--k));
-    border-radius: 3px 3px 2px 2px;
-    background:
-      linear-gradient(90deg, rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.1) 9%, rgb(255 255 255 / 0.2) 24%, rgb(255 255 255 / 0.06) 42%, rgb(0 0 0 / 0.06) 66%, rgb(0 0 0 / 0.42) 92%, rgb(0 0 0 / 0.6)),
-      repeating-linear-gradient(45deg, rgb(255 255 255 / 0.035) 0 1px, transparent 1px 3px),
-      repeating-linear-gradient(-45deg, rgb(0 0 0 / 0.04) 0 1px, transparent 1px 3px),
-      var(--c);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), inset 0 -2px 3px rgb(0 0 0 / 0.3);
-    transition: box-shadow 0.4s;
+    align-items: stretch;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #efe6d2;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25), 0 2px 0 rgb(0 0 0 / 0.35);
   }
-  .vol:hover .spine, .vol:focus-visible .spine { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25), 0 26px 30px -14px rgb(0 0 0 / 0.55); }
-  .band {
-    width: 100%;
-    height: calc(7px * var(--k));
-    flex: none;
-    background:
-      linear-gradient(180deg, transparent 0 1px, #e8c46b 1px 2.5px, transparent 2.5px calc(100% - 2.5px), #e8c46b calc(100% - 2.5px) calc(100% - 1px), transparent calc(100% - 1px));
-    opacity: 0.85;
-  }
-  .title {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    padding-block: calc(10px * var(--k));
-    font-family: var(--font-display-sc);
-    font-size: calc(1.05rem * var(--k));
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    color: #f0d48a;
-    text-shadow: 0 1px 0 rgb(0 0 0 / 0.55), 0 0 1px rgb(255 230 160 / 0.4);
-  }
-  .call {
-    flex: none;
-    margin-top: calc(8px * var(--k));
-    min-width: 62%;
-    padding: 2px 3px 1px;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: calc(0.62rem * var(--k));
-    color: #2a1f17;
-    background: #f3ead6;
-    border-radius: 1px;
-    box-shadow: 0 1px 1px rgb(0 0 0 / 0.35);
-  }
-
-  /* page block on top, between the two cover boards */
-  .top {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: var(--depth);
-    transform-origin: top center;
-    transform: rotateX(-90deg);
-    background:
-      linear-gradient(180deg, var(--c) 0 4px, rgb(0 0 0 / 0.25) 4px 5px, transparent 5px),
-      linear-gradient(90deg, var(--c) 0 3px, transparent 3px calc(100% - 3px), var(--c) calc(100% - 3px)),
-      repeating-linear-gradient(90deg, rgb(120 85 40 / 0.22) 0 1px, transparent 1px 2.5px),
-      linear-gradient(180deg, #f6ecd5, #d4c29b);
-  }
-  :global(:root[data-theme='dark']) .top { filter: brightness(0.8); }
-  /* covers on each side */
-  .side {
-    top: 0;
-    width: var(--depth);
-    height: 100%;
-    transform-origin: left center;
-    transform: rotateY(90deg);
-    background:
-      linear-gradient(90deg, rgb(0 0 0 / 0.28) 0 7px, rgb(255 255 255 / 0.06) 7px 8px, transparent 8px),
-      linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(0 0 0 / 0.25)),
-      linear-gradient(rgb(0 0 0 / 0.32), rgb(0 0 0 / 0.32)),
-      var(--c);
-    border-radius: 0 3px 3px 0;
-  }
-  .side.left { left: 0; }
-  .side.right { left: 100%; }
-
-  /* ── a small stack of books lying flat ── */
-  .stack {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    margin-left: auto;
-    margin-right: calc(10px * var(--k));
-    transform-style: preserve-3d;
-    transform: translateZ(calc(var(--depth) * -0.1));
-  }
-  .flat {
-    position: relative;
-    width: calc(var(--len) * 1px * var(--k));
-    height: calc(var(--th) * 1px * var(--k));
-    transform-style: preserve-3d;
-  }
-  .flat:nth-child(2) { transform: translateX(calc(-6px * var(--k))) rotateY(-4deg); }
-  .flat:nth-child(3) { transform: translateX(calc(5px * var(--k))) rotateY(5deg); }
-  .fspine {
+  .spine::after {
+    /* the plastic case's gloss */
+    content: '';
+    position: absolute;
     inset: 0;
-    border-radius: 2px;
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.04) 35%, rgb(0 0 0 / 0.35)),
-      linear-gradient(90deg, transparent 10%, #e8c46b 10% calc(10% + 1.5px), transparent calc(10% + 1.5px) calc(90% - 1.5px), #e8c46b calc(90% - 1.5px) 90%, transparent 90%),
-      var(--c);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0) 40%, rgb(0 0 0 / 0) 70%, rgb(0 0 0 / 0.12));
+    pointer-events: none;
   }
-  .ftop {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: calc(var(--depth) * 0.72);
-    transform-origin: top center;
-    transform: rotateX(-90deg);
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(0 0 0 / 0.15)), var(--c);
-    border-radius: 0 0 3px 3px;
-  }
-  .fend {
-    top: 0;
-    width: calc(var(--depth) * 0.72);
-    height: 100%;
-    transform-origin: left center;
-    transform: rotateY(90deg);
-    background:
-      linear-gradient(180deg, var(--c) 0 2px, transparent 2px calc(100% - 2px), var(--c) calc(100% - 2px)),
-      repeating-linear-gradient(180deg, rgb(120 85 40 / 0.25) 0 1px, transparent 1px 2.5px),
-      linear-gradient(90deg, #e9dcbc, #cdb98f);
-  }
-  .fend.left { left: 0; }
-  .fend.right { left: 100%; }
-
-  /* ── the shelf board ── */
-  .ledge { position: relative; z-index: 1; }
-  .ledge-top {
-    display: block;
-    height: calc(20px * var(--k));
-    margin-inline: -14px;
-    clip-path: polygon(2% 0, 98% 0, 100% 100%, 0 100%);
-    background:
-      linear-gradient(180deg, rgb(0 0 0 / 0.35), transparent 45%),
-      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.06) 0 2px, transparent 2px 11px, rgb(255 255 255 / 0.05) 11px 12px, transparent 12px 27px),
-      linear-gradient(180deg, #8c5c37, #a87447);
-  }
-  .ledge-front {
-    display: block;
-    height: calc(16px * var(--k));
-    margin-inline: -14px;
-    border-radius: 0 0 2px 2px;
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 0.22) 0 1px, transparent 1px 30%, rgb(0 0 0 / 0.2)),
-      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.07) 0 3px, transparent 3px 14px),
-      #6a4024;
-    box-shadow: 0 12px 16px -8px rgb(0 0 0 / 0.5);
-  }
-  :global(:root[data-theme='dark']) .ledge-top { filter: brightness(0.62); }
-  :global(:root[data-theme='dark']) .ledge-front { filter: brightness(0.6); }
-
-  @media (max-width: 600px) {
-    .bookcase { --k: 0.74; padding-inline: 8px; }
-    .stack { display: none; }
-    .ledge-top, .ledge-front { margin-inline: -8px; }
-  }
-  @media (max-width: 380px) {
-    .bookcase { --k: 0.64; }
-  }
-
-  /* J-card frame for the bookcase */
-  .bookcase {
-    margin: 0 0 clamp(2.5rem, 6vh, 4rem);
-    padding: 26px clamp(14px, 3vw, 32px) 0;
-    border-radius: 18px 18px 6px 6px;
-    background:
-      radial-gradient(ellipse 70% 70% at 50% 0%, color-mix(in srgb, var(--sec) 14%, transparent), transparent 70%),
-      var(--surface);
-    box-shadow: inset 0 18px 30px -22px rgb(0 0 0 / 0.35);
-  }
-  :global(:root[data-theme='dark']) .bookcase {
-    background:
-      radial-gradient(ellipse 70% 70% at 50% 0%, color-mix(in srgb, var(--sec) 16%, transparent), transparent 70%),
-      #0d0b0b;
-    box-shadow: inset 0 18px 30px -18px #000;
-  }
-  .ledge-top, .ledge-front { margin-inline: calc(-1 * clamp(14px, 3vw, 32px)); }
-
-  /* every shelf, as a list with big counts */
-  .shelf-list {
-    list-style: none;
-    padding: 0;
+  .tab {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
-    gap: 0.75rem;
-  }
-  .shelf-list a {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.15rem 1rem;
-    height: 100%;
-    padding: 1.35rem 1.4rem;
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: inherit;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.4s var(--ease-out);
-  }
-  .shelf-list a:hover { background: color-mix(in srgb, var(--c) 12%, var(--surface)); transform: translateY(-3px); }
-  .n {
-    grid-row: span 2;
+    place-items: center;
+    flex: none;
+    width: calc(var(--h) * 1.15);
     font-family: var(--font-head);
     font-weight: 900;
-    font-stretch: 120%;
-    font-size: 2.4rem;
+    font-stretch: 115%;
+    font-size: calc(var(--h) * 0.38);
+    color: #fff;
+    background: var(--c);
+  }
+  .paper {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1rem;
+    background: repeating-linear-gradient(0deg, transparent 0 calc(var(--h) / 3 - 1px), rgb(31 43 85 / 0.08) calc(var(--h) / 3 - 1px) calc(var(--h) / 3));
+  }
+  .title {
+    font-family: var(--font-hand);
+    font-size: calc(var(--h) * 0.4);
     line-height: 1;
-    color: var(--c);
+    color: #1f2b55;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .name { font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
-  .desc { font-size: 0.92rem; line-height: 1.4; color: var(--fg-faint); }
-  .shelf-list a::after {
-    content: '→';
-    position: absolute;
-    top: 1.3rem;
-    right: 1.3rem;
-    color: var(--c);
+  .meta {
+    flex: none;
+    font-family: var(--font-ui);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: #6b5d4c;
+  }
+  .bars { display: flex; gap: 3px; padding: 0 0.6rem; flex: none; }
+  .bars i { width: 4px; border-radius: 1px; }
+  .bars i:nth-child(1) { background: var(--stripe-1); }
+  .bars i:nth-child(2) { background: var(--stripe-2); }
+  .bars i:nth-child(3) { background: var(--stripe-3); }
+
+  /* the lid: clear plastic with the cassette inside, seen once the case slides out */
+  .lid {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: var(--d);
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+    border-radius: 0 0 6px 6px;
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.22), rgb(255 255 255 / 0.04) 40%, rgb(255 255 255 / 0.1)),
+      #3b3836;
+    /* tucked under the case above until this one is pulled out */
     opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.3s, transform 0.4s var(--ease-out);
+    transition: opacity 0.25s;
   }
-  .shelf-list a:hover::after { opacity: 1; transform: none; }
+  .case:hover .lid, .case:focus-visible .lid { opacity: 1; transition-delay: 0.05s; }
+  .lid svg { width: 100%; height: 100%; display: block; }
+  .shell { fill: var(--c); }
+  .lbl { fill: #efe6d2; }
+  .lbl-band { fill: color-mix(in srgb, var(--c) 60%, #000); }
+  .win { fill: #15110e; }
+  .hub { fill: #efe6d2; }
+  .foot { fill: rgb(0 0 0 / 0.2); }
+  /* the right-hand end of the case */
+  .end {
+    top: 0;
+    left: 100%;
+    width: var(--d);
+    height: 100%;
+    transform-origin: left center;
+    transform: rotateY(90deg);
+    background: linear-gradient(90deg, #4a4542, #2b2826);
+    border-radius: 0 4px 4px 0;
+  }
+  .plinth {
+    height: 16px;
+    margin: 0 -16px;
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(180deg, #3a3532, #141211);
+    box-shadow: 0 14px 24px -12px rgb(0 0 0 / 0.6);
+  }
+
+  /* ── the J-card info panel ── */
+  .jcard {
+    --c: var(--sec);
+    position: sticky;
+    top: calc(var(--head-h) + 2rem);
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem 1.6rem 1.6rem;
+    border-radius: var(--radius);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--c) 18%, transparent), transparent 55%),
+      var(--surface);
+    transition: background-color 0.3s;
+  }
+  .jcard .stripes { width: 3.5rem; }
+  .j-title {
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    line-height: 1.05;
+    color: var(--fg);
+  }
+  .j-desc { color: var(--fg-soft); line-height: 1.5; min-height: 3em; }
+  .j-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--fg-faint);
+  }
+  .j-meta .count {
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: var(--glass);
+    color: var(--vfd);
+    text-shadow: 0 0 5px var(--vfd-glow);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+  .jcard .btn { justify-self: start; margin-top: 0.4rem; }
+  .jcard.swap > :not(.stripes) { animation: swap-in 0.45s var(--ease-out); }
+  @keyframes swap-in { from { opacity: 0; transform: translateY(6px); } }
+
+  @media (max-width: 860px) {
+    .library { grid-template-columns: minmax(0, 1fr); }
+    .jcard { display: none; }
+    .tower { --d: 150px; }
+  }
 </style>

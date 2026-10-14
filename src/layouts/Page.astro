@@ -1,7 +1,7 @@
 ---
 /**
- * The "J-card" layout used by every page except the cassette home page:
- * a coloured spine down the side carrying the section name, and a wide main column.
+ * Every page except the home page: a centred, wide column under the
+ * deck-style header, tinted with the section's colour.
  */
 import Base from './Base.astro';
 import { NAV } from '../site.config';
@@ -9,31 +9,42 @@ import { NAV } from '../site.config';
 interface Props {
   title?: string;
   description?: string;
-  /** Which section this page belongs to (sets the colour and the spine text). */
+  /** Which section this page belongs to (sets the colour). */
   section?: string;
   type?: 'website' | 'article';
   /** Override the section colour. */
   color?: string;
-  /** Long read: the spine stripes fill up as you scroll, plus a thin bar on top. */
+  /** Long read: a thin reading bar along the top. */
   progress?: boolean;
-  /** Index pages: the spine *is* the page's main heading. */
-  index?: boolean;
 }
-const { title, description, section, type, progress = false, index = false } = Astro.props;
+const { title, description, section, type, progress = false } = Astro.props;
 const color = Astro.props.color ?? NAV.find((n) => n.label === section)?.color ?? '#d9532e';
-const spine = section ?? title ?? '';
 ---
 
 <Base title={title} description={description} section={section} type={type}>
   <slot name="head" slot="head" />
-  <div class:list={['shell', { reading: progress }]} style={`--sec:${color};--len:${Math.max(4, spine.length)}`}>
+  <div class="wrap" style={`--sec:${color}`}>
     {progress && <div class="progress" aria-hidden="true" />}
-    <aside class="rail" aria-hidden={index ? undefined : 'true'}>
-      {index ? <h1 class="rail-title">{spine}</h1> : <p class="rail-title">{spine}</p>}
-      <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
-    </aside>
     <main id="main" class="main">
       <slot />
     </main>
   </div>
 </Base>
+
+{
+  progress && (
+    <script>
+      // reading position → --read-p (0…1) on <html>; drives the top bar and the tape meter
+      const root = document.documentElement;
+      let frame = 0;
+      const update = () => {
+        frame = 0;
+        const max = root.scrollHeight - innerHeight;
+        root.style.setProperty('--read-p', String(max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0));
+      };
+      addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+      addEventListener('resize', update);
+      update();
+    </script>
+  )
+}

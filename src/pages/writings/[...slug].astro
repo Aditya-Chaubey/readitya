@@ -2,13 +2,14 @@
 import { render } from 'astro:content';
 import Page from '../../layouts/Page.astro';
 import Title from '../../components/Title.astro';
+import TapeMeter from '../../components/TapeMeter.astro';
 import { formatDate, getWritings, readingTime, wordCount, type Writing } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const posts = await getWritings();
   return posts.map((post, i) => ({
     params: { slug: post.id },
-    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+    props: { post, newer: posts[i - 1], older: posts[i + 1], index: i },
   }));
 }
 
@@ -16,6 +17,7 @@ interface Props {
   post: Writing;
   newer?: Writing;
   older?: Writing;
+  index: number;
 }
 const { post, newer, older } = Astro.props;
 const { Content, headings } = await render(post);
@@ -26,27 +28,25 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
 
 <Page title={post.data.title} description={post.data.description} section="Writings" type="article" progress>
   <header class="hero">
+    <p class="display" aria-hidden="true">
+      <span class="reels"><i></i><i></i></span>
+      <span class="txt"><span class="dim">▶ Now playing</span> <span class="lit">{post.data.type}</span></span>
+      <span class="count">{readingTime(words)}:00</span>
+    </p>
+    <Title text={post.data.title} class="headline" />
+    {post.data.description && <p class="dek">{post.data.description}</p>}
     <p class="meta-row">
-      <span class="stamp">{post.data.type}</span>
       {post.data.draft && <span class="stamp">draft</span>}
       <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
       <span class="sep">/</span>
       <span>{words.toLocaleString('en')} words</span>
       <span class="sep">/</span>
       <span>{readingTime(words)} min</span>
+      {post.data.tags.map((t) => <span class="tag">#{t}</span>)}
     </p>
-    <Title text={post.data.title} class="headline" />
-    {post.data.description && <p class="dek">{post.data.description}</p>}
-    {
-      post.data.tags.length > 0 && (
-        <ul class="tags" aria-label="Tags">
-          {post.data.tags.map((t) => <li>#{t}</li>)}
-        </ul>
-      )
-    }
   </header>
 
-  <div class:list={['layout', { 'has-toc': showToc }]}>
+  <div class="layout">
     <article class="prose">
       <Content />
       {
@@ -58,20 +58,23 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
       }
     </article>
 
-    {
-      showToc && (
-        <nav class="toc" aria-label="Contents">
-          <p class="label">Contents</p>
-          <ol>
-            {toc.map((h) => (
-              <li class={`d${h.depth}`}>
-                <a href={`#${h.slug}`} data-slug={h.slug}>{h.text}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )
-    }
+    <aside class="side">
+      <TapeMeter />
+      {
+        showToc && (
+          <nav class="toc" aria-label="Contents">
+            <p class="label">Tracks</p>
+            <ol>
+              {toc.map((h) => (
+                <li class={`d${h.depth}`}>
+                  <a href={`#${h.slug}`} data-slug={h.slug}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+    </aside>
   </div>
 
   {
@@ -79,7 +82,7 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
       <nav class="pager" aria-label="More writings">
         {older ? (
           <a href={`/writings/${older.id}/`}>
-            <span class="label">← Previous</span>
+            <span class="label">◀◀ Previous</span>
             <span class="pt">{older.data.title}</span>
           </a>
         ) : (
@@ -87,7 +90,7 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
         )}
         {newer ? (
           <a class="nx" href={`/writings/${newer.id}/`}>
-            <span class="label">Next →</span>
+            <span class="label">Next ▶▶</span>
             <span class="pt">{newer.data.title}</span>
           </a>
         ) : (
@@ -99,75 +102,69 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
 </Page>
 
 <script>
-  // highlight the section you're reading in the side contents
+  // light up the track you're reading in the side list
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc a[data-slug]')];
-  if (links.length && 'IntersectionObserver' in window) {
-    const bySlug = new Map(links.map((a) => [a.dataset.slug!, a]));
-    const headings = links.map((a) => document.getElementById(a.dataset.slug!)).filter(Boolean) as HTMLElement[];
+  if (links.length) {
+    const heads = links.map((a) => document.getElementById(a.dataset.slug!)).filter(Boolean) as HTMLElement[];
     let current = '';
-    const io = new IntersectionObserver(
-      () => {
-        // the last heading above the reading line wins
-        const line = innerHeight * 0.3;
-        let id = headings[0]?.id ?? '';
-        for (const h of headings) if (h.getBoundingClientRect().top < line) id = h.id;
-        if (id === current) return;
-        current = id;
-        links.forEach((a) => a.classList.toggle('on', a.dataset.slug === id));
-      },
-      { rootMargin: '0px 0px -60% 0px', threshold: [0, 1] },
-    );
-    headings.forEach((h) => io.observe(h));
-    bySlug.get(headings[0]?.id ?? '')?.classList.add('on');
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = innerHeight * 0.3;
+      let id = heads[0]?.id ?? '';
+      for (const h of heads) if (h.getBoundingClientRect().top < line) id = h.id;
+      if (id === current) return;
+      current = id;
+      links.forEach((a) => a.classList.toggle('on', a.dataset.slug === id));
+    };
+    addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    update();
   }
 </script>
 
 <style>
-  .hero :global(.headline) { max-width: 18ch; }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 1.25rem;
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    color: var(--fg-faint);
+  .hero :global(.headline) { max-width: 20ch; }
+  .tag { text-transform: none; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--read)) minmax(13rem, 15.5rem);
+    justify-content: space-between;
+    gap: 4rem;
   }
-
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr); }
-  .layout.has-toc { grid-template-columns: minmax(0, var(--read)) minmax(11rem, 15rem); justify-content: space-between; gap: 4rem; }
   .prose { font-size: 1.1em; }
+  .side { position: sticky; top: calc(var(--head-h) + 1.5rem); align-self: start; display: grid; gap: 1.75rem; }
 
-  .toc { position: sticky; top: calc(var(--head-h) + 2rem); align-self: start; }
-  .toc .label { margin-bottom: 0.8rem; }
-  .toc ol { list-style: none; padding: 0; border-left: 1px solid var(--line); }
-  .toc li { margin: 0; }
+  .toc .label { margin-bottom: 0.6rem; }
+  .toc ol { list-style: none; padding: 0; counter-reset: trk; }
+  .toc li { counter-increment: trk; }
   .toc a {
-    display: block;
-    padding: 0.35rem 0 0.35rem 1rem;
-    margin-left: -1px;
-    border-left: 2px solid transparent;
+    display: grid;
+    grid-template-columns: 1.8rem 1fr;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
     font-family: var(--font-head);
     font-size: 0.85rem;
     line-height: 1.35;
     text-decoration: none;
     color: var(--fg-faint);
-    transition: color 0.25s, border-color 0.25s;
+    transition: color 0.25s, background-color 0.25s;
   }
-  .toc .d3 a { padding-left: 1.9rem; font-size: 0.8rem; }
+  .toc a::before {
+    content: counter(trk, decimal-leading-zero);
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    padding-top: 0.12rem;
+    opacity: 0.7;
+  }
+  .toc .d3 a { padding-left: 1.4rem; font-size: 0.8rem; }
   .toc a:hover { color: var(--fg); }
-  .toc a.on { color: var(--fg); border-left-color: var(--sec); }
+  .toc a.on { color: var(--fg); background: color-mix(in srgb, var(--sec) 13%, transparent); }
+  .toc a.on::before { color: var(--accent); opacity: 1; }
 
   .revised { margin-top: 2.5rem; font-family: var(--font-ui); font-size: 0.72rem; color: var(--fg-faint); }
 
-  .pager {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: clamp(3rem, 8vh, 5rem);
-  }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: clamp(3rem, 8vh, 5rem); }
   .pager a {
     display: grid;
     gap: 0.4rem;
@@ -182,9 +179,9 @@ const showToc = post.data.toc && toc.filter((h) => h.depth === 2).length >= 2;
   .pager .nx { text-align: right; grid-column: 2; }
   .pt { font-family: var(--font-head); font-weight: 650; font-size: 1.15rem; line-height: 1.25; }
 
-  @media (max-width: 1080px) {
-    .layout.has-toc { grid-template-columns: minmax(0, 1fr); }
-    .toc { display: none; }
+  @media (max-width: 1060px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .side { display: none; }
   }
   @media (max-width: 560px) {
     .pager { grid-template-columns: 1fr; }

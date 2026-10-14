@@ -1,23 +1,11 @@
 ---
-import '@fontsource/eb-garamond/400.css';
-import '@fontsource/eb-garamond/400-italic.css';
-import '@fontsource/eb-garamond/500.css';
-import '@fontsource/eb-garamond/600.css';
-import '@fontsource/im-fell-english/400.css';
-import '@fontsource/im-fell-english/400-italic.css';
-import '@fontsource/im-fell-english-sc/400.css';
-import '@fontsource/courier-prime/400.css';
-import '@fontsource/courier-prime/700.css';
-import '@fontsource/special-elite/400.css';
-import '@fontsource/permanent-marker/400.css';
 import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/newsreader/opsz.css';
 import '@fontsource-variable/newsreader/opsz-italic.css';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
+import '@fontsource/permanent-marker/400.css';
 import '../styles/global.css';
-import bodyFont from '@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff2?url';
-import displayFont from '@fontsource/im-fell-english/files/im-fell-english-latin-400-normal.woff2?url';
 import headFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import textFont from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
 import Header from '../components/Header.astro';
@@ -27,14 +15,14 @@ import { SITE } from '../site.config';
 interface Props {
   title?: string;
   description?: string;
-  /** Hide the header/footer (used by the cassette home page). */
-  bare?: boolean;
-  /** Section name for the header highlight & running head. */
+  /** The home page: keeps the header, drops the footer, fills the screen. */
+  home?: boolean;
+  /** Section name, for the header highlight. */
   section?: string;
   type?: 'website' | 'article';
 }
 
-const { title, description = SITE.description, bare = false, section, type = 'website' } = Astro.props;
+const { title, description = SITE.description, home = false, section, type = 'website' } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -49,9 +37,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="author" content={SITE.author} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    {/* preload the fonts this kind of page leads with */}
-    <link rel="preload" href={bare ? bodyFont : headFont} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={bare ? displayFont : textFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={textFont} as="font" type="font/woff2" crossorigin />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.title} — Writings`} href="/rss.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.title} — Tidbits`} href="/tidbits/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -61,8 +48,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.title} />
     <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content={bare ? "#ddd0b3" : "#f3efe7"} media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content={bare ? "#120e0b" : "#121011"} media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f1ede5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121011" media="(prefers-color-scheme: dark)" />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       (() => {
@@ -74,10 +61,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </script>
     <slot name="head" />
   </head>
-  <body class:list={{ bare }}>
+  <body class:list={{ home }}>
     <a class="skip-link" href="#main">Skip to content</a>
-    {!bare && <Header section={section} />}
+    <Header section={section} />
     <slot />
-    {!bare && <Footer />}
+    {!home && <Footer />}
   </body>
 </html>

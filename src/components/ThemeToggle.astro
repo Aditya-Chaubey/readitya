@@ -1,30 +1,28 @@
-<button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-    <mask id="tt-moon">
-      <rect width="24" height="24" fill="#fff"></rect>
-      <circle class="tt-bite" cx="24" cy="4" r="7" fill="#000"></circle>
-    </mask>
-    <circle class="tt-core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#tt-moon)"></circle>
-    <g class="tt-rays" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path>
-    </g>
-  </svg>
+<button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Light / dark">
+  <span class="track" aria-hidden="true">
+    <svg class="ico sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    <svg class="ico moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z" fill="currentColor"></path></svg>
+    <span class="knob"></span>
+  </span>
 </button>
 
 <script>
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
 
-  for (const btn of document.querySelectorAll<HTMLButtonElement>('.theme-toggle')) {
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.theme-switch')) {
+    const sync = () => btn.setAttribute('aria-checked', String(root.dataset.theme === 'dark'));
+    sync();
     btn.addEventListener('click', () => {
-      const root = document.documentElement;
       const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       const apply = () => {
         root.dataset.theme = next;
         try { localStorage.setItem('theme', next); } catch {}
+        document.querySelectorAll('.theme-switch').forEach((b) => b.setAttribute('aria-checked', String(next === 'dark')));
       };
       if (reduced || !document.startViewTransition) return apply();
 
-      // the new theme spreads out from the button like lamplight
+      // the new theme spreads out from the switch like a lamp coming on
       const r = btn.getBoundingClientRect();
       const x = r.left + r.width / 2;
       const y = r.top + r.height / 2;
@@ -45,24 +43,38 @@
 </script>
 
 <style>
-  .theme-toggle {
+  .theme-switch {
     display: inline-grid;
     place-items: center;
-    width: 2.4rem;
-    height: 2.4rem;
+    padding: 0.35rem;
     border: 0;
-    border-radius: 50%;
     background: none;
-    color: var(--fg-soft);
     cursor: pointer;
-    transition: color 0.2s, background-color 0.2s;
   }
-  .theme-toggle:hover { color: var(--accent); background: color-mix(in srgb, var(--fg) 8%, transparent); }
-  .theme-toggle svg { overflow: visible; }
-  .tt-core { transition: r 0.5s var(--ease-spring); }
-  .tt-bite { transition: cx 0.5s var(--ease-out), cy 0.5s var(--ease-out); }
-  .tt-rays { transform-origin: 12px 12px; transition: transform 0.5s var(--ease-out), opacity 0.3s; }
-  :global(:root[data-theme='dark']) .tt-core { r: 8; }
-  :global(:root[data-theme='dark']) .tt-bite { cx: 17; cy: 7; }
-  :global(:root[data-theme='dark']) .tt-rays { transform: rotate(-60deg) scale(0.4); opacity: 0; }
+  .track {
+    position: relative;
+    display: block;
+    width: 3.1rem;
+    height: 1.6rem;
+    border-radius: 99px;
+    background: var(--plastic-2);
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.35), 0 1px 0 rgb(255 255 255 / 0.5);
+  }
+  :global(:root[data-theme='dark']) .track { box-shadow: inset 0 1px 3px #000, 0 1px 0 rgb(255 255 255 / 0.06); }
+  .ico { position: absolute; top: 50%; width: 0.8rem; height: 0.8rem; margin-top: -0.4rem; color: var(--fg-faint); }
+  .sun { left: 0.42rem; }
+  .moon { right: 0.42rem; }
+  .knob {
+    position: absolute;
+    top: 0.15rem;
+    left: 0.15rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 30%, #fff, var(--key-2) 75%);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.35), inset 0 -1px 2px rgb(0 0 0 / 0.15);
+    transition: transform 0.4s var(--ease-spring);
+  }
+  .theme-switch[aria-checked='true'] .knob { transform: translateX(1.5rem); background: radial-gradient(circle at 40% 30%, #6b6560, #2b2826 75%); }
+  .theme-switch:hover .ico { color: var(--fg); }
 </style>

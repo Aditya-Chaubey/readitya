@@ -12,13 +12,13 @@ A second paragraph, for good measure. Links like [this one](https://example.com)
 
 ## A section heading
 
-Use `##` for sections and `###` for sub-sections. They show up in the *Contents* box at the top automatically. Lists work as you'd expect:
+Use `##` for sections and `###` for sub-sections. They show up as numbered tracks in the margin automatically. Lists work as you'd expect:
 
-- Bullets are printed with a little fleuron.
+- Bullets get a small square marker.
 - Numbered lists use plain numerals.
 - **Bold**, *italic*, `inline code` and ~~strikethrough~~ all work.
 
-> A blockquote looks like this — set in italics with a rule of red ink down its side. Good for quoting other people, or yourself.
+> A blockquote looks like this — set in italics with a coloured rule down its side. Good for quoting other people, or yourself.
 
 ### A sub-section
 
@@ -46,7 +46,7 @@ function greet(name) {
 
 ---
 
-And a closing thought after a section break — the `---` above becomes a little ornament.[^2]
+And a closing thought after a section break — the `---` above becomes three tape stripes.[^2]
 
 [^1]: Footnotes are written like `[^1]` in the text, and collected at the end of the post automatically.
 [^2]: Each one gets a link back to where it came from.

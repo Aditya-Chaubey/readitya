@@ -1,6 +1,7 @@
 ---
 import TidbitCard from './TidbitCard.astro';
 import type { Tidbit } from '../lib/utils';
+import SectionHead from './SectionHead.astro';
 
 interface Props {
   items: Tidbit[];
@@ -8,13 +9,11 @@ interface Props {
   pages: number;
   total?: number;
 }
-const { items, page, pages } = Astro.props;
+const { items, page, pages, total } = Astro.props;
 const pageUrl = (p: number) => (p <= 1 ? '/tidbits/' : `/tidbits/page/${p}/`);
 ---
 
-<header class="intro">
-  <p class="lede">Small notes from the margins — links, sparks, half-thoughts.</p>
-</header>
+<SectionHead section="Tidbits" lede="Small notes from the margins — links, sparks, half-thoughts." count={total ?? items.length} />
 
 {items.length === 0 && <p class="muted">Nothing here yet.</p>}
 

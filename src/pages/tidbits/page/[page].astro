@@ -27,6 +27,6 @@ interface Props {
 const { items, page, pages, total } = Astro.props;
 ---
 
-<Page title={`Tidbits — page ${page}`} section="Tidbits" index>
+<Page title={`Tidbits — page ${page}`} section="Tidbits">
   <TidbitFeed items={items} page={page} pages={pages} total={total} />
 </Page>

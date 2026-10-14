@@ -5,7 +5,11 @@ import Title from '../components/Title.astro';
 
 <Page title="Page not found" section="404" color="#d9532e">
   <div class="lost">
-    <p class="meta-row"><span class="stamp">Side B</span></p>
+    <p class="display" aria-hidden="true">
+      <span class="reels"><i></i><i></i></span>
+      <span class="txt"><span class="dim">■ Stop ▸</span> <span class="lit">No signal</span></span>
+      <span class="count">404</span>
+    </p>
     <Title text="This side of the tape is blank." class="headline" />
     <p class="dek">Whatever was here has been taped over.</p>
     <p class="actions"><a class="btn" href="/">⏏ Back to the tapes</a></p>

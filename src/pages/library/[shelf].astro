@@ -28,12 +28,14 @@ const rows = items
 
 <Page title={title} description={description ?? `My ${title.toLowerCase()} log.`} section="Library">
   <header class="hero">
-    <p class="meta-row">
-      <a class="stamp" href="/library">← Library</a>
-      <span>{rows.length} {rows.length === 1 ? 'entry' : 'entries'}</span>
+    <p class="display" aria-hidden="true">
+      <span class="reels"><i></i><i></i></span>
+      <span class="txt"><span class="dim">▶ Library ▸</span> <span class="lit">{title}</span></span>
+      <span class="count">{String(rows.length).padStart(3, '0')}</span>
     </p>
     <Title text={title} class="headline" />
     {description && <p class="dek">{description}</p>}
+    <p class="meta-row"><a class="stamp" href="/library">◀◀ Back to the tower</a></p>
   </header>
 
   {

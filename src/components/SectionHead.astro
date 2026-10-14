@@ -1,0 +1,33 @@
+---
+/**
+ * The top of a section page: a small deck display (reels + track readout +
+ * tape counter), then the page title and one line of intro.
+ */
+import Title from './Title.astro';
+import { NAV } from '../site.config';
+
+interface Props {
+  section: string;
+  title?: string;
+  lede?: string;
+  /** Number shown on the tape counter (e.g. how many items). */
+  count?: number;
+}
+const { section, title = section, lede, count } = Astro.props;
+const track = NAV.findIndex((n) => n.label === section) + 1;
+---
+
+<header class="sec-head">
+  <p class="display" aria-hidden="true">
+    <span class="reels"><i></i><i></i></span>
+    <span class="txt">
+      <span class="dim">Side A ▸</span>
+      {track > 0 && <span class="dim">Trk {String(track).padStart(2, '0')}</span>}
+      <span class="lit">{section}</span>
+    </span>
+    {count !== undefined && <span class="count">{String(count).padStart(3, '0')}</span>}
+  </p>
+  <Title text={title} class="sec-title" />
+  {lede && <p class="lede">{lede}</p>}
+  <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
+</header>

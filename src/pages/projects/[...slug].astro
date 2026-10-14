@@ -26,13 +26,17 @@ const d = project.data;
 
 <Page title={d.title} description={d.summary} section="Projects" type="article">
   <header class="hero">
+    <p class="display" aria-hidden="true">
+      <span class="reels"><i></i><i></i></span>
+      <span class="txt"><span class="dim">▶ Now playing</span> <span class="lit">Project</span></span>
+    </p>
+    <Title text={d.title} class="headline" />
+    <p class="dek">{d.summary}</p>
     <p class="meta-row">
       <StatusStamp status={d.status} />
       {d.draft && <span class="stamp">draft</span>}
       <span>{formatMonth(d.started)}{d.ended ? ` – ${formatMonth(d.ended)}` : ' — now'}</span>
     </p>
-    <Title text={d.title} class="headline" />
-    <p class="dek">{d.summary}</p>
     {
       (d.stack.length > 0 || d.links.length > 0) && (
         <div class="facts">
