@@ -1,60 +1,50 @@
 ---
 import TidbitCard from './TidbitCard.astro';
 import type { Tidbit } from '../lib/utils';
-import Title from './Title.astro';
 
 interface Props {
   items: Tidbit[];
   page: number;
   pages: number;
-  total: number;
+  total?: number;
 }
 const { items, page, pages } = Astro.props;
 const pageUrl = (p: number) => (p <= 1 ? '/tidbits/' : `/tidbits/page/${p}/`);
 ---
 
-<div class="content">
-  <header class="page-title">
-    <Title text="Tidbits" />
-    <p class="lede">Small notes from the margins.</p>
-    <hr class="title-rule" />
-  </header>
+<header class="intro">
+  <p class="lede">Small notes from the margins — links, sparks, half-thoughts.</p>
+</header>
 
-  {items.length === 0 && <p class="muted"><em>Nothing here yet.</em></p>}
+{items.length === 0 && <p class="muted">Nothing here yet.</p>}
 
-  <ol class="feed">
-    {items.map((t) => <li class="reveal"><TidbitCard tidbit={t} /></li>)}
-  </ol>
-
-  {
-    pages > 1 && (
-      <nav class="pagination" aria-label="Pagination">
-        {page > 1 ? <a href={pageUrl(page - 1)} rel="prev">← Newer</a> : <span />}
-        <span class="where">Page {page} of {pages}</span>
-        {page < pages ? <a href={pageUrl(page + 1)} rel="next">Older →</a> : <span />}
-      </nav>
-    )
-  }
+<div class="feed">
+  {items.map((t) => <div class="reveal"><TidbitCard tidbit={t} /></div>)}
 </div>
 
+{
+  pages > 1 && (
+    <nav class="pagination" aria-label="Pagination">
+      {page > 1 ? <a href={pageUrl(page - 1)} rel="prev">← Newer</a> : <span />}
+      <span class="where">{page} / {pages}</span>
+      {page < pages ? <a href={pageUrl(page + 1)} rel="next">Older →</a> : <span />}
+    </nav>
+  )
+}
+
 <style>
-  .sub {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.8rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--ink-faint);
-  }
-  .feed { list-style: none; padding: 0; display: grid; gap: 1.75rem; }
+  .feed { border-bottom: 1px solid var(--line); }
   .pagination {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
-  .where { color: var(--ink-faint); }
+  .pagination a { text-decoration: none; padding: 0.6rem 1rem; border-radius: 99px; background: var(--surface); }
+  .pagination a:hover { background: color-mix(in srgb, var(--sec) 16%, var(--surface)); color: var(--fg); }
+  .where { color: var(--fg-faint); }
 </style>

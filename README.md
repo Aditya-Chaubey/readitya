@@ -25,7 +25,7 @@ npm run preview    # serve ./dist locally to double-check a build
 
 ## Make it yours (5 minutes)
 
-1. **`src/site.config.ts`**: your name, tagline, timezone, social links, and the tapes on the home page (label, link and colours). Each nav entry also sets the colour of that section's ribbon bookmark.
+1. **`src/site.config.ts`**: your name, tagline, timezone, social links, and the tapes on the home page (label, link and colours). Each nav entry also sets that section's colour (the big spine down the side of its pages, links and highlights).
 2. **`astro.config.mjs`**: set `site:` to your real domain (feeds and the sitemap use it). Also update the domain in `public/robots.txt`.
 3. **`src/content/about.md`**: your About page. To use a photo, put it at `public/images/me.jpg` and uncomment the `photo:` line.
 4. Delete the placeholder post, tidbit and library entries when you're ready.

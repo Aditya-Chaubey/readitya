@@ -1,5 +1,5 @@
 ---
-/** A rubber stamp coloured by project status. */
+/** A small status chip, coloured by project status. */
 interface Props {
   status: string;
 }
@@ -14,22 +14,28 @@ const tone = /ship|done|live|released|complete/.test(s)
       : 'active';
 ---
 
-<span class:list={['stamp', 'status', tone]}>
-  {tone === 'active' && <i class="pulse" aria-hidden="true"></i>}
-  {status}
-</span>
+<span class:list={['status', tone]}><i aria-hidden="true"></i>{status}</span>
 
 <style>
-  .status { display: inline-flex; align-items: center; gap: 0.4em; white-space: nowrap; }
-  .done { color: var(--teal); }
-  .paused { color: var(--ink-faint); }
-  .idea { color: var(--gold); }
-  .pulse {
-    width: 0.45em;
-    height: 0.45em;
-    border-radius: 50%;
-    background: currentColor;
-    animation: pulse 1.8s ease-in-out infinite;
+  .status {
+    --c: var(--stripe-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0.25em 0.7em;
+    border-radius: 99px;
+    color: var(--fg);
+    background: color-mix(in srgb, var(--c) 16%, transparent);
   }
-  @keyframes pulse { 50% { opacity: 0.25; } }
+  .done { --c: #2f9a63; }
+  .paused { --c: var(--fg-faint); }
+  .idea { --c: var(--stripe-1); }
+  i { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--c); }
+  .active i { animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.3; } }
 </style>

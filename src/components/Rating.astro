@@ -1,5 +1,5 @@
 ---
-/** Five ink dots: ● full, ◐ half, ○ empty. */
+/** Five little level blocks: full, half, empty. */
 interface Props {
   value: number;
 }
@@ -12,13 +12,13 @@ const dots = Array.from({ length: 5 }, (_, i) => (value >= i + 1 ? 'full' : valu
 </span>
 
 <style>
-  .rating { display: inline-flex; gap: 4px; vertical-align: middle; }
+  .rating { display: inline-flex; gap: 3px; vertical-align: middle; }
   i {
-    width: 0.72rem;
-    height: 0.72rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent);
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--fg) 12%, transparent);
   }
-  .full { background: var(--accent); }
-  .half { background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); }
+  .full { background: var(--sec); }
+  .half { background: linear-gradient(90deg, var(--sec) 50%, color-mix(in srgb, var(--fg) 12%, transparent) 50%); }
 </style>

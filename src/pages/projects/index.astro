@@ -3,7 +3,6 @@ import Page from '../../layouts/Page.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
 import StatusStamp from '../../components/StatusStamp.astro';
 import { getProjects } from '../../lib/utils';
-import Title from '../../components/Title.astro';
 
 const projects = await getProjects();
 const span = (p: (typeof projects)[number]) => {
@@ -13,174 +12,113 @@ const span = (p: (typeof projects)[number]) => {
 };
 ---
 
-<Page title="Projects" section="Projects" description="Things I'm building, tinkering with, and have shipped.">
-  <div class="content">
-    <header class="page-title">
-      <Title text="Projects" />
-      <p class="lede">Things I'm making.</p>
-      <hr class="title-rule" />
-    </header>
+<Page title="Projects" section="Projects" index description="Things I'm making.">
+  <header class="intro">
+    <p class="lede">Things I'm making — some shipped, most still on the workbench.</p>
+  </header>
 
-    {projects.length === 0 && <p class="muted"><em>Nothing here yet.</em></p>}
+  {projects.length === 0 && <p class="muted">Nothing here yet.</p>}
 
-    <ul class="plates">
-      {
-        projects.map((p) => (
-          <li class="reveal">
-            <a class="plate" href={`/projects/${p.id}/`} data-tilt="5">
-              <figure class="art">
-                <span class="mat">
-                  {p.data.cover ? (
-                    <img src={p.data.cover} alt="" loading="lazy" width="400" height="250" />
-                  ) : (
-                    <ProjectArt seed={p.data.title} color={p.data.color} />
-                  )}
-                  <span class="sheen" aria-hidden="true" />
-                </span>
-                <span class="corner tl" aria-hidden="true" />
-                <span class="corner tr" aria-hidden="true" />
-                <span class="corner bl" aria-hidden="true" />
-                <span class="corner br" aria-hidden="true" />
-              </figure>
-              <div class="info">
-                <div class="row">
-                  <StatusStamp status={p.data.status} />
-                  <span class="when">{span(p)}</span>
-                </div>
-                <h2>{p.data.title}</h2>
-                <p class="summary">{p.data.summary}</p>
+  <ul class="grid">
+    {
+      projects.map((p, i) => (
+        <li class="reveal" style={`--n:${i}`}>
+          <a class="card" href={`/projects/${p.id}/`}>
+            <figure class="art">
+              {p.data.cover ? (
+                <img src={p.data.cover} alt="" loading="lazy" width="800" height="500" />
+              ) : (
+                <ProjectArt seed={p.data.title} color={p.data.color} />
+              )}
+            </figure>
+            <div class="info">
+              <div class="row">
+                <StatusStamp status={p.data.status} />
+                <span class="when">{span(p)}</span>
               </div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+              <h2>{p.data.title}</h2>
+              <p class="summary">{p.data.summary}</p>
+              {p.data.stack.length > 0 && (
+                <ul class="stack" aria-label="Built with">
+                  {p.data.stack.map((s) => <li>{s}</li>)}
+                </ul>
+              )}
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Page>
 
 <style>
-  .plates {
+  .grid {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
-    gap: 2rem 1.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: 1.5rem;
   }
-  /* an odd one out at the top becomes a wide, featured plate */
-  .plates > li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
-  .plates > li:first-child:nth-last-child(odd) .plate { grid-template-columns: 1.15fr 1fr; align-items: center; }
+  /* an odd one out at the top becomes a wide, featured card */
+  .grid > li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+  .grid > li:first-child:nth-last-child(odd) .card { grid-template-columns: 1.25fr 1fr; grid-template-rows: auto; }
+  .grid > li:first-child:nth-last-child(odd) .art { aspect-ratio: auto; min-height: 100%; }
+  .grid > li:first-child:nth-last-child(odd) .info { align-content: center; padding: clamp(1.5rem, 3vw, 2.5rem); }
+  .grid > li:first-child:nth-last-child(odd) h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
 
-  .plate {
-    position: relative;
+  .card {
     display: grid;
-    gap: 1.1rem;
+    grid-template-rows: auto 1fr;
     height: 100%;
-    padding: 1rem 1rem 1.25rem;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface);
     color: inherit;
     text-decoration: none;
-    background: var(--paper-2);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    box-shadow: 0 1px 0 var(--paper-edge), 0 18px 30px -22px rgb(var(--shadow) / 0.6);
-    transform-style: preserve-3d;
+    box-shadow: 0 0 0 1px transparent;
+    transition: transform 0.45s var(--ease-out), box-shadow 0.3s;
   }
-  .plate:hover { color: inherit; box-shadow: 0 1px 0 var(--paper-edge), 0 30px 40px -24px rgb(var(--shadow) / 0.65); }
-  :global(:root[data-theme='dark']) .plate:hover { box-shadow: 0 30px 50px -24px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(242 166 90 / 0.25); }
-
-  .art { position: relative; margin: 0; }
-  .mat {
-    position: relative;
+  .card:hover {
+    color: inherit;
+    transform: translateY(-5px);
+    box-shadow: 0 0 0 1.5px var(--sec), 0 24px 40px -24px color-mix(in srgb, var(--sec) 60%, transparent);
+  }
+  .art { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
+  .art > :global(svg), .art > img {
     display: block;
-    aspect-ratio: 8 / 5;
-    padding: 8px;
-    background: #f8f2e4;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15), inset 0 0 0 1px rgb(0 0 0 / 0.05);
-    overflow: hidden;
-  }
-  :global(:root[data-theme='dark']) .mat { background: #e9dfca; filter: brightness(0.92); }
-  .mat > :global(svg), .mat > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--ease-out);
+    transition: transform 0.9s var(--ease-out);
   }
-  .plate:hover .mat > :global(svg), .plate:hover .mat > img { transform: scale(1.05); }
-  .sheen {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgb(255 255 255 / 0.35), transparent 50%);
-    mix-blend-mode: soft-light;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .plate:hover .sheen { opacity: 1; }
+  .card:hover .art > :global(svg), .card:hover .art > img { transform: scale(1.06); }
+  :global(:root[data-theme='dark']) .art > :global(svg) { filter: brightness(0.85) saturate(0.95); }
 
-  /* scrapbook photo corners */
-  .corner {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    background: linear-gradient(135deg, #2a1f17 50%, transparent 50%);
-    opacity: 0.85;
-    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.3));
-  }
-  :global(:root[data-theme='dark']) .corner { background: linear-gradient(135deg, #0d0a08 50%, transparent 50%); }
-  .tl { left: -4px; top: -4px; }
-  .tr { right: -4px; top: -4px; transform: rotate(90deg); }
-  .br { right: -4px; bottom: -4px; transform: rotate(180deg); }
-  .bl { left: -4px; bottom: -4px; transform: rotate(270deg); }
-  .art figcaption {
-    margin-top: 0.35rem;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 0.9rem;
-    text-align: center;
-    color: var(--ink-faint);
-  }
-
-  .info { display: grid; gap: 0.5rem; align-content: start; transform: translateZ(20px); }
+  .info { display: grid; gap: 0.65rem; align-content: start; padding: 1.25rem 1.35rem 1.5rem; }
   .row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-  .when { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint); }
+  .when { font-family: var(--font-ui); font-size: 0.72rem; color: var(--fg-faint); }
   h2 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.65rem;
-    line-height: 1.15;
-    margin-top: 0.2rem;
+    font-family: var(--font-head);
+    font-weight: 750;
+    font-stretch: 106%;
+    font-size: 1.55rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
-  .summary { color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
-  .stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 0.2rem;
-  }
+  .summary { color: var(--fg-soft); line-height: 1.5; }
+  .stack { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; padding: 0; margin-top: 0.2rem; }
   .stack li {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    padding: 0.1em 0.5em;
-    background: var(--paper);
-    border: 1px dashed var(--rule);
-    border-radius: 2px;
-    color: var(--ink-soft);
+    font-family: var(--font-ui);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    padding: 0.2em 0.6em;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    color: var(--fg-soft);
   }
-  .more {
-    margin-top: 0.35rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.25s, transform 0.25s;
-  }
-  .plate:hover .more, .plate:focus-visible .more { opacity: 1; transform: none; }
-  @media (hover: none) { .more { opacity: 1; transform: none; } }
-
-  @media (max-width: 640px) {
-    .plates > li:first-child:nth-last-child(odd) .plate { grid-template-columns: 1fr; }
+  @media (max-width: 720px) {
+    .grid > li:first-child:nth-last-child(odd) .card { grid-template-columns: 1fr; }
+    .grid > li:first-child:nth-last-child(odd) .art { aspect-ratio: 16 / 10; }
   }
 </style>

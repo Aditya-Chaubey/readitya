@@ -1,7 +1,7 @@
 ---
 /**
- * A single "book page": ribbon bookmark, paper sheet and dog-eared corner. Every page except the cassette
- * home page renders inside this.
+ * The "J-card" layout used by every page except the cassette home page:
+ * a coloured spine down the side carrying the section name, and a wide main column.
  */
 import Base from './Base.astro';
 import { NAV } from '../site.config';
@@ -9,32 +9,31 @@ import { NAV } from '../site.config';
 interface Props {
   title?: string;
   description?: string;
+  /** Which section this page belongs to (sets the colour and the spine text). */
   section?: string;
   type?: 'website' | 'article';
-  /** Text on the right of the running head (defaults to the section). */
-  headRight?: string;
-  /** Colour of the ribbon bookmark. */
-  ribbon?: string;
-  /** Show a reading-progress bar at the top (long posts). */
+  /** Override the section colour. */
+  color?: string;
+  /** Long read: the spine stripes fill up as you scroll, plus a thin bar on top. */
   progress?: boolean;
+  /** Index pages: the spine *is* the page's main heading. */
+  index?: boolean;
 }
-const { title, description, section, type, progress = false } = Astro.props;
-const ribbon = Astro.props.ribbon ?? NAV.find((n) => n.label === section)?.ribbon;
+const { title, description, section, type, progress = false, index = false } = Astro.props;
+const color = Astro.props.color ?? NAV.find((n) => n.label === section)?.color ?? '#d9532e';
+const spine = section ?? title ?? '';
 ---
 
 <Base title={title} description={description} section={section} type={type}>
   <slot name="head" slot="head" />
-  {progress && <div class="progress" aria-hidden="true" />}
-  <main id="main" class="book">
-    <article class="page">
-      <span class="ribbon" aria-hidden="true" style={ribbon ? `--ribbon:${ribbon}` : undefined}></span>
+  <div class:list={['shell', { reading: progress }]} style={`--sec:${color};--len:${Math.max(4, spine.length)}`}>
+    {progress && <div class="progress" aria-hidden="true" />}
+    <aside class="rail" aria-hidden={index ? undefined : 'true'}>
+      {index ? <h1 class="rail-title">{spine}</h1> : <p class="rail-title">{spine}</p>}
+      <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
+    </aside>
+    <main id="main" class="main">
       <slot />
-      <span class="dogear" aria-hidden="true"></span>
-    </article>
-  </main>
+    </main>
+  </div>
 </Base>
-
-<script>
-  import { tilt } from '../scripts/tilt';
-  tilt();
-</script>

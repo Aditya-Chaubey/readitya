@@ -27,210 +27,182 @@ const rows = items
 ---
 
 <Page title={title} description={description ?? `My ${title.toLowerCase()} log.`} section="Library">
-  <div class="content">
-    <header class="page-title">
-      <Title text={title} />
-      {description && <p class="lede">{description}</p>}
-      <hr class="title-rule" />
-    </header>
+  <header class="hero">
+    <p class="meta-row">
+      <a class="stamp" href="/library">← Library</a>
+      <span>{rows.length} {rows.length === 1 ? 'entry' : 'entries'}</span>
+    </p>
+    <Title text={title} class="headline" />
+    {description && <p class="dek">{description}</p>}
+  </header>
 
+  {
+    rows.length > 1 && (
+      <form class="controls" aria-label="Sort and filter" onsubmit="return false">
+        <label class="select">
+          <span class="sr-only">Sort</span>
+          <select name="sort">
+            <option value="last:desc">{verb} — newest</option>
+            <option value="last:asc">{verb} — oldest</option>
+            <option value="rating:desc">Rating — high to low</option>
+            <option value="rating:asc">Rating — low to high</option>
+            <option value="year:desc">Released — newest</option>
+            <option value="year:asc">Released — oldest</option>
+            <option value="title:asc">Title — A to Z</option>
+          </select>
+        </label>
+        <label class="chip">
+          <input type="checkbox" name="notes" /> <span>With notes</span>
+        </label>
+        <label class="chip">
+          <input type="checkbox" name="rated" /> <span>Rated</span>
+        </label>
+      </form>
+    )
+  }
+
+  {rows.length === 0 && <p class="muted">Nothing here yet.</p>}
+
+  <ol class="items" id="items">
     {
-      rows.length > 1 && (
-        <form class="controls" aria-label="Sort and filter" onsubmit="return false">
-          <label>
-            <span>Sort</span>
-            <select name="sort">
-              <option value="last:desc">{verb} — newest</option>
-              <option value="last:asc">{verb} — oldest</option>
-              <option value="rating:desc">Rating — high to low</option>
-              <option value="rating:asc">Rating — low to high</option>
-              <option value="year:desc">Released — newest</option>
-              <option value="year:asc">Released — oldest</option>
-              <option value="title:asc">Title — A to Z</option>
-            </select>
-          </label>
-          <label class="check">
-            <input type="checkbox" name="notes" /> <span>Only with notes</span>
-          </label>
-          <label class="check">
-            <input type="checkbox" name="rated" /> <span>Only rated</span>
-          </label>
-        </form>
-      )
-    }
-
-    {rows.length === 0 && <p class="muted"><em>Nothing here yet.</em></p>}
-
-    <ol class="items" id="items">
-      {
-        rows.map((item) => (
-          <li
-            class="item reveal"
-            data-title={item.title.toLowerCase()}
-            data-year={String(item.year ?? '')}
-            data-rating={String(item.rating ?? -1)}
-            data-last={item.last}
-            data-notes={item.notes ? '1' : '0'}
-          >
-            {item.cover && <img class="cover" src={item.cover} alt="" loading="lazy" width="72" height="108" />}
-            <div class="body">
-              <h2 class="t">
-                {item.link ? <a href={item.link} rel="noopener">{item.title}</a> : item.title}
-                {item.year && <span class="yr">({item.year})</span>}
-              </h2>
-              {item.creator && (
-                <p class="by">
-                  <span class="k">{creatorLabel}</span> {item.creator}
-                </p>
-              )}
-              {item.rating !== undefined && (
-                <p class="rate">
-                  <Rating value={item.rating} />
-                </p>
-              )}
-              {item.notes && (
-                <blockquote class="notes">
-                  {item.notes.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
-                </blockquote>
-              )}
-              {item.logs.length > 0 && (
-                <ul class="logs" aria-label="Log">
-                  {item.logs.map((l) => (
-                    <li>
-                      <span class="dates">
-                        {formatLoose(l.date)}
-                        {l.end && <> → {formatLoose(l.end)}</>}
-                      </span>
-                      <span class="status">{l.status ?? verb}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {item.tags.length > 0 && <p class="tags">{item.tags.map((t) => `#${t}`).join('  ')}</p>}
+      rows.map((item) => (
+        <li
+          class="item reveal"
+          data-title={item.title.toLowerCase()}
+          data-year={String(item.year ?? '')}
+          data-rating={String(item.rating ?? -1)}
+          data-last={item.last}
+          data-notes={item.notes ? '1' : '0'}
+        >
+          {item.cover && <img class="cover" src={item.cover} alt="" loading="lazy" width="96" height="144" />}
+          <div class="body">
+            <div class="top">
+              <h2 class="t">{item.link ? <a href={item.link} rel="noopener">{item.title}</a> : item.title}</h2>
+              {item.year && <span class="yr">{item.year}</span>}
             </div>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="empty-filter muted" hidden><em>Nothing matches those filters.</em></p>
-
-  </div>
+            {item.creator && (
+              <p class="by">
+                <span class="sr-only">{creatorLabel}: </span>
+                {item.creator}
+              </p>
+            )}
+            {item.rating !== undefined && (
+              <p class="rate">
+                <Rating value={item.rating} />
+              </p>
+            )}
+            {item.notes && (
+              <div class="notes">
+                {item.notes.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
+              </div>
+            )}
+            {item.logs.length > 0 && (
+              <ul class="logs" aria-label="Log">
+                {item.logs.map((l) => (
+                  <li>
+                    <span>
+                      {formatLoose(l.date)}
+                      {l.end && <> → {formatLoose(l.end)}</>}
+                    </span>
+                    <span class="status">{l.status ?? verb}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {item.tags.length > 0 && <p class="tags">{item.tags.map((t) => `#${t}`).join('  ')}</p>}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="empty-filter muted" hidden>Nothing matches those filters.</p>
 </Page>
 
 <style>
-  .crumbs {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-    margin-bottom: 1.75rem;
-  }
-  .crumbs a { color: var(--ink-soft); }
+  .hero :global(.headline) { max-width: 18ch; }
+  .meta-row a.stamp { text-decoration: none; }
 
   .controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
     align-items: center;
-    padding: 0.75rem 1rem;
-    margin-bottom: 2rem;
-    background: var(--paper-2);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
-  .controls label { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
   .controls select {
     font: inherit;
-    color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 0.25rem 0.4rem;
+    text-transform: inherit;
+    color: var(--fg);
+    background: var(--surface);
+    border: 0;
+    border-radius: 99px;
+    padding: 0.6rem 2.2rem 0.6rem 1rem;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 1.15rem) 55%, calc(100% - 0.85rem) 55%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+    cursor: pointer;
   }
-  .controls input { accent-color: var(--accent); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 99px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip:has(input:checked) { background: var(--sec); color: #fff; }
+  .chip:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  .items { list-style: none; padding: 0; counter-reset: item; }
-  .item {
-    counter-increment: item;
-    display: flex;
-    gap: 1.25rem;
-    padding: 1.4rem 0 1.4rem 3.1rem;
-    position: relative;
-    border-bottom: 1px dotted var(--rule);
-  }
-  .item::before {
-    content: counter(item) '.';
-    position: absolute;
-    left: 0;
-    top: 1.3rem;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 1.5rem;
-    color: var(--accent);
-    width: 2.6rem;
-    text-align: right;
-  }
-  .cover {
-    flex: none;
-    width: 72px;
-    height: 108px;
-    object-fit: cover;
-    border-radius: 2px;
-    box-shadow: 3px 4px 10px -3px rgb(var(--shadow) / 0.5);
-  }
-  .body { flex: 1; min-width: 0; }
-  .t {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.45rem;
-    line-height: 1.2;
-  }
-  .t a { text-decoration-color: var(--rule); }
-  .yr { margin-left: 0.4rem; font-size: 0.75em; color: var(--ink-faint); font-family: var(--font-body); }
-  .by { margin-top: 0.15rem; color: var(--ink-soft); }
-  .k {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-right: 0.3rem;
-  }
-  .rate { margin-top: 0.4rem; }
-  .notes {
-    margin-top: 0.75rem;
-    padding: 0.1rem 0 0.1rem 1rem;
-    border-left: 2px solid var(--accent);
-    font-style: italic;
-    color: var(--ink-soft);
-  }
-  .notes p + p { margin-top: 0.6em; }
-  .logs {
+  .items {
     list-style: none;
     padding: 0;
-    margin-top: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--ink-faint);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+    gap: 1rem;
+    counter-reset: item;
   }
-  .logs li { display: flex; gap: 0.75rem; }
-  .logs li::before { content: '⌁'; color: var(--accent); }
-  .status {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .item {
+    counter-increment: item;
+    position: relative;
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.35rem 1.4rem 1.4rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: transform 0.4s var(--ease-out), box-shadow 0.3s;
+  }
+  .item:hover { transform: translateY(-3px); box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--sec) 60%, transparent); }
+  .item::after {
+    content: counter(item, decimal-leading-zero);
+    position: absolute;
+    top: 1.35rem;
+    right: 1.4rem;
+    font-family: var(--font-ui);
     font-size: 0.68rem;
-    padding: 0 0.4rem;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
+    color: var(--fg-faint);
   }
-  .tags { margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint); }
-  .back { margin-top: 2.5rem; text-align: center; font-family: var(--font-mono); font-size: 0.85rem; }
-  @media (max-width: 520px) {
-    .item { padding-left: 2.3rem; }
-    .item::before { width: 1.9rem; font-size: 1.25rem; }
-    .cover { width: 56px; height: 84px; }
-  }
+  .cover { flex: none; width: 72px; height: 108px; object-fit: cover; border-radius: 6px; }
+  .body { flex: 1; min-width: 0; display: grid; gap: 0.45rem; align-content: start; }
+  .top { display: flex; align-items: baseline; gap: 0.6rem; padding-right: 2rem; }
+  .t { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.01em; }
+  .t a { text-decoration: none; }
+  .yr { font-family: var(--font-ui); font-size: 0.72rem; color: var(--fg-faint); }
+  .by { color: var(--fg-soft); font-style: italic; }
+  .notes { margin-top: 0.3rem; padding-left: 0.9rem; border-left: 2px solid var(--sec); color: var(--fg-soft); font-size: 0.98rem; line-height: 1.5; }
+  .notes p + p { margin-top: 0.5em; }
+  .logs { list-style: none; padding: 0; margin-top: 0.3rem; display: grid; gap: 0.25rem; font-family: var(--font-ui); font-size: 0.7rem; color: var(--fg-faint); }
+  .logs li { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  .status { text-transform: uppercase; letter-spacing: 0.06em; padding: 0.1em 0.5em; border-radius: 99px; background: color-mix(in srgb, var(--sec) 14%, transparent); color: var(--fg); }
+  .tags { font-family: var(--font-ui); font-size: 0.7rem; color: var(--fg-faint); }
 </style>
 
 <script>

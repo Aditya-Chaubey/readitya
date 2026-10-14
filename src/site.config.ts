@@ -33,15 +33,15 @@ export const TAPES = [
 ] as const;
 
 /**
- * Main navigation (header). Numbered like a book's table of contents.
- * `ribbon` is the colour of the bookmark ribbon on that section's pages.
+ * Main navigation. Each section is a "tape" with its own colour: it tints the
+ * spine down the side of the page, links, highlights and the post wash.
  */
 export const NAV = [
-  { label: 'About', href: '/about', ribbon: '#2f5d62' },
-  { label: 'Projects', href: '/projects', ribbon: '#c08a2a' },
-  { label: 'Writings', href: '/writings', ribbon: '#9a3324' },
-  { label: 'Tidbits', href: '/tidbits', ribbon: '#4f6b34' },
-  { label: 'Library', href: '/library', ribbon: '#4a3b6b' },
+  { label: 'About', href: '/about', color: '#1f8a85' },
+  { label: 'Projects', href: '/projects', color: '#df9a1f' },
+  { label: 'Writings', href: '/writings', color: '#d9532e' },
+  { label: 'Tidbits', href: '/tidbits', color: '#6c9a37' },
+  { label: 'Library', href: '/library', color: '#7b5cc8' },
 ] as const;
 
 /** Links shown in the footer and on the About page. Remove or add freely. */

@@ -3,22 +3,17 @@ import Page from '../layouts/Page.astro';
 import Title from '../components/Title.astro';
 ---
 
-<Page title="Page not found" section="Lost">
-  <div class="content lost">
-    <Title text="This side of the tape is blank." />
+<Page title="Page not found" section="404" color="#d9532e">
+  <div class="lost">
+    <p class="meta-row"><span class="stamp">Side B</span></p>
+    <Title text="This side of the tape is blank." class="headline" />
+    <p class="dek">Whatever was here has been taped over.</p>
     <p class="actions"><a class="btn" href="/">⏏ Back to the tapes</a></p>
   </div>
 </Page>
 
 <style>
-  .lost { text-align: center; padding-block: 2rem; }
-  .lost :global(h1) {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.1;
-    margin-top: 0.5rem;
-  }
-  .lede { margin-top: 1rem; font-style: italic; color: var(--ink-soft); }
-  .actions { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .lost { padding-block: clamp(2rem, 10vh, 6rem); }
+  .lost :global(.headline) { max-width: 16ch; margin-top: 1rem; }
+  .actions { margin-top: 2rem; }
 </style>

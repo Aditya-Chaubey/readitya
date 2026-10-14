@@ -6,9 +6,9 @@ type: Essay
 tags: [meta, placeholder]
 ---
 
-Every book begins with a blank page, and this one is no different. This is a placeholder essay; replace it with your own words. It exists to show how a post looks once it is set in type — the drop cap above, the small capitals of the first line, the rhythm of the paragraphs that follow. Write in plain Markdown and the site takes care of the rest.
+Every tape starts blank, and so does this page. This is a placeholder essay — replace it with your own words. It shows how a post looks once it's set: the headline up top, the reading column, the contents in the margin. Write in plain Markdown and the site takes care of the rest.
 
-A second paragraph, for good measure. Notice how text is justified and hyphenated, the way it would be in a printed book, and how links like [this one](https://example.com) are quietly underlined in ink.[^1]
+A second paragraph, for good measure. Links like [this one](https://example.com) draw an underline when you hover them, and footnotes are collected at the end.[^1]
 
 ## A section heading
 

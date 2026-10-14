@@ -22,30 +22,27 @@ const excerpt = (tidbit.body ?? '').replace(/[#*_>`\[\]]/g, '').trim().slice(0, 
 ---
 
 <Page title={title} description={excerpt} section="Tidbits" type="article">
-  <div class="content">
-    {!tidbit.data.title && <h1 class="sr-only">{title}</h1>}
-    <TidbitCard tidbit={tidbit} standalone />
-    <nav class="pager" aria-label="More tidbits">
-      {older ? <a href={`/tidbits/${older.id}/`}>← Older</a> : <span />}
-      <a href="/tidbits">All</a>
-      {newer ? <a href={`/tidbits/${newer.id}/`}>Newer →</a> : <span />}
-    </nav>
-  </div>
+  {!tidbit.data.title && <h1 class="sr-only">{title}</h1>}
+  <TidbitCard tidbit={tidbit} standalone />
+  <nav class="pager" aria-label="More tidbits">
+    {older ? <a href={`/tidbits/${older.id}/`}>← Older</a> : <span />}
+    <a href="/tidbits">All tidbits</a>
+    {newer ? <a href={`/tidbits/${newer.id}/`}>Newer →</a> : <span />}
+  </nav>
 </Page>
 
 <style>
-  .crumbs {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-    margin-bottom: 1.75rem;
-  }
-  .crumbs a { color: var(--ink-soft); }
   .pager {
     display: flex;
     justify-content: space-between;
-    margin-top: 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
+  .pager a { text-decoration: none; }
 </style>
