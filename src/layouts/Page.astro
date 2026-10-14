@@ -1,7 +1,8 @@
 ---
 /**
- * Every page except the home page: a centred, wide column under the
- * deck-style header, tinted with the section's colour.
+ * Every page except the home page: a wide column under the deck-style
+ * header, tinted with the section's colour. On wide screens the section
+ * name runs sideways down a rail on the left, like a cassette's spine.
  */
 import Base from './Base.astro';
 import { NAV } from '../site.config';
@@ -18,15 +19,27 @@ interface Props {
   progress?: boolean;
 }
 const { title, description, section, type, progress = false } = Astro.props;
-const color = Astro.props.color ?? NAV.find((n) => n.label === section)?.color ?? '#d9532e';
+const nav = NAV.find((n) => n.label === section);
+const color = Astro.props.color ?? nav?.color ?? '#d9532e';
+// on the section's own index page the rail is just a label; elsewhere it links back
+const railHref = nav && Astro.url.pathname.replace(/\/$/, '') !== nav.href ? nav.href : undefined;
 ---
 
 <Base title={title} description={description} section={section} type={type}>
   <slot name="head" slot="head" />
   <div class="wrap" style={`--sec:${color}`}>
     {progress && <div class="progress" aria-hidden="true" />}
-    <main id="main" class="main">
-      <slot />
+    <main id="main" class:list={['main', { 'has-rail': section }]}>
+      {
+        section && (
+          <div class="rail" aria-hidden="true">
+            {railHref ? <a href={railHref} tabindex="-1">{section}</a> : <span>{section}</span>}
+          </div>
+        )
+      }
+      <div class="main-body">
+        <slot />
+      </div>
     </main>
   </div>
 </Base>

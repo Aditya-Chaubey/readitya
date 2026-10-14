@@ -54,9 +54,9 @@
   --glow: transparent;
   --shadow: 46 28 10;
 
-  --wide: 1120px;
-  --read: 42rem;
-  --gutter: clamp(1.1rem, 4vw, 3rem);
+  --wide: 1440px;
+  --read: 44rem;
+  --gutter: clamp(1rem, 3.5vw, 3rem);
   --head-h: 4.25rem;
   --radius: 14px;
   --ease-out: cubic-bezier(.2, .8, .2, 1);
@@ -221,6 +221,44 @@ a:hover { color: var(--accent, var(--stripe-2)); }
   padding-block: clamp(1.75rem, 5vh, 3.25rem) clamp(4rem, 9vh, 6rem);
   view-transition-name: main;
 }
+.main-body { min-width: 0; }
+
+/* ── the rail: the section name on its side, down the left edge (wide screens) ── */
+.rail { display: none; }
+@media (min-width: 1100px) {
+  .main.has-rail {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(2.5rem, 4vw, 4rem);
+  }
+  .rail {
+    display: block;
+    align-self: start;
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-stretch: 112%;
+    font-size: clamp(4rem, 5.6vw, 6rem);
+    line-height: 0.8;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    animation: rail-in 1s var(--ease-out) both;
+  }
+  @supports (writing-mode: sideways-lr) {
+    .rail { writing-mode: sideways-lr; rotate: none; }
+  }
+  .rail a { color: inherit; text-decoration: none; }
+  .rail a:hover { color: var(--sec-fg, var(--sec)); }
+  /* on index pages the rail is the title, so the big horizontal one steps aside */
+  .has-rail .sec-title {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .has-rail .sec-head .lede { margin-top: 1.25rem; }
+}
+@keyframes rail-in { from { opacity: 0; transform: translateY(2.5rem); } }
 
 /* ── the deck display: a slim smoked-glass readout that names the page ── */
 .display {
@@ -291,10 +329,10 @@ a:hover { color: var(--accent, var(--stripe-2)); }
 @keyframes stripe-in { from { transform: scaleX(0); } }
 
 /* entrance */
-.main > * { animation: rise 0.8s var(--ease-out) both; }
-.main > :nth-child(2) { animation-delay: 0.07s; }
-.main > :nth-child(3) { animation-delay: 0.14s; }
-.main > :nth-child(n + 4) { animation-delay: 0.2s; }
+.main-body > * { animation: rise 0.8s var(--ease-out) both; }
+.main-body > :nth-child(2) { animation-delay: 0.07s; }
+.main-body > :nth-child(3) { animation-delay: 0.14s; }
+.main-body > :nth-child(n + 4) { animation-delay: 0.2s; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 @keyframes ink-in { from { opacity: 0; transform: translateY(14px); filter: blur(3px); } }
 
@@ -338,11 +376,12 @@ a:hover { color: var(--accent, var(--stripe-2)); }
 }
 .meta-row .sep { opacity: 0.5; }
 
-/* the top of a post: display + headline over a soft wash of the section colour */
+/* the top of a post: display + headline over a tall wash of the section colour,
+   warmed with the tape stripes and fading out into the page */
 .hero {
   position: relative;
   isolation: isolate;
-  padding: 0 0 clamp(2rem, 5vh, 3rem);
+  padding: clamp(2.5rem, 9vh, 6rem) 0 clamp(3rem, 8vh, 5rem);
   margin-bottom: clamp(2rem, 5vh, 3rem);
   border-bottom: 1px solid var(--line);
 }
@@ -350,8 +389,17 @@ a:hover { color: var(--accent, var(--stripe-2)); }
   content: '';
   position: absolute;
   z-index: -1;
-  inset: -4rem -10% 10% -10%;
-  background: radial-gradient(ellipse 55% 65% at 20% 35%, color-mix(in srgb, var(--sec) 20%, transparent), transparent 70%);
+  inset: -9rem -14% 0 -14%;
+  background:
+    radial-gradient(ellipse 45% 70% at 22% 55%, color-mix(in srgb, var(--sec) 48%, transparent), transparent 70%),
+    radial-gradient(ellipse 38% 55% at 50% 30%, color-mix(in srgb, var(--stripe-1) 26%, transparent), transparent 70%),
+    radial-gradient(ellipse 42% 65% at 80% 60%, color-mix(in srgb, var(--stripe-3) 34%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--sec) 14%, transparent), transparent 85%);
+  /* fade out at the sides and the bottom so the wash has no edges */
+  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent), linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, #000 45%, transparent), linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-composite: intersect;
   pointer-events: none;
   animation: wash-in 1.4s var(--ease-out) both;
 }
@@ -473,8 +521,8 @@ a:hover { color: var(--accent, var(--stripe-2)); }
 
 @media print {
   html, body { background: #fff !important; color: #000; }
-  body::before, .site-header, .site-footer, .progress, .pager, .toc, .controls, .tape-meter, .display { display: none !important; }
-  .main > *, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+  body::before, .site-header, .site-footer, .progress, .pager, .toc, .controls, .tape-meter, .display, .rail { display: none !important; }
+  .main-body > *, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
   .hero::before { display: none; }
   .prose a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #555; }
   .prose pre, .prose blockquote, .prose figure { break-inside: avoid; }
