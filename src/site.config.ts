@@ -46,9 +46,9 @@ export const NAV = [
 
 /** Links shown in the footer and on the About page. Remove or add freely. */
 export const SOCIALS = [
-  { label: 'Email', href: 'mailto:hello@example.com' },
-  { label: 'GitHub', href: 'https://github.com/' },
-  { label: 'X / Twitter', href: 'https://x.com/' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/' },
+  { label: 'Email', href: 'mailto:adityachaubey321@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/Aditya-Chaubey' },
+  { label: 'X / Twitter', href: 'https://x.com/thatguyaditya' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aditya-chaubey-/' },
 ] as const;
 
