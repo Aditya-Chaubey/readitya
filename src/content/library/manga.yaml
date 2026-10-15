@@ -1,3 +1,4 @@
+# Each item can also have notes, rating, logs and link — see books.yaml for the full list.
 title: Manga
 description: Volumes read, chapter by chapter.
 creatorLabel: Mangaka
@@ -5,8 +6,7 @@ verb: Read
 order: 6
 color: '#3d5a3a'
 items:
-  - title: A Placeholder Manga
-    creator: Some Mangaka
-    year: 2004
-    logs:
-      - { date: 2026-06, status: Reading }
+  - title: 20th Century Boys
+    creator: Naoki Urasawa
+    year: 1999
+    cover: https://upload.wikimedia.org/wikipedia/en/e/e2/20thcenturyboys01.jpg

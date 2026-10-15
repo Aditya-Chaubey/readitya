@@ -1,3 +1,4 @@
+# Each item can also have notes, rating, logs and link — see books.yaml for the full list.
 title: TV Shows
 description: Series I've followed, season by season.
 creatorLabel: Created by
@@ -5,9 +6,21 @@ verb: Watched
 order: 3
 color: '#b8862b'
 items:
-  - title: A Placeholder Series
-    creator: Some Showrunner
-    year: 2019
-    rating: 3.5
-    logs:
-      - { date: 2026-08, end: 2026-09, status: Season 1 }
+  - title: The Mentalist
+    creator: Bruno Heller
+    year: 2008
+    cover: https://m.media-amazon.com/images/I/61j+2eM+MUL._AC_UF350,350_QL80_.jpg
+    rating: 2.5
+
+  - title: Dark
+    creator: Baran bo Odar & Jantje Friese
+    year: 2017
+    cover: https://m.media-amazon.com/images/M/MV5BMTUzNjQ2MTY5NV5BMl5BanBnXkFtZTgwOTAzNTQxNDM@._V1_.jpg
+
+  - title: Badly in Love
+    creator: MEGUMI
+    tags: [japanese]
+    cover: https://m.media-amazon.com/images/M/MV5BNDBiOTAxYmQtYjRiNC00ZTQ2LWEyMjAtN2Y0YWJjOTk0OWJiXkEyXkFqcGc@._V1_.jpg
+    rating: 2
+    notes: funny premise
+    

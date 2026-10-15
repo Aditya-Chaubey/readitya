@@ -48,6 +48,8 @@ const library = defineCollection({
     order: z.number().default(99),
     /** Spine colour on the bookshelf. */
     color: z.string().default('#7a2e22'),
+    /** Shape of item images: posters/books are portrait, album art is square. */
+    coverShape: z.enum(['portrait', 'square']).default('portrait'),
     items: z
       .array(
         z.object({
@@ -56,7 +58,10 @@ const library = defineCollection({
           year: z.union([z.number(), z.string()]).optional(),
           /** 0 – 5, halves allowed (e.g. 3.5) */
           rating: z.number().min(0).max(5).optional(),
+          /** A few lines about the item — optional. Blank lines make new paragraphs. */
           notes: z.string().optional(),
+          /** Image: a path in /public (e.g. /images/covers/x.jpg) or a full URL.
+           *  Without one, a cover is generated from the title. */
           cover: z.string().optional(),
           link: z.string().optional(),
           tags: z.array(z.string()).default([]),

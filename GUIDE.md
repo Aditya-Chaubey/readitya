@@ -78,12 +78,15 @@ Open the right file in `src/content/library/` — `books.yaml`, `movies.yaml`, `
     creator: Who made it
     year: 2020
     rating: 4.5
-    notes: What you thought (optional).
+    notes: What you thought, in a line or two (optional).
+    cover: /images/covers/the-thing.jpg
     logs:
       - { date: 2026-10-01, status: Finished }
 ```
 
 - `rating` is 0–5 (halves allowed). Delete the line if you don't want to rate it.
+- `cover` is the item's image: put a file in `public/images/covers/` and write its path, or paste a full image URL. Leave it out and a cover is generated from the title in the shelf's colour.
+- `notes` is optional. For more than one line, write `notes: |` and put the text on the lines below, indented — a blank line starts a new paragraph.
 - Keep the spaces at the start of each line exactly as shown — they matter.
 - **New category?** Copy any of those files, rename it (e.g. `games.yaml`), and change its `title`. A new tape appears in the tower.
 

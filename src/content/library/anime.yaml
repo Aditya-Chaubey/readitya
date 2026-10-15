@@ -1,3 +1,4 @@
+# Each item can also have notes, rating, logs and link — see books.yaml for the full list.
 title: Anime
 description: Series and films from the world of anime.
 creatorLabel: Studio
@@ -5,9 +6,12 @@ verb: Watched
 order: 5
 color: '#9a3324'
 items:
-  - title: A Placeholder Anime
-    creator: Some Studio
-    year: 1998
-    rating: 4.5
-    logs:
-      - { date: 2026-07-01, end: 2026-07-20, status: Completed }
+  - title: 'Cyberpunk: Edgerunners'
+    creator: Studio Trigger
+    year: 2022
+    cover: https://upload.wikimedia.org/wikipedia/en/a/a1/Cyberpunk_Edgerunners_poster.jpg
+
+  - title: 'Mashle: Magic and Muscles'
+    creator: A-1 Pictures
+    year: 2023
+    cover: https://upload.wikimedia.org/wikipedia/en/1/17/Mashle%2C_volume_1_cover.jpg

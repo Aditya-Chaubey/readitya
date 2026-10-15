@@ -1,4 +1,11 @@
-# One shelf of the library. Add an item by copying the block under `items:`.
+# One shelf of the library. Add an item by copying a block under `items:`.
+# Every item can also have (all optional):
+#   notes: |            a couple of lines about it — blank lines make new paragraphs
+#   cover: /images/covers/x.jpg   or a full image URL; without one a cover is generated
+#   rating: 4.5         0 – 5, halves allowed
+#   logs:               one line per read; dates can be 2026, 2026-10 or 2026-10-01
+#     - { date: 2026-09-01, end: 2026-09-14, status: Read }
+#   link: https://example.com
 title: Books
 description: Everything I've read, cover to cover — and the ones I abandoned.
 creatorLabel: Author
@@ -6,13 +13,36 @@ verb: Read
 order: 1
 color: '#7a2e22'
 items:
-  - title: A Placeholder Book
-    creator: Some Author
-    year: 1965
-    rating: 4.5          # 0 – 5, halves allowed. Delete the line if unrated.
-    notes: |
-      Notes are optional. Write a sentence or a full review here — blank lines make new paragraphs.
-    logs:                # one line per read; dates can be 2026, 2026-10 or 2026-10-01
-      - { date: 2026-09-01, end: 2026-09-14, status: Read }
-    # cover: /images/covers/placeholder-book.jpg
-    # link: https://example.com
+  - title: Steal Like an Artist
+    creator: Austin Kleon
+    year: 2012
+    cover: https://upload.wikimedia.org/wikipedia/en/e/eb/Steal_Like_an_Artist.jpg
+    notes: Very good read. Author writes in a simple fun tone. 
+    rating: 4.5
+    logs: 
+      - { date: 2026-10, end: 2026-10, status: Read }
+
+  - title: Show Your Work!
+    creator: Austin Kleon
+    year: 2014
+    cover: https://covers.openlibrary.org/b/isbn/9780761178972-L.jpg
+    notes: kinda motivated this site. some of the advice not applicable to me but enjoyable read regardless.
+    rating: 4
+    logs: 
+      - { date: 2026-10, end: 2026-10, status: Read }
+
+  - title: Atomic Habits
+    creator: James Clear
+    year: 2018
+    cover: https://upload.wikimedia.org/wikipedia/en/2/28/Atomic_Habits_book_cover.jpg
+    notes: had low expectations but the advice is very practical and applicable. 
+    logs: 
+      - { date: 2026-9, status: Reading }
+
+  - title: 'Sapiens: A Brief History of Humankind'
+    creator: Yuval Noah Harari
+    year: 2011
+    cover: https://upload.wikimedia.org/wikipedia/commons/6/6d/Sapiens-_A_Brief_History_of_Humankind.png
+    notes: currently reading, very fascinating.
+    logs: 
+      - { date: 2026-9, status: Reading }

@@ -16,6 +16,7 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
           <span class="txt"><span class="dim">▶ Liner notes</span> <span class="lit">About</span></span>
         </p>
         <Title text={frontmatter.lede ?? frontmatter.title ?? 'About me'} class="headline" />
+        {frontmatter.description && <p class="dek">{frontmatter.description}</p>}
       </header>
       <div class="prose">
         <Content />
@@ -23,7 +24,8 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
     </div>
 
     <aside class="side">
-      <figure class="photo">
+      <figure class="portrait">
+        <div class="photo">
         {
           frontmatter.photo ? (
             <img src={frontmatter.photo} alt={`Portrait of ${SITE.author}`} width="480" height="600" />
@@ -33,6 +35,8 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
             </div>
           )
         }
+        </div>
+        {frontmatter.caption && <figcaption>{frontmatter.caption}</figcaption>}
       </figure>
       <nav class="elsewhere" aria-label="Elsewhere">
         <p class="label">Elsewhere</p>
@@ -62,6 +66,15 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
   }
   .prose { font-size: 1.1em; }
   .side { position: sticky; top: calc(var(--head-h) + 2rem); display: grid; gap: 2rem; }
+  .portrait { margin: 0; }
+  .portrait figcaption {
+    margin-top: 0.7rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+  }
   .photo {
     margin: 0;
     aspect-ratio: 4 / 5;
@@ -114,6 +127,6 @@ const initials = SITE.author.split(' ').map((w) => w[0]).join('');
   }
   @media (max-width: 520px) {
     .side { grid-template-columns: 1fr; }
-    .photo { max-width: 16rem; }
+    .portrait { max-width: 16rem; }
   }
 </style>

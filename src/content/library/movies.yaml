@@ -1,3 +1,4 @@
+# Each item can also have notes, rating, logs and link — see books.yaml for the full list.
 title: Movies
 description: Films I've watched, from the multiplex to the midnight streaming binge.
 creatorLabel: Director
@@ -5,9 +6,37 @@ verb: Watched
 order: 2
 color: '#2f5d62'
 items:
-  - title: A Placeholder Film
-    creator: Some Director
-    year: 1982
-    rating: 4
+  - title: Mere Brother Ki Dulhan
+    creator: Ali Abbas Zafar
+    year: 2011
+    cover: https://upload.wikimedia.org/wikipedia/en/8/83/Mere_Brother_Ki_Dulhan22.jpg
+    rating: 3.5
+    notes: fun movie, suprisingly my fav character was the brother. he is a vibe.
     logs:
-      - { date: 2026-10-05, status: Watched }
+      - {date: 2026-10, status: watched}
+
+  - title: Superbad
+    creator: Greg Mottola
+    year: 2007
+    cover: https://upload.wikimedia.org/wikipedia/en/8/8b/Superbad_Poster.png
+    rating: 2.5
+    logs:
+      - {date: 2026-10, status: watched}
+
+  - title: Before Sunrise
+    creator: Richard Linklater
+    year: 1995
+    cover: https://upload.wikimedia.org/wikipedia/en/d/da/Before_Sunrise_poster.jpg
+    notes: probably my fav romance.
+    rating: 5
+    logs:
+      - {date: 2026-10-10, status: rewatch}
+      - {date: 2023, status: watched}
+
+  - title: How to Lose a Guy in 10 Days
+    creator: Donald Petrie
+    year: 2003
+    cover: https://upload.wikimedia.org/wikipedia/en/0/07/HowToLoseAGuyimp.jpg
+    rating: 3.5
+    logs:
+      - {date: 2026-10, status: watched}

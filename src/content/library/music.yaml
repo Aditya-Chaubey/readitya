@@ -1,13 +1,37 @@
+# Each item can also have notes, rating, logs and link — see books.yaml for the full list.
 title: Music
-description: Albums that lived on repeat.
+description: Songs and albums that lived on repeat.
 creatorLabel: Artist
 verb: Listened
 order: 4
 color: '#4a3b6b'
+coverShape: square
 items:
-  - title: A Placeholder Album
-    creator: Some Band
-    year: 1977
-    rating: 5
-    logs:
-      - { date: 2026, status: On repeat }
+  - title: Come Here
+    creator: Kath Bloom
+    year: 1984
+    cover: https://i.scdn.co/image/ab67616d0000b27331a7f84aec4470a0c1468a79
+    rating: 3
+
+  - title: Sad Girl
+    creator: Lana Del Rey
+    year: 2014
+    cover: https://upload.wikimedia.org/wikipedia/en/6/6a/UltraviolenceLDR.png
+    rating: 3.5
+
+  - title: Lust for Life
+    creator: Lana Del Rey
+    year: 2017
+    cover: https://upload.wikimedia.org/wikipedia/en/2/20/Lust_for_Life_-_Lana_Del_Rey_%26_The_Weeknd.png
+    rating: 4
+
+  - title: Nicole Kidman
+    creator: Adéla
+    year: 2026
+    cover: https://c.saavncdn.com/917/PRIMA-English-2026-20260904063612-500x500.jpg
+    rating: 2.5
+
+  - title: The Kill 2
+    creator: Lex Amarni
+    cover: https://i.scdn.co/image/ab67616d0000b27347c800c40f339462035bd0cc
+    rating: 2
