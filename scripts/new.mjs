@@ -6,6 +6,7 @@
  *   npm run new tidbit                 → src/content/tidbits/2026-10-13-0930.md
  *   npm run new tidbit "Optional title"
  *   npm run new project "My Project"    → src/content/projects/my-project.md
+ *   npm run new ai "What Is a Token?"   → src/content/ai/2026-10-26-what-is-a-token.md
  */
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -82,6 +83,28 @@ draft: true
 What is it, why does it exist, how is it going?
 `,
   );
+} else if (kind === 'ai') {
+  if (!title) {
+    console.error('Usage: npm run new ai "What Is a Token?"');
+    process.exit(1);
+  }
+  const file = join(root, 'src/content/ai', `${day}-${slugify(title)}.md`);
+  write(
+    file,
+    `---
+title: ${JSON.stringify(title)}
+tldr: ""
+date: ${day}T${time}:00${tz}
+level: Beginner   # Beginner · Intermediate · Advanced
+tags: []
+sources: []   # e.g. [{ label: "The original paper", url: "https://..." }]
+drafted_with: []
+draft: true
+---
+
+See HERMES.md for the article format.
+`,
+  );
 } else if (kind === 'tidbit' || kind === 'micro') {
   const file = join(root, 'src/content/tidbits', `${day}-${time.replace(':', '')}.md`);
   write(
@@ -97,5 +120,6 @@ ${title ? `title: ${JSON.stringify(title)}\n` : ''}tags: []
   console.log(`Usage:
   npm run new post "My Post Title"
   npm run new tidbit ["Optional title"]
-  npm run new project "My Project"`);
+  npm run new project "My Project"
+  npm run new ai "Concept Title"`);
 }

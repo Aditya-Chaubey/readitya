@@ -29,6 +29,7 @@ export const TAPES = [
   { label: 'Projects', href: '/projects', side: 'A', length: 'C-60', shell: '#d9a13b', band: '#2b2622', ink: '#2b2622', note: 'works in progress' },
   { label: 'Writings', href: '/writings', side: 'A', length: 'C-90', shell: '#2b2622', band: '#e0a43a', ink: '#f2e6cf', note: 'long play' },
   { label: 'Tidbits', href: '/tidbits', side: 'B', length: 'C-30', shell: '#c4583f', band: '#24555a', ink: '#f6ecd7', note: 'short cuts' },
+  { label: 'AI Daily', href: '/ai', side: 'B', length: 'C-15', shell: '#f1ece2', band: '#d4477f', ink: '#2a1f17', note: 'one idea a day' },
   { label: 'Library', href: '/library', side: 'A', length: 'C-120', shell: '#2f5d62', band: '#e8b04b', ink: '#f6ecd7', note: 'the archive' },
 ] as const;
 
@@ -41,6 +42,7 @@ export const NAV = [
   { label: 'Projects', href: '/projects', color: '#df9a1f' },
   { label: 'Writings', href: '/writings', color: '#d9532e' },
   { label: 'Tidbits', href: '/tidbits', color: '#6c9a37' },
+  { label: 'AI Daily', href: '/ai', color: '#d4477f' },
   { label: 'Library', href: '/library', color: '#7b5cc8' },
 ] as const;
 

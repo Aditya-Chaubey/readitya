@@ -1,0 +1,203 @@
+---
+import Page from '../../layouts/Page.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import { formatDate, getConcepts } from '../../lib/utils';
+import { SITE } from '../../site.config';
+
+const posts = await getConcepts();
+// day numbers count up from the very first post
+const day = (i: number) => String(posts.length - i).padStart(3, '0');
+const [today, ...rest] = posts;
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<Page title="AI Daily" section="AI Daily" description="One AI concept a day, explained in plain language.">
+  <link slot="head" rel="alternate" type="application/rss+xml" title={`${SITE.title} — AI Daily`} href="/ai/rss.xml" />
+  <SectionHead section="AI Daily" lede="One AI concept a day, explained in plain language — no maths degree required." count={posts.length} />
+
+  {posts.length === 0 && <p class="muted">The first concept drops tomorrow.</p>}
+
+  {
+    today && (
+      <a class="today reveal" href={`/ai/${today.id}/`}>
+        <span class="label">Today · Day {day(0)}</span>
+        <span class="tt">{today.data.title}</span>
+        <span class="tl">{today.data.tldr}</span>
+        <span class="meta-row">
+          <span class="stamp">{today.data.level}</span>
+          <time datetime={today.data.date.toISOString()}>{formatDate(today.data.date)}</time>
+          {today.data.draft && <span class="stamp">draft</span>}
+          <span class="go">Read ▶</span>
+        </span>
+      </a>
+    )
+  }
+
+  {
+    rest.length > 0 && (
+      <section class="log" aria-label="Earlier concepts">
+        <div class="log-head">
+          <h2 class="label">Earlier</h2>
+          {tags.length > 1 && (
+            <div class="chips" role="group" aria-label="Filter by topic">
+              <button type="button" class="chip" data-tag="" aria-pressed="true">All</button>
+              {tags.map((t) => (
+                <button type="button" class="chip" data-tag={t} aria-pressed="false">#{t}</button>
+              ))}
+            </div>
+          )}
+        </div>
+        <ol class="tracks">
+          {rest.map((p, i) => (
+            <li class="reveal" data-tags={p.data.tags.join(' ')}>
+              <a href={`/ai/${p.id}/`}>
+                <span class="no">{day(i + 1)}</span>
+                <span class="body">
+                  <span class="t">
+                    {p.data.title}
+                    {p.data.draft && <span class="stamp">draft</span>}
+                  </span>
+                  <span class="tl">{p.data.tldr}</span>
+                </span>
+                <span class="side">
+                  <span class="lvl">{p.data.level}</span>
+                  <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <p class="none muted" hidden>Nothing on that topic yet.</p>
+      </section>
+    )
+  }
+</Page>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+  const rows = [...document.querySelectorAll<HTMLLIElement>('.tracks li')];
+  const none = document.querySelector<HTMLElement>('.none');
+  chips.forEach((c) =>
+    c.addEventListener('click', () => {
+      const tag = c.dataset.tag!;
+      chips.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+      let shown = 0;
+      for (const r of rows) {
+        const on = !tag || r.dataset.tags!.split(' ').includes(tag);
+        r.hidden = !on;
+        if (on) shown++;
+      }
+      if (none) none.hidden = shown > 0;
+    }),
+  );
+</script>
+
+<style>
+  .today {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    gap: 0.9rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.35s var(--ease-out);
+  }
+  .today::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 60% 90% at 0% 0%, color-mix(in srgb, var(--sec) 30%, transparent), transparent 70%),
+      radial-gradient(ellipse 50% 80% at 100% 100%, color-mix(in srgb, var(--stripe-1) 22%, transparent), transparent 70%);
+  }
+  .today:hover { transform: translateY(-3px); }
+  .today .label { color: var(--sec-fg, var(--sec)); }
+  .tt {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-stretch: 106%;
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .today .tl { max-width: 40rem; font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem); line-height: 1.5; color: var(--fg-soft); }
+  .go { margin-left: auto; color: var(--fg); transition: color 0.2s; }
+  .today:hover .go { color: var(--accent); }
+
+  .log { margin-top: clamp(2.5rem, 7vh, 4rem); }
+  .log-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 0.75rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .chip {
+    border: 0;
+    padding: 0.3em 0.7em;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--fg-soft);
+    background: var(--surface);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .chip:hover { color: var(--fg); }
+  .chip[aria-pressed='true'] { color: var(--fg); background: color-mix(in srgb, var(--sec) 22%, transparent); }
+
+  .tracks { list-style: none; padding: 0; border-top: 2px solid var(--fg); }
+  .tracks li { border-bottom: 1px dashed var(--line); }
+  .tracks a {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.3rem 1.5rem;
+    padding: 1.15rem 0.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .tracks a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: color-mix(in srgb, var(--sec) 10%, transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .tracks a:hover::before, .tracks a:focus-visible::before { transform: none; }
+  .no { font-family: var(--font-ui); font-size: 0.8rem; color: var(--fg-faint); }
+  .body { display: grid; gap: 0.3rem; min-width: 0; }
+  .t {
+    font-family: var(--font-head);
+    font-weight: 650;
+    font-stretch: 104%;
+    font-size: clamp(1.15rem, 1vw + 0.85rem, 1.4rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    transition: color 0.25s;
+  }
+  .tracks a:hover .t { color: var(--accent); }
+  .tracks .tl { font-size: 0.95rem; line-height: 1.45; color: var(--fg-soft); }
+  .side { display: grid; justify-items: end; gap: 0.3rem; }
+  .lvl, time {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    white-space: nowrap;
+  }
+  .stamp { margin-left: 0.6rem; vertical-align: middle; }
+  .today .stamp { margin-left: 0; }
+  @media (max-width: 640px) {
+    .tracks a { grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0.4rem 0.8rem; }
+    .side { grid-column: 2; display: flex; gap: 1rem; justify-items: start; }
+  }
+</style>

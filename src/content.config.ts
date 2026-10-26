@@ -31,6 +31,24 @@ const tidbits = defineCollection({
   }),
 });
 
+/** AI Daily: src/content/ai/<yyyy-mm-dd>-<slug>.md — one concept explained per day. */
+const ai = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/ai' }),
+  schema: z.object({
+    title: z.string(),
+    /** The whole idea in one or two plain sentences. Shown on the card and atop the post. */
+    tldr: z.string(),
+    date: z.coerce.date(),
+    level: z.enum(['Beginner', 'Intermediate', 'Advanced']).default('Beginner'),
+    tags: z.array(z.string()).default([]),
+    /** Further reading. */
+    sources: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+    /** Which models helped draft it, e.g. [DeepSeek, Gemini]. */
+    drafted_with: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 /** A loose date: 2026, "2026-10", 2026-10-13 … */
 const looseDate = z.union([z.string(), z.number(), z.date()]);
 
@@ -105,4 +123,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { writings, tidbits, library, projects };
+export const collections = { writings, tidbits, library, projects, ai };

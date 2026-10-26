@@ -77,6 +77,12 @@ export async function getTidbits() {
   return items.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
+/** AI Daily posts, newest first. */
+export async function getConcepts() {
+  const items = await getCollection('ai', (p) => showDrafts || !p.data.draft);
+  return items.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
 export async function getShelves() {
   const shelves = await getCollection('library');
   return shelves.sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
@@ -106,3 +112,4 @@ export type Writing = CollectionEntry<'writings'>;
 export type Project = CollectionEntry<'projects'>;
 export type Tidbit = CollectionEntry<'tidbits'>;
 export type Shelf = CollectionEntry<'library'>;
+export type Concept = CollectionEntry<'ai'>;

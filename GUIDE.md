@@ -69,6 +69,14 @@ links: [{ label: Source, url: "https://github.com/you/project" }]
 
 Write about the project below the `---`. Change `draft: true` to `draft: false` to publish.
 
+### An AI concept (AI Daily)
+
+```
+npm run new ai "What Is an Embedding?"
+```
+
+Creates `src/content/ai/<today>-what-is-an-embedding.md`. Your Hermes agent publishes these daily — the full format it follows is in **`HERMES.md`**. Same `draft: true` / `draft: false` rule as posts.
+
 ### Something you read, watched or listened to (Library)
 
 Open the right file in `src/content/library/` — `books.yaml`, `movies.yaml`, `tv-shows.yaml`, `music.yaml`, `anime.yaml` or `manga.yaml` — and add an entry under `items:` by copying this:
@@ -139,6 +147,7 @@ After that, publishing is just: write → save → push to GitHub. The site rebu
 | Write a post          | `npm run new post "Title"`            |
 | Write a short note    | `npm run new tidbit`                  |
 | Add a project         | `npm run new project "Name"`          |
+| Explain an AI concept | `npm run new ai "Title"` (see HERMES.md) |
 | Log a book/movie/etc. | Edit a file in `src/content/library/` |
 | Publish a draft       | Change `draft: true` → `draft: false` |
 

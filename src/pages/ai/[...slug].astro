@@ -1,0 +1,138 @@
+---
+import { render } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+import Title from '../../components/Title.astro';
+import { formatDate, getConcepts, readingTime, wordCount, type Concept } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const posts = await getConcepts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1], day: posts.length - i },
+  }));
+}
+
+interface Props {
+  post: Concept;
+  newer?: Concept;
+  older?: Concept;
+  day: number;
+}
+const { post, newer, older, day } = Astro.props;
+const { Content } = await render(post);
+const words = wordCount(post.body);
+const d = post.data;
+---
+
+<Page title={d.title} description={d.tldr} section="AI Daily" type="article" progress>
+  <header class="hero">
+    <p class="display" aria-hidden="true">
+      <span class="reels"><i></i><i></i></span>
+      <span class="txt"><span class="dim">▶ Day</span> <span class="lit">{String(day).padStart(3, '0')}</span></span>
+      <span class="count">{readingTime(words)}:00</span>
+    </p>
+    <Title text={d.title} class="headline" />
+    <p class="meta-row">
+      {d.draft && <span class="stamp">draft</span>}
+      <span class="stamp">{d.level}</span>
+      <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+      <span class="sep">/</span>
+      <span>{readingTime(words)} min</span>
+      {d.tags.map((t) => <span class="tag">#{t}</span>)}
+    </p>
+  </header>
+
+  <aside class="tldr" aria-label="In one breath">
+    <span class="label">In one breath</span>
+    <p>{d.tldr}</p>
+  </aside>
+
+  <article class="prose">
+    <Content />
+  </article>
+
+  {
+    d.sources.length > 0 && (
+      <section class="sources" aria-label="Further reading">
+        <p class="label">Further reading</p>
+        <ul>
+          {d.sources.map((s) => (
+            <li>
+              <a href={s.url} rel="noopener" target="_blank">{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {d.drafted_with.length > 0 && <p class="credit">Drafted with help from {d.drafted_with.join(' & ')}.</p>}
+
+  <nav class="pager" aria-label="More concepts">
+    {
+      older ? (
+        <a href={`/ai/${older.id}/`}>
+          <span class="label">◀◀ Day {day - 1}</span>
+          <span class="pt">{older.data.title}</span>
+        </a>
+      ) : (
+        <a href="/ai/">
+          <span class="label">◀◀ Back</span>
+          <span class="pt">All concepts</span>
+        </a>
+      )
+    }
+    {
+      newer && (
+        <a class="nx" href={`/ai/${newer.id}/`}>
+          <span class="label">Day {day + 1} ▶▶</span>
+          <span class="pt">{newer.data.title}</span>
+        </a>
+      )
+    }
+  </nav>
+</Page>
+
+<style>
+  .hero :global(.headline) { max-width: 20ch; }
+  .tag { text-transform: none; }
+
+  .tldr {
+    max-width: var(--read);
+    margin-bottom: clamp(2rem, 5vh, 2.75rem);
+    padding: 1.1rem 1.35rem 1.2rem;
+    border-left: 4px solid var(--sec);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: color-mix(in srgb, var(--sec) 9%, var(--surface));
+  }
+  .tldr .label { color: var(--sec-fg, var(--sec)); }
+  .tldr p { margin-top: 0.4rem; font-size: 1.15rem; line-height: 1.5; font-weight: 500; }
+
+  .prose { font-size: 1.1em; }
+
+  .sources, .credit { max-width: var(--read); }
+  .sources { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+  .sources ul { margin-top: 0.6rem; padding-left: 1.2em; list-style: square; }
+  .sources li + li { margin-top: 0.35em; }
+  .sources li::marker { color: var(--accent); }
+  .credit { margin-top: 1.5rem; font-family: var(--font-ui); font-size: 0.72rem; color: var(--fg-faint); }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: clamp(3rem, 8vh, 5rem); }
+  .pager a {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.25rem 1.4rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.35s var(--ease-out), background-color 0.25s;
+  }
+  .pager a:hover { transform: translateY(-3px); background: color-mix(in srgb, var(--sec) 14%, var(--surface)); }
+  .pager .nx { text-align: right; grid-column: 2; }
+  .pt { font-family: var(--font-head); font-weight: 650; font-size: 1.15rem; line-height: 1.25; }
+  @media (max-width: 560px) {
+    .pager { grid-template-columns: 1fr; }
+    .pager .nx { grid-column: 1; }
+  }
+</style>
