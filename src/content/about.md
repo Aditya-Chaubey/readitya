@@ -8,7 +8,7 @@ caption: meonabeachinmalaysia.png
 
 > *"We all like to think we're more complex than a two-sentence explanation, but a two-sentence explanation is usually what the world wants from us."*  -- Austin Kleon in his book 'Show your work!' (a good read, btw :D)
 
-I am **Aditya**, a 24-year-old **regular dude**. I like to talk about various things, but most of my views and opinions are related to **technology** and **our future**. I did my Computer Engineering and then an MBA, and now I like to use all that I have learned (not a lot) to create stuff that **I** think is cool. 
+I am **Aditya**, a 24-year-old **regular dude**. I like to talk about various things, but most of my views and opinions are related to **technology** and **our future**. I completed my Computer Engineering and then did an MBA, and now I like to use all that I have learned (not a lot) to create stuff that **I** think is cool. 
 
 By day, I work as a consultant at an IT company.
 
@@ -35,3 +35,4 @@ Still, I will treat it like my personal daily diary... in the sense that I don't
 ## Say hello
 
 The best way to reach me is by email (unless you know me). I read everything, even if I'm slow to reply.
+
