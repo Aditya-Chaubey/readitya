@@ -12,21 +12,23 @@ drafted_with: [DeepSeek]
 draft: false
 ---
 
-You have played this game. Someone thinks of a thing — a person, a place, an object — and you get twenty questions to find it. Every question has to be answerable with yes or no.
+You have played this game. Somebody thinks of a person, a place or an object, and you get twenty questions to find it. Every question has to be answerable with a yes or a no.
 
-Watch a good player. They do not guess. Their first question splits the world roughly in half: *is it alive?* Their second halves what is left. A bad player asks something that rules out almost nothing — *is it smaller than a bus?* — and burns a question for free.
+Watch someone who is good at it. They do not guess. Their first question splits the world roughly in half, is it alive, and their second halves whatever is left. Someone who is bad at it asks whether the thing is smaller than a bus, rules out almost nothing, and has spent a question for free.
 
-That instinct, the one you already have, is the entire algorithm behind a **decision tree**. It is the oldest idea in machine learning, still in daily use, and still the thing to beat whenever your data arrives as a spreadsheet.
+That instinct, the one you already have, is the whole algorithm behind a **decision tree**.
 
 ## The only move it knows
 
-A decision tree predicts by walking you down a chain of questions. Each question compares one column of your table to a number. Answer it, go left or right, answer the next one. Whatever box you end up in holds the prediction.
+A decision tree predicts by walking you down a chain of questions. Each one compares a single column of your table against a number: is the distance above twenty kilometres, is the hours-studied figure above four. You answer, you go left or right, you answer the next one, and wherever the chain runs out, the prediction is waiting.
 
-Notice how narrow that is. The tree can ask *is the distance above 20 km?* It cannot ask *is the cost more than twice the distance?* One column, one number, yes or no. That narrowness sounds like a weakness. It is the source of nearly everything the tree is good at, and nearly everything it cannot do.
+A column here means one fact recorded for every row. Hours studied is a column. Whether a student turned up to lectures is another. The tree can ask about hours, and it can ask about lectures. It cannot ask whether the cost is more than twice the distance, because that question mixes two columns at once.
+
+That restriction sounds like a weakness. In practice it is where most of the tree's strengths come from, and most of its limits too.
 
 ## Ten students walk into an exam
 
-Here is a small table. Ten students, two columns, and one thing we want to predict: did they pass?
+Ten students sat a mock exam. We know how many hours each of them studied, whether they attended lectures, and whether they passed.
 
 | Hours studied | Went to lectures | Result |
 | --- | --- | --- |
@@ -41,88 +43,98 @@ Here is a small table. Ten students, two columns, and one thing we want to predi
 | 9 | yes | pass |
 | 10 | yes | pass |
 
-Five passes, five fails. And one awkward row: student seven studied for seven hours, skipped the lectures, and failed anyway. Real tables are full of rows like that. Keep an eye on it.
+Five passed and five failed. Student seven is the awkward one: seven hours of study, no lectures, and a fail anyway. Tables are full of rows like that, and the whole lesson of this article lives in what a tree does with them.
 
 ## How mixed is this pile?
 
-The tree builds itself by asking one question at every step: *which cut leaves the two new piles less mixed than the pile I started with?*
+The tree builds itself by asking a question of its own at every step: which cut leaves the two new piles less mixed than the pile I started with?
 
-So it needs a number for "mixed". The usual one is the **Gini impurity**, and before any symbols, here is the whole idea in a sentence. Gini answers: **if I picked two students from this pile at random, how likely is it that one passed and the other failed?**
+So it needs a number for mixed. The usual one is the **Gini impurity**. Before any symbols, here it is in a sentence. If you picked two students out of a pile at random, how likely is it that one passed and the other failed?
 
-Our ten students are five and five. Pick two at random and they disagree about half the time, so the pile scores 0.5. A pile of four students who all failed can never disagree with itself, so it scores 0. Everything else falls between those two.
+Our ten students are five and five. Pick two at random and they disagree about half the time, so the pile scores 0.5. A pile of four students who all failed can never disagree with itself, so it scores 0. Everything else lands somewhere in between.
 
 ![A curve showing impurity peaking when a pile is half and half](/images/ai/ai-2026-10-26-1.png)
 
 *A pile where everyone passed is perfectly clean, scoring 0. A fifty-fifty pile is as mixed as it gets, scoring 0.5. Every cut is an attempt to move left along this curve.*
 
-The formula, if you want it, is `Gini = 1 - (p1² + p2²)`, where `p1` and `p2` are the shares of each class. Take the share of passes, square it, take the share of fails, square it, add them, subtract from one. Half and half gives you 1 minus (0.25 + 0.25), which is 0.5. One single class gives you 1 minus 1, which is 0.
+The formula is `Gini = 1 - (p1² + p2²)`, where `p1` and `p2` are the shares of each class in the pile. Take the share of passes, square it, take the share of fails, square it, add the two together, and subtract the total from one. Half and half gives 1 minus 0.5, which is 0.5. A single class gives 1 minus 1, which is 0.
 
-The squaring is the clever bit. It punishes small shares, so lopsided piles score low and balanced piles score high.
+The squaring is the useful part. It punishes small shares, so a lopsided pile scores low and a balanced one scores high.
 
 ## The first cut
 
-Now the tree tries every column and every threshold, and keeps whichever cut lowers that number the most.
+Now the tree tries every column at every threshold, and keeps whichever cut lowers that number the most.
 
-**Cut on hours, at four.** The left pile is students one to four, all four failed, so it scores 0. The right pile is one fail among five passes, which scores about 0.278. To combine them we weight by size — four students left, six right — giving `0.4 × 0 + 0.6 × 0.278 = 0.167`.
+Cut on hours, at four. The left pile is students one to four, all four of whom failed, so it scores 0. The right pile has one fail among five passes, which scores about 0.278. Combining them means weighting by size, four students left and six right, so `0.4 × 0 + 0.6 × 0.278 = 0.167`.
 
-The pile started at 0.5. It is now 0.167. That is a drop of **0.333**.
+The pile began at 0.5 and is now 0.167. That is a drop of **0.333**.
 
-**Cut on lectures instead.** The students who attended split into one fail and five passes, scoring 0.278. The ones who skipped split into three fails and one pass, scoring 0.375. Weighted: `0.6 × 0.278 + 0.4 × 0.375 = 0.317`. A drop of **0.183**.
+Cut on lectures instead. The students who attended split into one fail and five passes, scoring 0.278. Those who skipped split into three fails and one pass, scoring 0.375. Weighted: `0.6 × 0.278 + 0.4 × 0.375 = 0.317`. A drop of **0.183**.
 
-Hours wins, 0.333 against 0.183, and that is the first question in the tree. Neither cut is clean. The tree did not need clean — it needed the best available.
+Hours wins, 0.333 against 0.183, so hours becomes the first question. Neither cut is clean, and that is fine. The tree only ever needs the cut that is best available.
 
 ![A decision tree with two questions and three leaves](/images/ai/ai-2026-10-26-2.png)
 
-*The first question does most of the work. The second buys a little more, and the box on the right is still mixed — one failed student is hiding in there.*
+*The first question does most of the work. The second buys a little more, and the box on the right is still mixed. One failed student is hiding in there.*
 
 ## The rule that exists to be wrong about one person
 
-That leftover box is where the trouble starts. Four students, three passes, one fail. It is student seven, again.
+The leftover box holds four students, three passes and one fail. It is student seven again.
 
-The tree can fix this. Ask one more question — hours at seven — and student seven lands in a leaf all by himself, perfectly pure, impurity zero. The score improves. The model gets worse.
+The tree can fix this. Ask one more question, hours at seven, and student seven drops into a leaf of his own: perfectly pure, impurity zero. The score improves. The model gets worse.
 
-This is **overfitting**, and that one-row leaf is the whole disease in miniature. A rule whose only job is to be wrong about one student fewer on the exam you already marked tells you nothing about the next exam. Grow a tree without limits and it will keep splitting until every leaf is pure, which on real data means roughly one rule per training row. Perfect on what it has seen. Useless on what it has not.
+This is **overfitting**, and that single-row leaf is the disease in miniature. A rule whose only job is to be wrong about one student fewer on an exam you have already marked teaches you nothing about the next exam. Leave a tree to grow without limits and it will keep splitting until every leaf is pure, which on real data means roughly one rule per training row.
 
-Every library gives you the same three brakes. The defaults are permissive, so you get the overfitted tree unless you intervene. Cap the depth. Demand a minimum number of rows in every leaf. Or prune afterwards and charge the tree a fee for each leaf it keeps. If your leaves hold one or two rows, you did not fit a model. You indexed a spreadsheet.
+Every library gives you the same three brakes, and the defaults are loose enough that you get the overfitted tree unless you intervene. Cap the depth. Demand a minimum number of rows in each leaf. Or prune afterwards, charging the tree a fee for every leaf it keeps. If your leaves hold one or two rows, you did not fit a model. You indexed a spreadsheet.
 
 ## What the tree is really doing to your data
 
-Step back from the students and look at the geometry, because this is the part that explains everything else.
+Step back from the students and look at the shape of the thing.
 
-Plot two columns as a flat sheet of paper. A question like *hours at four* is a vertical line. A question about lectures is a horizontal line. So every cut is a wall running parallel to one of the axes, and the leaves of the tree are the rectangular rooms those walls enclose.
+Plot two columns as a flat sheet of paper. A question about hours is a vertical line. A question about lectures is a horizontal line. Every cut is a wall parallel to one axis or the other, and the leaves are the rectangular rooms those walls enclose.
 
 ![A trained decision tree for the iris dataset, with splits and leaf statistics](/images/ai/ai-iris-classification-tree.png)
 
-*A real tree, trained on the iris dataset: 150 flowers, four measurements, three species. Do not bother reading every number — look at the shape. A handful of yes-or-no questions is enough to separate three species almost perfectly. Image: Dvd8719, CC BY-SA 4.0, via Wikimedia Commons.*
+*A real tree, trained on the iris dataset: 150 flowers, four measurements, three species. Do not bother reading every number. Look at the shape. A handful of yes-or-no questions is enough to separate three species almost perfectly. Image: Dvd8719, CC BY-SA 4.0, via Wikimedia Commons.*
 
-And that immediately tells you what a tree cannot do. Suppose the rule is "pass if the hours and the lecture attendance agree, fail if they disagree" — the classic XOR pattern, two diagonal stripes. No single vertical or horizontal wall separates diagonal stripes. The tree would have to cut many times, building a staircase to approximate a diagonal.
+That picture explains what a tree cannot do. Suppose the rule is "pass if the hours and the attendance agree, fail if they disagree", which gives you two diagonal stripes. No vertical or horizontal wall separates diagonal stripes, so the tree has to cut again and again, building a staircase to imitate a diagonal.
 
-scikit-learn's own documentation is refreshingly blunt about this: the algorithm is greedy, makes the locally best choice at each node, cannot guarantee the best possible tree, and struggles with concepts like XOR and parity. The greed is not a bug to be fixed. It is what makes the tree fast and readable.
+scikit-learn's own documentation says so plainly: the algorithm is greedy, it makes the best-looking choice at each node, it cannot promise the best possible tree, and it struggles with concepts like XOR and parity. Greed is what keeps a tree fast and readable.
 
 ## Why it still beats neural networks on spreadsheets
 
-In 2022, three researchers assembled 45 tabular datasets and tuned every model properly — neural networks included. Tree-based models still came out on top on medium-sized tables, around ten thousand rows, before anyone counted how much faster they are.
+In 2022, three researchers assembled 45 datasets shaped like spreadsheets and tuned every model properly, neural networks included. Tree-based models still came out on top on medium-sized tables of around ten thousand rows, before anyone counted how much faster they run.
 
-Their explanation comes down to three things, and all three follow from the staircase:
+The explanation comes down to three things, and all three follow from the staircase.
 
-Neural networks are built to expect smoothness — nearby inputs give nearby outputs. That is a gift for images. Tables are not smooth. A credit score of 699 is fine and 700 is refused. Trees expect nothing smooth, because they are flat by construction.
+Neural networks expect smoothness: nearby inputs should give nearby outputs. That is a gift for images. Tables are not smooth. A credit score of 699 is fine and 700 is refused. Trees expect nothing smooth, because they are flat by construction.
 
-Neural networks also suffer when a table carries useless columns, because they have to spend capacity learning that a column is noise. A tree simply never picks it: a useless column produces no gain.
+Neural networks also suffer when a table carries useless columns, since they have to spend capacity learning that a column is noise. A tree never picks it, because a useless column produces no gain.
 
-And tables are built by humans, one column at a time, so the useful directions are already lined up with the axes. Trees cut along those axes. Neural networks mix the columns together first, and lose that alignment.
+And tables are built by people, one column at a time, so the useful directions already line up with the axes. Trees cut along those axes. Neural networks mix the columns together first and lose that alignment.
 
-For context on how long this idea has been earning its keep: Quinlan's 1986 paper describing the ID3 algorithm has been cited around fourteen thousand times.
+Quinlan's 1986 paper on the ID3 algorithm has been cited around fourteen thousand times, which tells you how long this idea has been earning its keep.
 
 ## Three things it cannot do
 
-- **It cannot extrapolate.** Every prediction is the average of the rows that landed in that leaf, so it never returns a value beyond the range it saw. Show it a house twice as large as anything in training and it gives you the most expensive box's average.
-- **It is twitchy.** Change a few rows and the top question can flip, reshuffling everything below it. Two trees fitted on different halves of the same data can look unrelated. Averaging many of them — a random forest — is the standard fix.
-- **Its probabilities are coarse.** A leaf with three passes and one fail says 0.75, which is a frequency from four students, not a law of nature.
+- **It cannot extrapolate.** Every prediction is the average of the rows that landed in that leaf, so it never returns a value beyond the range it saw. Show it a house twice as large as anything in training and it hands back the most expensive box's average.
+- **It is twitchy.** Change a few rows and the top question can flip, reshuffling everything below it. Two trees fitted on different halves of the same data can look unrelated. Averaging many of them into a random forest is the standard fix.
+- **Its probabilities are coarse.** A leaf with three passes and one fail reports 0.75, which is a frequency taken from four students. Treat it as a rough ranking rather than a risk score.
+
+## Where to go next
+
+A few good places, roughly in the order I would take them.
+
+- **Watch it drawn by hand.** [StatQuest: Decision Trees](https://www.youtube.com/watch?v=7VeUPuFGJHk) walks through impurity and splitting on a whiteboard in about seventeen minutes. If the Gini paragraph above felt slippery, this fixes it.
+- **Play with a real tree.** [explained.ai's tree visualiser](https://explained.ai/decision-tree-viz/) lets you change a split and watch the predictions move. It is the fastest way to feel what a cut does.
+- **Take the free short course.** [Kaggle's Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning) is about four hours and ends with you training your own tree in a browser.
+- **Run the iris example yourself.** [scikit-learn's decision tree plot](https://scikit-learn.org/stable/auto_examples/tree/plot_iris_dtc.html) is the picture from this article, generated by a short script you can copy.
+- **Read a book, if you want the maths.** [An Introduction to Statistical Learning](https://www.statlearning.com/) is free to download. Chapter 8 covers trees and forests properly, and it assumes less than the title suggests.
 
 ## The last question
 
-Every model in the family — the forest, the boosted ensemble that wins most Kaggle tables, the ones with names you have not met yet — is a variation on one move: **where do I cut?**
+Every model in the family, the forest and the boosted ensemble that wins most Kaggle tables and the ones with names you have not met yet, is a variation on one move: **where do I cut?**
 
-Learn the tree as a staircase, and the rest of the family reads as refinements of the same question.
+Learn the tree as a staircase and the rest of the family reads as refinements of the same question.
 
-So the next time an insurance form asks you five yes-or-no questions and then quotes you a price, you will know exactly what just happened. You walked down a decision tree. Someone, somewhere, decided where the walls go.
+So the next time an insurance form asks you five yes or no questions and then quotes you a price, you will know what just happened. You walked down a decision tree, and somebody chose where the walls go.
