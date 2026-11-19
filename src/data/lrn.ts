@@ -26,6 +26,19 @@ export interface Story {
 
 export const STORIES: Story[] = [
   {
+    slug: 'watches',
+    title: 'The Machine on Your Wrist',
+    deck: 'How a wristwatch works, where it came from, and how to fall happily down the rabbit hole. A field guide for the newly curious.',
+    topic: 'Objects & design',
+    date: '2026-11-20',
+    minutes: 35,
+    interactives: 12,
+    cover: '/lrn/_covers/watches.svg',
+    bg: '#0a0c0f',
+    fg: '#f1e9d8',
+    accent: '#c9a96e',
+  },
+  {
     slug: 'decision-trees',
     title: 'The Tree That Asks Questions',
     deck: 'How a stack of yes-or-no questions became one of the most useful ideas in machine learning — and why one tree is never enough.',

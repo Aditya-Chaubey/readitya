@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Machine on Your Wrist — lrn</title>
+<meta name="description" content="A beginner's guide to wristwatches: how a mechanical watch actually works, why quartz changed everything, the types and complications, two centuries of history, and the brands worth knowing.">
+<meta name="theme-color" content="#0a0c0f">
+<meta property="og:title" content="The Machine on Your Wrist">
+<meta property="og:description" content="How a wristwatch works, where it came from, and how to fall down the rabbit hole — a guide for the newly curious.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="watches.css">
+<script src="watches.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-first">Buying guide</a></nav>
+</header>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lume-dot"></span><span class="lc">lrn</span> · No. 04 · Objects, explained</p>
+      <h1 id="title">The Machine<br>on Your <em>Wrist</em></h1>
+      <p class="deck">How a wristwatch works, where it came from, and how to fall happily down the rabbit hole. A field guide for the newly curious.</p>
+      <p class="byline">By Aditya Chaubey · <time datetime="2026-11-20">November 2026</time> · 35 min · 12 interactives</p>
+    </div>
+    <figure class="hero-watch" aria-label="A live wristwatch showing your current local time.">
+      <div id="hero-watch"></div>
+      <figcaption>
+        <span>It's <strong id="hero-time">--:--</strong> where you are.</span>
+        <span class="seg" role="group" aria-label="Seconds hand motion">
+          <button type="button" data-hero="mech" aria-pressed="true">Mechanical sweep</button>
+          <button type="button" data-hero="quartz" aria-pressed="false">Quartz tick</button>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+  <a class="hero-cue" href="#story"><span>Wind it up</span><i aria-hidden="true"></i></a>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <p class="dropcap">Your phone knows the time to within a few thousandths of a second. It gets it from satellites and cell towers, corrects itself constantly, and never needs winding. So why would anyone strap a little mechanical engine to their wrist that loses a few seconds a day, needs a service every few years and can cost as much as a car?</p>
+  <p>Ask a watch person and you'll get a strange mix of answers. Because it's beautiful. Because it was my grandfather's. Because there are more than a hundred tiny parts in there, beating eight times a second, powered by nothing but a coiled spring — and it <em>works</em>. Because it's the only machine most of us ever wear.</p>
+  <p class="lead">This is a guide for people who have just started to notice watches. We'll open one up and see how it ticks, meet the quartz crystal that nearly killed the Swiss watch industry, tour the styles and "complications", walk through five hundred years of history, and finish with the brands worth knowing and how to pick your first one.</p>
+  <p>The watch above is running on your computer's clock. Flip it between <strong>mechanical sweep</strong> and <strong>quartz tick</strong> and watch the seconds hand. That one difference — a glide versus a jump — is where our story starts.</p>
+</section>
+
+<!-- ═════════════ CH1: ANATOMY ═════════════ -->
+<section class="chapter paper" id="ch-anatomy" data-ch="1">
+  <header class="ch-head">
+    <p class="ch-num">I</p>
+    <p class="ch-label">Chapter one</p>
+    <h2>Anatomy of a watch</h2>
+    <p class="ch-dek">Learn the words first. Everything else gets easier.</p>
+  </header>
+  <div class="prose">
+    <p>Watch people have a word for every millimeter of a watch, and the forums assume you know them all. Here's the outside of a typical sports watch. Tap the dots, or the names, to learn what each part does.</p>
+  </div>
+  <figure class="fig wide anatomy" aria-labelledby="anat-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Exploded view</p><h3 id="anat-title">The outside, part by part</h3></div>
+    <div class="anat-body">
+      <div class="anat-stage" id="anat-stage"></div>
+      <div class="anat-side">
+        <ol class="anat-list" id="anat-list"></ol>
+        <div class="anat-card" id="anat-card" aria-live="polite"></div>
+      </div>
+    </div>
+  </figure>
+  <div class="prose">
+    <p>Under the dial sits the part that actually matters: the <strong>movement</strong>, also called the <strong>calibre</strong>. Everything else is housing. Two watches can look completely different and share the same movement inside, and two identical-looking watches can hide movements that differ in price by a factor of fifty. Most of the hobby is learning to tell the difference.</p>
+    <p>Movements come in two big families. A <strong>mechanical</strong> movement runs entirely on a wound spring and a ticking regulator made of metal. A <strong>quartz</strong> movement runs on a battery and a vibrating crystal. We'll start with the mechanical one, because it's the more astonishing of the two.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH2: POWER ═════════════ -->
+<section class="chapter night" id="ch-power" data-ch="2">
+  <header class="ch-head">
+    <p class="ch-num">II</p>
+    <p class="ch-label">Chapter two</p>
+    <h2>A spring, slowly letting go</h2>
+    <p class="ch-dek">Where a mechanical watch gets its energy.</p>
+  </header>
+  <div class="prose">
+    <p>Every mechanical watch has a battery, it's just made of steel. Inside a small drum called the <strong>barrel</strong> sits the <strong>mainspring</strong>: a ribbon of special alloy, often tens of centimeters long, coiled into a space smaller than a coin. Turn the crown and you wind it tighter. Left alone, it tries to unwind, and that patient push drives everything else.</p>
+    <p>A fully wound mainspring typically keeps a watch running for <strong>40 to 80 hours</strong>, a figure called the <strong>power reserve</strong>. Some modern movements stretch to five days or more; a few specialist watches run for weeks. Try it: give the crown a few turns, then watch the reserve drain. Time here runs very fast.</p>
+  </div>
+  <figure class="fig wide reserve" aria-labelledby="res-title">
+    <div class="fig-head">
+      <div><p class="fig-k">Interactive · Power reserve</p><h3 id="res-title">Wind it, then let it run</h3></div>
+      <div class="seg" role="group" aria-label="Winding method">
+        <button type="button" data-wind="manual" aria-pressed="true">Hand-wound</button>
+        <button type="button" data-wind="auto" aria-pressed="false">Automatic</button>
+      </div>
+    </div>
+    <div class="res-body">
+      <canvas id="res-spring" role="img" aria-label="The mainspring inside its barrel, tightening as you wind."></canvas>
+      <div class="res-side">
+        <div class="gauge"><canvas id="res-gauge" aria-hidden="true"></canvas><output id="res-hours">0 h</output><span>power reserve</span></div>
+        <p class="res-hint" id="res-hint">Each press is one turn of the crown. About 40 turns fills a typical mainspring.</p>
+        <div class="res-btns">
+          <button type="button" class="btn" id="res-wind">↻ Turn the crown</button>
+          <button type="button" class="btn ghost" id="res-reset">Let it stop</button>
+        </div>
+        <p class="res-clock">Simulated time: <output id="res-clock">0 h 00 m</output> · 1 second here ≈ 2 hours</p>
+      </div>
+    </div>
+    <figcaption>Simplified: a real mainspring delivers slightly less force as it unwinds, which is why watches can run a little slower near the end of their reserve.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Switch to <strong>Automatic</strong> and move your pointer (or finger) back and forth across the panel. That's a self-winding watch: a half-moon weight called the <strong>rotor</strong> swings around the back of the movement every time your wrist moves, and a clever set of gears turns that wobble into winding. Wear it every day and it never needs touching. Take it off for the weekend, though, and it will probably have stopped by Monday.</p>
+    <aside class="aside"><strong>Watch-speak:</strong> a hand-wound watch is called a "manual" or "manual-wind". An automatic is just "an auto". Both are mechanical. People who say "automatic" when they mean "not quartz" will get gently corrected online.</aside>
+  </div>
+</section>
+
+<!-- ═════════════ CH3: GEAR TRAIN (scrolly) ═════════════ -->
+<section class="chapter night" id="ch-train" data-ch="3">
+  <header class="ch-head">
+    <p class="ch-num">III</p>
+    <p class="ch-label">Chapter three</p>
+    <h2>The gear train</h2>
+    <p class="ch-dek">From one turn every eight hours to eight beats a second.</p>
+  </header>
+  <div class="scrolly" id="train-scrolly">
+    <figure class="scrolly-fig">
+      <svg id="train-svg" viewBox="0 0 760 520" role="img" aria-label="The gear train of a mechanical watch, from mainspring barrel to balance wheel."></svg>
+      <div class="train-read" id="train-read" aria-live="polite"></div>
+    </figure>
+    <div class="steps">
+      <div class="step" data-step="0"><p>A spring that pushes is useless on its own. If you let it unwind freely, it would empty itself in a fraction of a second. The trick is to make it unwind <em>slowly</em> and <em>evenly</em>, and the first part of that trick is a chain of gears called the <strong>going train</strong>.</p></div>
+      <div class="step" data-step="1"><p>The <strong>barrel</strong> holding the mainspring has teeth around its edge. It turns very slowly — in many movements, about once every seven or eight hours.</p></div>
+      <div class="step" data-step="2"><p>It drives the <strong>center wheel</strong>, which is geared to turn exactly <strong>once an hour</strong>. Its arbor pokes up through the middle of the dial and carries the minute hand. (A separate little gearbox under the dial, the <em>motion works</em>, divides that by 12 for the hour hand.)</p></div>
+      <div class="step" data-step="3"><p>Next comes the <strong>third wheel</strong>, a go-between that keeps stepping the speed up.</p></div>
+      <div class="step" data-step="4"><p>Then the <strong>fourth wheel</strong>, which turns <strong>once a minute</strong>. Put a hand on it and you have a seconds hand. That's why on many older watches the seconds sit in a little subdial near 6 o'clock: that's simply where the fourth wheel happened to be.</p></div>
+      <div class="step" data-step="5"><p>Last in line is the <strong>escape wheel</strong>, with oddly shaped teeth. Each wheel in the chain spins faster than the one before, and with less force: by the time the spring's push reaches here, it is tiny. Something has to stop this wheel from simply whizzing round.</p></div>
+      <div class="step" data-step="6"><p>That something is the <strong>escapement</strong> — a pallet fork and a balance wheel — and it's the real genius of the watch. It lets the escape wheel move forward one tooth at a time, in perfectly timed beats. Everything upstream moves in tiny, regular steps as a result. Let's zoom in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ CH4: ESCAPEMENT ═════════════ -->
+<section class="chapter night" id="ch-escape" data-ch="4">
+  <header class="ch-head">
+    <p class="ch-num">IV</p>
+    <p class="ch-label">Chapter four</p>
+    <h2>The heartbeat</h2>
+    <p class="ch-dek">A wheel that swings, a fork that rocks, and a sound you can hear.</p>
+  </header>
+  <div class="prose">
+    <p>The <strong>balance wheel</strong> is the watch's timekeeper. It's a small, carefully weighted ring attached to a hair-thin coiled spring, the <strong>hairspring</strong>. Twist it and let go, and it swings back and forth like a pendulum, at a rate that barely changes whether the swing is big or small. That steadiness is what makes timekeeping possible.</p>
+    <p>Between the balance and the escape wheel sits the <strong>pallet fork</strong>, a little lever with two jewels on its arms. Each time the balance swings through the middle, it knocks the fork from one side to the other. The fork unlocks the escape wheel, which jumps forward a fraction of a tooth — and as it does, it gives the fork, and through it the balance, a tiny push to keep it swinging. Then the other jewel catches the next tooth and locks the wheel again.</p>
+    <p>Lock, unlock, push, lock. That's the "tick-tock" — literally the sound of jewels hitting teeth. Below it is slowed down a lot.</p>
+  </div>
+  <figure class="fig full escape" aria-labelledby="esc-title">
+    <div class="fig-head">
+      <div><p class="fig-k">Interactive · Swiss lever escapement</p><h3 id="esc-title">Lock, unlock, push</h3></div>
+      <div class="seg" role="group" aria-label="Playback speed">
+        <button type="button" data-speed="0.04" aria-pressed="true">Slow motion</button>
+        <button type="button" data-speed="0.25" aria-pressed="false">¼ speed</button>
+        <button type="button" data-speed="1" aria-pressed="false">Real time</button>
+      </div>
+    </div>
+    <div class="esc-body">
+      <canvas id="esc-canvas" role="img" aria-label="Animated schematic of a balance wheel, pallet fork and escape wheel."></canvas>
+      <div class="esc-side">
+        <p class="k">Beat rate</p>
+        <div class="beats" role="group" aria-label="Beat rate">
+          <button type="button" data-vph="18000" aria-pressed="false">18,000<small>vintage</small></button>
+          <button type="button" data-vph="21600" aria-pressed="false">21,600<small>common</small></button>
+          <button type="button" data-vph="28800" aria-pressed="true">28,800<small>modern</small></button>
+          <button type="button" data-vph="36000" aria-pressed="false">36,000<small>high-beat</small></button>
+        </div>
+        <p class="esc-explain" id="esc-explain"></p>
+        <div class="esc-dials">
+          <div><svg id="esc-sec" viewBox="-60 -60 120 120" aria-hidden="true"></svg><span>This beat rate</span></div>
+          <div><svg id="esc-q" viewBox="-60 -60 120 120" aria-hidden="true"></svg><span>Quartz, for comparison</span></div>
+        </div>
+        <label class="check"><input type="checkbox" id="esc-sound"> Hear the ticks</label>
+      </div>
+    </div>
+    <figcaption>A schematic, not a scale drawing. Real balances swing about 270–300° each way; the fork and wheel geometry is simplified so you can see each stage.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Watchmakers measure this rhythm in <strong>vibrations per hour</strong> (vph), where every tick and every tock counts. A modern movement at <strong>28,800 vph</strong> beats 8 times a second, so its seconds hand moves in 8 tiny steps per second. That's the smooth "sweep" people love, and it's not actually smooth at all: it's just stepping too fast for your eye to catch. Higher beat rates are a little more stable against bumps; lower ones wear more gently. Neither is "better" on its own.</p>
+    <p>Now think about the numbers. At 28,800 vph, a watch beats <strong>691,200 times a day</strong>. To be accurate to five seconds a day, every single one of those beats has to be right to within a few millionths of a second. All of it powered by a spring, regulated by a hair, and rattled around on your wrist while you type, run and wash dishes.</p>
+    <blockquote class="pull">A mechanical watch is about 200 years of very clever people fighting friction, gravity, temperature and magnetism — and mostly winning.</blockquote>
+    <h3>Why the jewels?</h3>
+    <p>When a watch says "21 jewels" on the dial, it isn't bragging about bling. The jewels are tiny synthetic rubies used as bearings at the points that wear most: the pivots of the wheels and the pallet stones. Synthetic ruby is hard, smooth and holds oil well, which is why a good mechanical watch can run for decades. Around 17 to 25 jewels is normal for a time-only automatic. More jewels usually just means more functions, not more quality.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH5: QUARTZ ═════════════ -->
+<section class="chapter paper" id="ch-quartz" data-ch="5">
+  <header class="ch-head">
+    <p class="ch-num">V</p>
+    <p class="ch-label">Chapter five</p>
+    <h2>Then came quartz</h2>
+    <p class="ch-dek">A crystal that hums 32,768 times a second.</p>
+  </header>
+  <div class="prose">
+    <p>On Christmas Day 1969, Seiko began selling the <strong>Astron</strong> in Tokyo, the world's first quartz wristwatch. It was expensive and a little clunky. Within fifteen years, quartz had turned the entire watch industry upside down.</p>
+    <p>The idea is lovely. Quartz is <strong>piezoelectric</strong>: squeeze it and it makes a tiny voltage; apply a voltage and it flexes. Cut a sliver into the shape of a tiny tuning fork, put it in a circuit, and it vibrates at an extremely stable rate. In almost every quartz watch that rate is <strong>32,768 times a second</strong>.</p>
+    <p>Why such an odd number? Because 32,768 is 2 multiplied by itself 15 times. A simple circuit can halve a frequency, and if you halve 32,768 fifteen times, you get exactly <strong>one pulse per second</strong>, which drives a tiny stepper motor that moves the seconds hand. Watch the chain below.</p>
+  </div>
+  <figure class="fig wide quartz" aria-labelledby="q-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Frequency divider</p><h3 id="q-title">Halve it fifteen times</h3></div>
+    <div class="q-body">
+      <div class="q-fork"><canvas id="q-fork" aria-hidden="true"></canvas><span>Quartz tuning fork<br><b>32,768 Hz</b></span></div>
+      <ol class="q-chain" id="q-chain" aria-label="Fifteen divide-by-two stages"></ol>
+      <div class="q-out"><svg id="q-out" viewBox="-60 -60 120 120" aria-hidden="true"></svg><span>1 pulse per second<br>→ stepper motor</span></div>
+    </div>
+    <figcaption>Each stage flips its output every time its input flips twice, halving the frequency. Stages faster than your screen can show are drawn as a blur.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>A quartz crystal is so steady that even a cheap quartz watch keeps time far better than the finest mechanical one. A typical quartz watch is rated to about <strong>±15 seconds a month</strong>. A certified mechanical <em>chronometer</em> is allowed to drift <strong>−4 to +6 seconds a day</strong>. Race them and see what happens over a year.</p>
+  </div>
+  <figure class="fig wide drift" aria-labelledby="drift-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Accuracy race</p><h3 id="drift-title">Set five watches together. Wait <output id="drift-days">30 days</output>.</h3></div>
+    <div class="drift-rows" id="drift-rows"></div>
+    <label class="slider"><span>Days since you set them</span><input id="drift-slider" type="range" min="0" max="365" value="30"></label>
+    <figcaption>Worst-case figures from common specifications: COSC chronometer (+6 s/day), Spring Drive (±1 s/day), standard quartz (±15 s/month), high-accuracy quartz (±10 s/year), and a watch that syncs to radio or GPS time signals. Real watches usually do better than their worst case. Bars use a square-root scale so the small errors stay visible.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Quartz was cheaper, more accurate and nearly maintenance-free. Through the 1970s and early 1980s, as Japanese and American companies flooded the market with quartz watches, the Swiss industry, which had bet on mechanical, collapsed. Historians call it the <strong>quartz crisis</strong>. Roughly two-thirds of Swiss watchmaking jobs disappeared and hundreds of brands vanished or were sold.</p>
+    <p>What saved it was, of all things, a cheap plastic quartz watch. In 1983 a Swiss group launched the <strong>Swatch</strong>: colorful, fun, made from just 51 parts, assembled by machines. It sold in the millions, and the profits helped rebuild the industry. Then something unexpected happened. Freed from having to be the most accurate way to tell time, mechanical watches reinvented themselves as something else entirely: craft objects, heirlooms, little bits of engineering art. By the 2000s they were more desirable than ever.</p>
+    <p>That's the paradox at the heart of the hobby. People pay more for the <em>less</em> accurate watch, because accuracy stopped being the point.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH6: TYPES ═════════════ -->
+<section class="chapter night" id="ch-types" data-ch="6">
+  <header class="ch-head">
+    <p class="ch-num">VI</p>
+    <p class="ch-label">Chapter six</p>
+    <h2>A field guide to types</h2>
+    <p class="ch-dek">What's inside, and what it was built for.</p>
+  </header>
+  <div class="prose">
+    <p>There are two ways to sort watches. The first is by what powers them. Here are the six you'll come across.</p>
+  </div>
+  <div class="movements" id="movements"></div>
+  <div class="prose">
+    <p>The second way is by style. Almost every watch style started life as a tool for a specific job: diving, flying, racing, crossing time zones. Most people who buy them today never dive or fly a plane, but the design details stuck, and each one has a reason. Pick a style to see what makes it what it is.</p>
+  </div>
+  <figure class="fig full styles" aria-labelledby="styles-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Style guide</p><h3 id="styles-title">Eight classic styles</h3></div>
+    <div class="styles-tabs" id="styles-tabs" role="tablist" aria-label="Watch styles"></div>
+    <div class="styles-body">
+      <div class="styles-watch" id="styles-watch"></div>
+      <div class="styles-info" id="styles-info" aria-live="polite"></div>
+    </div>
+    <figcaption>Illustrations are generic: each one combines the features that define the style, not any specific brand's design.</figcaption>
+  </figure>
+</section>
+
+<!-- ═════════════ CH7: COMPLICATIONS ═════════════ -->
+<section class="chapter paper" id="ch-comps" data-ch="7">
+  <header class="ch-head">
+    <p class="ch-num">VII</p>
+    <p class="ch-label">Chapter seven</p>
+    <h2>Complications</h2>
+    <p class="ch-dek">Everything a watch does besides telling the time.</p>
+  </header>
+  <div class="prose">
+    <p>In watch-speak, a <strong>complication</strong> is any function beyond hours, minutes and seconds. A date window is a complication. So is a stopwatch. At the far end are watches with dozens of them, taking years to design and assemble. Each one below works: press buttons, pick cities, listen.</p>
+  </div>
+  <figure class="fig full comps" aria-labelledby="comps-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Complication bench</p><h3 id="comps-title">Six complications you can try</h3></div>
+    <div class="comps-body">
+      <div class="comps-tabs" id="comps-tabs" role="tablist" aria-label="Complications"></div>
+      <div class="comps-stage">
+        <div class="comps-watch" id="comps-watch"></div>
+        <div class="comps-controls" id="comps-controls"></div>
+      </div>
+      <div class="comps-info" id="comps-info" aria-live="polite"></div>
+    </div>
+  </figure>
+  <div class="prose">
+    <p>Watchmakers sometimes sort complications into tiers. Everyday ones like the date and the GMT hand. Sporting ones like the chronograph. And the so-called <strong>grand complications</strong>: the perpetual calendar, the minute repeater and the split-seconds chronograph. A watch that combines several grand complications is a <em>grande complication</em>, and only a handful of workshops in the world can make one.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH8: HISTORY ═════════════ -->
+<section class="chapter night" id="ch-history" data-ch="8">
+  <header class="ch-head">
+    <p class="ch-num">VIII</p>
+    <p class="ch-label">Chapter eight</p>
+    <h2>Five hundred years in fifteen stops</h2>
+    <p class="ch-dek">From pocket clocks to smartwatches.</p>
+  </header>
+  <div class="prose">
+    <p>Portable clocks are older than you'd think, and wristwatches younger. For most of history, a serious man's watch lived in his pocket. Wristwatches were for women, until a war changed everyone's mind. Drag or scroll through the timeline.</p>
+  </div>
+  <div class="timeline-wrap">
+    <div class="timeline-bar" aria-hidden="true"><span id="tl-progress"></span></div>
+    <ol class="timeline" id="timeline" tabindex="0" aria-label="Timeline of watch history"></ol>
+    <div class="tl-nav"><button type="button" class="btn ghost" id="tl-prev" aria-label="Previous">←</button><button type="button" class="btn ghost" id="tl-next" aria-label="Next">→</button></div>
+  </div>
+</section>
+
+<!-- ═════════════ CH9: BRANDS ═════════════ -->
+<section class="chapter paper" id="ch-brands" data-ch="9">
+  <header class="ch-head">
+    <p class="ch-num">IX</p>
+    <p class="ch-label">Chapter nine</p>
+    <h2>The names worth knowing</h2>
+    <p class="ch-dek">Who they are, and what makes each one interesting.</p>
+  </header>
+  <div class="prose">
+    <p>There are hundreds of watch brands, but a few dozen come up again and again. Many big names now belong to a handful of groups: Swatch Group (Omega, Longines, Tissot, Breguet and more), Richemont (Cartier, Jaeger-LeCoultre, Vacheron Constantin, IWC, A. Lange &amp; Söhne) and LVMH (TAG Heuer, Hublot, Zenith, Bulgari). A few of the most famous are still independent or family-owned. Filter by price range to find your level.</p>
+  </div>
+  <div class="brand-filter" role="group" aria-label="Filter brands by price">
+    <button type="button" data-tier="all" aria-pressed="true">All</button>
+    <button type="button" data-tier="1" aria-pressed="false">$ Entry</button>
+    <button type="button" data-tier="2" aria-pressed="false">$$ Mid</button>
+    <button type="button" data-tier="3" aria-pressed="false">$$$ Luxury</button>
+    <button type="button" data-tier="4" aria-pressed="false">$$$$ Haute horlogerie</button>
+  </div>
+  <ul class="brands" id="brands"></ul>
+  <div class="prose">
+    <aside class="aside light"><strong>A word on "in-house":</strong> you'll see brands boast about "in-house movements", designed and made by the brand itself. Many excellent watches instead use movements bought from specialist makers such as ETA (owned by Swatch Group) or Sellita, or from Seiko and Miyota in Japan. Neither is a scam. In-house adds prestige and sometimes clever engineering. A proven outsourced movement is usually cheaper to buy and to service.</aside>
+  </div>
+</section>
+
+<!-- ═════════════ CH10: FIRST WATCH ═════════════ -->
+<section class="chapter night" id="ch-first" data-ch="10">
+  <header class="ch-head">
+    <p class="ch-num">X</p>
+    <p class="ch-label">Chapter ten</p>
+    <h2>Your first (real) watch</h2>
+    <p class="ch-dek">Size, budget, water and care.</p>
+  </header>
+  <div class="prose">
+    <p>The best advice in the hobby is old and boring: buy what you love, start cheaper than you think, and wear it a lot before buying the next one. Here are the tools to get the details right.</p>
+    <h3>1. Will it fit?</h3>
+    <p>Case diameter gets all the attention, but the number that decides whether a watch fits is <strong>lug-to-lug</strong>: the distance from the tip of the top lugs to the tip of the bottom ones. If it's wider than the top of your wrist, the lugs hang over the edge and it looks too big. Measure your wrist with a strip of paper.</p>
+  </div>
+  <figure class="fig wide sizer" aria-labelledby="size-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Wrist sizer</p><h3 id="size-title">Your wrist: <output id="size-wrist">17 cm</output></h3></div>
+    <div class="size-body">
+      <svg id="size-svg" viewBox="0 0 520 300" role="img" aria-label="A watch on a wrist of the chosen size."></svg>
+      <div class="size-side">
+        <label class="slider"><span>Wrist circumference</span><input id="size-slider" type="range" min="14" max="22" step="0.5" value="17"></label>
+        <label class="slider"><span>Try a case of <output id="size-case">40 mm</output></span><input id="size-case-slider" type="range" min="30" max="48" step="1" value="40"></label>
+        <p class="size-verdict" id="size-verdict"></p>
+      </div>
+    </div>
+    <figcaption>A rule of thumb, not a law. Assumes lug-to-lug ≈ 1.2 × case diameter and a wrist about 30% as wide as it is round. Fashions change: 1950s watches were often 34–36 mm; the 2010s loved 44 mm.</figcaption>
+  </figure>
+  <div class="prose">
+    <h3>2. What can you get for the money?</h3>
+  </div>
+  <figure class="fig wide budget" aria-labelledby="bud-title">
+    <div class="fig-head"><p class="fig-k">Interactive · Budget ladder</p><h3 id="bud-title">With about <output id="bud-out">$400</output>, look at…</h3></div>
+    <label class="slider"><span>Your budget (USD)</span><input id="bud-slider" type="range" min="0" max="7" step="1" value="2" aria-describedby="bud-card"></label>
+    <div class="bud-card" id="bud-card" aria-live="polite"></div>
+    <figcaption>Rough new retail prices as of 2026, which change constantly. The pre-owned market can stretch any budget much further.</figcaption>
+  </figure>
+  <div class="prose">
+    <h3>3. Can it get wet?</h3>
+    <p>Water-resistance ratings are among the most misunderstood numbers in watches. They come from static pressure tests in a lab, not from real depths, and moving your arm through water creates spikes of extra pressure. A "30 m" watch isn't one to swim with.</p>
+  </div>
+  <div class="wr-table" role="table" aria-label="What water resistance ratings mean in practice">
+    <div class="wr-row head" role="row"><span role="columnheader">Rating</span><span role="columnheader">Rain &amp; hand-washing</span><span role="columnheader">Swimming</span><span role="columnheader">Snorkeling</span><span role="columnheader">Diving</span></div>
+    <div class="wr-row" role="row"><span role="cell"><b>30 m</b> / 3 bar</span><span role="cell" class="y">✓</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span></div>
+    <div class="wr-row" role="row"><span role="cell"><b>50 m</b> / 5 bar</span><span role="cell" class="y">✓</span><span role="cell" class="m">brief</span><span role="cell" class="n">✕</span><span role="cell" class="n">✕</span></div>
+    <div class="wr-row" role="row"><span role="cell"><b>100 m</b> / 10 bar</span><span role="cell" class="y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="n">✕</span></div>
+    <div class="wr-row" role="row"><span role="cell"><b>200 m+</b>, "Diver's" (ISO 6425)</span><span role="cell" class="y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="y">✓</span><span role="cell" class="y">✓</span></div>
+  </div>
+  <div class="prose">
+    <p class="small-note">And always: screw the crown down if it's a screw-down crown, never press chronograph pushers underwater unless the watch says you can, and get the seals checked every few years.</p>
+    <h3>4. Looking after it</h3>
+  </div>
+  <div class="care">
+    <div><p class="care-n">01</p><h4>Service it</h4><p>A mechanical watch's oils dry out over time. Most brands suggest a full service every 5–10 years. It isn't cheap, so factor it in.</p></div>
+    <div><p class="care-n">02</p><h4>Mind the date</h4><p>On many watches, changing the date between about 9 pm and 3 am, while the date gears are engaged, can damage them. Move the hands past 6 first.</p></div>
+    <div><p class="care-n">03</p><h4>Beware magnets</h4><p>Strong magnets in speakers, laptop lids and bag clasps can magnetize a hairspring and make a watch suddenly run minutes fast. A watchmaker can demagnetize it in seconds.</p></div>
+    <div><p class="care-n">04</p><h4>Wind it gently</h4><p>Hand-wind until you feel resistance, then stop. Autos can be hand-wound too, and you can't overwind them: a slipping clutch protects the spring.</p></div>
+  </div>
+  <div class="prose">
+    <h3>5. A pocket glossary</h3>
+  </div>
+  <div class="glossary" id="glossary"></div>
+</section>
+
+<!-- ═════════════ CLOSING ═════════════ -->
+<section class="prose closing">
+  <p>Here's the thing nobody tells you when you start: you will probably end up caring less about the watch than you expected, and more about what it represents. A watch you wore on the day you graduated. A cheap diver that's been on every trip. The one you inherited, that still runs if you give the crown a few turns.</p>
+  <p>The mechanism is a marvel: a spring letting go, a wheel swinging, a fork rocking eight times a second, a few hundred years of ingenuity folded into a space the size of a coin. But the real complication, as watch people like to say, is the person wearing it.</p>
+  <p>Go wind something.</p>
+  <p class="fin" aria-hidden="true">◷</p>
+</section>
+
+<!-- ═════════════ NOTES ═════════════ -->
+<section class="methods">
+  <div class="methods-inner">
+    <h2>Notes &amp; sources</h2>
+    <details open>
+      <summary>About the illustrations and figures</summary>
+      <p>Every illustration on this page is drawn in code (SVG and canvas). The watches are generic: they combine the features that define a style rather than copying any brand's design, and no brand logos are used. The escapement animation is a schematic. The live watch, moon phase, GMT and minute repeater use your device's clock. Accuracy figures in the race are worst-case specifications: COSC's −4/+6 s/day for chronometers, Seiko's ±1 s/day for Spring Drive (±15 s/month), and typical published tolerances for quartz. Prices in the budget ladder are approximate new retail ranges and change often.</p>
+    </details>
+    <details>
+      <summary>Further reading</summary>
+      <ul class="sources">
+        <li>Daniels, G. <em>Watchmaking.</em> The classic book on making a watch by hand, by the inventor of the co-axial escapement.</li>
+        <li>Landes, D. S. <em>Revolution in Time: Clocks and the Making of the Modern World.</em> Harvard University Press. The best one-volume history.</li>
+        <li><a href="https://www.cosc.swiss/">COSC — Contrôle Officiel Suisse des Chronomètres</a>, the body that tests Swiss chronometers.</li>
+        <li>ISO 6425, the international standard for divers' watches, and ISO 22810 for general water resistance.</li>
+        <li><a href="https://www.fhs.swiss/">Federation of the Swiss Watch Industry (FH)</a>: statistics and the rules behind "Swiss Made".</li>
+        <li><a href="https://ciechanow.ski/mechanical-watch/">Bartosz Ciechanowski, "Mechanical Watch"</a>: a superb interactive deep dive into the movement, and an inspiration for this piece.</li>
+      </ul>
+    </details>
+    <p class="next"><span>More from lrn</span><a href="../decision-trees/">The Tree That Asks Questions →</a><a href="../linear-algebra/">Linear Algebra →</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <p>long readable notes — visual essays that take their time.</p>
+  <nav aria-label="Footer"><a href="/lrn/">All notes</a><a href="/">Home</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>
