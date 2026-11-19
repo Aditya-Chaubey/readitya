@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Follow a library errand through an AI agent’s tools, decisions, mistakes, and safeguards in an interactive visual essay from Deep Cuts.">
+<meta name="theme-color" content="#11382e">
+<title>What Are AI Agents? — Deep Cuts</title>
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../_shared/styles.css">
+<link rel="stylesheet" href="../_shared/agents.css">
+<script src="../_shared/agents.js" defer></script>
+</head>
+<body class="agent-page">
+<a class="skip" href="#story-start">Skip to article</a>
+<header class="masthead" id="top">
+  <div class="mast-inner">
+    <a href="/deep-cuts/" class="brand"><img src="../_shared/mark.svg" alt="" width="27" height="27">DEEP CUTS<span aria-hidden="true">.</span></a>
+    <nav aria-label="Main navigation"><a href="/deep-cuts/">All stories</a><a href="/">Aditya Chaubey</a></nav>
+  </div>
+</header>
+<div class="agent-progress" aria-hidden="true"><span></span></div>
+<main id="agent-main">
+  <section class="agent-cover" aria-labelledby="agent-title">
+    <div class="cover-inner">
+      <div class="cover-writing">
+        <p class="agent-eyebrow">Deep Cuts / Foundations</p>
+        <h1 id="agent-title">What are<br><em>AI agents?</em></h1>
+        <p class="agent-deck">A library errand with a few things that could go wrong.</p>
+        <p class="agent-byline">By Aditya Chaubey</p>
+      </div>
+      <div class="cover-board" aria-hidden="true">
+        <div class="board-grid"></div>
+        <span class="board-label board-goal">GOAL</span>
+        <span class="board-label board-check">CHECK</span>
+        <span class="board-label board-hold">HOLD?</span>
+        <div class="cover-route"><i></i><i></i><i></i><i></i></div>
+        <div class="catalog-card">
+          <p>LIBRARY CATALOG</p>
+          <strong>The<br><em>Moon Atlas</em></strong>
+          <div class="card-moon"></div>
+          <div class="card-line"></div>
+          <span>PICKUP BY 6:00 PM</span>
+        </div>
+      </div>
+      <a class="cover-link" href="#story-start"><span aria-hidden="true"></span> Start the errand</a>
+    </div>
+  </section>
+
+  <div class="agent-frame">
+    <aside class="agent-rail">
+      <nav aria-label="In this essay">
+        <p>In this essay</p>
+        <a href="#story-start">The errand</a>
+        <a href="#loop">Inside the loop</a>
+        <a href="#simulator">Run the agent</a>
+        <a href="#control">Who decides?</a>
+        <a href="#reliability">What breaks</a>
+        <a href="#boundaries">What it can do</a>
+      </nav>
+    </aside>
+    <article class="agent-article">
+      <section id="story-start" data-agent-chapter>
+        <p class="agent-kicker">The errand</p>
+        <h2>One book before six.</h2>
+        <p class="agent-lead">It’s 4:20 p.m. and you need a copy of <em>The Moon Atlas</em> for a library display. You can collect it by six. You need a step-free entrance and you have a budget of exactly zero dollars.</p>
+        <p>You could search the catalog, cross-check opening hours and the entrance, then request a hold. Or you could hand over the errand. “Find me a copy I can pick up by six,” you say. “Check access and ask me before placing a hold.”</p>
+        <p>A chatbot could tell you how to search. A tool-using assistant could look up the title. But halfway through this errand, the first copy can disappear. Now the system needs to decide what to do with that information. That’s when the system has to choose a different path.</p>
+        <p>We’ll follow a fictional library network. Its tools, hours, books, and receipts are simulated. The decisions are the part to watch.</p>
+      </section>
+
+      <section id="loop" data-agent-chapter>
+        <p class="agent-kicker">Inside the loop</p>
+        <h2>One decision at a time.</h2>
+        <p>An <strong>AI agent</strong>, in the sense used here, is a system that pursues a goal by choosing actions, observing what happens, and choosing again. In a language-model agent, the model helps choose the next action. The surrounding software keeps track of the task, grants access to tools, and enforces the limits. People sometimes use <em>agent</em> more broadly. The useful question is how much control the model has over what happens next.</p>
+        <div class="loop-story">
+          <figure class="loop-board" aria-labelledby="loop-figure-title">
+            <p class="panel-label">The agent loop</p>
+            <ol class="loop-nodes" aria-label="Conceptual stages of the loop">
+              <li data-node="goal" class="is-active">Goal</li><li data-node="act">Action</li><li data-node="observe">Observation</li><li data-node="decide">Next decision</li>
+            </ol>
+            <div class="loop-display">
+              <h3 id="loop-figure-title">What are we trying to do?</h3>
+              <p id="loop-example">Find a free, step-free pickup for The Moon Atlas before 6 p.m.</p>
+            </div>
+            <figcaption>The next decision can begin another turn of the loop.</figcaption>
+            <nav class="loop-jumps" aria-label="Jump to a stage of the loop">
+              <a href="#beat-goal" data-loop-jump="goal" aria-current="step">Goal</a>
+              <a href="#beat-act" data-loop-jump="act">Act</a>
+              <a href="#beat-observe" data-loop-jump="observe">Observe</a>
+              <a href="#beat-decide" data-loop-jump="decide">Decide</a>
+            </nav>
+          </figure>
+          <div>
+            <div id="beat-goal" class="loop-beat" data-beat="goal"><p class="beat-name">Goal</p><p>Carry the title and deadline forward with the budget and access requirements. The agent may search right away. A reservation needs the reader’s approval.</p></div>
+            <div id="beat-act" class="loop-beat" data-beat="act"><p class="beat-name">Action</p><p>The model requests a catalog search. The application checks the arguments, makes the call, and returns structured results. Central Library appears to have a copy.</p></div>
+            <div id="beat-observe" class="loop-beat" data-beat="observe"><p class="beat-name">Observation</p><p>Central’s branch system reports that its last copy just went out. The catalog was showing an older snapshot. The search result was useful, and the newer evidence changes what the agent should do.</p></div>
+            <div id="beat-decide" class="loop-beat" data-beat="decide"><p class="beat-name">Next decision</p><p>Check the next candidate. Ask if a requirement is ambiguous. Stop if nothing qualifies. The result of one step shapes the choice of the next.</p></div>
+          </div>
+        </div>
+        <p>Some systems write a plan at the start. Some pick one action at a time. A plan can help organize a big job, but the loop is what lets it react when a date changes or a tool returns something unexpected. The ReAct paper explored an early version of this pattern, alternating model reasoning and actions so that new observations could change the next move. [<a href="#src-react" aria-label="Source: ReAct">1</a>]</p>
+      </section>
+
+      <section id="simulator" data-agent-chapter>
+        <p class="agent-kicker">Run the agent</p>
+        <h2>Watch an errand go sideways.</h2>
+        <p>Start with the stale catalog. You’ll see what each tool returned, why the next call was chosen, and what it takes to claim the errand is done. At the approval gate, you make the decision.</p>
+        <figure class="run-lab" aria-labelledby="run-title">
+          <header><div><p class="panel-label">Library simulator</p><h3 id="run-title">Find <em>The Moon Atlas</em></h3></div><output id="run-status" class="run-status" aria-live="polite">Ready</output></header>
+          <div class="run-goal"><span>By 6:00 p.m.</span><span>Step-free</span><span>$0</span><span>Ask before holding</span></div>
+          <div class="run-controls">
+            <label for="scenario">What happens?</label>
+            <select id="scenario"><option value="stale">Stale catalog</option><option value="smooth">Smooth run</option><option value="receipt">Lost receipt</option><option value="blocked">Neither branch works</option></select>
+            <div class="run-buttons"><button type="button" id="run-step">Next step</button><button type="button" id="run-play">Play</button><button type="button" id="run-reset">Reset</button></div>
+          </div>
+          <div id="run-gate" class="run-gate" hidden>
+            <p id="hold-question"></p>
+            <div class="run-buttons"><button type="button" id="run-approve">Approve hold</button><button type="button" id="run-decline">Decline</button></div>
+          </div>
+          <ol id="run-log" class="run-log" aria-label="Agent action log" aria-live="polite">
+            <li><b>Goal loaded</b><p>The agent can read library data. Placing a hold requires approval.</p></li>
+          </ol>
+          <figcaption>Runs are deterministic. All library records and actions are fictional. Play pauses at approval and at the end of a run.</figcaption>
+        </figure>
+        <p>Try <strong>Lost receipt</strong> next. Suppose the branch places the hold but the reply never arrives. The timeout tells us the response failed to reach us. The hold could still exist. Checking its status avoids a second request. A real service can help by accepting an <strong>idempotency key</strong>, a request identifier it uses to recognize a retry of the same operation.</p>
+        <p>Now try <strong>Neither branch works</strong>. A good final message explains what was checked and where the task fell short. Maybe the only copy requires stairs. Maybe the deadline passed. The system can offer alternatives, but changing “step-free” or “today” is the reader’s decision. Stopping can be the correct outcome even when the original request remains unmet.</p>
+        <h3>What a tool call buys you</h3>
+        <p>The model can produce plausible words about the library. A catalog tool gives the system a way to ask the library itself. The tool definition tells the model which inputs are accepted and what the response means. A timestamp can tell it how old the answer is. An error code can tell it what failed. A stable branch ID keeps “Central” from being confused with another location carrying the same name.</p>
+        <div class="exchange" aria-label="Illustrative call and return">
+          <div><p class="panel-label">Request</p><p><strong>Check branch</strong><br>Branch: Central<br>Title: The Moon Atlas</p></div>
+          <div><p class="panel-label">Response</p><p><strong>Zero copies available</strong><br>Source: branch inventory<br>Checked: 4:21 p.m.</p></div>
+        </div>
+        <p>The model sees the answer because the application puts the result back into the next turn. The application can also reject an invalid request before sending it. The model can interpret a messy user request, and the tool can insist on a branch ID, an exact book record, and a valid approval before attempting a hold.</p>
+        <h3>Where the state lives</h3>
+        <p>As the agent runs, it needs to know the goal, which branches were checked, the current candidate, whether the person approved that exact hold, and whether a receipt came back. The recent conversation can carry some of that context. An application should record consequential facts and approvals explicitly, especially if a run can pause and resume.</p>
+        <p><strong>Memory</strong> can also mean a preference or record that survives across sessions. “I usually pick up at Cedar” might help rank two valid branches next time. It should never silently take precedence over “I need step-free access today.” Working state answers what happened in this run. Long-term memory can inform a future one.</p>
+      </section>
+
+      <section id="control" data-agent-chapter>
+        <p class="agent-kicker">Who decides?</p>
+        <h2>Same request, three ways to handle it.</h2>
+        <p>Look at where the next step comes from. A person can choose it. A programmer can define it ahead of time. Or the model can choose among actions based on intermediate results. Two systems can look identical from the chat box and work very differently under the hood. [<a href="#src-workflows" aria-label="Source: Building effective agents">2</a>]</p>
+        <figure class="choice-lab" aria-labelledby="choice-title">
+          <p class="panel-label">Compare approaches</p><h3 id="choice-title">Central’s copy is gone. Now what?</h3>
+          <div class="choice-buttons" role="group" aria-label="Choose a system">
+            <button type="button" data-approach="chat" aria-pressed="true">Chat</button><button type="button" data-approach="workflow" aria-pressed="false">Workflow</button><button type="button" data-approach="agent" aria-pressed="false">Agent</button>
+          </div>
+          <div class="choice-outcome" aria-live="polite"><p id="choice-owner">You choose the next step.</p><p id="choice-explanation">The system can explain how to check other branches. You open the catalog, look up access, and decide where to go.</p></div>
+        </figure>
+        <p>A fixed workflow can branch and retry. You might write a rule that checks every branch with stock, discards any branch with stairs, and sorts the survivors by pickup time. That could be the best answer for this errand. Where the requirements become harder to encode, like interpreting two contradictory accessibility notices or identifying when a vague request needs clarification, giving the model a choice of next steps can help.</p>
+        <p>Most practical designs are hybrids. A model might interpret a request and choose a lookup. Ordinary software can enforce the deadline, check the tool’s inputs, and make the approval gate impossible to skip. You can make that system more predictable without taking away the flexibility it needs.</p>
+        <h3>Where is the extra judgment worth it?</h3>
+        <p>Suppose the job is sending the same due-date notice every week. A scheduled rule is easy to test and gives the same result for the same inputs. Now suppose the job is triaging a pile of patron requests written in different ways. A model can interpret what people asked for and choose the right lookup or form. The cost of that flexibility is more calls, more time, and more ways a run can surprise you.</p>
+        <p>Look for a task with a clear end state, tools that can report what happened, and permission boundaries you can enforce. “Help with the library” leaves the agent guessing about both scope and success. “Find one eligible copy and show me where I can collect it” gives it a target you can check.</p>
+        <h3>Does it need a team?</h3>
+        <p>Sometimes a coordinator delegates work to several specialized agents. One might gather catalog records while another checks accessibility. That helps when the tasks are genuinely independent or need different tools. It also introduces handoffs, repeated calls, and decisions about what to do when results disagree. In the library example, two ordinary reads can run in parallel inside one agent. A team adds value only if it solves a problem the simpler design actually has.</p>
+      </section>
+
+      <section id="reliability" data-agent-chapter>
+        <p class="agent-kicker">What breaks</p>
+        <h2>Good at a step. How about ten?</h2>
+        <p>Imagine a brittle errand with ten required steps and no recovery. Even if a step goes right 95% of the time given that everything before it went right, the chance of a clean ten-step run is about 60%. That’s <strong>0.95 multiplied by itself ten times</strong>. Try adding steps and watch the difference between a strong local result and a full task.</p>
+        <figure class="odds-lab" aria-labelledby="odds-title">
+          <div><p class="panel-label">An illustrative model</p><h3 id="odds-title">How often does the whole run succeed?</h3></div>
+          <div class="odds-controls">
+            <label>Required steps <output id="steps-value" for="steps-count">10</output><input id="steps-count" type="range" min="1" max="20" value="10"></label>
+            <label>Success per step <output id="odds-value" for="step-odds">95%</output><input id="step-odds" type="range" min="55" max="100" value="95"></label>
+          </div>
+          <div class="odds-result"><output id="total-odds">59.9%</output><p>chance that every required step works</p></div>
+          <div id="odds-chain" class="odds-chain" aria-hidden="true"></div>
+          <figcaption>Each bar shows the chance of reaching that step with a clean record through it. The model uses the same conditional success rate at each step and assumes no recovery. These numbers are illustrative.</figcaption>
+        </figure>
+        <p>Real calls fail for different reasons. A catalog outage can knock out several steps at once. A reliable verification step can catch a bad result before a write. A second attempt can help if a network problem was brief, but it’s costly if the input is wrong or the service is still down. The point of the toy model is to show how many small assumptions can sit between a fluent answer and a completed job.</p>
+        <p>So how would we evaluate the library agent? Give it realistic errands with cases it hasn’t seen. Score whether it secured a qualifying copy, avoided duplicate holds, preserved access and cost constraints, and asked before taking action. Track time and tool usage. Include trials where there is no valid option. Compare the agent with a simple scripted baseline on the same cases. A system that finds an extra copy once in a while can still be a poor fit if it regularly needs intervention or places duplicate holds. Read the traces for failures. “I reserved the book” sounds equally confident with or without a receipt.</p>
+        <p>The <strong>trace</strong> is the record of what the system did. Tool names, arguments, observed results, approval decisions, and final status can make a run inspectable. These records can contain private information, so real systems need rules about what to save and who can see it. You can debug a duplicate reservation from logged tool calls and receipts without collecting every internal detail of the model.</p>
+      </section>
+
+      <section id="boundaries" data-agent-chapter>
+        <p class="agent-kicker">What it can do</p>
+        <h2>Access and permission are different.</h2>
+        <p>The catalog can tell you a copy exists. A hold tool can change who gets the next copy. Those actions have different consequences. Good tools make that visible: a read returns evidence, a write requires the right authority, and a successful write returns something the system can verify.</p>
+        <div class="trust-grid" aria-label="Three kinds of information an agent receives">
+          <div><p class="panel-label">Evidence</p><h3>“One copy available.”</h3><p>A branch record informs the decision.</p></div>
+          <div><p class="panel-label">Authority</p><h3>“Yes, hold it at Cedar.”</h3><p>The requester authorizes this specific action.</p></div>
+          <div><p class="panel-label">Confirmation</p><h3>“Hold confirmed. H-284.”</h3><p>A receipt supports the claim that it happened.</p></div>
+        </div>
+        <p>An agent may read web pages, documents, or tool output written by people outside the conversation. That material can contain instructions directed at the model. Treating those instructions as authorization is a failure called <strong>indirect prompt injection</strong>. A library listing can provide evidence about a book. It can’t expand an agent’s access or change who approved a hold. Research like AgentDojo measures how tool-using systems handle such untrusted data. [<a href="#src-agentdojo" aria-label="Source: AgentDojo">3</a>]</p>
+        <p>Keep permission checks in the application and tool layer. Give each tool the access it needs. Ask before actions with material consequences, and tie the approval to the exact item, branch, and price. Put a limit on retries and calls, and give the agent a clear way to stop or ask. The model can recommend a move. The system decides whether that move is allowed. [<a href="#src-guide" aria-label="Source: A practical guide to building agents">4</a>]</p>
+        <p>Now go back to 4:20. The telling moment was the decision after Central’s last copy went out. The system had evidence, a goal it could still pursue, and a choice about what to do next.</p>
+        <blockquote>The moment worth watching is the one after the plan stops working.</blockquote>
+      </section>
+
+      <section class="agent-sources" aria-labelledby="sources-title">
+        <p class="agent-kicker">Further reading</p><h2 id="sources-title">Sources &amp; notes</h2>
+        <ol>
+          <li id="src-react"><a href="https://arxiv.org/abs/2210.03629">Yao et al., <em>ReAct</em></a> describes alternating model reasoning with actions and observations.</li>
+          <li id="src-workflows"><a href="https://www.anthropic.com/research/building-effective-agents">Anthropic, <em>Building Effective Agents</em></a> distinguishes predetermined workflows from model-directed agents.</li>
+          <li id="src-agentdojo"><a href="https://papers.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html">Debenedetti et al., <em>AgentDojo</em></a> introduces an evaluation environment for tools operating on untrusted data.</li>
+          <li id="src-guide"><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">OpenAI, <em>A Practical Guide to Building Agents</em></a> covers tool design, orchestration, guardrails, and human intervention.</li>
+        </ol>
+        <a class="agent-archive-link" href="/deep-cuts/">More essays in Field Notes</a>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="footer"><div><a href="/deep-cuts/" class="brand"><img src="../_shared/mark.svg" alt="" width="27" height="27">DEEP CUTS<span aria-hidden="true">.</span></a><p>Long, visual, hand-built stories about how things work.</p></div><nav aria-label="Footer navigation"><a href="/deep-cuts/">All stories</a><a href="#top">Back to top</a></nav></footer>
+</body>
+</html>

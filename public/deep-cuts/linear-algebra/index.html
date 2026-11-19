@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive visual essay from Deep Cuts about the linear algebra underneath artificial intelligence.">
+<meta name="theme-color" content="#141433">
+<title>Linear Algebra — Deep Cuts</title>
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../_shared/styles.css">
+<link rel="stylesheet" href="../_shared/story.css">
+<script src="../_shared/essay.js" defer></script>
+<script src="../_shared/story.js" defer></script>
+</head>
+<body class="feature-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead" id="top">
+  <div class="mast-inner">
+    <a href="/deep-cuts/" class="brand"><img src="../_shared/mark.svg" alt="" width="27" height="27">DEEP CUTS<span aria-hidden="true">.</span></a>
+    <nav aria-label="Main navigation"><a href="/deep-cuts/">All stories</a><a href="/">Aditya Chaubey</a></nav>
+    <button class="contents-toggle" type="button" aria-expanded="false" aria-controls="chapter-menu"><span aria-hidden="true">☷</span> Contents</button>
+  </div>
+</header>
+<div class="reading-progress" aria-hidden="true"><div id="progress"></div></div>
+<main id="main">
+<section class="hero" aria-labelledby="title">
+  <div class="hero-wrap">
+    <figure class="hero-figure" aria-hidden="true">
+      <div class="hero-art"><canvas id="cover"></canvas></div>
+    </figure>
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> Deep Cuts / Foundations</p>
+      <h1 id="title">Linear <em>Algebra</em></h1>
+      <p class="deck">How words become geometry.</p>
+      <p class="hero-intro">Follow one word through the math that helps a machine read.</p>
+      <p class="cover-byline">By Aditya Chaubey</p>
+    </div>
+    <a class="cover-start" href="#opening"><span class="scroll-mark" aria-hidden="true"></span>Begin the story</a>
+  </div>
+</section>
+<section class="opening" id="opening" data-chapter aria-labelledby="opening-title">
+  <header class="opening-heading">
+    <p class="kicker">The opening question</p>
+    <h2 id="opening-title">A word with two lives.</h2>
+    <p>Read the two sentences below. Pay attention to what you picture.</p>
+  </header>
+  <div class="opening-journey">
+    <figure class="context-stage" aria-labelledby="context-caption">
+      <div class="context-art" data-scene="river">
+        <canvas id="context-plot" width="680" height="442" aria-hidden="true"></canvas>
+        <div class="context-type" aria-hidden="true"><span id="context-tag">At the river</span><strong>bank</strong></div>
+      </div>
+      <figcaption id="context-caption">Two meanings, drawn in a toy space.</figcaption>
+      <nav class="scene-nav" aria-label="Opening scenes">
+        <a href="#river-scene" data-scene-link="river" aria-current="step">River</a>
+        <a href="#account-scene" data-scene-link="account">Account</a>
+        <a href="#map-scene" data-scene-link="map">Word map</a>
+      </nav>
+    </figure>
+    <div class="context-steps">
+      <section class="context-step" id="river-scene" data-context="river">
+        <p class="context-line">The duck waddled up the <mark>bank</mark>.</p>
+        <p>You probably pictured mud. The duck did most of the work. A muddy slope makes sense for a bird that’s just climbed out of the water.</p>
+      </section>
+      <section class="context-step" id="account-scene" data-context="account">
+        <p class="context-line">She opened an account at the <mark>bank</mark>.</p>
+        <p>Now the scene changes. The letters in <em>bank</em> are identical. What changed is the evidence around them.</p>
+        <p>A language model starts with token IDs. If <em>bank</em> is one token, its ID is the same in both sentences. Doing arithmetic on that ID tells us about as much as subtracting two phone numbers.</p>
+      </section>
+      <section class="context-step" id="map-scene" data-context="map">
+        <p class="context-line">What if a meaning had a <em>location</em>?</p>
+        <p>Picture a sheet of graph paper. Put watery things near the top and financial things toward the right. The two readings of <em>bank</em> can now occupy different places.</p>
+        <p>A model learns a much bigger space with less obvious axes. We’ll start with two we can see.</p>
+      </section>
+    </div>
+  </div>
+</section>
+<div class="article-frame">
+  <aside id="chapter-menu" class="chapter-menu">
+    <p class="rail-title">In this essay</p>
+    <nav aria-label="Chapters">
+      <a href="#opening"><span>00</span> A word with two lives</a>
+      <a href="#vectors"><span>01</span> Vectors</a>
+      <a href="#similarity"><span>02</span> Similarity</a>
+      <a href="#matrices"><span>03</span> Matrices</a>
+      <a href="#rank"><span>04</span> Rank &amp; compression</a>
+      <a href="#attention"><span>05</span> Attention</a>
+    </nav>
+  </aside>
+  <article class="essay">
+    <section id="vectors" data-chapter>
+      <p class="kicker">01 / Vectors</p>
+      <h2>Give a word an address.</h2>
+      <p>Take the map from the opening and add a few neighbors. <em>Mortgage</em> sits near the bottom right. <em>Duck</em> sits near the top left. The interesting one is <em>bank</em>. You can move it toward either cluster by changing just two numbers.</p>
+      <p>The coordinates <strong>(x, y)</strong> form a <strong>vector</strong>. Draw an arrow from the origin to that address and you can see both how far it goes and which way it points. Set the coordinates below to give <em>bank</em> a reading of your own.</p>
+      <figure class="lab" aria-labelledby="vector-title">
+        <div class="lab-heading"><div><p class="kicker">Interactive / Word map</p><h3 id="vector-title">Where would you put “bank”?</h3></div></div>
+        <canvas id="vector-plot" width="640" height="360" role="img" aria-label="Toy word map with financial association on the horizontal axis and water association on the vertical axis."></canvas>
+        <div class="slider-row">
+          <label>Finance <output id="finance-out" for="finance">4.0</output><input id="finance" type="range" min="0" max="5" value="4" step=".1"></label>
+          <label>Water <output id="water-out" for="water">1.5</output><input id="water" type="range" min="0" max="5" value="1.5" step=".1"></label>
+        </div>
+        <div class="presets word-presets" aria-label="Try either meaning"><button type="button" data-word-place="river">Use the river meaning</button><button type="button" data-word-place="account">Use the financial meaning</button></div>
+        <figcaption>The horizontal axis is finance. The vertical axis is water. These coordinates are illustrative.</figcaption>
+      </figure>
+      <p>Vectors also let you combine offsets. Starting at <strong>(4, 1.5)</strong> and adding <strong>(−2, 2)</strong> takes you to <strong>(2, 3.5)</strong>. The first coordinate moved left by two. The second moved up by two. Doubling a vector doubles every coordinate, so the arrow goes twice as far in the same direction. Those two operations, adding and scaling, are the workhorses of this story.</p>
+      <p>A real embedding can have hundreds or thousands of coordinates. The list still gives an address, but we rarely get to give each axis a clean label. Features can be distributed across many coordinates. A learned representation can carry information about grammar, subject matter, and other patterns without designating one coordinate as the official “duck axis.”</p>
+      <p>And one important distinction: the model’s initial embedding for a given token is a learned lookup. The representation <em>after</em> layers of processing can reflect the surrounding tokens. In our toy map, you moved <em>bank</em> by hand. To learn what moves an address, we first need a way to tell whether it’s pointing toward the right neighbors.</p>
+    </section>
+    <section id="similarity" data-chapter>
+      <p class="kicker">02 / Similarity</p>
+      <h2>What counts as “close”?</h2>
+      <p>Suppose you’re building a search box. A reader types <em>things near a river</em>. You have a vector for that query and a vector for every article. You could measure straight-line distance, but two arrows can point the same way while ending far apart because one is much longer. A different question is how well they <em>line up</em>.</p>
+      <p>The <strong>dot product</strong> multiplies matching coordinates and adds the results. For <strong>(3, 4)</strong> and <strong>(4, 0)</strong>, it’s <strong>3 × 4 + 4 × 0 = 12</strong>. In geometric terms, the dot product is the product of the arrow lengths times the cosine of their angle. It rewards alignment, and length matters too.</p>
+      <figure class="lab dark-lab" aria-labelledby="angle-title">
+        <div class="lab-heading"><div><p class="kicker">Interactive / Angle test</p><h3 id="angle-title">Turn the orange arrow.</h3></div></div>
+        <canvas id="angle-plot" width="640" height="285" role="img" aria-label="Two unit vectors with an adjustable angle."></canvas>
+        <div class="angle-controls"><label>Angle <output id="angle-out" for="angle">55°</output><input id="angle" type="range" min="0" max="180" value="55"></label><div class="score"><span>Cosine similarity</span><output id="cosine">0.57</output></div></div>
+        <div class="presets angle-actions" aria-label="Compare benchmark angles"><button type="button" data-angle-value="0">Aligned</button><button type="button" data-angle-value="90">Right angle</button><button type="button" data-angle-value="180">Opposed</button></div>
+        <figcaption>Both arrows have length 1, so their dot product equals their cosine similarity.</figcaption>
+      </figure>
+      <p>Rotate past 90° and the score turns negative. At exactly 90°, the vectors are <strong>orthogonal</strong> and their dot product is zero. At 0°, the score is one here because the vectors have unit length. If you divide a dot product by both vector lengths, you get <strong>cosine similarity</strong> for any two nonzero vectors. The normalization makes the angle do all the talking.</p>
+      <p>Dot products also measure what lies along a direction. Take the unit arrow <strong>(1, 0)</strong> and dot it with <strong>(3, 4)</strong>. You get 3: the signed distance along the horizontal axis. The projected vector is <strong>(3, 0)</strong>. It’s like dropping a shadow onto a line. Later we’ll use this same idea to understand why one direction can carry much of a picture.</p>
+      <p>A similarity score inherits the priorities of the space it lives in. If a model learned to group words by topic, a high score might connect <em>duck</em> with <em>pond</em>. In a space trained to capture syntactic roles, <em>duck</em> might instead sit near other nouns. The geometry answers a precise question. Training determines which question turns out to be useful.</p>
+      <p>So far we’ve picked directions by hand. What if we could give the computer a single instruction that moves every arrow on the page?</p>
+    </section>
+    <section id="matrices" data-chapter>
+      <p class="kicker">03 / Matrices</p>
+      <h2>Move the grid, and everything moves.</h2>
+      <p>Here’s the instruction: say where “one step right” and “one step up” should land. A <strong>matrix</strong> records those two destinations and, from them, can move every point in the space. In two dimensions, start with two unit arrows: <strong>e₁ = (1, 0)</strong> and <strong>e₂ = (0, 1)</strong>. They’re the <strong>standard basis</strong>. Every point is a combination of those two directions. At (2, 3), you’ve taken two steps along the first and three along the second.</p>
+      <p>To describe a linear transformation, we only have to say where those two arrows go. Put their destinations in the matrix’s columns. Every other point follows the same recipe with the new arrows.</p>
+      <div class="scrolly"><figure class="lab matrix-lab" aria-labelledby="matrix-title">
+        <div class="lab-heading"><div><p class="kicker">Interactive / Transformation table</p><h3 id="matrix-title">Put the grid through a machine.</h3></div></div>
+        <div class="presets" aria-label="Transformation presets">
+          <button type="button" data-transform="identity" aria-pressed="true">Identity</button>
+          <button type="button" data-transform="stretch" aria-pressed="false">Stretch</button>
+          <button type="button" data-transform="shear" aria-pressed="false">Shear</button>
+          <button type="button" data-transform="rotate" aria-pressed="false">Rotate</button>
+          <button type="button" data-transform="flatten" aria-pressed="false">Flatten</button>
+        </div>
+        <canvas id="matrix-plot" width="640" height="345" role="img" aria-label="The coordinate grid and two basis vectors after the selected transformation."></canvas>
+        <div class="matrix-readout"><span>Matrix <strong id="matrix-values">[ 1, 0 / 0, 1 ]</strong></span><span>Determinant <strong id="determinant">1</strong></span><span>Image of (2, 1) <strong id="matrix-point">(2, 1)</strong></span></div>
+        <figcaption>The blue and orange arrows show where the two basis vectors land. The square dot tracks the point (2, 1).</figcaption>
+      </figure>
+      <div class="steps">
+        <div class="step" data-step="identity"><p><strong>Start with a square grid.</strong> The two colored basis arrows say where one step right and one step up will take you.</p></div>
+        <div class="step" data-step="shear"><p><strong>Now lean it.</strong> Every step up also takes you a step right. Watch where the square dot lands.</p></div>
+        <div class="step" data-step="flatten"><p><strong>Take away the vertical direction.</strong> Points that once had different heights can arrive at exactly the same address.</p></div>
+      </div></div>
+      <p>Take <strong>Shear</strong>. The first arrow stays at (1, 0). The second goes to (1, 1). The point (2, 1) lands at <strong>2 × (1, 0) + 1 × (1, 1) = (3, 1)</strong>. The old square grid leans. It still consists of evenly spaced straight lines, and the origin stays put. Any genuine linear map respects addition and scaling: transforming a combination gives the same result as transforming the pieces and then combining them.</p>
+      <p>Look at the determinant as you switch presets. Its absolute value tells you the factor by which the map scales area in 2D. A negative determinant reverses orientation, like a mirror. A zero determinant means a square has no area left. On <strong>Flatten</strong>, points above and below the same horizontal position land together. You can’t deduce where a point started from where it ended up.</p>
+            <h3>Run the machine backward</h3>
+      <p>When you know the output and want the input, you’re solving a system of linear equations. With the shear, suppose the output is (3, 1). The second coordinate says <strong>y = 1</strong>. The first says <strong>x + y = 3</strong>, so <strong>x = 2</strong>. That works for any output because the shear has an inverse. Its inverse undoes exactly the extra horizontal step for every vertical step.</p>
+      <p>With flattening, (3, 1) has no solution because the output’s second coordinate is always zero. And (3, 0) has infinitely many solutions because every input of the form (3, y) works. In data problems we often have a third situation: there’s noise, and no candidate matches all the measurements exactly. <strong>Least squares</strong> picks an output in the matrix’s column space that minimizes the sum of squared mismatches. Geometrically, that’s a projection onto the space of possible outputs.</p>
+      <h3>Two machines in a row</h3>
+      <p>With column vectors, the expression <strong>BAv</strong> means that A moves the vector first and B moves the result. Multiply B by A and you get one matrix that does both jobs. Order matters: starting at (1, 0), doubling x and then rotating 90° produces (0, 2). Rotate first and the horizontal stretch has nothing to stretch, so you get (0, 1).</p>
+      <p>That raises a problem for neural networks. If you stack only linear maps, all those layers still collapse to one linear map. Even with biases, a stack of affine maps collapses to one affine map. A neural network breaks that restriction with nonlinear operations. A simple example, ReLU, sends negatives to zero and leaves positives alone, which allows the network to behave differently on different sides of a boundary.</p>
+      <p>Go back to <strong>Flatten</strong> for a second. A whole dimension disappeared. In a picture, losing an independent direction might be a trade worth making.</p>
+    </section>
+    <section id="rank" data-chapter>
+      <p class="kicker">04 / Rank &amp; compression</p>
+      <h2>How much can you throw away?</h2>
+      <p>In the last experiment, the flattened grid fit on a line. Every trace of the old vertical coordinate disappeared. <strong>Rank</strong> counts how many independent directions the output can occupy. In 2D a rank-two matrix can reach the whole plane, a rank-one matrix reaches a line, and rank zero sends everything to the origin. Saying the same thing in matrix language: rank counts the independent columns.</p>
+      <p>Now consider a grayscale photo as a table of brightness values. Every row is a vector. If the brightness pattern is the same across every row, just with different overall intensities, you could store the shared row pattern and one multiplier per row. That’s a rank-one picture. Real images have more structure, but many contain repeated patterns that can be approximated with a surprisingly small number of components.</p>
+      <figure class="lab image-lab" aria-labelledby="rank-title">
+        <div class="lab-heading"><div><p class="kicker">Interactive / Image reconstruction</p><h3 id="rank-title">Rebuild a mountain from its parts.</h3></div></div>
+        <div class="image-pair">
+          <div><p>Original</p><canvas id="rank-original" width="112" height="76" role="img" aria-label="Original synthetic grayscale mountain landscape."></canvas></div>
+          <div><p>Reconstruction</p><canvas id="rank-preview" width="112" height="76" role="img" aria-label="Grayscale landscape reconstructed at the selected rank."></canvas></div>
+        </div>
+        <div class="slider-row"><label>Components kept <output id="rank-out" for="rank-slider">5</output><input id="rank-slider" type="range" min="1" max="24" value="5"></label></div>
+        <div class="presets rank-presets" aria-label="Compare levels of detail"><button type="button" data-rank-value="1">Light and dark</button><button type="button" data-rank-value="5">Early detail</button><button type="button" data-rank-value="24">Fine detail</button></div>
+        <div class="rank-stats"><span id="rank-count">945 stored values</span><span id="rank-energy"></span></div>
+        <figcaption>Computed on an original, synthetic landscape. The count compares scalar entries before encoding or file compression.</figcaption>
+      </figure>
+      <p>The <strong>singular value decomposition</strong>, or SVD, writes the image matrix as a sum of rank-one layers. Each layer pairs a vertical pattern with a horizontal pattern and gives the pair a weight called a <strong>singular value</strong>. Keep only the k layers with the largest weights and you get a best rank-k approximation in the sense of minimizing the sum of squared pixel errors. That’s what the slider is doing. The first few layers capture broad light and dark regions, while extra layers restore ridgelines and texture. A detail you care about can still disappear if it contributes little to total squared brightness.</p>
+      <p>Where do the patterns come from? Think of a matrix as moving the unit circle. The circle becomes an ellipse, possibly squashed flat. The SVD picks perpendicular input directions and perpendicular output directions so that, one direction at a time, the matrix only stretches. The singular values are the lengths of those stretches. The largest stretch gives the first layer, and the other orthogonal directions explain what’s left.</p>
+      <h3>Eigenvectors answer a different question</h3>
+      <p>An <strong>eigenvector</strong> of a square matrix is a nonzero vector that stays on its own line when you apply the matrix. If <strong>Av = λv</strong>, then λ, the <strong>eigenvalue</strong>, tells you the scale and whether the direction flips. A quarter-turn in the real plane has no real eigenvectors. It still has an SVD. The two ideas meet when you look at <strong>AᵀA</strong>: its eigenvectors give input directions for an SVD, and its eigenvalues are the squared singular values.</p>
+      <p>This is also a way to understand <strong>principal component analysis</strong>. Put examples in rows, features in columns, and subtract each feature’s mean. The leading right singular vectors of this centered table give directions of greatest variance. Project onto them and you get a smaller description of each example. Variance is a specific criterion. A low-variance feature can still matter if, say, it’s the telltale difference between two classes.</p>
+    </section>
+    <section id="attention" data-chapter>
+      <p class="kicker">05 / Attention</p>
+      <h2>Back to the bank.</h2>
+      <p>Read the duck sentence one more time. You can get the relevant meaning partly by looking at other words. A transformer has an operation called <strong>self-attention</strong> that builds a new representation for a token using information from other positions. Say we’re interested in the final <em>bank</em>. Think of its <strong>query</strong> as a vector used to score positions, each position’s <strong>key</strong> as the vector it gets scored against, and its <strong>value</strong> as the vector it contributes to the result.</p>
+      <p>These three kinds of vectors come from learned matrix multiplications. One attention head scores the query against the keys with dot products, scales the scores by the square root of the key dimension, then applies <strong>softmax</strong>. Softmax exponentiates each allowed score and divides by the sum of the exponentials. The results are positive weights that add to one. The output is a weighted sum of the value vectors. In a causal language model, a mask rules out later positions.</p>
+      <figure class="lab attention-lab" aria-labelledby="attention-title">
+        <div class="lab-heading"><div><p class="kicker">Interactive / Toy attention head</p><h3 id="attention-title">Watch the word change.</h3></div></div>
+        <div class="presets" aria-label="Choose sentence"><button type="button" data-sentence="river" aria-pressed="true">By the river</button><button type="button" data-sentence="money" aria-pressed="false">With an account</button></div>
+        <p class="sentence" id="sentence">The duck waddled up the <mark>bank</mark>.</p>
+        <div class="presets attention-phases" aria-label="Attention calculation">
+          <button type="button" data-attention-phase="score" aria-pressed="true">Compare keys</button>
+          <button type="button" data-attention-phase="weights" aria-pressed="false">Make weights</button>
+          <button type="button" data-attention-phase="mix" aria-pressed="false">Mix values</button>
+        </div>
+        <p id="attention-instruction" class="attention-instruction">Each word gets a scaled dot product with the query for “bank”.</p>
+        <div id="attention-bars" class="attention-bars" aria-live="polite"></div>
+        <div id="attention-mix" class="attention-mix" hidden>
+          <div><p>Resulting vector</p><output id="mix-coordinates" aria-live="polite"></output></div>
+          <div class="mix-map" role="img" aria-label="The resulting point on the toy finance and water map"><span aria-hidden="true"></span></div>
+        </div>
+        <figcaption>One toy attention head with hand-assigned 2D query, key, and value vectors. The chart omits punctuation.</figcaption>
+      </figure>
+      <p>In the river example, use the query <strong>(1, 1)</strong> and the key <strong>(0, 3)</strong> for <em>duck</em>. Their scaled score is <strong>3 ÷ √2 ≈ 2.12</strong>. The key for <em>bank</em> is <strong>(0.5, 0.5)</strong>, which gives <strong>1 ÷ √2 ≈ 0.71</strong>. Before normalization, <em>duck</em> gets roughly four times the weight because <strong>e<sup>2.12</sup> ÷ e<sup>0.71</sup> ≈ 4.1</strong>. Every token’s score still matters to the final share. More plausible neighbors mean more competition. Try <strong>Mix values</strong> and switch sentences. The output moves toward the water side in one sentence and the finance side in the other because different words contribute more to the sum.</p>
+      <p>Real transformers use many heads and layers, with different learned weights. Earlier layers can already have mixed contextual information into a representation before a later head sees it. A head’s attention weights describe one weighted sum inside the network. Explaining a particular prediction also takes the value vectors, the other computations in the model, and often direct tests of what happens when you intervene.</p>
+      <p>The token ID we started with still points to the same entry in a lookup table. The representation after attention carries something else: a little of the sentence the word came from. The opening map guessed where “bank” might land. Now you’ve watched one way it could get there.</p>
+      <blockquote>Same four letters. A different place in space.</blockquote>
+    </section>
+    <section class="reading-notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">Keep exploring</h2>
+      <p><a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/">Gilbert Strang’s Linear Algebra</a> includes full MIT lectures and problems on these ideas. Start with the lectures on projections and least squares, or go straight to the singular value decomposition.</p>
+      <p><a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a> introduces the Transformer architecture and gives the equations behind the last experiment.</p>
+      <details><summary>How the interactive examples were made</summary><p>The word map uses illustrative coordinates. Grid transformations are applied to points in the browser. The landscape is algorithmically drawn and decomposed from its grayscale pixel matrix. The attention walk-through computes scaled dot products, softmax, and the weighted sum of hand-assigned value vectors. Chapters highlight as you read, and all experiments can be operated from the keyboard.</p></details>
+      <p class="next-feature"><a href="../ai-agents/">Next in Foundations: What Are AI Agents?</a></p>
+    </section>
+  </article>
+</div>
+</main>
+<footer class="footer"><div><a href="/deep-cuts/" class="brand"><img src="../_shared/mark.svg" alt="" width="27" height="27">DEEP CUTS<span aria-hidden="true">.</span></a><p>Long, visual, hand-built stories about how things work.</p></div><nav aria-label="Footer navigation"><a href="/deep-cuts/">All stories</a><a href="#top">Back to top</a></nav></footer>
+</body>
+</html>

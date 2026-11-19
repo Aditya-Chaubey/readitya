@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tree That Asks Questions — Deep Cuts</title>
+<meta name="description" content="An interactive visual story about decision trees: how a stack of yes-or-no questions learns from data, why it memorizes, and how a forest of them fixes it.">
+<meta name="theme-color" content="#0f2a20">
+<meta property="og:title" content="The Tree That Asks Questions">
+<meta property="og:description" content="How a stack of yes-or-no questions became one of the most useful ideas in machine learning.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dt.css">
+<script src="lib.js" defer></script>
+<script src="dt.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/deep-cuts/"><img src="../_shared/mark.svg" alt="" width="24" height="24">Deep Cuts<span>.</span></a>
+  <nav aria-label="Site"><a href="/deep-cuts/">All stories</a><a href="/">Aditya Chaubey</a></nav>
+</header>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <p class="hero-kicker"><span class="dot"></span>Deep Cuts · No. 03 · Machine learning, unboxed</p>
+    <h1 id="title">The Tree<br>That Asks <em>Questions</em></h1>
+    <p class="hero-deck">How a stack of yes-or-no questions became one of the most useful ideas in machine learning — and why one tree is never enough.</p>
+    <p class="hero-byline">By Aditya Chaubey · <time datetime="2026-11-20">November 2026</time> · 25 min · 9 interactives</p>
+  </div>
+  <a class="hero-cue" href="#story"><span>Walk into the woods</span><i aria-hidden="true"></i></a>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <p class="dropcap">Imagine you are standing at the edge of a wood with an empty basket. The ground is crowded with mushrooms: fat ones, spindly ones, freckled ones, a few the color of a stop sign. Some of them would make a very good dinner. Some of them would make a very bad week.</p>
+  <p>You don't know any of them. But you have a little book, and the book doesn't describe each mushroom one by one. Instead, it asks you questions. <em>Does it grow on wood? Is there a ring around the stem?</em> Each answer sends you to a different page, and after a few pages it tells you what you're holding.</p>
+  <p>That little book is a <strong>decision tree</strong>. So is the flowchart a nurse uses to triage patients, the script on a bank's fraud desk, and — in a much bigger, automated form — a huge share of the models that decide what loan offer you see, which transaction gets flagged, and which package gets sent on which truck.</p>
+  <p class="lead">This is a story about how a computer learns to write that little book by itself. We'll build one together, watch it get too clever, and then plant a forest.</p>
+  <aside class="note" role="note"><strong>One rule before we start:</strong> every mushroom in this story is invented, and so is the forest. Nothing here is a guide to real mushrooms. Please don't eat anything because a web page told you to.</aside>
+</section>
+
+<!-- ═════════════ CH 1: TWENTY QUESTIONS ═════════════ -->
+<section class="chapter" id="ch-questions" data-chapter="1">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 1</p>
+    <h2>Twenty questions</h2>
+    <p class="chapter-dek">A key, a basket, and the power of doubling.</p>
+  </header>
+
+  <div class="prose">
+    <p>Here are eight mushrooms from our imaginary wood. Below them is a key — the kind botanists have printed in field guides for more than two hundred years. Pick any mushroom, then answer the key's questions by looking at your pick.</p>
+  </div>
+
+  <figure class="wide-fig key-game" id="key-game" aria-labelledby="key-title">
+    <div class="fig-head"><p class="fig-kicker">Interactive · The field key</p><h3 id="key-title">Pick a mushroom. Let the key find it.</h3></div>
+    <div class="key-cards" id="key-cards" role="listbox" aria-label="Eight invented mushrooms"></div>
+    <div class="key-play">
+      <div class="key-dialog" id="key-dialog" aria-live="polite">
+        <p class="key-prompt">Choose a mushroom above to begin.</p>
+      </div>
+      <svg class="key-tree" id="key-tree" viewBox="0 0 880 330" role="img" aria-label="A three-level key with eight leaves."></svg>
+    </div>
+    <figcaption>Three yes-or-no questions are enough to tell eight mushrooms apart. Species, traits and edibility are invented.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Every time you answered, you threw away half of the possibilities. That's the whole trick. One question splits eight mushrooms into two groups of four. A second splits four into two. A third splits two into one. <strong>Three questions, eight mushrooms</strong> — because 2 × 2 × 2 = 8.</p>
+    <p>Keep doubling and the numbers get silly fast. This is why the parlor game <em>Twenty Questions</em> is winnable at all.</p>
+  </div>
+
+  <figure class="wide-fig doubling" id="doubling" aria-labelledby="dbl-title">
+    <div class="fig-head"><p class="fig-kicker">Interactive · Doubling</p><h3 id="dbl-title">How many things can <output id="dbl-n">10</output> perfect questions tell apart?</h3></div>
+    <div class="dbl-body">
+      <div class="dbl-big"><output id="dbl-count">1,024</output><span id="dbl-thing">— about the number of words in a short essay.</span></div>
+      <canvas id="dbl-canvas" aria-hidden="true"></canvas>
+    </div>
+    <label class="slider"><span>Questions asked</span><input id="dbl-slider" type="range" min="1" max="20" value="10" aria-describedby="dbl-count"></label>
+    <figcaption>Each dot is one thing you could pin down. Past 10 questions, a dot stands for many.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Real questions are rarely perfect. "Does it grow on wood?" might split a real forest 30 to 70 instead of 50 to 50, and some answers are fuzzy. But the shape of the idea survives: a good sequence of questions narrows a huge space very quickly.</p>
+  </div>
+
+  <figure class="plate" aria-labelledby="plate-title">
+    <div class="plate-art" aria-hidden="true">
+      <svg viewBox="0 0 520 360" id="plate-svg"></svg>
+    </div>
+    <figcaption>
+      <p class="fig-kicker">From the archive</p>
+      <h3 id="plate-title">The oldest machine learning model is a book</h3>
+      <p>In 1778 the naturalist Jean-Baptiste Lamarck published <em>Flore françoise</em>, a guide to the plants of France. Instead of asking readers to page through every description, it asked them a chain of either-or questions, each pair of choices pointing to the next. Lamarck's <strong>dichotomous key</strong> wasn't the first of its kind, but it made the format famous. Field guides still use it.</p>
+      <p class="plate-note">Illustration: a reconstruction in the style of an 18th-century key, not a scan.</p>
+    </figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Lamarck wrote his questions by hand, from a lifetime of looking at plants. The question for the rest of this story is different: <em>what if nobody knows the right questions?</em> What if all you have is a pile of examples — and you want the machine to find the questions itself?</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH 2: SCROLLY ═════════════ -->
+<section class="chapter" id="ch-learn" data-chapter="2">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 2</p>
+    <h2>A key nobody wrote</h2>
+    <p class="chapter-dek">Give a computer 160 mushrooms and two rulers.</p>
+  </header>
+
+  <div class="scrolly" id="scrolly">
+    <figure class="scrolly-fig" aria-labelledby="scrolly-cap">
+      <div class="scrolly-stage">
+        <canvas id="field-canvas" role="img" aria-label="Scatter plot of 160 mushrooms by cap width and stem height, being split into regions by a decision tree."></canvas>
+        <div class="field-legend" aria-hidden="true"><span class="lg-e">Edible</span><span class="lg-p">Poisonous</span><span class="lg-acc" id="field-acc"></span></div>
+      </div>
+      <svg class="scrolly-tree" id="field-tree" role="img" aria-label="The decision tree learned so far."></svg>
+      <figcaption id="scrolly-cap" class="sr-only">A scatter plot and a tree diagram that change as you scroll.</figcaption>
+    </figure>
+    <div class="steps">
+      <div class="step" data-step="0"><p>We went back to the wood and collected <strong>160 mushrooms</strong>. For each one we measured two things: how wide the cap is and how tall the stem is. Every dot is one mushroom.</p></div>
+      <div class="step" data-step="1"><p>Then we sent them all to a lab. <span class="chip-p">Poisonous</span> ones are now red diamonds; <span class="chip-e">edible</span> ones are green circles. There's a pattern in there — but it's not a simple one.</p></div>
+      <div class="step" data-step="2"><p>A decision tree begins with one question about one measurement: <em>is this number bigger than that threshold?</em> The computer tries every threshold on both rulers — a few hundred candidate questions — and scores each one.</p></div>
+      <div class="step" data-step="3"><p>The winner: <strong>"Is the stem taller than <span data-fill="t0">7.7</span> cm?"</strong> Above that line, most mushrooms are poisonous. Below it, most are fine. One question, and the tree is already right about <span data-fill="acc1">76</span>% of the time.</p></div>
+      <div class="step" data-step="4"><p>Now the trick that makes it a <em>tree</em>: take each side and ask a new question, using only the mushrooms on that side. For short-stemmed mushrooms, the best question is about the cap: <strong>narrower than <span data-fill="t1">5.6</span> cm?</strong> Those little buttons are trouble.</p></div>
+      <div class="step" data-step="5"><p>For tall-stemmed mushrooms, the cap matters too — but the threshold is different: <strong>wider than <span data-fill="t2">9.9</span> cm?</strong> Those are big parasols, and nearly all of them are poisonous.</p></div>
+      <div class="step" data-step="6"><p>Repeat once more and we have three levels of questions and eight boxes. Each box is a <strong>leaf</strong>, and each leaf makes a verdict by majority vote of the mushrooms inside it. This tree gets <span data-fill="acc3">90</span>% of our collection right.</p></div>
+      <div class="step" data-step="7"><p>Here's the rule we secretly used to invent this forest — the dashed outline. Nobody told the tree. It found the outline's rough shape from examples alone, in straight lines, one question at a time.</p></div>
+      <div class="step" data-step="8"><p>That's the whole idea of a learned decision tree: <strong>chop the space into boxes with straight cuts</strong>, and label each box. Two questions remain. How does it decide which cut is "best"? And when should it stop?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ CH 3: IMPURITY ═════════════ -->
+<section class="chapter" id="ch-impurity" data-chapter="3">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 3</p>
+    <h2>What makes a good question?</h2>
+    <p class="chapter-dek">Measuring a mess.</p>
+  </header>
+
+  <div class="prose">
+    <p>A good question leaves you with tidier piles than you started with. If a question splits a basket of mixed mushrooms into one basket of all-edible and one of all-poisonous, it's perfect. If both baskets end up just as mixed as before, it was a waste of breath.</p>
+    <p>To compare questions, the tree needs a number for "how mixed is this basket?" The most common choice is called <strong>Gini impurity</strong>, and it has a lovely plain-English meaning: <em>pull out a mushroom at random, put it back, then pull out another. How often are the two different?</em></p>
+  </div>
+
+  <figure class="wide-fig jar" id="jar" aria-labelledby="jar-title">
+    <div class="fig-head"><p class="fig-kicker">Interactive · Impurity</p><h3 id="jar-title">Mix the basket.</h3></div>
+    <div class="jar-body">
+      <div class="jar-basket">
+        <canvas id="jar-canvas" role="img" aria-label="A basket of 20 mushrooms with an adjustable share of poisonous ones."></canvas>
+        <label class="slider"><span>Poisonous in the basket <output id="jar-out">6 of 20</output></span><input id="jar-slider" type="range" min="0" max="20" value="6"></label>
+      </div>
+      <div class="jar-chart">
+        <canvas id="jar-curve" role="img" aria-label="Gini impurity and entropy plotted against the share of poisonous mushrooms."></canvas>
+        <div class="jar-read">
+          <div><span class="k">Gini impurity</span><output id="jar-gini" class="v g">0.42</output></div>
+          <div><span class="k">Entropy (bits)</span><output id="jar-ent" class="v e">0.88</output></div>
+        </div>
+      </div>
+    </div>
+    <figcaption>Gini = 1 − p<sub>edible</sub>² − p<sub>poison</sub>². Entropy = −Σ p log₂ p. Both are zero for a pure basket and peak at a 50/50 mix.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>A pure basket scores <strong>0</strong>: every pair matches. A perfect 50/50 basket scores <strong>0.5</strong>, the worst you can do with two kinds. The dashed curve is <strong>entropy</strong>, a cousin from information theory that measures the same mess in bits. It's what Ross Quinlan's ID3 algorithm used in the 1980s; Gini is what CART, the other founding algorithm, used. In practice they almost always pick the same questions.</p>
+    <p>Now we can score a question. Split the basket, measure the impurity of each half, and average them — weighted by how many mushrooms landed in each. The drop from before to after is called the <strong>information gain</strong>. The best question is the one with the biggest drop.</p>
+    <p>Try being the algorithm. Drag the cut through our 160 mushrooms and watch the two baskets.</p>
+  </div>
+
+  <figure class="wide-fig split-lab" id="split-lab" aria-labelledby="split-title">
+    <div class="fig-head">
+      <div><p class="fig-kicker">Interactive · Be the algorithm</p><h3 id="split-title">Find the best first question.</h3></div>
+      <div class="seg" role="group" aria-label="Which ruler">
+        <button type="button" data-feature="stem" aria-pressed="true">Stem height</button>
+        <button type="button" data-feature="cap" aria-pressed="false">Cap width</button>
+      </div>
+    </div>
+    <div class="split-body">
+      <div class="split-plot">
+        <canvas id="split-canvas" role="img" aria-label="Scatter of mushrooms with a draggable split line."></canvas>
+        <label class="slider"><span id="split-q">Is the stem taller than <output id="split-t">5.0</output> cm?</span><input id="split-slider" type="range" min="1" max="13" step="0.05" value="5"></label>
+      </div>
+      <div class="split-side">
+        <div class="baskets">
+          <div class="basket" id="basket-l"><p class="b-title">No</p><div class="b-bar"><i class="e"></i><i class="p"></i></div><p class="b-n"></p><p class="b-g"></p></div>
+          <div class="basket" id="basket-r"><p class="b-title">Yes</p><div class="b-bar"><i class="e"></i><i class="p"></i></div><p class="b-n"></p><p class="b-g"></p></div>
+        </div>
+        <div class="gain">
+          <div><span class="k">Before</span><output id="g-before">0.495</output></div>
+          <div><span class="k">After (weighted)</span><output id="g-after">—</output></div>
+          <div class="big"><span class="k">Information gain</span><output id="g-gain">—</output></div>
+        </div>
+        <canvas id="sweep-canvas" role="img" aria-label="Weighted impurity for every possible threshold; lower is better."></canvas>
+        <button type="button" class="btn" id="split-best">Search every threshold ▸</button>
+      </div>
+    </div>
+    <figcaption>The lower chart shows the weighted impurity after every possible cut on this ruler. The tree simply takes the lowest point across both rulers.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>That's all "learning" means here. No intuition, no taste — just a brute-force search over every possible question, keeping the one that tidies the baskets most. With two rulers and 160 mushrooms, that's a few hundred candidates. With a thousand columns and a million rows it's a lot more, but computers are good at boring, and clever bookkeeping (sort each column once, then slide the threshold) keeps it fast.</p>
+    <p>Notice what the search <em>can't</em> do: it only ever looks one question ahead. It takes the best question now, and never goes back to reconsider. This is called a <strong>greedy</strong> algorithm. Finding the truly optimal tree is a much harder problem — so hard that, in general, nobody bothers. Greedy turns out to be good enough most of the time.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH 4: GROW ═════════════ -->
+<section class="chapter" id="ch-grow" data-chapter="4">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 4</p>
+    <h2>Ask again. And again.</h2>
+    <p class="chapter-dek">Recursion, leaves, and when to stop.</p>
+  </header>
+
+  <div class="prose">
+    <p>Once the first question is chosen, the tree does something elegantly lazy: it treats each side as a brand-new, smaller problem and runs the exact same search on it. Then again on each of <em>those</em> sides. Programmers call this <strong>recursion</strong>. Gardeners would call it branching.</p>
+    <p>Press play to grow the tree one level at a time. Hover any box in the diagram to see which slice of the forest it's responsible for — or hover the plot to trace a single mushroom down the tree.</p>
+  </div>
+
+  <figure class="full-fig grow-lab" id="grow-lab" aria-labelledby="grow-title">
+    <div class="fig-head">
+      <div><p class="fig-kicker">Interactive · Watch it grow</p><h3 id="grow-title">Depth <output id="grow-depth">0</output>: <output id="grow-leaves">1 leaf</output>, <output id="grow-acc">55%</output> right</h3></div>
+      <div class="grow-controls">
+        <button type="button" class="btn ghost" id="grow-minus" aria-label="Remove one level">−</button>
+        <button type="button" class="btn" id="grow-play">▶ Grow</button>
+        <button type="button" class="btn ghost" id="grow-plus" aria-label="Add one level">+</button>
+      </div>
+    </div>
+    <div class="grow-body">
+      <canvas id="grow-canvas" role="img" aria-label="Mushroom scatter plot divided into the tree's boxes."></canvas>
+      <div class="grow-tree-wrap"><svg id="grow-tree" role="img" aria-label="The current tree diagram."></svg></div>
+    </div>
+    <p class="grow-path" id="grow-path" aria-live="polite">Hover the plot to follow a mushroom through the questions.</p>
+    <figcaption>Box color shows the leaf's verdict; deeper color means a purer leaf. Numbers in each leaf are edible · poisonous mushrooms that reached it.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Left alone, this process only stops when every leaf is perfectly pure — when every box contains mushrooms of only one kind. On our collection that takes <strong><span data-fill="fullDepth">7</span> levels</strong> and <strong><span data-fill="fullLeaves">26</span> leaves</strong>. That sounds like a triumph. The tree is right about every single mushroom we gave it.</p>
+    <p>Look closer at the deepest boxes, though. Some are slivers holding a single mushroom. That's not a pattern. That's a tree remembering one specific mushroom.</p>
+  </div>
+
+  <div class="anatomy">
+    <div class="anatomy-item"><span class="ana-icon root" aria-hidden="true"></span><h4>Root</h4><p>The first question, asked of every example.</p></div>
+    <div class="anatomy-item"><span class="ana-icon node" aria-hidden="true"></span><h4>Internal node</h4><p>A question about one feature and one threshold.</p></div>
+    <div class="anatomy-item"><span class="ana-icon branch" aria-hidden="true"></span><h4>Branch</h4><p>One answer — yes or no — leading onward.</p></div>
+    <div class="anatomy-item"><span class="ana-icon leaf" aria-hidden="true"></span><h4>Leaf</h4><p>No more questions. A verdict, by majority vote.</p></div>
+    <div class="anatomy-item"><span class="ana-icon depth" aria-hidden="true"></span><h4>Depth</h4><p>The longest chain of questions from root to leaf.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════ CH 5: OVERFIT ═════════════ -->
+<section class="chapter dark" id="ch-overfit" data-chapter="5">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 5</p>
+    <h2>The tree that memorized</h2>
+    <p class="chapter-dek">Perfect on the past. Worse on the future.</p>
+  </header>
+
+  <div class="prose">
+    <p>Here's something we haven't told you. Labs make mistakes. When we invented this forest, we deliberately mislabeled about <strong>1 in 12</strong> mushrooms — a harmless one marked poisonous, or the other way round. Real data is like this: typos, broken sensors, judgment calls.</p>
+    <p>A tree that grows until every leaf is pure has no way to know which labels are mistakes. So it carves out a tiny box for each one — including the wrong ones. To see what that costs, we went back to the wood and picked <strong>400 new mushrooms</strong> the tree has never seen.</p>
+  </div>
+
+  <figure class="full-fig overfit-lab" id="overfit-lab" aria-labelledby="of-title">
+    <div class="fig-head">
+      <div><p class="fig-kicker">Interactive · Old mushrooms vs new</p><h3 id="of-title">How deep should the tree grow?</h3></div>
+      <div class="seg" role="group" aria-label="Which mushrooms to show">
+        <button type="button" data-show="train" aria-pressed="true">The 160 it learned from</button>
+        <button type="button" data-show="test" aria-pressed="false">400 new ones</button>
+      </div>
+    </div>
+    <div class="of-body">
+      <canvas id="of-canvas" role="img" aria-label="The tree's boxes at the chosen depth over either training or new mushrooms."></canvas>
+      <div class="of-side">
+        <canvas id="of-chart" role="img" aria-label="Accuracy on training and new mushrooms for each depth."></canvas>
+        <label class="slider"><span>Maximum depth <output id="of-depth">3</output></span><input id="of-slider" type="range" min="1" max="10" value="3"></label>
+        <div class="of-read">
+          <div><span class="k">On the 160 it learned from</span><output id="of-train" class="v tr">90%</output></div>
+          <div><span class="k">On 400 new mushrooms</span><output id="of-test" class="v te">84%</output></div>
+        </div>
+        <label class="check"><input type="checkbox" id="of-flips"> Ring the mislabeled mushrooms</label>
+      </div>
+    </div>
+    <figcaption>Hollow rings on the plot are mislabeled training mushrooms. Accuracy on new mushrooms peaks early, then slides as the tree starts fitting the mistakes.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Push the slider to the right. Training accuracy climbs to a perfect 100%. Accuracy on new mushrooms <em>peaks</em> at around depth <span data-fill="bestDepth">4</span> — about <span data-fill="bestAcc">85</span>% — and then sags as the tree spends its extra questions memorizing noise.</p>
+    <p>This is <strong>overfitting</strong>, and it is the central drama of all of machine learning, not just trees. A model that fits the past perfectly has usually learned some things about the past that aren't true about the world.</p>
+    <blockquote class="pull">A tree that is never wrong about its own examples is almost always wrong about something else.</blockquote>
+    <p>There are a few classic ways to stop a tree before it embarrasses itself:</p>
+  </div>
+
+  <div class="cards4">
+    <div class="card"><p class="card-k">01</p><h4>Cap the depth</h4><p>Allow only so many questions in a row. Blunt, effective, easy to explain.</p></div>
+    <div class="card"><p class="card-k">02</p><h4>Demand big leaves</h4><p>Refuse any split that would leave fewer than, say, 10 examples on a side. No slivers.</p></div>
+    <div class="card"><p class="card-k">03</p><h4>Prune it back</h4><p>Grow the whole tree, then snip branches whose gain doesn't justify their complexity. CART's "cost-complexity pruning" does this.</p></div>
+    <div class="card"><p class="card-k">04</p><h4>Hold some data back</h4><p>Pick the settings by checking a held-out set the tree never trained on — exactly what our 400 new mushrooms were for.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════ CH 6: WOBBLE ═════════════ -->
+<section class="chapter" id="ch-wobble" data-chapter="6">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 6</p>
+    <h2>A wobbly tree</h2>
+    <p class="chapter-dek">Change a few mushrooms, change the whole key.</p>
+  </header>
+
+  <div class="prose">
+    <p>Trees have a second, quieter flaw. Because every question depends on the one before it, a tiny change near the top ripples all the way down. Swap a handful of mushrooms in the basket and the first question might change — and then every question below it changes too.</p>
+    <p>Below are three trees, each trained on a slightly different basket. Each basket was made by drawing 160 mushrooms from our collection <em>with replacement</em>, so some get picked twice and some not at all. Statisticians call that a <strong>bootstrap sample</strong>.</p>
+  </div>
+
+  <figure class="full-fig wobble-lab" id="wobble-lab" aria-labelledby="wb-title">
+    <div class="fig-head">
+      <div><p class="fig-kicker">Interactive · Same forest, different baskets</p><h3 id="wb-title">Three baskets, three different trees</h3></div>
+      <button type="button" class="btn" id="wobble-go">↻ Draw new baskets</button>
+    </div>
+    <div class="wobble-grid" id="wobble-grid"></div>
+    <figcaption>Each panel is a depth-5 tree trained on a bootstrap resample of the same 160 mushrooms. The text under each panel is its first question.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Same forest, same rulers, same algorithm — noticeably different boxes. In the jargon, a single deep tree has <strong>high variance</strong>: its answers depend a lot on exactly which examples it happened to see.</p>
+    <p>That sounds like bad news. In 2001, the statistician Leo Breiman — one of the four authors of CART — turned it into the best news trees ever got.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH 7: FOREST ═════════════ -->
+<section class="chapter forest-ch" id="ch-forest" data-chapter="7">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 7</p>
+    <h2>Ask the whole forest</h2>
+    <p class="chapter-dek">Many wobbly trees make one steady answer.</p>
+  </header>
+
+  <div class="prose">
+    <p>Breiman's idea: if every tree wobbles in a <em>different</em> direction, then averaging many of them should cancel the wobbles out. Grow a hundred trees, each on its own bootstrap basket. To make them even more different from each other, let each question consider only a <strong>random subset of the features</strong>. Then, for any new mushroom, let the trees vote.</p>
+    <p>He called it a <strong>random forest</strong>. Slide to add trees and watch the jagged boxes melt into something smoother.</p>
+  </div>
+
+  <figure class="full-fig forest-lab" id="forest-lab" aria-labelledby="fo-title">
+    <div class="fig-head">
+      <div><p class="fig-kicker">Interactive · Plant a forest</p><h3 id="fo-title"><output id="fo-n">1</output> <span id="fo-trees">tree</span> voting</h3></div>
+    </div>
+    <div class="fo-body">
+      <div class="fo-plot">
+        <canvas id="fo-canvas" role="img" aria-label="Vote map of the forest over the mushroom space."></canvas>
+        <label class="slider"><span>Trees in the forest <output id="fo-out">1</output></span><input id="fo-slider" type="range" min="1" max="100" value="1" aria-label="Number of trees"></label>
+      </div>
+      <div class="fo-side">
+        <div class="fo-grove" id="fo-grove" aria-hidden="true"></div>
+        <p class="fo-hint" id="fo-hint">Hover the map to see how the trees vote on a single mushroom.</p>
+        <div class="of-read">
+          <div><span class="k">One deep tree, on new mushrooms</span><output id="fo-single" class="v tr">82%</output></div>
+          <div><span class="k">The forest, on new mushrooms</span><output id="fo-acc" class="v te">80%</output></div>
+        </div>
+        <canvas id="fo-chart" role="img" aria-label="Forest accuracy on new mushrooms as trees are added."></canvas>
+      </div>
+    </div>
+    <figcaption>Color shows the share of trees voting "poisonous": deep red is unanimous, pale is a split vote. Each tree is grown fully deep on its own bootstrap basket, choosing between features at random at each question.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Each tree in the forest is individually a worse model than our carefully pruned one — they're grown all the way down, memorizing their baskets. But their mistakes are scattered in different places, and a vote washes most of them out. The forest ends up beating any single tree, and it does so without anyone having to agonize over the right depth.</p>
+    <p>The same year, Jerome Friedman — another of CART's four authors — published a different way to combine trees. Instead of growing them independently and voting, <strong>gradient boosting</strong> grows them in sequence: each small tree is trained specifically to fix the errors of all the trees before it.</p>
+  </div>
+
+  <figure class="wide-fig ensemble-diagram" aria-labelledby="ens-title">
+    <div class="fig-head"><p class="fig-kicker">Diagram · Two ways to grow a forest</p><h3 id="ens-title">Vote side by side, or correct in a line</h3></div>
+    <svg viewBox="0 0 900 300" id="ensemble-svg" role="img" aria-label="Left: a random forest, where independent trees vote. Right: boosting, where each tree corrects the previous ones."></svg>
+  </figure>
+
+  <div class="prose">
+    <p>Boosted trees — in libraries like XGBoost, LightGBM and CatBoost — have dominated competitions on spreadsheet-shaped data for a decade. A 2022 study by Léo Grinsztajn and colleagues tested them against deep neural networks on 45 tabular datasets and found tree ensembles still came out ahead on typical medium-sized tables. For all the noise about giant AI models, a surprising amount of the world still runs on very large piles of very small trees.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH 8: TIMELINE + VERDICT ═════════════ -->
+<section class="chapter" id="ch-roots" data-chapter="8">
+  <header class="chapter-head">
+    <p class="chapter-num">Chapter 8</p>
+    <h2>Roots and branches</h2>
+    <p class="chapter-dek">Two and a half centuries of asking good questions.</p>
+  </header>
+
+  <ol class="timeline" id="timeline">
+    <li><time>1778</time><h4>Flore françoise</h4><p>Lamarck popularizes the dichotomous key: identify a plant through a chain of either-or questions.</p></li>
+    <li><time>1963</time><h4>Automatic Interaction Detection</h4><p>James Morgan and John Sonquist publish AID, an early program that splits survey data into groups automatically.</p></li>
+    <li><time>1984</time><h4>CART</h4><p>Breiman, Friedman, Olshen and Stone's book <em>Classification and Regression Trees</em> sets out Gini splits and cost-complexity pruning.</p></li>
+    <li><time>1986</time><h4>ID3</h4><p>Ross Quinlan's ID3 grows trees using information gain from entropy. Its successor, C4.5, follows in 1993.</p></li>
+    <li><time>2001</time><h4>Forests and boosting</h4><p>Breiman publishes <em>Random Forests</em>. Friedman publishes gradient boosting machines. Trees become teams.</p></li>
+    <li><time>2016</time><h4>XGBoost</h4><p>Tianqi Chen and Carlos Guestrin's fast, scalable boosting library becomes a fixture of data-science competitions.</p></li>
+    <li><time>2022</time><h4>Still standing</h4><p>Benchmarks find tree ensembles still outperform deep learning on typical tabular data.</p></li>
+  </ol>
+
+  <div class="prose">
+    <p>Why have trees lasted? Partly because they're fast and work well with messy data — mixed numbers and categories, uneven scales, missing values. But mostly, I think, because of something Lamarck understood. <strong>A small tree is something a person can read.</strong> You can print it, argue with it, and point to the exact question that made it decide. Few models in machine learning let you do that.</p>
+  </div>
+
+  <div class="ledger">
+    <div class="ledger-col good">
+      <h4>Where trees shine</h4>
+      <ul>
+        <li><strong>Readable.</strong> A shallow tree is a flowchart you can audit.</li>
+        <li><strong>Low-fuss.</strong> No need to rescale features; thresholds don't care about units.</li>
+        <li><strong>Nonlinear.</strong> They capture interactions — "tall <em>and</em> broad" — automatically.</li>
+        <li><strong>Strong in teams.</strong> Forests and boosted trees are top performers on tabular data.</li>
+      </ul>
+    </div>
+    <div class="ledger-col bad">
+      <h4>Where they stumble</h4>
+      <ul>
+        <li><strong>Overfitting.</strong> Left unchecked, one tree memorizes noise.</li>
+        <li><strong>Wobbly.</strong> Small changes in data can rewrite the whole tree.</li>
+        <li><strong>Staircase edges.</strong> Every cut is parallel to an axis, so diagonal boundaries become steps.</li>
+        <li><strong>Lost readability.</strong> A forest of 500 deep trees is accurate — and no longer a flowchart.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prose closing">
+    <p>Go back to the edge of the wood. You have a basket and a little book of questions. Now you know where the book could come from: a few hundred labeled mushrooms, a way to measure a mess, and the patience to try every question and keep the best one. You know it will be tempted to memorize, and you know to stop it early. And if you're unsure, you know to ask a hundred slightly different books and go with the majority.</p>
+    <p>That's not a bad way to make decisions, as it happens. Even for people.</p>
+    <p class="fin" aria-hidden="true">❦</p>
+  </div>
+</section>
+
+<!-- ═════════════ METHODS ═════════════ -->
+<section class="methods" id="methods">
+  <div class="methods-inner">
+    <h2>Methods &amp; notes</h2>
+    <details open>
+      <summary>How the data and models were made</summary>
+      <p>The mushrooms, the forest and the field-key species are all invented. Each mushroom has two measurements drawn uniformly at random (cap width 2–16 cm, stem height 1–13 cm). A hidden rule marks three regions as poisonous; then 8% of labels are flipped at random to simulate lab errors. The training set has 160 mushrooms and the "new mushrooms" test set has 400, drawn the same way with a different random seed.</p>
+      <p>Every tree on this page is computed live in your browser by a small CART-style implementation: binary splits at midpoints between observed values, Gini impurity, greedy selection, majority-vote leaves. The depth slider in Chapter 5 shows the fully grown tree truncated at each depth. The random forest uses 100 trees, each grown to purity on a bootstrap sample; because there are only two features, each split considers one randomly chosen feature (in practice the default is often the square root of the number of features).</p>
+      <p>All figures are drawn with canvas and SVG; no external charting libraries are used. Numbers in the text are filled in from the same computations.</p>
+    </details>
+    <details>
+      <summary>Sources and further reading</summary>
+      <ul class="sources">
+        <li>Breiman, L., Friedman, J., Olshen, R. &amp; Stone, C. (1984). <em>Classification and Regression Trees.</em> Wadsworth.</li>
+        <li>Quinlan, J. R. (1986). <a href="https://link.springer.com/article/10.1007/BF00116251">Induction of decision trees.</a> <em>Machine Learning</em> 1, 81–106.</li>
+        <li>Breiman, L. (2001). <a href="https://link.springer.com/article/10.1023/A:1010933404324">Random forests.</a> <em>Machine Learning</em> 45, 5–32.</li>
+        <li>Friedman, J. H. (2001). <a href="https://projecteuclid.org/journals/annals-of-statistics/volume-29/issue-5/Greedy-function-approximation-A-gradient-boostingmachine/10.1214/aos/1013203451.full">Greedy function approximation: a gradient boosting machine.</a> <em>Annals of Statistics</em> 29(5).</li>
+        <li>Morgan, J. N. &amp; Sonquist, J. A. (1963). Problems in the analysis of survey data, and a proposal. <em>Journal of the American Statistical Association</em> 58(302).</li>
+        <li>Chen, T. &amp; Guestrin, C. (2016). <a href="https://arxiv.org/abs/1603.02754">XGBoost: a scalable tree boosting system.</a> KDD.</li>
+        <li>Grinsztajn, L., Oyallon, E. &amp; Varoquaux, G. (2022). <a href="https://arxiv.org/abs/2207.08815">Why do tree-based models still outperform deep learning on tabular data?</a> NeurIPS Datasets &amp; Benchmarks.</li>
+        <li>Yee, S. &amp; Chu, T. <a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">A visual introduction to machine learning.</a> R2D3 — a classic, and an inspiration for this piece.</li>
+        <li>scikit-learn. <a href="https://scikit-learn.org/stable/modules/tree.html">Decision trees user guide.</a></li>
+      </ul>
+    </details>
+    <p class="next"><span>More from Deep Cuts</span><a href="../linear-algebra/">Linear Algebra: how words become geometry →</a><a href="../ai-agents/">What are AI agents? →</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/deep-cuts/"><img src="../_shared/mark.svg" alt="" width="22" height="22">Deep Cuts<span>.</span></a>
+  <p>Long, visual, hand-built stories about how things work.</p>
+  <nav aria-label="Footer"><a href="/deep-cuts/">All stories</a><a href="/">Home</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>
