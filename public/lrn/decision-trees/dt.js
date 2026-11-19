@@ -1,4 +1,4 @@
-/* Deep Cuts — The Tree That Asks Questions. All figures are drawn live. */
+/* lrn — The Tree That Asks Questions. All figures are drawn live. */
 (function () {
   'use strict';
   const L = window.DTLib;

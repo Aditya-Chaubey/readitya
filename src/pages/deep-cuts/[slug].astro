@@ -1,0 +1,21 @@
+---
+/** Old /deep-cuts/<slug>/ story links forward to /lrn/<slug>/. */
+import { STORIES } from '../../data/lrn';
+
+export function getStaticPaths() {
+  return STORIES.map((s) => ({ params: { slug: s.slug } }));
+}
+const to = `/lrn/${Astro.params.slug}/`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moved to lrn</title>
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <link rel="canonical" href={to} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body><p>This story moved to <a href={to}>{to}</a>.</p></body>
+</html>

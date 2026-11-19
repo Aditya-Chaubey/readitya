@@ -1,4 +1,4 @@
-/* Decision-tree engine for the Deep Cuts story "The Tree That Asks Questions".
+/* Decision-tree engine for the lrn story "The Tree That Asks Questions".
    A small, honest CART implementation: Gini impurity, axis-aligned splits on
    midpoints, greedy recursion. Everything the page shows is computed here. */
 (function (g) {
