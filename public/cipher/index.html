@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-accent="gold">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cipher</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050607">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cipher">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/favicon-64.png">
+  <meta name="description" content="Personal intelligence console: briefing, calendar, missions, cases, people, money, skills and journal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Lock screen (only shown when a passcode is set) -->
+  <div id="lock" class="lock" hidden>
+    <form id="lockForm" class="lock-card" autocomplete="off">
+      <div class="crest">C</div>
+      <h1 class="serif">Cipher</h1>
+      <div class="rule"></div>
+      <div class="kicker">Authorised personnel only</div>
+      <input id="lockInput" type="password" placeholder="Passcode" aria-label="Passcode">
+      <button class="btn gold" type="submit">Authenticate</button>
+      <div id="lockMsg" class="kicker err"></div>
+    </form>
+  </div>
+
+  <!-- Phone top bar -->
+  <header class="topbar">
+    <a href="#briefing" class="topbrand" aria-label="Cipher home"><span class="crest xs">C</span><span class="brand-mini serif">Cipher</span></a>
+    <div class="topacts">
+      <button id="searchBtnM" class="icon-btn tap" type="button" aria-label="Search" data-icon="search"></button>
+      <button id="newBtnM" class="icon-btn tap gold-t" type="button" aria-label="Create new" data-icon="plus"></button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">
+        <div class="crest sm">C</div>
+        <div>
+          <div class="serif brand-name">Cipher</div>
+          <div class="kicker">Personal intelligence</div>
+        </div>
+      </div>
+      <div class="side-actions">
+        <button id="searchBtn" class="search-btn" type="button" data-icon="search"><span>Search</span><kbd>Ctrl K</kbd></button>
+        <button id="newBtn" class="btn gold new-btn" type="button" data-icon="plus" aria-label="Create new"><span>New</span></button>
+      </div>
+      <nav id="nav" class="nav" aria-label="Sections"></nav>
+      <div class="side-foot">
+        <a id="settingsLink" href="#settings" class="foot-link" data-icon="settings"><span>Settings</span></a>
+        <button id="lockBtn" class="foot-link" type="button" data-icon="lock"><span>Lock console</span></button>
+        <div class="agent">
+          <div class="kicker">Agent on duty</div>
+          <div id="footCodename" class="foot-name serif"></div>
+          <div id="clock" class="kicker gold-t"></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="page-head">
+        <div>
+          <div id="pageKicker" class="kicker gold-t"></div>
+          <h1 id="pageTitle" class="serif"></h1>
+        </div>
+        <div id="pageActions" class="actions"></div>
+      </header>
+      <section id="view"></section>
+    </main>
+  </div>
+
+  <!-- Phone tab bar -->
+  <nav id="tabbar" class="tabbar" aria-label="Main"></nav>
+
+  <!-- iPhone install hint (Safari only, until dismissed) -->
+  <div id="installHint" class="install-hint" hidden></div>
+
+  <dialog id="modal" class="modal"><div id="modalBody"></div></dialog>
+
+  <dialog id="palette" class="palette">
+    <input id="palInput" type="text" placeholder="Search everything, or type a command…" aria-label="Search" autocomplete="off">
+    <div id="palList" class="pal-list"></div>
+    <div class="pal-foot kicker">↑↓ navigate · Enter open · Esc close</div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/core.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/operations.js"></script>
+  <script src="js/missions.js"></script>
+  <script src="js/drills.js"></script>
+  <script src="js/cases.js"></script>
+  <script src="js/treasury.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/arsenal.js"></script>
+  <script src="js/journal.js"></script>
+  <script src="js/vault.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/briefing.js"></script>
+  <script>CX.boot();</script>
+</body>
+</html>
