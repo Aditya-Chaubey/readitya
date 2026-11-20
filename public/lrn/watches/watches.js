@@ -264,7 +264,7 @@
         const kx = 50 / Math.abs(Math.cos(a) || 1e-6), ky = 80 / Math.abs(Math.sin(a) || 1e-6);
         const r = Math.min(kx, ky) - 4;
         const x = r * Math.cos(a), y = r * Math.sin(a);
-        ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="Bodoni Moda, serif" font-size="${h % 3 === 0 ? 15 : 12}" fill="#1b1b1b" text-anchor="middle" dominant-baseline="central" transform="rotate(${h * 30} ${f1(x)} ${f1(y)})">${rom[h]}</text>`;
+        ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="DM Serif Display, Georgia, serif" font-size="${h % 3 === 0 ? 15 : 12}" fill="#1b1b1b" text-anchor="middle" dominant-baseline="central" transform="rotate(${h * 30} ${f1(x)} ${f1(y)})">${rom[h]}</text>`;
       }
       ix += `<rect x="-36" y="-58" width="72" height="116" fill="none" stroke="#1b1b1b" stroke-width=".7"/>`;
     } else {
@@ -288,13 +288,13 @@
           const [x2, y2] = polar(R1 - 26, ang); ix += `<text x="${f1(x2)}" y="${f1(y2)}" font-family="DM Mono, monospace" font-size="7" fill="${o.idxC}" fill-opacity=".7" text-anchor="middle" dominant-baseline="central">${h + 12}</text>`;
         } else if (o.idx === 'roman') {
           const rom = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
-          const [x, y] = polar(R1 - 8, ang); ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="Bodoni Moda, serif" font-size="13" fill="${o.idxC}" text-anchor="middle" dominant-baseline="central">${rom[h]}</text>`;
+          const [x, y] = polar(R1 - 8, ang); ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="DM Serif Display, Georgia, serif" font-size="13" fill="${o.idxC}" text-anchor="middle" dominant-baseline="central">${rom[h]}</text>`;
         } else if (o.idx === 'arabic') {
-          const [x, y] = polar(R1 - 8, ang); ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="Bodoni Moda, serif" font-size="17" fill="${o.idxC}" text-anchor="middle" dominant-baseline="central">${h || 12}</text>`;
+          const [x, y] = polar(R1 - 8, ang); ix += `<text x="${f1(x)}" y="${f1(y)}" font-family="DM Serif Display, Georgia, serif" font-size="17" fill="${o.idxC}" text-anchor="middle" dominant-baseline="central">${h || 12}</text>`;
         }
       }
     }
-    if (o.top) ix += `<text y="${o.subs ? -46 : -40}" font-family="Bodoni Moda, serif" font-size="11" letter-spacing="2" fill="${o.idxC}" text-anchor="middle">${o.top}</text>`;
+    if (o.top) ix += `<text y="${o.subs ? -46 : -40}" font-family="DM Serif Display, Georgia, serif" font-size="11" letter-spacing="2" fill="${o.idxC}" text-anchor="middle">${o.top}</text>`;
     if (o.bot) ix += `<text y="${o.subs === 3 ? 58 : o.smallSec || o.moon || o.tourb ? -26 : 42}" font-family="DM Mono, monospace" font-size="6" letter-spacing="1.6" fill="${o.idxC}" fill-opacity=".75" text-anchor="middle">${o.bot}</text>`;
     s += P('indices', ix);
 
