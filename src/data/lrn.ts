@@ -26,6 +26,19 @@ export interface Story {
 
 export const STORIES: Story[] = [
   {
+    slug: 'poker',
+    title: 'All In: A Friendly Guide to Poker',
+    deck: 'How the world’s most famous card game works, why it’s really about people, and how to play your first hand. With a playable game against a cat.',
+    topic: 'Games',
+    date: '2026-11-20',
+    minutes: 30,
+    interactives: 12,
+    cover: '/lrn/_covers/poker.svg',
+    bg: '#0f4a35',
+    fg: '#f8f1e1',
+    accent: '#f0b93a',
+  },
+  {
     slug: 'watches',
     title: 'The Machine on Your Wrist',
     deck: 'How a wristwatch works, where it came from, and how to fall happily down the rabbit hole. A field guide for the newly curious.',

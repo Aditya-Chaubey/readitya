@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All In — lrn</title>
+<meta name="description" content="A friendly, interactive guide to poker: the deck, the hand rankings, how a hand of Texas Hold'em works, odds, strategy, history and table manners — with a playable hand at the end.">
+<meta name="theme-color" content="#0b2f22">
+<meta property="og:title" content="All In: A Friendly Guide to Poker">
+<meta property="og:description" content="How the world's most famous card game works, why it's more about people than cards, and how to play your first hand.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="poker.css">
+<script src="poker.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-play">Play a hand</a></nav>
+</header>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <div class="felt" aria-hidden="true"></div>
+  <div class="chips-float" id="chips-float" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-fan" id="hero-fan" aria-hidden="true"></div>
+    <p class="kicker"><span class="lc">lrn</span> · No. 05 · Games, decoded</p>
+    <h1 id="title"><span class="t1">All</span> <span class="t2">In</span></h1>
+    <p class="deck">A friendly guide to poker: how the world's most famous card game works, why it's really about people, and how to play your first hand without anyone noticing it's your first hand.</p>
+    <p class="byline">By Aditya Chaubey · <time datetime="2026-11-20">November 2026</time> · 30 min · 11 interactives · 1 playable hand</p>
+    <a class="hero-cta" href="#story">Shuffle up and deal <span aria-hidden="true">♠</span></a>
+  </div>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <p class="dropcap">Here is the strangest thing about poker: you can lose holding the best cards, and win holding nothing at all. In chess the better position usually wins. In poker the better <em>story</em> often does.</p>
+  <p>That's because poker isn't really a card game. It's a game about decisions made with incomplete information, played with cards. You see some of the picture, your opponents see a different part of it, and everyone has to guess the rest, while putting something they care about on the line.</p>
+  <p class="lead">This guide takes you from "which hand beats which?" to sitting down at a friendly game and holding your own. We'll meet the deck, learn the hand rankings, walk through a full hand of Texas Hold'em, and get a feel for odds, bluffing and table manners. At the end, you'll play a hand against a cat.</p>
+  <aside class="note" role="note"><strong>House rule:</strong> this is a guide to the <em>game</em>. Play with friends for chips, matchsticks or bragging rights. If you ever play for money, set a limit before you sit down and stick to it. The cards don't care how much you've lost.</aside>
+</section>
+
+<!-- ═════════════ CH1: THE DECK ═════════════ -->
+<section class="chapter cream" id="ch-deck">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>1</span></div><p class="ch-label">Chapter one</p><h2>Fifty-two cards</h2><p class="ch-dek">The only equipment you need, and one very large number.</p></header>
+  <div class="prose">
+    <p>Poker uses a standard deck: <strong>52 cards</strong> in four <strong>suits</strong> (♠ spades, ♥ hearts, ♦ diamonds, ♣ clubs) and thirteen <strong>ranks</strong>, from 2 up through 10, then Jack, Queen, King and Ace. No jokers.</p>
+    <p>In most forms of poker, suits are all equal: no suit beats another. Only rank matters, except when five cards share a suit, which is a <em>flush</em>. The Ace is the most flexible card in the deck: it's the highest card, but it can also play low, below the 2, to make the smallest straight, A-2-3-4-5.</p>
+  </div>
+  <figure class="fig wide deckfig" aria-labelledby="deck-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · The deck</p><h3 id="deck-title">Give it a shuffle</h3></div><button type="button" class="btn" id="deck-shuffle">Shuffle ⟳</button></div>
+    <div class="deck-grid" id="deck-grid"></div>
+    <p class="deck-fact" id="deck-fact">Sorted the way it comes out of the box. Press shuffle.</p>
+    <figcaption>Hover or tap a card to see its name.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Every time you shuffle properly, you are almost certainly holding an arrangement of cards that has <strong>never existed before</strong> in the history of the universe. There are 52 × 51 × 50 × … × 1 ways to order a deck. That number, written <em>52!</em>, is about 8 followed by 67 zeros. If everyone who has ever lived had shuffled a deck every second since the Big Bang, they wouldn't have scratched the surface.</p>
+    <p>So no: you haven't "seen this hand before".</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH2: RANKINGS ═════════════ -->
+<section class="chapter felt-sec" id="ch-ranks">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>2</span></div><p class="ch-label">Chapter two</p><h2>What beats what</h2><p class="ch-dek">Ten hands. Memorize these and you can play.</p></header>
+  <div class="prose">
+    <p>A poker hand is always exactly <strong>five cards</strong>. The rarer the hand, the higher it ranks. That's the whole logic, and it means the order isn't arbitrary: it falls straight out of the math. Click through the ladder, from the hand you'll see most often to the one you may never see at all.</p>
+  </div>
+  <figure class="fig full ladder" aria-labelledby="ladder-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Hand rankings</p><h3 id="ladder-title">The ladder</h3></div></div>
+    <div class="ladder-body">
+      <ol class="ladder-list" id="ladder-list"></ol>
+      <div class="ladder-stage">
+        <div class="ladder-cards" id="ladder-cards"></div>
+        <div class="ladder-info" id="ladder-info" aria-live="polite"></div>
+      </div>
+    </div>
+    <figcaption>Odds of being dealt each hand in your first five cards, out of 2,598,960 possible five-card hands.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>A few rules settle the arguments that will absolutely come up:</p>
+    <ul class="rules">
+      <li><b>Same hand type?</b> Compare the important cards first. A pair of Kings beats a pair of Queens. If the pairs match, compare the leftover cards, called <b>kickers</b>, one at a time from the top.</li>
+      <li><b>Suits never break ties.</b> Two identical straights in different suits split the pot.</li>
+      <li><b>Full house vs full house:</b> the three-of-a-kind part decides. K-K-K-2-2 beats Q-Q-Q-A-A.</li>
+      <li><b>The wheel:</b> A-2-3-4-5 is the lowest straight. Straights don't "wrap": Q-K-A-2-3 is nothing.</li>
+    </ul>
+    <p>Think you've got it? Here's a quick test. Pick the winner.</p>
+  </div>
+  <figure class="fig wide quiz" aria-labelledby="quiz-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Quiz</p><h3 id="quiz-title">Which hand wins?</h3></div><p class="quiz-score" id="quiz-score">Streak <b>0</b> · Best <b>0</b></p></div>
+    <div class="quiz-body">
+      <div class="quiz-hand" id="quiz-a"><p class="qh-label">Hand A</p><div class="qh-cards"></div><p class="qh-name"></p></div>
+      <div class="quiz-vs">vs</div>
+      <div class="quiz-hand" id="quiz-b"><p class="qh-label">Hand B</p><div class="qh-cards"></div><p class="qh-name"></p></div>
+    </div>
+    <div class="quiz-btns"><button type="button" class="btn" data-pick="a">Hand A</button><button type="button" class="btn ghost" data-pick="tie">Split pot</button><button type="button" class="btn" data-pick="b">Hand B</button></div>
+    <p class="quiz-msg" id="quiz-msg" aria-live="polite"></p>
+  </figure>
+</section>
+
+<!-- ═════════════ CH3: A HAND (scrolly) ═════════════ -->
+<section class="chapter felt-sec" id="ch-hand">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>3</span></div><p class="ch-label">Chapter three</p><h2>Anatomy of a hand</h2><p class="ch-dek">Texas Hold'em, from shuffle to showdown.</p></header>
+  <div class="prose">
+    <p>There are dozens of kinds of poker, but one rules them all: <strong>Texas Hold'em</strong>. It's what you see on TV and in most home games. Each player gets two private cards, five shared cards are dealt face up in the middle, and you make the best five-card hand you can from all seven. Scroll to play through a real hand, seat by seat.</p>
+  </div>
+  <div class="scrolly" id="hand-scrolly">
+    <figure class="scrolly-fig" aria-label="An animated poker table playing through a hand.">
+      <div class="table" id="table">
+        <div class="table-rail"><div class="table-felt"><span class="table-logo">lrn</span></div></div>
+      </div>
+    </figure>
+    <div class="steps">
+      <div class="step" data-step="0"><p class="step-k">The setup</p><p>Six players, one deck, a pile of chips each. Everyone starts with <b>200 chips</b>. You're at the bottom.</p></div>
+      <div class="step" data-step="1"><p class="step-k">The button</p><p>The white disc is the <b>dealer button</b>. Eli has it this hand. It marks who acts <em>last</em> in each round of betting, which is a big advantage, and it moves one seat to the left after every hand so everyone gets a turn.</p></div>
+      <div class="step" data-step="2"><p class="step-k">The blinds</p><p>Before any cards are dealt, the two players to the button's left post forced bets called <b>blinds</b>: the <b>small blind</b> (1 chip, that's you) and the <b>big blind</b> (2 chips, Ana). Without them, everyone could wait for perfect cards forever. Blinds make sure there's always something to fight over.</p></div>
+      <div class="step" data-step="3"><p class="step-k">Hole cards</p><p>The dealer gives everyone two cards face down, one at a time, starting from the small blind. These are your <b>hole cards</b>, and only you get to see them. You peek: <b class="red">A♠ Q♠</b>. That's a strong start: two high cards of the same suit.</p></div>
+      <div class="step" data-step="4"><p class="step-k">Pre-flop betting</p><p>Betting starts with the player left of the big blind. Bo looks at <b>7♣ 2♦</b>, the worst starting hand in Hold'em, and <b>folds</b>. Cy <b>calls</b> 2. Dee folds. Eli <b>raises</b> to 6. You call 6. Ana folds her big blind. Cy calls. Three players remain.</p></div>
+      <div class="step" data-step="5"><p class="step-k">The flop</p><p>The bets are swept into the <b>pot</b>: 20 chips. The dealer "burns" a card (discards it face down, to stop cheating) and deals three cards face up in the middle: the <b>flop</b>. <b class="red">Q♦ 9♠ 4♠</b>. You now have a pair of Queens with an Ace kicker, <em>and</em> four spades: one more spade makes a flush.</p></div>
+      <div class="step" data-step="6"><p class="step-k">Betting on the flop</p><p>After the flop, betting starts with the first player still in the hand to the left of the button. That's you. You <b>check</b> (pass without betting). Cy checks. Eli <b>bets</b> 10. You call. Cy, hoping to make a straight with J-10, calls too.</p></div>
+      <div class="step" data-step="7"><p class="step-k">The turn</p><p>Burn one, deal one: the fourth community card, called the <b>turn</b>, is <b>2♥</b>. A blank: it helps nobody. You check, Cy checks, Eli bets 20. You call. Cy gives up and folds.</p></div>
+      <div class="step" data-step="8"><p class="step-k">The river</p><p>Burn one, deal the last card, the <b>river</b>: <b class="red">K♠</b>. A fifth spade! You have a flush, and with the Ace, the best possible flush. You bet 40. Eli thinks for a long time… and calls.</p></div>
+      <div class="step" data-step="9"><p class="step-k">Showdown</p><p>When the last bet is called, the remaining players reveal their cards: the <b>showdown</b>. Eli turns over <b>8♥ 8♣</b>, a pair of eights. You show your <b>ace-high flush</b>, using both your cards and three spades from the board. Each player uses the best five of their seven cards.</p></div>
+      <div class="step" data-step="10"><p class="step-k">Ship it</p><p>The 170-chip pot slides your way. The button moves one seat to the left, onto you, the blinds move with it, and a new hand begins. That's it. That's poker. Everything else is detail and nerve.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ CH4: ACTIONS ═════════════ -->
+<section class="chapter cream" id="ch-actions">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>4</span></div><p class="ch-label">Chapter four</p><h2>Five things you can do</h2><p class="ch-dek">Every decision in poker is one of these.</p></header>
+  <div class="prose">
+    <p>When it's your turn, the options depend on one question: <em>has anyone bet yet in this round?</em></p>
+  </div>
+  <div class="actions">
+    <div class="act" data-act="check"><div class="act-anim" aria-hidden="true"><span class="knock"></span></div><h4>Check</h4><p class="when">If nobody has bet yet</p><p>Pass the action along without putting chips in. Tap the table twice to signal it, the most satisfying gesture in poker.</p></div>
+    <div class="act" data-act="bet"><div class="act-anim" aria-hidden="true"><span class="chip c1"></span><span class="chip c2"></span><span class="chip c3"></span></div><h4>Bet</h4><p class="when">If nobody has bet yet</p><p>Put chips in first. Now everyone else has to match it, raise it, or leave.</p></div>
+    <div class="act" data-act="call"><div class="act-anim" aria-hidden="true"><span class="chip c1"></span><span class="chip c2"></span><span class="eq">=</span></div><h4>Call</h4><p class="when">If someone has bet</p><p>Match the current bet to stay in the hand.</p></div>
+    <div class="act" data-act="raise"><div class="act-anim" aria-hidden="true"><span class="chip c1"></span><span class="chip c2"></span><span class="chip c3"></span><span class="chip c4"></span><span class="up">↑</span></div><h4>Raise</h4><p class="when">If someone has bet</p><p>Match the bet <em>and</em> increase it. Everyone else must now match your new amount.</p></div>
+    <div class="act" data-act="fold"><div class="act-anim" aria-hidden="true"><span class="fcard f1"></span><span class="fcard f2"></span></div><h4>Fold</h4><p class="when">Any time it's your turn</p><p>Give up your cards and any claim to the pot. The chips you've already put in stay there.</p></div>
+  </div>
+  <div class="prose">
+    <p>A round of betting ends when everyone still in the hand has put in the same amount (or everyone has checked). If everyone folds except one player, that player wins the pot immediately, without showing their cards. This is why bluffing works.</p>
+    <h3>How much can you bet?</h3>
+    <p>That depends on the game's <strong>betting structure</strong>. In <b>No-Limit</b>, you can bet any amount up to everything in front of you, the famous "all in". In <b>Pot-Limit</b>, the most you can bet is the size of the pot. In <b>Fixed-Limit</b>, bets come in set sizes. No-Limit Hold'em is the most popular game in the world, and also the most dramatic. A player who runs out of chips mid-hand isn't out of luck: they can still win the part of the pot they matched, and any extra bets go into a separate <b>side pot</b>.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH5: BEST FIVE ═════════════ -->
+<section class="chapter felt-sec" id="ch-five">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>5</span></div><p class="ch-label">Chapter five</p><h2>Best five of seven</h2><p class="ch-dek">Reading the board is a skill. Practice it here.</p></header>
+  <div class="prose">
+    <p>In Hold'em you always have seven cards to choose from, two in your hand and five on the board, and your hand is the <strong>best five</strong> you can make. You can use both of your hole cards, one, or even none: if the board itself is the best hand, you "play the board" and probably split the pot.</p>
+    <p>Beginners misread hands all the time. Overlooking a straight on the board or forgetting that everyone shares the same flush is a classic. Deal some hands and see how the best five light up.</p>
+  </div>
+  <figure class="fig full reader" aria-labelledby="reader-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Hand reader</p><h3 id="reader-title">What have you got?</h3></div><div class="seg" role="group" aria-label="Mode"><button type="button" data-mode="show" aria-pressed="true">Show me</button><button type="button" data-mode="guess" aria-pressed="false">Let me guess</button></div></div>
+    <div class="reader-body">
+      <div class="reader-row"><p class="rr-label">Board</p><div class="rr-cards" id="rd-board"></div></div>
+      <div class="reader-row"><p class="rr-label">Your hand</p><div class="rr-cards" id="rd-hole"></div></div>
+    </div>
+    <div class="reader-out" id="rd-out" aria-live="polite"></div>
+    <div class="reader-guess" id="rd-guess" hidden></div>
+    <div class="reader-btns"><button type="button" class="btn" id="rd-deal">Deal another ⟳</button><span class="reader-streak" id="rd-streak"></span></div>
+  </figure>
+</section>
+
+<!-- ═════════════ CH6: ODDS ═════════════ -->
+<section class="chapter cream" id="ch-odds">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>6</span></div><p class="ch-label">Chapter six</p><h2>A little bit of math</h2><p class="ch-dek">Outs, odds, and why good players are calculators in hoodies.</p></header>
+  <div class="prose">
+    <p>Poker is a game of skill <em>because</em> it's a game of chance. Over one hand, anyone can win. Over thousands of hands, the player who makes better decisions about probability wins. You don't need much math, just two ideas.</p>
+    <h3>Idea one: count your outs</h3>
+    <p>An <strong>out</strong> is a card that would improve your hand to a winner. Remember our flush draw after the flop? There are 13 spades in the deck; you could see four of them, so <b>9 spades</b> were left: 9 outs. To turn outs into a percentage there's a famous shortcut, the <b>rule of 2 and 4</b>: on the flop, multiply your outs by 4 to estimate your chance of hitting by the river; on the turn, multiply by 2.</p>
+  </div>
+  <figure class="fig wide outs" aria-labelledby="outs-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Outs</p><h3 id="outs-title">With <output id="outs-n">9</output> outs, you'll hit…</h3></div><div class="seg" role="group" aria-label="Street"><button type="button" data-street="flop" aria-pressed="true">On the flop (2 cards to come)</button><button type="button" data-street="turn" aria-pressed="false">On the turn (1 card)</button></div></div>
+    <div class="outs-body">
+      <div class="outs-big"><output id="outs-exact">35.0%</output><span>exact chance</span><p id="outs-rule">Rule of 4 says <b>36%</b> — close enough.</p></div>
+      <div class="outs-deck" id="outs-deck" aria-hidden="true"></div>
+    </div>
+    <label class="slider"><span>Number of outs</span><input id="outs-slider" type="range" min="1" max="20" value="9"></label>
+    <div class="outs-presets" id="outs-presets"></div>
+    <figcaption>Exact figures assume you know your two cards and the board: 47 unseen cards on the flop, 46 on the turn.</figcaption>
+  </figure>
+  <div class="prose">
+    <h3>Idea two: pot odds</h3>
+    <p>Say the pot holds 80 chips and your opponent bets 20. To call you must risk 20 to win 100 (the pot plus their bet). You're getting 100-to-20, or 5-to-1, so you need to win more than 1 time in 6, about <b>17%</b>, for the call to pay off in the long run. If your outs give you better than that, call. If not, fold, even if it hurts.</p>
+  </div>
+  <figure class="fig wide potodds" aria-labelledby="po-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Pot odds</p><h3 id="po-title">Should you call?</h3></div></div>
+    <div class="po-body">
+      <div class="po-sliders">
+        <label class="slider"><span>Pot before the bet <output id="po-pot">80</output></span><input id="po-pot-s" type="range" min="10" max="300" step="10" value="80"></label>
+        <label class="slider"><span>Bet you must call <output id="po-call">20</output></span><input id="po-call-s" type="range" min="5" max="300" step="5" value="20"></label>
+        <label class="slider"><span>Your chance to win <output id="po-eq">35%</output></span><input id="po-eq-s" type="range" min="1" max="99" value="35"></label>
+      </div>
+      <div class="po-viz">
+        <svg id="po-svg" viewBox="0 0 300 160" aria-hidden="true"></svg>
+        <p class="po-verdict" id="po-verdict"></p>
+      </div>
+    </div>
+  </figure>
+  <div class="prose">
+    <p>Here's a third tool, the one the pros use: <strong>equity</strong>, your share of the pot if all the cards were dealt out right now. Pick a classic matchup and the page will deal it out thousands of times.</p>
+  </div>
+  <figure class="fig wide equity" aria-labelledby="eq-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Equity calculator</p><h3 id="eq-title">Famous pre-flop matchups</h3></div><select id="eq-select" aria-label="Choose a matchup"></select></div>
+    <div class="eq-body">
+      <div class="eq-side" id="eq-a"><div class="eq-cards"></div><p class="eq-pct">—</p><div class="eq-bar"><i></i></div></div>
+      <div class="eq-mid"><p class="eq-vs">vs</p><p class="eq-tie" id="eq-tie"></p></div>
+      <div class="eq-side" id="eq-b"><div class="eq-cards"></div><p class="eq-pct">—</p><div class="eq-bar"><i></i></div></div>
+    </div>
+    <p class="eq-note" id="eq-note"></p>
+    <figcaption>Computed live in your browser by dealing random boards (Monte Carlo simulation). Numbers wobble by a percent or so from run to run.</figcaption>
+  </figure>
+</section>
+
+<!-- ═════════════ CH7: STRATEGY ═════════════ -->
+<section class="chapter felt-sec" id="ch-strategy">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>7</span></div><p class="ch-label">Chapter seven</p><h2>How to not be the fish</h2><p class="ch-dek">Starting hands, position, bluffs and tells.</p></header>
+  <div class="prose">
+    <p>There's an old saying: if you can't spot the sucker at the table within half an hour, it's you. Poker players call that player the <strong>fish</strong>. Here's how to swim.</p>
+    <h3>1. Fold more</h3>
+    <p>The single biggest beginner mistake is playing too many hands. There are 169 different starting hands in Hold'em, and most of them lose money. Good players fold the majority of the time before the flop and play their good hands aggressively. That style has a name: <b>tight-aggressive</b>.</p>
+  </div>
+  <figure class="fig full chart" aria-labelledby="chart-title">
+    <div class="fig-head"><div><p class="fig-k">Interactive · Starting hands</p><h3 id="chart-title">A beginner's starting-hand chart</h3></div></div>
+    <div class="chart-body">
+      <div class="grid169" id="grid169" role="grid" aria-label="169 starting hands"></div>
+      <div class="chart-side">
+        <div class="chart-legend" id="chart-legend"></div>
+        <div class="chart-info" id="chart-info" aria-live="polite"><p class="ci-hand">Hover a hand</p><p>Pairs run down the diagonal. <b>Suited</b> hands (same suit, "s") are above it, <b>offsuit</b> ("o") below.</p></div>
+      </div>
+    </div>
+    <figcaption>A simplified guide for a full table, not gospel. Real strategy shifts with your seat, the stack sizes and the players.</figcaption>
+  </figure>
+  <div class="prose">
+    <h3>2. Position is power</h3>
+    <p>Acting last is a huge advantage: you get to see what everyone else does before you decide. That's why the button is the best seat at the table and why players near it can play more hands. In early position, with lots of players still to act behind you, play only your strongest hands.</p>
+    <h3>3. Bluff with a reason</h3>
+    <p>A <strong>bluff</strong> is a bet with a weak hand, designed to make better hands fold. Movies make it look like poker is all bluffing. It isn't. A good bluff tells a believable story: your bets on earlier streets should make sense with the strong hand you're pretending to have. Bluffing works best against one or two opponents, and very badly against players who call everything. Never try to bluff someone who isn't paying attention.</p>
+    <p>The cousin of the bluff is the <strong>semi-bluff</strong>: betting with a hand that isn't good yet but could become good, like our flush draw. You win if they fold, and you can still win if they call and the spade comes.</p>
+  </div>
+  <div class="tells" id="tells">
+    <div class="tell"><div class="tell-face" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div><h4>The long stare</h4><p>People acting strong are often weak, and vice versa. A player who stares you down may be trying to scare you off.</p></div>
+    <div class="tell"><div class="tell-face shake" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div><h4>Shaky hands</h4><p>Counterintuitive: trembling when betting often signals a <em>strong</em> hand. Adrenaline is hard to fake.</p></div>
+    <div class="tell"><div class="tell-face peek" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div><h4>The chip glance</h4><p>A quick look at their chips after the flop can mean someone liked what they saw and is planning a bet.</p></div>
+    <div class="tell"><div class="tell-face fast" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div><h4>Timing</h4><p>Online, there are no faces, but how fast someone acts is a tell too. An instant call often means a medium-strength hand.</p></div>
+  </div>
+  <div class="prose">
+    <p class="small-note">Tells are fun but unreliable. Betting patterns, what someone does over many hands, are far more trustworthy than a twitch.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH8: PLAY ═════════════ -->
+<section class="chapter felt-sec play-sec" id="ch-play">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>8</span></div><p class="ch-label">Chapter eight</p><h2>Your turn</h2><p class="ch-dek">Heads-up against Whiskers, a cat with questionable morals.</p></header>
+  <div class="prose">
+    <p>Time to play. This is <b>Fixed-Limit Hold'em</b>, one-on-one: blinds of 1 and 2, bets of 2 before and on the flop, 4 on the turn and river, at most three raises per round. You both start with 100 chips. Whiskers decides by simulating hands, and bluffs now and then. Good luck.</p>
+  </div>
+  <figure class="fig full game" id="game" aria-labelledby="game-title">
+    <h3 id="game-title" class="sr-only">Play heads-up poker against a computer opponent</h3>
+    <div class="g-table">
+      <div class="g-seat g-bot"><div class="g-avatar cat" aria-hidden="true"><span class="ear l"></span><span class="ear r"></span><span class="eye l"></span><span class="eye r"></span><span class="nose"></span></div><div><p class="g-name">Whiskers <span class="g-btn" id="g-bot-btn" hidden>D</span></p><p class="g-stack" id="g-bot-stack">100</p></div><p class="g-say" id="g-say"></p></div>
+      <div class="g-cards" id="g-bot-cards"></div>
+      <div class="g-mid"><div class="g-board" id="g-board"></div><p class="g-pot">Pot <b id="g-pot">0</b></p></div>
+      <div class="g-cards" id="g-you-cards"></div>
+      <div class="g-seat g-you"><div class="g-avatar you" aria-hidden="true">YOU</div><div><p class="g-name">You <span class="g-btn" id="g-you-btn" hidden>D</span></p><p class="g-stack" id="g-you-stack">100</p></div><p class="g-hand" id="g-hand"></p></div>
+    </div>
+    <div class="g-controls" id="g-controls"></div>
+    <div class="g-foot">
+      <label class="check"><input type="checkbox" id="g-odds"> Show my chance of winning</label>
+      <ol class="g-log" id="g-log" aria-live="polite"></ol>
+    </div>
+  </figure>
+</section>
+
+<!-- ═════════════ CH9: HISTORY & VARIANTS ═════════════ -->
+<section class="chapter cream" id="ch-history">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>9</span></div><p class="ch-label">Chapter nine</p><h2>From riverboats to robots</h2><p class="ch-dek">Two hundred years of bluffing.</p></header>
+  <div class="prose"><p>Nobody knows exactly where poker came from. It probably descends from several older bluffing games: the French <em>poque</em>, the German <em>pochen</em>, perhaps the Persian <em>as-nas</em>. What we do know is that it grew up in America, in the early 1800s, and travelled the way Americans did.</p></div>
+  <ol class="hist" id="hist"></ol>
+  <div class="prose"><h3>The family tree</h3><p>Hold'em is the most popular, but it's one branch of a big family. Flip the cards to meet the others.</p></div>
+  <div class="variants" id="variants"></div>
+</section>
+
+<!-- ═════════════ CH10: ETIQUETTE ═════════════ -->
+<section class="chapter felt-sec" id="ch-manners">
+  <header class="ch-head"><div class="ch-card" aria-hidden="true"><span>10</span></div><p class="ch-label">Chapter ten</p><h2>Don't be that player</h2><p class="ch-dek">Table manners, and the words you'll hear.</p></header>
+  <div class="manners">
+    <div><p class="m-n">♠</p><h4>Act in turn</h4><p>Wait until it's your turn to fold, bet or even react. Acting early gives away information and annoys everyone.</p></div>
+    <div><p class="m-n">♥</p><h4>Say it, then do it</h4><p>Announce "call" or "raise to 20" out loud. Dropping in some chips, then reaching back for more, is a <em>string bet</em> and usually not allowed.</p></div>
+    <div><p class="m-n">♦</p><h4>Don't splash the pot</h4><p>Place your bet in front of you, not thrown into the pile, so everyone can see how much you put in.</p></div>
+    <div><p class="m-n">♣</p><h4>Don't slow-roll</h4><p>If you have the winning hand at showdown, show it. Making someone think they've won before revealing yours is the rudest move in poker.</p></div>
+    <div><p class="m-n">♠</p><h4>Protect your cards</h4><p>Keep a chip or your hand on your cards. If the dealer mucks them by accident, they're gone.</p></div>
+    <div><p class="m-n">♥</p><h4>Be a good loser (and winner)</h4><p>Bad beats happen to everyone. Nobody wants to hear the story of yours. Win quietly, lose gracefully.</p></div>
+  </div>
+  <div class="prose"><h3>Speak poker</h3></div>
+  <div class="glossary" id="glossary"></div>
+</section>
+
+<!-- ═════════════ CLOSING ═════════════ -->
+<section class="prose closing">
+  <p>Poker rewards a particular kind of thinking: making the best decision you can with what you know, then letting go of the result. You'll make good calls and lose, and bad calls and win. Over enough hands the luck evens out, and what's left is how well you decided.</p>
+  <p>That's not a bad lesson for a card game to teach. Find some friends, a deck and a pile of something to bet with. Fold more than feels natural. And when you finally get that flush on the river, try to keep a straight face.</p>
+  <p class="fin" aria-hidden="true"><span>♠</span><span>♥</span><span>♦</span><span>♣</span></p>
+</section>
+
+<!-- ═════════════ NOTES ═════════════ -->
+<section class="methods">
+  <div class="methods-inner">
+    <h2>Notes &amp; sources</h2>
+    <details open>
+      <summary>How this page works</summary>
+      <p>All cards, tables and animations are drawn in your browser. Hand rankings are judged by a small five-card evaluator that picks the best 5 of 7. Hand frequencies are exact counts out of the 2,598,960 possible five-card hands. Equity figures and Whiskers' decisions use Monte Carlo simulation: dealing out many random completions of the hand and counting wins. The starting-hand chart is a simplified beginner's guide, not a solver output.</p>
+    </details>
+    <details>
+      <summary>Further reading</summary>
+      <ul class="sources">
+        <li>Sklansky, D. <em>The Theory of Poker.</em> The classic on why poker decisions are about expected value.</li>
+        <li>Harrington, D. &amp; Robertie, B. <em>Harrington on Hold'em.</em> A thorough, readable tournament guide.</li>
+        <li>McManus, J. <em>Cowboys Full: The Story of Poker.</em> A lively history, from riverboats to the internet.</li>
+        <li>Brown, N. &amp; Sandholm, T. (2019). <a href="https://www.science.org/doi/10.1126/science.aay2400">Superhuman AI for multiplayer poker.</a> <em>Science</em> 365. The Pluribus paper.</li>
+        <li><a href="https://en.wikipedia.org/wiki/List_of_poker_hands">List of poker hands</a> on Wikipedia, for frequencies and tie-break rules.</li>
+      </ul>
+    </details>
+    <p class="next"><span>More from lrn</span><a href="../watches/">The Machine on Your Wrist →</a><a href="../decision-trees/">The Tree That Asks Questions →</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <p>long readable notes — visual essays that take their time.</p>
+  <nav aria-label="Footer"><a href="/lrn/">All notes</a><a href="/">Home</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>
