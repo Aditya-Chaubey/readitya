@@ -93,7 +93,7 @@ const desc = 'lrn — long readable notes. Visual essays that take their time: d
                 <p class="f-meta">
                   <span class="tag">{lead.topic}</span>
                   <span>{lead.minutes} min</span>
-                  <span>{lead.interactives} interactives</span>
+                  {lead.interactives > 0 && <span>{lead.interactives} interactives</span>}
                 </p>
                 <h2>{lead.title}</h2>
                 <p class="f-deck">{lead.deck}</p>
@@ -139,7 +139,7 @@ const desc = 'lrn — long readable notes. Visual essays that take their time: d
                     <p class="c-meta">
                       <time datetime={s.date}>{fmt(s.date)}</time>
                       <span>{s.minutes} min</span>
-                      <span>{s.interactives} interactives</span>
+                      {s.interactives > 0 && <span>{s.interactives} interactives</span>}
                     </p>
                   </div>
                 </a>

@@ -26,6 +26,32 @@ export interface Story {
 
 export const STORIES: Story[] = [
   {
+    slug: 'off-duty',
+    title: 'Off Duty: The Quiet Art of Looking Expensive in Casual Clothes',
+    deck: 'The palette, the silhouette, the fabrics, the ten pieces and the details, with Newman, McQueen, Delon, Gosling, Gong Yoo and Hyun Bin as the lookbook.',
+    topic: 'Style & manners',
+    date: '2026-11-20',
+    minutes: 45,
+    interactives: 0,
+    cover: '/lrn/off-duty/img/gosling-cream.webp',
+    bg: '#0f0f0e',
+    fg: '#ece7de',
+    accent: '#f0a77f',
+  },
+  {
+    slug: 'gentleman',
+    title: 'Well Suited: How to Dress Like a Modern Gentleman',
+    deck: 'Fit, fabric, shoes, dress codes and the manners that matter more than any of it. With a paper-doll gentleman you can dress yourself.',
+    topic: 'Style & manners',
+    date: '2026-11-20',
+    minutes: 40,
+    interactives: 12,
+    cover: '/lrn/_covers/gentleman.svg',
+    bg: '#5c1421',
+    fg: '#f4ecdd',
+    accent: '#e3c48d',
+  },
+  {
     slug: 'poker',
     title: 'All In: A Friendly Guide to Poker',
     deck: 'How the world’s most famous card game works, why it’s really about people, and how to play your first hand. With a playable game against a cat.',
