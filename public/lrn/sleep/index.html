@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lights Out — lrn</title>
+<meta name="description" content="A field guide to sleep: why we sleep, the two forces that run your night, sleep stages and dreams, how much you need, chronotypes, caffeine, alcohol and screens, the perfect bedroom, the best habits, what to do when you can't sleep, and myths. With a page that turns from dusk to dawn as you read.">
+<meta name="theme-color" content="#0a0d24">
+<meta property="og:title" content="Lights Out">
+<meta property="og:description" content="Everything about sleep, explained well. Read it from dusk to dawn.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Nunito:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sleep.css">
+<script src="sleep.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+
+<!-- the sky: fixed layers that change from dusk to dawn as you scroll -->
+<div class="sky" id="sky" aria-hidden="true">
+  <canvas id="stars"></canvas>
+  <div class="moon-track"><div class="moon" id="moon"><i></i><i></i><i></i></div></div>
+  <div class="horizon" id="horizon"></div>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<div class="clock" id="clock" aria-hidden="true"><span class="clock-ico" id="clock-ico">☾</span><span id="clock-t">9:30</span><small id="clock-ap">PM</small></div>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-night">A night inside</a><a href="#ch-habits">Best habits</a></nav>
+</header>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lc">lrn</span> · No. 10 · Body &amp; mind</p>
+      <h1 id="title"><span class="lights" id="lights">Lights</span> <em class="out">Out<span class="dot">.</span></em></h1>
+      <p class="deck">A field guide to the strangest, most important thing you do every day. Why you sleep, what happens while you're gone, and how to get really, properly good at it.</p>
+      <p class="byline">By Aditya Chaubey · <time datetime="2026-11-21">November 2026</time> · 45 min · 12 interactives</p>
+      <button class="pull" id="pull" aria-pressed="false"><span class="pull-cord"><i></i></span><span class="pull-l">Pull to turn the lights out</span></button>
+    </div>
+    <figure class="hero-art" aria-label="Illustration: a cat asleep on a crescent moon">
+      <svg viewBox="0 0 420 420" id="cat-moon">
+        <defs>
+          <radialGradient id="mg" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#fff6d6"/><stop offset=".6" stop-color="#ffd978"/><stop offset="1" stop-color="#e9a948"/></radialGradient>
+          <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd978" stop-opacity=".45"/><stop offset="1" stop-color="#ffd978" stop-opacity="0"/></radialGradient>
+          <mask id="cres"><rect width="420" height="420" fill="#fff"/><circle cx="268" cy="168" r="128" fill="#000"/></mask>
+        </defs>
+        <circle cx="200" cy="215" r="200" fill="url(#glow)" class="glow"/>
+        <g class="bob">
+          <circle cx="200" cy="215" r="150" fill="url(#mg)" mask="url(#cres)"/>
+          <g mask="url(#cres)" fill="#e6a443" opacity=".5"><circle cx="120" cy="260" r="14"/><circle cx="150" cy="320" r="9"/><circle cx="95" cy="200" r="7"/><circle cx="190" cy="340" r="6"/></g>
+          <!-- cat -->
+          <g class="cat" transform="translate(150 286)">
+            <path class="tail" d="M140 22c30 6 44-12 36-30" fill="none" stroke="#2a2347" stroke-width="13" stroke-linecap="round"/>
+            <g class="breathe">
+              <ellipse cx="80" cy="18" rx="74" ry="34" fill="#2a2347"/>
+              <path d="M20 4c-6-26 4-40 22-42 4 10 2 22-2 30" fill="#2a2347"/>
+              <circle cx="22" cy="6" r="30" fill="#2a2347"/>
+              <path d="M2-14l-2-26 18 14zM34-20l14-22 4 26z" fill="#2a2347"/>
+              <path d="M8 6q6 5 12 0M28 6q6 5 12 0" fill="none" stroke="#ffd978" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M22 16l-3 3h6z" fill="#ff9aa8"/>
+            </g>
+          </g>
+        </g>
+        <g class="zzz" font-family="Fraunces" font-weight="800" fill="#e8e3ff"><text x="150" y="250" font-size="22">z</text><text x="150" y="250" font-size="30">z</text><text x="150" y="250" font-size="38">Z</text></g>
+      </svg>
+    </figure>
+  </div>
+  <a class="hero-cue" href="#story"><span>Scroll through the night</span><i aria-hidden="true"></i></a>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <p class="dropcap">It's 11:40 on a weeknight. You meant to be asleep an hour ago. You're in bed, technically, which counts for something, but your thumb is doing that thing where it scrolls on its own. One more video. One more reel. You know you'll regret it at 7 a.m. You do it anyway.</p>
+  <p>There's a name for this. In China it's called <em>bàofùxìng áoyè</em>, “revenge bedtime procrastination”: staying up late to claw back some free time from a day that didn't leave you any. If it sounds familiar, you have company. In a 2025 LocalCircles survey of more than 43,000 people across India, <strong>59 percent said they get less than six hours of uninterrupted sleep a night.</strong> Only 2 percent said they regularly get eight or more.</p>
+  <p>Which is a shame, because sleep turns out to be the closest thing biology has to a miracle drug. It sharpens memory, steadies mood, repairs muscle, tunes the immune system, regulates appetite and, as far as scientists can tell, helps clean the brain. There is no organ, and almost no aspect of how you think or feel, that doesn't get worse when you skimp on it.</p>
+  <p class="lead">This is a guide to the third of your life you spend unconscious.</p>
+  <p>Read it however you like, but notice the sky. This page runs from dusk to dawn: the clock in the corner keeps the time, and by the end, the sun will be up. Along the way there's a cat who's very good at this, a caffeine calculator that may ruin your evening chai, a bedroom you can redesign, a breathing exercise that actually works, and a lot of fascinating science.</p>
+  <p class="disclaimer">This is an educational guide, not medical advice. If you have ongoing trouble sleeping, loud snoring with gasping, or you're exhausted no matter how long you sleep, talk to a doctor. Most sleep problems are very treatable.</p>
+</section>
+
+<!-- ═════════════ CH1 WHY ═════════════ -->
+<section class="chapter" id="ch-why" data-rail="Why we sleep">
+  <header class="ch-head rv">
+    <p class="ch-time">10:00 PM</p>
+    <p class="ch-num">One</p>
+    <h2>Why on earth do we sleep?</h2>
+    <p class="ch-dek">An animal that lies unconscious for hours is easy to eat. Evolution kept it anyway.</p>
+  </header>
+  <div class="prose rv">
+    <p>Think about how strange sleep is. For roughly eight hours a day, you stop eating, stop looking for a mate, stop watching for danger, and lie down with your eyes closed, paralysed for part of the time, hallucinating vividly for another part. From an evolutionary point of view, that's a staggering risk. If sleep didn't do something essential, natural selection should have got rid of it long ago.</p>
+    <p>Instead, every animal studied so far sleeps in some form. Fruit flies sleep. Fish sleep. Even jellyfish, which don't have a brain, have a sleep-like state. Dolphins sleep with one half of their brain at a time so they can keep surfacing to breathe. Frigatebirds have been recorded napping in mid-flight. Whatever sleep does, it's so important that animals have bent over backwards to keep doing it.</p>
+    <p>Scientists don't think there's one single reason we sleep. It looks more like a maintenance window: the time when the body and brain run jobs that can't happen while you're busy being awake. Tap each card to see what's on the list.</p>
+  </div>
+
+  <div class="whys wide" id="whys"></div>
+
+  <div class="prose rv">
+    <h3 class="sub">What happens when you don't</h3>
+    <p>In 1964, a 17-year-old Californian named Randy Gardner stayed awake for about 11 days as a science-fair project. By the end he had trouble concentrating, slurred speech, memory lapses and mild hallucinations. Researchers now consider experiments like that far too risky to repeat, and Guinness stopped accepting sleeplessness records for the same reason.</p>
+    <p>You don't need eleven days to feel the effects. After about 17 to 19 hours awake, people in one well-known Australian study performed about as badly on some tests as people with a blood alcohol level of 0.05 percent, which is the legal driving limit in many countries. Longer than that and performance dropped to the equivalent of 0.1 percent. The scary part is that sleepy people consistently underestimate how impaired they are.</p>
+    <p>Chronic short sleep, the kind most of us live with, is quieter but adds up. Large population studies link regularly sleeping under six hours with higher risks of weight gain, type 2 diabetes, high blood pressure, heart disease, depression and anxiety, and with catching colds more easily. Some of those links are partly correlation, since illness can also cause poor sleep. But lab studies, where healthy people are deliberately kept short of sleep for a few nights, show the mechanisms directly: blood sugar control worsens, hunger hormones shift toward eating more, and mood and attention slip.</p>
+  </div>
+  <blockquote class="pullq rv"><p>Sleep isn't the absence of being awake. It's a different, busy state the body needs to be in.</p></blockquote>
+</section>
+
+<!-- ═════════════ CH2 TWO FORCES ═════════════ -->
+<section class="chapter" id="ch-forces" data-rail="Two forces">
+  <header class="ch-head rv">
+    <p class="ch-time">10:45 PM</p>
+    <p class="ch-num">Two</p>
+    <h2>The two forces that run your night</h2>
+    <p class="ch-dek">Sleep pressure and your body clock. Learn these and everything else makes sense.</p>
+  </header>
+  <div class="prose rv">
+    <p>In 1982 the Swiss researcher Alexander Borbély proposed a model of sleep so useful it's still taught today. It says your sleepiness at any moment is set by two separate systems working together.</p>
+    <p><b>Process S: sleep pressure.</b> From the moment you wake, a chemical called <strong>adenosine</strong> builds up in your brain, a by-product of your neurons burning energy. The longer you're awake, the more accumulates and the sleepier you feel. Sleep clears it. Think of it as an hourglass that starts running when you open your eyes.</p>
+    <p><b>Process C: the circadian clock.</b> Deep in your brain, just above where the optic nerves cross, sits a tiny cluster of about 20,000 neurons called the <strong>suprachiasmatic nucleus</strong>. It's your master clock, running on a cycle of roughly 24 hours, and it's set mainly by light hitting your eyes. During the day it sends out an alerting signal that pushes back against sleep pressure. In the evening, as light fades, it eases off and signals the release of <strong>melatonin</strong>, the hormone that tells the body it's night.</p>
+    <p>You fall asleep most easily when sleep pressure is high <em>and</em> the clock's alerting signal is low. Drag the sliders below to see the two forces play out across a day.</p>
+  </div>
+
+  <figure class="card wide rv" id="forces">
+    <div class="card-ctrls">
+      <label class="ctrl"><span>Wake up at <output id="fo-w-o"></output></span><input type="range" id="fo-w" min="4" max="11" step=".5" value="7"></label>
+      <label class="ctrl"><span>Afternoon coffee <output id="fo-c-o"></output></span><input type="range" id="fo-c" min="0" max="3" step="1" value="0"></label>
+      <div class="ctrl"><span>Last night</span><div class="seg" id="fo-n"><button data-v="0" class="on">Slept well</button><button data-v="1">Pulled an all-nighter</button></div></div>
+    </div>
+    <div class="chart tall" id="forces-chart"></div>
+    <div class="legend" id="forces-legend"></div>
+    <p class="card-note" id="forces-note"></p>
+  </figure>
+
+  <div class="prose rv">
+    <p>The model explains a lot of everyday experiences:</p>
+    <ul class="ticks">
+      <li><b>The post-lunch dip.</b> Your circadian alerting signal has a small natural dip in the early afternoon, around 2 to 4 p.m., whatever you ate. It's not just the biryani, though the biryani doesn't help. It's why siesta cultures exist.</li>
+      <li><b>The second wind.</b> Stay up past your usual bedtime and you'll often feel suddenly more awake around midnight. Your clock is still sending a weak alerting signal, and if you've pushed past the moment pressure peaked, it can briefly win.</li>
+      <li><b>How caffeine works.</b> Caffeine's molecule is shaped enough like adenosine to sit in its receptors and block them. The adenosine is still there, building up; you just can't feel it. When the caffeine wears off, it all hits at once: the infamous crash.</li>
+      <li><b>Jet lag.</b> Fly from Delhi to London and your clock is still on Indian time. Light at the new destination slowly resets it, roughly an hour or so a day.</li>
+    </ul>
+
+    <h3 class="sub">Light is the master switch</h3>
+    <p>The single strongest signal for your body clock is light, especially in the morning. Special cells in your retina, different from the ones you see with, detect brightness and report directly to the master clock. Bright morning light tells it “the day has started” and shifts your rhythm earlier, so you'll feel sleepy earlier that night. Bright light late in the evening does the opposite and pushes it later.</p>
+    <p>The scale difference matters. A well-lit office is a few hundred lux. Outdoors on an overcast day is several thousand. Direct sunlight can be 50,000 or more. Ten to thirty minutes outside in the morning, even without direct sun, gives your clock a far stronger signal than any indoor light, and it's one of the most effective sleep habits there is.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH3 A NIGHT INSIDE ═════════════ -->
+<section class="chapter" id="ch-night" data-rail="A night inside">
+  <header class="ch-head rv">
+    <p class="ch-time">11:30 PM</p>
+    <p class="ch-num">Three</p>
+    <h2>A night inside your head</h2>
+    <p class="ch-dek">Sleep isn't one state. It's a journey through four stages, repeated four to six times a night.</p>
+  </header>
+  <div class="prose rv">
+    <p>Until the 1950s, most scientists assumed sleep was simply the brain switching off. Then researchers in Chicago noticed sleepers' eyes darting rapidly beneath their eyelids at regular intervals, and woke them up. They'd been dreaming. That discovery of <strong>REM sleep</strong> (rapid eye movement) revealed that the sleeping brain goes through distinct stages, each with its own electrical signature. Tap each one to see its brain waves.</p>
+  </div>
+
+  <figure class="card wide rv" id="waves">
+    <div class="wv-tabs" id="wv-tabs" role="tablist"></div>
+    <canvas class="wv-canvas" id="wv-canvas" aria-hidden="true"></canvas>
+    <div class="wv-info" aria-live="polite"><h3 id="wv-t"></h3><p id="wv-d"></p><p class="wv-fact" id="wv-f"></p></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">The architecture of a night</h3>
+    <p>You move through these stages in cycles of roughly 90 minutes (anywhere from about 70 to 120, depending on the person and the cycle). But the cycles aren't identical. <strong>Deep sleep dominates the first half of the night</strong>, when sleep pressure is highest. <strong>REM dominates the second half</strong>, with the longest and most vivid REM periods in the last couple of hours before you wake.</p>
+    <p>That has a big practical consequence. If you normally sleep eight hours and cut it to six by going to bed late or setting an early alarm, you don't lose a quarter of each stage evenly. You lose a disproportionate chunk of your REM sleep, the stage most linked to emotional processing and creative connection-making. Watch a night unfold:</p>
+  </div>
+
+  <figure class="card wide rv" id="hypno">
+    <div class="hy-top">
+      <div class="seg" id="hy-len"><button data-v="8" class="on">8 hours</button><button data-v="6">6 hours (late night)</button></div>
+      <button class="btn" id="hy-play">▶ Play the night</button>
+    </div>
+    <div class="chart tall" id="hypno-chart"></div>
+    <div class="hy-stats" id="hy-stats"></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Dreams</h3>
+    <p>You dream every night, whether or not you remember it. The most vivid, story-like dreams happen in REM, though dreams occur in other stages too. During REM, the brain's emotional centres are highly active, while the region behind your forehead that handles logic and self-control (the prefrontal cortex) is relatively quiet. That's why dreams feel emotionally intense and completely unquestioned: of course your school maths teacher is a horse, and of course you're late for an exam you never studied for.</p>
+    <p>Why we dream is still debated. Leading ideas include processing emotional experiences, consolidating memories, and simulating threats or social situations so we're better prepared for them. Whatever the reason, the body is careful not to act them out: during REM, your brain paralyses almost every voluntary muscle except the eyes and the breathing muscles. This is called <strong>REM atonia</strong>.</p>
+    <p>Occasionally the system glitches. In <strong>sleep paralysis</strong>, you wake up mentally while the REM paralysis is still switched on: you're aware, you can't move, and you may sense a presence in the room. It's terrifying and harmless, and surprisingly common; estimates suggest a sizable minority of people experience it at least once. It's behind folklore around the world, from the “old hag” of Newfoundland to many South Asian stories of a spirit sitting on the sleeper's chest. It usually passes in seconds to a couple of minutes, and it happens more often when you're sleep-deprived or keeping irregular hours.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH4 HOW MUCH ═════════════ -->
+<section class="chapter" id="ch-much" data-rail="How much">
+  <header class="ch-head rv">
+    <p class="ch-time">12:30 AM</p>
+    <p class="ch-num">Four</p>
+    <h2>How much is enough?</h2>
+    <p class="ch-dek">Probably more than you're getting. And no, you can't fully catch up on Sunday.</p>
+  </header>
+  <div class="prose rv">
+    <p>Expert panels such as the US National Sleep Foundation and the American Academy of Sleep Medicine broadly agree: most adults need <strong>7 to 9 hours</strong> a night. Teenagers need more, 8 to 10, and young children more still. People over 65 tend to need slightly less, 7 to 8, but they don't need dramatically less; they often just find it harder to stay asleep.</p>
+  </div>
+
+  <figure class="card wide rv" id="ages">
+    <div class="ages" id="ages-bars"></div>
+    <p class="card-note">Recommended nightly sleep by age, from the National Sleep Foundation's consensus guidelines. Bars show the recommended range; individuals vary.</p>
+  </figure>
+
+  <div class="prose rv">
+    <p>“But I'm fine on five hours.” Maybe. A tiny fraction of people carry rare gene variants (one was found in a gene called DEC2) that seem to let them thrive on about six hours. They are genuinely rare. Most people who believe they're fine on five or six have simply forgotten what being fully rested feels like. In a famous experiment at the University of Pennsylvania, people restricted to six hours a night for two weeks performed as badly on attention tests as people kept awake for a night or two, yet rated themselves only slightly sleepy. The impairment kept growing; their sense of it didn't.</p>
+    <p>A simple test of whether you're getting enough: on a free holiday with no alarm, after a few days of settling in, how long do you naturally sleep? And do you need an alarm to wake up on work days? If you sleep much longer whenever you can, and the alarm always drags you out of deep sleep, you're probably carrying a debt.</p>
+
+    <h3 class="sub">Sleep debt and social jet lag</h3>
+    <p>Sleeping in on weekends helps a little, but research suggests it doesn't fully undo a week of short nights; some effects, like on blood-sugar control, seem to persist. And it creates another problem. The German chronobiologist Till Roenneberg coined the term <strong>social jet lag</strong> for the difference between when you sleep on work days and free days. If you sleep midnight to 7 on weekdays and 3 to 11 a.m. on weekends, your body effectively flies three time zones west every Friday and back every Monday. Monday mornings feel like jet lag because, biologically, they are.</p>
+  </div>
+
+  <figure class="card wide rv" id="debt">
+    <div class="debt-grid">
+      <div class="debt-col">
+        <p class="debt-h">Work days</p>
+        <label class="ctrl"><span>Asleep at <output id="db-wb-o"></output></span><input type="range" id="db-wb" min="20" max="28" step=".25" value="24.5"></label>
+        <label class="ctrl"><span>Wake at <output id="db-ww-o"></output></span><input type="range" id="db-ww" min="4" max="11" step=".25" value="7"></label>
+      </div>
+      <div class="debt-col">
+        <p class="debt-h">Free days</p>
+        <label class="ctrl"><span>Asleep at <output id="db-fb-o"></output></span><input type="range" id="db-fb" min="20" max="30" step=".25" value="26"></label>
+        <label class="ctrl"><span>Wake at <output id="db-fw-o"></output></span><input type="range" id="db-fw" min="5" max="14" step=".25" value="10"></label>
+      </div>
+      <div class="debt-col">
+        <p class="debt-h">You need</p>
+        <label class="ctrl"><span>Hours a night <output id="db-n-o"></output></span><input type="range" id="db-n" min="6" max="10" step=".25" value="8"></label>
+      </div>
+    </div>
+    <div class="debt-week" id="debt-week" aria-hidden="true"></div>
+    <div class="debt-out">
+      <div><p>Weekly sleep debt</p><b id="db-debt">0h</b></div>
+      <div><p>Social jet lag</p><b id="db-jl">0h</b><span id="db-jl-n"></span></div>
+    </div>
+  </figure>
+</section>
+
+<!-- ═════════════ CH5 CHRONOTYPE ═════════════ -->
+<section class="chapter" id="ch-chrono" data-rail="Larks & owls">
+  <header class="ch-head rv">
+    <p class="ch-time">1:30 AM</p>
+    <p class="ch-num">Five</p>
+    <h2>Larks, owls and everyone in between</h2>
+    <p class="ch-dek">Your natural bedtime is partly written in your genes. Here's how to find yours.</p>
+  </header>
+  <div class="prose rv">
+    <p>Not everyone's clock runs on the same schedule. Some people naturally wake at 5:30 bright and chatty; others don't feel human until 11 and do their best thinking at midnight. This preference is called your <strong>chronotype</strong>, and it's real biology, not laziness or virtue. Twin studies suggest it's substantially heritable, and large genetic studies have found hundreds of gene regions associated with being a morning or evening person.</p>
+    <p>Chronotype also shifts with age. Children tend to be early birds. In adolescence, the clock swings dramatically later, which is why teenagers genuinely struggle to fall asleep early and why some schools have improved attendance and grades by starting later. It peaks at its latest around 20 and slowly drifts earlier through adulthood, which is why your grandparents are up at 5.</p>
+    <p>Take this short quiz to get a rough idea of yours. It's inspired by the questionnaires researchers use, but simplified, so treat the result as a hint, not a diagnosis.</p>
+  </div>
+
+  <figure class="card wide rv" id="quiz">
+    <div class="qz-body" id="qz-body" aria-live="polite"></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>The modern world is built for larks: early school, early offices, early flights. Owls forced onto a lark schedule live in permanent social jet lag, and studies link that mismatch with poorer mood and health. You can shift your clock a little, an hour or so, with consistent morning light, earlier meals and dimmer evenings. But you can't turn an owl into a lark, and it's worth arranging your life, where you can, to put demanding work at the time your brain is actually awake.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH6 ENEMIES ═════════════ -->
+<section class="chapter" id="ch-enemies" data-rail="Enemies of sleep">
+  <header class="ch-head rv">
+    <p class="ch-time">2:30 AM</p>
+    <p class="ch-num">Six</p>
+    <h2>The usual suspects</h2>
+    <p class="ch-dek">Caffeine, alcohol, screens, late dinners and the 2 a.m. brain.</p>
+  </header>
+  <div class="prose rv">
+    <h3 class="sub first">Caffeine lasts longer than you think</h3>
+    <p>Caffeine has a <strong>half-life</strong> of roughly five hours in a typical healthy adult, though it varies hugely between people, from about two to twelve hours depending on genes, pregnancy, some medications and whether you smoke (smoking speeds it up). Half-life means that five hours after your 4 p.m. coffee, half its caffeine is still circulating; after ten hours, a quarter.</p>
+    <p>In a 2013 study by Christopher Drake and colleagues, a large dose of caffeine (400 mg, roughly what's in a few strong coffees) taken even six hours before bed still cut people's sleep by about an hour, and many didn't notice. Build your own day of drinks below and see what's left in your blood at bedtime.</p>
+  </div>
+
+  <figure class="card wide rv" id="caff">
+    <div class="cf-drinks" id="cf-drinks"></div>
+    <div class="cf-day" id="cf-day" aria-live="polite"></div>
+    <div class="card-ctrls three">
+      <label class="ctrl"><span>Bedtime <output id="cf-bed-o"></output></span><input type="range" id="cf-bed" min="20" max="27" step=".25" value="23"></label>
+      <label class="ctrl"><span>Your caffeine half-life <output id="cf-hl-o"></output></span><input type="range" id="cf-hl" min="2" max="10" step=".5" value="5"></label>
+      <button class="btn ghost" id="cf-clear">Clear the day</button>
+    </div>
+    <div class="chart" id="caff-chart"></div>
+    <p class="card-note" id="caff-note"></p>
+  </figure>
+
+  <div class="prose rv">
+    <p>Caffeine amounts vary a lot by brew and cup size, so the numbers above are typical estimates. A common guideline is to stop caffeine at least 8 hours before bed. If you're a slow metaboliser, or you've noticed you sleep badly, try making your last cup a lunchtime one for two weeks and see what happens.</p>
+
+    <h3 class="sub">Alcohol: sedation is not sleep</h3>
+    <p>A drink or two can make you fall asleep faster, which is why so many people use it as a nightcap. But being sedated isn't the same as sleeping well. As your liver processes the alcohol through the night, it fragments the second half of your sleep with more awakenings, and it suppresses REM sleep. It also relaxes the throat muscles, making snoring and sleep apnoea worse. Many people who track their sleep are startled by how much a couple of evening drinks raise their overnight heart rate. If you drink, earlier is better than later, and less is better than more.</p>
+
+    <h3 class="sub">Screens: it's not only the blue light</h3>
+    <p>You've probably heard that the blue light from phones suppresses melatonin. It can, and bright screens close to your face late at night do shift the clock a bit. But researchers increasingly think the bigger problem is what's on the screen: content designed to be engaging. An exciting series, an argument in a group chat or an endless feed keep your brain alert and push bedtime later and later. “Night mode” helps a little. Putting the phone outside the bedroom helps a lot.</p>
+
+    <h3 class="sub">Late heavy meals, and the 2 a.m. brain</h3>
+    <p>A large, rich or spicy dinner right before bed can cause reflux and discomfort, and digestion raises body temperature when it should be falling. Try to finish big meals two to three hours before sleep. As for the 2 a.m. brain, the one that replays every embarrassing thing you've ever said: we'll deal with that in Chapter Nine.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH7 BEDROOM ═════════════ -->
+<section class="chapter" id="ch-room" data-rail="The bedroom">
+  <header class="ch-head rv">
+    <p class="ch-time">3:30 AM</p>
+    <p class="ch-num">Seven</p>
+    <h2>Design the perfect cave</h2>
+    <p class="ch-dek">Cool, dark, quiet, and boring. Build yours.</p>
+  </header>
+  <div class="prose rv">
+    <p>To fall asleep, your core body temperature needs to drop by about a degree. That's why it's hard to sleep in a hot room and why a warm shower an hour or two before bed helps: it draws blood to your skin, and you lose heat quickly afterwards. Sleep researchers generally suggest a cool bedroom, often quoted as around 18–20°C, but in an Indian summer that's neither realistic nor necessary. What matters is being cool <em>enough</em> to feel comfortable under a light sheet. An AC at 24–26°C with a fan is a perfectly good setup.</p>
+    <p>Darkness matters because even dim light through closed eyelids can affect sleep. Quiet matters because noise can fragment sleep even when it doesn't fully wake you. Toggle things in the room below and watch your score change.</p>
+  </div>
+
+  <figure class="card wide rv room-card" id="room">
+    <div class="room-grid">
+      <div class="room-art"><svg viewBox="0 0 460 320" id="room-svg" aria-label="Illustration of a bedroom that changes with your choices"></svg></div>
+      <div class="room-ctrls">
+        <label class="ctrl"><span>Room temperature <output id="rm-t-o"></output></span><input type="range" id="rm-t" min="16" max="34" step="1" value="29"></label>
+        <div class="toggles" id="rm-toggles"></div>
+        <div class="room-score"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="rs-track"/><circle cx="60" cy="60" r="52" class="rs-fill" id="rs-fill"/></svg><div><b id="rs-n">0</b><span id="rs-l"></span></div></div>
+      </div>
+    </div>
+    <p class="card-note" id="rm-note"></p>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Keep the bed for sleep</h3>
+    <p>Your brain is an association machine. If you work, scroll, eat and argue in bed, your brain learns that bed is a place for being awake. One of the core techniques sleep therapists use, called <strong>stimulus control</strong>, is to retrain that link: use the bed only for sleep (and sex), and if you can't sleep, get up and do something calm elsewhere until you feel sleepy. In a small Indian flat where the bed is also the sofa and the desk, do your best: at least keep work and laptops off it in the last hour.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH8 HABITS ═════════════ -->
+<section class="chapter" id="ch-habits" data-rail="Best habits">
+  <header class="ch-head rv">
+    <p class="ch-time">4:30 AM</p>
+    <p class="ch-num">Eight</p>
+    <h2>The best habits, in order</h2>
+    <p class="ch-dek">A day designed for a good night, from the moment your alarm goes off.</p>
+  </header>
+  <div class="prose rv">
+    <p>Sleep hygiene lists are usually a jumble of twenty rules of equal weight. They're not equal. If you only do one thing, make it the first one on this timeline. Each habit below is placed at the time it matters; tap a stop to see why it works.</p>
+  </div>
+
+  <figure class="day wide rv" id="day">
+    <div class="day-line" id="day-line"><div class="day-sun" id="day-sun"></div></div>
+    <div class="day-card" id="day-card" aria-live="polite"></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">The power nap</h3>
+    <p>Naps are great, used carefully. A short nap of <strong>10 to 20 minutes</strong> restores alertness without letting you sink into deep sleep, so you wake up feeling better, not groggy. In a well-known 1990s NASA study of long-haul pilots, a planned 40-minute rest opportunity (pilots slept about 26 minutes on average) improved their performance by 34 percent and their alertness by 54 percent. Naps longer than about 30 minutes risk waking you from deep sleep with “sleep inertia”, that heavy, confused feeling, and late-afternoon naps can steal sleep pressure from the night. Nap before about 3 p.m., set an alarm, and if you have insomnia, skip naps altogether.</p>
+    <p>A fun hack some people swear by: the <strong>coffee nap</strong>. Drink a coffee, then immediately lie down for 15–20 minutes. Caffeine takes roughly that long to kick in, so you wake just as it arrives, with the nap having cleared some adenosine too.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH9 CAN'T SLEEP ═════════════ -->
+<section class="chapter" id="ch-cant" data-rail="When you can't sleep">
+  <header class="ch-head rv">
+    <p class="ch-time">5:15 AM</p>
+    <p class="ch-num">Nine</p>
+    <h2>When you just can't sleep</h2>
+    <p class="ch-dek">Insomnia, racing thoughts, snoring, pills and the tyranny of sleep trackers.</p>
+  </header>
+  <div class="prose rv">
+    <p>Almost everyone has nights when sleep won't come. The worst thing you can do is lie there trying hard, because effort is the opposite of sleep. Sleep is something you allow, not something you do. Here's what actually helps.</p>
+    <ul class="ticks">
+      <li><b>Get up after about 20 minutes.</b> If you've been lying awake for what feels like twenty minutes (don't check the clock), go to another room, keep the lights low, and do something boring and screen-free until you feel sleepy. Then return. This stops your brain from learning that bed means frustration.</li>
+      <li><b>Write it down.</b> Racing thoughts often come from unfinished business. In a 2018 study at Baylor University, people who spent five minutes writing a specific to-do list for the next days fell asleep faster than people who wrote about tasks they'd already completed. Park the worries on paper.</li>
+      <li><b>Cognitive shuffling.</b> Pick a random word, like BLANKET. For each letter, picture unrelated objects starting with it: B, banana, bicycle, bridge… L, lamp, lion… It mimics the jumbled imagery of drifting off and crowds out worry.</li>
+      <li><b>Breathe slowly.</b> Slow breathing with long exhales calms the nervous system. In a 2023 Stanford study, five minutes a day of “cyclic sighing” (two inhales through the nose, one long exhale through the mouth) improved mood and slowed breathing more than an equal dose of mindfulness meditation. Try it here:</li>
+    </ul>
+  </div>
+
+  <figure class="breath wide rv" id="breath">
+    <div class="br-tabs" id="br-tabs"><button data-m="sigh" class="on">Cyclic sigh</button><button data-m="478">4-7-8</button><button data-m="box">Box breathing</button></div>
+    <div class="br-stage">
+      <div class="br-orb" id="br-orb"><span id="br-word">Ready</span></div>
+      <svg class="br-ring" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="92" class="br-track"/><circle cx="100" cy="100" r="92" class="br-prog" id="br-prog"/></svg>
+    </div>
+    <p class="br-cap" id="br-cap"></p>
+    <button class="btn" id="br-go">Start breathing</button>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Insomnia, and the treatment that works best</h3>
+    <p>If you have trouble falling or staying asleep at least three nights a week for three months or more, and it's affecting your days, that's chronic insomnia. It's very common, and it's very treatable. The first-line treatment recommended by major medical bodies, including the American College of Physicians, isn't a pill. It's <strong>CBT-I</strong>: cognitive behavioural therapy for insomnia. It combines stimulus control, a carefully managed “sleep restriction” schedule that rebuilds sleep pressure, and techniques for tackling anxious thoughts about sleep. It typically takes four to eight sessions, works for most people, and keeps working after treatment ends. It's increasingly available online and through apps.</p>
+
+    <h3 class="sub">Melatonin and sleeping pills</h3>
+    <p>Melatonin is not a knockout pill; it's a timing signal. It's most useful for shifting your clock, for jet lag or a very late sleep schedule, and research suggests low doses (often 0.5–3 mg) taken a few hours before your target bedtime can work as well as large ones. Prescription sleeping pills can help in a crisis, but they're generally meant for short-term use: many produce sleep that's lighter than natural sleep, cause next-day grogginess, and can lead to dependence. Talk to a doctor rather than self-medicating, especially before mixing anything with alcohol.</p>
+
+    <h3 class="sub">Snoring that isn't just snoring</h3>
+    <p><strong>Obstructive sleep apnoea</strong> happens when the airway repeatedly collapses during sleep, stopping breathing for seconds at a time until the brain jolts you half-awake to restart it, sometimes hundreds of times a night, usually without you remembering. Warning signs include loud snoring, pauses in breathing or gasping that a partner notices, morning headaches and being exhausted however long you sleep. It's strongly linked to high blood pressure, heart problems and drowsy-driving accidents, and it's widely thought to be underdiagnosed in India. It's also very treatable, often with a CPAP machine that gently keeps the airway open. If this sounds like you, ask a doctor about a sleep study.</p>
+
+    <h3 class="sub">Should you track your sleep?</h3>
+    <p>Wearables are decent at measuring how long you slept and your heart rate, and much less accurate at telling sleep stages apart than their confident charts suggest. They can be useful for spotting patterns (“I sleep badly after late meals”). But researchers have described a condition they call <strong>orthosomnia</strong>: anxiety caused by chasing a perfect sleep score, which, ironically, makes sleep worse. If your tracker stresses you out, take it off. How you feel during the day is the best sleep score there is.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH10 MYTHS ═════════════ -->
+<section class="chapter" id="ch-myths" data-rail="Myths">
+  <header class="ch-head rv">
+    <p class="ch-time">5:45 AM</p>
+    <p class="ch-num">Ten</p>
+    <h2>Myth or fact?</h2>
+    <p class="ch-dek">Ten things people believe about sleep. Make your call, then flip.</p>
+  </header>
+  <div class="myths wide" id="myths"></div>
+  <div class="prose rv">
+    <h3 class="sub">Meanwhile, in the animal kingdom</h3>
+    <p>For perspective on your eight hours, here's roughly how long some other animals sleep a day. Figures are approximate (many come from animals in captivity, and wild animals often sleep less), but the range is wonderful.</p>
+  </div>
+  <figure class="card wide rv" id="zoo">
+    <div class="zoo" id="zoo-bars"></div>
+    <p class="card-note">Approximate daily sleep, compiled from published estimates (e.g. Siegel, 2005, <em>Nature</em>; wild elephants from Gravett et al., 2017). Hover a bar for a fun fact.</p>
+  </figure>
+</section>
+
+<!-- ═════════════ DAWN ═════════════ -->
+<section class="chapter dawn" id="ch-dawn" data-rail="Good morning">
+  <div class="sunrise" aria-hidden="true"><div class="sun"></div></div>
+  <header class="ch-head rv">
+    <p class="ch-time">6:30 AM</p>
+    <p class="ch-num">Eleven</p>
+    <h2>Good morning</h2>
+    <p class="ch-dek">Your plan for tonight, and every night after.</p>
+  </header>
+
+  <figure class="plan wide rv" id="plan">
+    <div class="plan-head">
+      <svg class="pl-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="pl-track"/><circle cx="60" cy="60" r="52" class="pl-fill" id="pl-fill"/></svg>
+      <div><p class="pl-n" id="pl-n">0 / 0</p><p class="pl-l" id="pl-l"></p></div>
+      <button class="btn ghost small" id="pl-reset">Reset</button>
+    </div>
+    <ul class="pl-list" id="pl-list"></ul>
+  </figure>
+
+  <div class="prose rv closing">
+    <p>The sun's up. If you read this in one go, you probably spent a chunk of your evening learning about sleep instead of sleeping, which is exactly the kind of irony the cat finds hilarious.</p>
+    <p>Here's the whole thing in one breath. Wake at the same time every day. Get outside in the morning light. Stop caffeine by early afternoon. Go easy on late alcohol and late dinners. Give yourself an hour to land. Keep the room cool, dark and quiet, and keep the phone somewhere else. If you can't sleep, get up instead of fighting. And if it keeps happening, get help, because good help exists.</p>
+    <p>Sleep is not a luxury, a weakness or time wasted. It's the most powerful, free, legal performance enhancer you have, and you get a fresh dose every night. Tonight, take it.</p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sources" id="sources">
+  <div class="prose">
+    <h2>Sources &amp; further reading</h2>
+    <ul>
+      <li>LocalCircles (2025). How India Sleeps survey. <a href="https://theprint.in/health/59-indians-get-less-than-6-hrs-of-sleep-localcircles-survey-finds-and-phones-arent-the-main-culprit/2541779">ThePrint report</a> · <a href="https://www.localcircles.com/a/press/page/sleep-disruptions-survey">LocalCircles</a></li>
+      <li>Borbély, A. (1982). A two process model of sleep regulation. <em>Human Neurobiology</em>.</li>
+      <li>Drake, C. et al. (2013). Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed. <em>Journal of Clinical Sleep Medicine</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3805807">PMC</a></li>
+      <li>Sleep Foundation. <a href="https://www.sleepfoundation.org/nutrition/caffeine-and-sleep">Caffeine and sleep</a>.</li>
+      <li>Hirshkowitz, M. et al. (2015). National Sleep Foundation's sleep time duration recommendations. <em>Sleep Health</em>.</li>
+      <li>Williamson, A. &amp; Feyer, A.-M. (2000). Moderate sleep deprivation produces impairments equivalent to legally prescribed levels of alcohol intoxication. <em>Occupational and Environmental Medicine</em>.</li>
+      <li>Van Dongen, H. et al. (2003). The cumulative cost of additional wakefulness. <em>Sleep</em>.</li>
+      <li>Xie, L. et al. (2013). Sleep drives metabolite clearance from the adult brain. <em>Science</em>.</li>
+      <li>Aserinsky, E. &amp; Kleitman, N. (1953). Regularly occurring periods of eye motility during sleep. <em>Science</em>.</li>
+      <li>Roenneberg, T. et al. (2012). Social jetlag and obesity. <em>Current Biology</em>.</li>
+      <li>He, Y. et al. (2009). The transcriptional repressor DEC2 regulates sleep length in mammals. <em>Science</em>.</li>
+      <li>Rosekind, M. et al. (1995). Crew factors in flight operations IX: Effects of planned cockpit rest. NASA Technical Memorandum.</li>
+      <li>Scullin, M. et al. (2018). The effects of bedtime writing on difficulty falling asleep. <em>Journal of Experimental Psychology: General</em>.</li>
+      <li>Balban, M. et al. (2023). Brief structured respiration practices enhance mood and reduce physiological arousal. <em>Cell Reports Medicine</em>.</li>
+      <li>Qaseem, A. et al. (2016). Management of chronic insomnia disorder in adults: a clinical practice guideline from the American College of Physicians. <em>Annals of Internal Medicine</em>.</li>
+      <li>Baron, K. et al. (2017). Orthosomnia: are some patients taking the quantified self too far? <em>Journal of Clinical Sleep Medicine</em>.</li>
+      <li>Siegel, J. (2005). Clues to the functions of mammalian sleep. <em>Nature</em>. · Gravett, N. et al. (2017). Inactivity/sleep in two wild free-roaming African elephant matriarchs. <em>PLOS ONE</em>.</li>
+    </ul>
+    <p class="fine">Interactive figures are simplified illustrations: the two-process curves, hypnograms and caffeine model are schematic, and caffeine contents are typical estimates. Not medical advice.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <p>Long readable notes. No. 10 · Lights Out.</p>
+  <nav><a href="/lrn/">All notes</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>

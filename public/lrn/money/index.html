@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slow Rich — lrn</title>
+<meta name="description" content="Money basics for your twenties, for a 25-year-old with a first job in India: decoding your CTC, budgeting, emergency funds, insurance, credit cards, inflation, compounding, mutual funds, PPF, EPF, NPS, tax, big purchases, scams and the psychology of money.">
+<meta name="theme-color" content="#0d1411">
+<meta property="og:title" content="Slow Rich">
+<meta property="og:description" content="Money basics for your twenties. A field guide for your first salary, with calculators you can play with.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="money.css">
+<script src="money.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-salary">Your salary</a><a href="#ch-compound">Compounding</a><a href="#ch-checklist">Checklist</a></nav>
+</header>
+
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lc">lrn</span> · No. 09 · Money</p>
+      <h1 id="title"><span class="w w1">Slow</span><span class="w w2">Rich<i>.</i></span></h1>
+      <p class="deck">Money basics for your twenties. Everything a 25-year-old with a first salary in India should know, and almost nobody explains: from the gap between your CTC and your bank balance to why the most powerful thing you own is the next thirty-five years.</p>
+      <p class="byline">By Aditya Chaubey · <time datetime="2026-11-21">November 2026</time> · 60 min · 13 interactives</p>
+    </div>
+    <figure class="hero-fig" aria-label="Illustration: ₹10,000 a month from age 25 grows along a steepening curve">
+      <div class="hero-num"><span class="hn-l">₹10,000 a month from 25, at 60</span><span class="hn-v" id="hero-v">₹0</span><span class="hn-age" id="hero-age">age 25</span></div>
+      <svg id="hero-svg" viewBox="0 0 600 360" preserveAspectRatio="none" aria-hidden="true"></svg>
+    </figure>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-in">
+    <span>CTC</span><b>₹</b><span>SIP</span><b>₹</b><span>EPF</span><b>₹</b><span>PPF</span><b>₹</b><span>NPS</span><b>₹</b><span>CIBIL</span><b>₹</b><span>Index fund</span><b>₹</b><span>Term cover</span><b>₹</b><span>Expense ratio</span><b>₹</b><span>Step-up</span><b>₹</b><span>LTCG</span><b>₹</b><span>Emergency fund</span><b>₹</b>
+    <span>CTC</span><b>₹</b><span>SIP</span><b>₹</b><span>EPF</span><b>₹</b><span>PPF</span><b>₹</b><span>NPS</span><b>₹</b><span>CIBIL</span><b>₹</b><span>Index fund</span><b>₹</b><span>Term cover</span><b>₹</b><span>Expense ratio</span><b>₹</b><span>Step-up</span><b>₹</b><span>LTCG</span><b>₹</b><span>Emergency fund</span><b>₹</b>
+  </div></div>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <div class="sms rv" aria-label="A bank SMS">
+    <p class="sms-from">AX-YOURBK</p>
+    <p>Your A/c XX4417 is credited with <b>INR 66,149.00</b> on 31-07 by NEFT. Info: SALARY JUL. Avl Bal: INR 68,912.40</p>
+  </div>
+  <p class="dropcap">Meet Ishaan. He's 25, he's just joined a software company in Pune, and his offer letter said <strong>₹9 lakh a year</strong>. He did the maths on the way home from the interview: nine lakh divided by twelve is seventy-five thousand a month. He'd already half-spent it.</p>
+  <p>Then the first salary arrived, and it said sixty-six. Where did nine thousand rupees a month go? Was it a mistake? Was he being cheated? (He wasn't. We'll find every rupee in Chapter One.)</p>
+  <p>That gap between what you were promised and what lands in your account is the first of many things about money that nobody teaches you. School taught you trigonometry. College taught you whatever your degree was. Nobody sat you down and explained provident fund, or why your parents' favourite LIC policy might be a bad deal, or why a credit card is either the best or the worst financial tool you'll ever own depending entirely on one habit.</p>
+  <p class="lead">This is that sit-down.</p>
+  <p>It's written for someone exactly like Ishaan: 25, first proper job, living in an Indian city, maybe sending some money home, slightly overwhelmed by finfluencers shouting about stocks. It assumes you know nothing, and it tries to explain not just <em>what</em> to do but <em>why</em>, because the why is what keeps you on track when the market falls 30 percent or your friend buys a car you can't afford.</p>
+  <p>Here's the spoiler. Getting rich slowly is almost embarrassingly simple. Spend less than you earn. Protect yourself from disasters. Avoid expensive debt. Put the difference into boring, low-cost investments, automatically, every month, for decades. Don't panic. That's it. The hard part isn't knowing it; it's doing it for thirty-five years. The rest of this guide is the detail, and the detail matters.</p>
+  <p class="disclaimer">This is an educational guide, not personal financial advice. Tax rules, interest rates and limits are as of November 2026 (financial year 2026–27) and change often. Check current rules, and talk to a SEBI-registered adviser for decisions about your own situation.</p>
+</section>
+
+<!-- ═════════════ MAP ═════════════ -->
+<section class="map wide rv" aria-label="The plan">
+  <p class="map-h">The order of operations</p>
+  <ol class="steps">
+    <li><span>01</span><b>Understand your pay</b><i>CTC, in-hand, PF, tax</i></li>
+    <li><span>02</span><b>Budget on autopilot</b><i>pay yourself first</i></li>
+    <li><span>03</span><b>Build a safety net</b><i>emergency fund + insurance</i></li>
+    <li><span>04</span><b>Kill bad debt</b><i>cards, BNPL, loans</i></li>
+    <li><span>05</span><b>Invest for decades</b><i>index funds, EPF, PPF, NPS</i></li>
+    <li><span>06</span><b>Stay the course</b><i>behaviour beats brilliance</i></li>
+  </ol>
+</section>
+
+<!-- ═════════════ CH1 SALARY ═════════════ -->
+<section class="chapter light" id="ch-salary" data-rail="Your salary">
+  <header class="ch-head rv">
+    <p class="ch-num">01</p>
+    <h2>Where did my nine thousand go?</h2>
+    <p class="ch-dek">Decoding CTC, in-hand pay, provident fund and income tax.</p>
+  </header>
+  <div class="prose rv">
+    <p><strong>CTC</strong> means <em>cost to company</em>: everything your employer spends on you in a year, including money you'll never see in your monthly salary. It's a number designed to look good in an offer letter. The number that matters for your life is <strong>in-hand</strong> (or take-home) pay: what actually reaches your bank account.</p>
+    <p>Between the two sit four main things. Drag the slider to see how they change with salary. The figures are an estimate for a typical private-sector structure; your payslip will differ a little.</p>
+  </div>
+
+  <figure class="calc wide rv" id="salary">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Annual CTC <output id="sal-ctc-o"></output></span><input type="range" id="sal-ctc" min="300000" max="3000000" step="25000" value="900000"></label>
+        <label class="ctrl"><span>Basic pay as % of CTC <output id="sal-basic-o"></output></span><input type="range" id="sal-basic" min="30" max="50" step="1" value="40"></label>
+        <div class="ctrl"><span>Provident fund on</span>
+          <div class="seg" id="sal-pf"><button data-v="full" class="on">Full basic</button><button data-v="cap">₹15,000 cap</button></div></div>
+      </div>
+      <div class="sal-out">
+        <p class="big-l">Monthly in-hand, roughly</p>
+        <p class="big" id="sal-month">₹0</p>
+        <p class="sub-l" id="sal-note"></p>
+      </div>
+    </div>
+    <div class="waterfall" id="sal-bars" role="img" aria-label="Breakdown of CTC into in-hand pay and deductions"></div>
+    <table class="sal-table" id="sal-table"><caption class="sr">Yearly breakdown</caption><tbody></tbody></table>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">The four leaks, explained</h3>
+    <p><b>1. Employer's provident fund (EPF).</b> Your employer puts 12 percent of your basic pay into your Employees' Provident Fund account every month, and because it's counted in your CTC, it comes out of the headline number. You also contribute 12 percent from your own salary. Many companies calculate this on your full basic; others cap it at 12 percent of ₹15,000 (₹1,800 a month), which raises your in-hand pay but lowers your saving.</p>
+    <p>This is not lost money. It's forced savings, earning <strong>8.25 percent a year</strong> (the rate declared for 2025–26), backed by the government, and the interest is tax-free within limits. For a 25-year-old who might otherwise spend it, EPF is one of the best deals in Indian finance. Two rules: never withdraw it when you change jobs (transfer it using your UAN, your Universal Account Number, which stays the same for life), and check your passbook on the EPFO portal once a year to make sure your employer is actually depositing it.</p>
+    <p><b>2. Gratuity.</b> A lump sum your employer pays when you leave after at least five years of continuous service. Many companies include its cost (about 4.8 percent of basic) in your CTC, even though you only get it if you stay five years. If you leave after two, it simply disappears from your maths.</p>
+    <p><b>3. Professional tax.</b> A small state tax on employment, up to ₹2,500 a year, charged in states like Maharashtra and Karnataka. Annoying but trivial.</p>
+    <p><b>4. Income tax (TDS).</b> Your employer deducts tax every month and pays it to the government on your behalf: tax deducted at source. At the end of the year you get a <strong>Form 16</strong> showing your salary and tax paid. For many first-job salaries, though, the tax is now zero. Here's why.</p>
+
+    <h3 class="sub">Income tax in one page</h3>
+    <p>India has two tax systems you can choose between. The <strong>new regime</strong> is the default: lower rates, almost no deductions. The <strong>old regime</strong> has higher rates but lets you subtract things like rent (HRA), 80C investments (PPF, ELSS, EPF, life insurance premiums up to ₹1.5 lakh) and health insurance premiums (80D).</p>
+    <p>Under the new regime for 2026–27, salaried people get a ₹75,000 standard deduction automatically, and anyone whose taxable income is ₹12 lakh or less gets a rebate that wipes out the tax entirely. Together, that means a salary of up to about <strong>₹12.75 lakh pays no income tax at all</strong>. Above that, tax applies in slabs:</p>
+  </div>
+
+  <figure class="slabs wide rv" id="slabs" aria-label="New regime tax slabs">
+    <div class="slab-row" id="slab-row"></div>
+    <p class="slab-cap">New regime slabs, FY 2026–27. Each rate applies only to the slice of income inside its band, plus 4% health and education cess. Taxable income up to ₹12 lakh is fully rebated. (Rates unchanged in Budget 2026; the new Income-tax Act, 2025 took effect on 1 April 2026.)</p>
+  </figure>
+
+  <div class="prose rv">
+    <p>The single most common misunderstanding about tax: <em>moving into a higher slab doesn't mean all your income is taxed at the higher rate.</em> Only the rupees inside each band are. A raise never reduces your take-home pay.</p>
+    <p><b>Which regime should you pick?</b> At 25, on a typical first salary, the new regime almost always wins: it's simpler and often zero. The old regime starts to make sense if you pay high rent in a metro (big HRA exemption) <em>and</em> fill your 80C and 80D limits. Most payroll portals let you compare; if the old regime saves you less than ₹10,000–15,000 a year, simplicity is worth more. Choose for the tax system, never invest in something just to save tax.</p>
+    <p><b>File your return anyway.</b> Even if your tax is zero, file an income tax return (ITR) every year, usually by 31 July. It creates a record of income that banks, visa offices and landlords ask for, it lets you claim refunds, and it carries forward investment losses. It takes about twenty minutes on the income tax portal once your Form 16 arrives. Check your AIS (Annual Information Statement) there too: it shows everything the tax department already knows about you.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH2 BUDGET ═════════════ -->
+<section class="chapter dark" id="ch-budget" data-rail="Budgeting">
+  <header class="ch-head rv">
+    <p class="ch-num">02</p>
+    <h2>A budget you'll actually keep</h2>
+    <p class="ch-dek">Forget tracking every chai. Decide three numbers and automate them.</p>
+  </header>
+  <div class="prose rv">
+    <p>Most budgets fail because they're diets: exhausting, joyless, abandoned by week three. The budgets that work are closer to architecture. You make a few big decisions once, build them into your bank account, and then spend whatever's left without guilt.</p>
+    <p>The best-known framework is <strong>50 / 30 / 20</strong>, popularised by Elizabeth Warren: 50 percent of take-home pay on <em>needs</em> (rent, groceries, commute, bills, EMIs, money you must send home), 30 percent on <em>wants</em> (eating out, travel, shopping, subscriptions), and 20 percent on <em>savings and investments</em>. It's a starting point, not a law. Indian metros complicate it: rent in Mumbai or Bengaluru can eat 35 percent on its own. On the other hand, many 25-year-olds live with family or flatmates and can save 30 to 50 percent, which is a superpower they will never have again once life gets more expensive.</p>
+    <p>Play with your own split:</p>
+  </div>
+
+  <figure class="calc wide rv" id="budget">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Monthly in-hand <output id="bud-inc-o"></output></span><input type="range" id="bud-inc" min="20000" max="250000" step="1000" value="66000"></label>
+        <label class="ctrl"><span>Needs <output id="bud-n-o"></output></span><input type="range" id="bud-n" min="20" max="80" step="1" value="50"></label>
+        <label class="ctrl"><span>Wants <output id="bud-w-o"></output></span><input type="range" id="bud-w" min="5" max="60" step="1" value="30"></label>
+        <p class="ctrl-note">Savings is whatever's left. Try “living at home”: needs 25%, wants 30%.</p>
+      </div>
+      <div class="donut-wrap">
+        <svg id="bud-donut" viewBox="0 0 200 200" role="img" aria-label="Budget split"></svg>
+        <div class="donut-c"><p id="bud-save">₹0</p><span>saved a month</span></div>
+      </div>
+    </div>
+    <div class="legend" id="bud-legend"></div>
+    <p class="calc-verdict" id="bud-verdict"></p>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Pay yourself first</h3>
+    <p>The one trick that makes budgets work: <strong>save at the start of the month, not the end</strong>. If you wait to see what's left over, nothing will be. Set up an automatic SIP (systematic investment plan) and a recurring transfer to your emergency fund for the day after salary day. The money leaves before you see it, and you adjust your spending to what remains. Humans are remarkably good at living on whatever is in the account.</p>
+    <p>A neat structure many people use is <b>two bank accounts</b>: salary lands in account A, automatic transfers take out savings and fixed bills, and a fixed “spending allowance” moves to account B, linked to your UPI. When account B is empty, the month's fun is over. No spreadsheet required.</p>
+
+    <h3 class="sub">Track for three months, once</h3>
+    <p>You don't need to track forever, but do it once. Most people have no idea where their money goes, and UPI makes it worse: ₹180 here, ₹349 there, invisible. Export three months of bank and card statements and sort them into categories. Almost everyone finds one shocking leak, usually food delivery, quick-commerce top-ups or forgotten subscriptions. Fix the big leak and forget the small ones.</p>
+
+    <h3 class="sub">Money for family</h3>
+    <p>Many Indian 25-year-olds send part of their salary home, or will be expected to support parents as they age. This is a need, not a want, and it belongs in your budget explicitly. Two pieces of advice: decide the amount in a calm conversation, not month by month, so it's predictable for everyone; and if you can, put some of that money towards a <strong>health insurance policy for your parents</strong>. A single hospitalisation without insurance can wipe out years of a family's savings, and it often falls on the eldest earning child.</p>
+  </div>
+  <blockquote class="pull rv"><p>It's not your salary that makes you wealthy. It's the gap between your salary and your spending, invested for a very long time.</p></blockquote>
+</section>
+
+<!-- ═════════════ CH3 SAFETY NET ═════════════ -->
+<section class="chapter light" id="ch-safety" data-rail="Safety net">
+  <header class="ch-head rv">
+    <p class="ch-num">03</p>
+    <h2>Build the floor before the ladder</h2>
+    <p class="ch-dek">An emergency fund, health insurance and, maybe, term insurance. In that order.</p>
+  </header>
+  <div class="prose rv">
+    <p>Before you invest a single rupee in the stock market, protect yourself from the events that force people to sell investments at the worst possible time: losing a job, a medical emergency, a family crisis. Wealth is built in the long run, and the long run is a series of short runs you have to survive.</p>
+    <h3 class="sub">The emergency fund</h3>
+    <p>Keep <strong>three to six months of essential expenses</strong> somewhere safe and instantly accessible. Six is better if your job is insecure, you work in a volatile industry, or people depend on you. It doesn't need to earn much; its job is to exist. Good homes for it: a high-interest savings account, a sweep-in fixed deposit, or a liquid mutual fund. Not stocks, not crypto, not a locked FD you can't break, and definitely not a friend's business.</p>
+  </div>
+
+  <figure class="calc wide rv" id="efund">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Essential monthly expenses <output id="ef-exp-o"></output></span><input type="range" id="ef-exp" min="10000" max="150000" step="1000" value="33000"></label>
+        <label class="ctrl"><span>Months of cover <output id="ef-m-o"></output></span><input type="range" id="ef-m" min="3" max="12" step="1" value="6"></label>
+        <label class="ctrl"><span>You can set aside each month <output id="ef-s-o"></output></span><input type="range" id="ef-s" min="2000" max="60000" step="500" value="8000"></label>
+      </div>
+      <div class="sal-out">
+        <p class="big-l">Target</p>
+        <p class="big" id="ef-target">₹0</p>
+        <p class="sub-l" id="ef-time"></p>
+      </div>
+    </div>
+    <div class="ef-track" id="ef-track" aria-hidden="true"></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Health insurance: buy your own, now</h3>
+    <p>Your company probably gives you group health insurance. That's great, and it's not enough. It ends the day you leave or lose your job, which is exactly when you can least afford a hospital bill. Corporate covers are often small, too, for a country where a week in a private hospital in a metro can cost several lakh rupees.</p>
+    <p>Buy a personal health policy in your twenties, for three reasons. Premiums are lowest when you're young and healthy. Most policies have <em>waiting periods</em> (often two to four years for pre-existing conditions and some specific illnesses) that only start counting once you buy. And if you develop a condition later, insurers may load the premium or refuse you altogether. A common sensible setup at 25 is a base policy of ₹5–10 lakh plus a cheap <strong>super top-up</strong> that raises your cover to ₹25–50 lakh. Look at the claim settlement record, the network hospitals near you, room-rent limits (avoid them), and co-payment clauses (avoid those too).</p>
+
+    <h3 class="sub">Term insurance: only if someone depends on you</h3>
+    <p>Life insurance exists for one purpose: replacing your income for people who depend on it if you die. If nobody does yet, you may not need it. If your parents rely on your income, or you're married, or planning to be, buy <strong>pure term insurance</strong>: you pay a small premium, and if you die during the term, your family gets a large sum. If you don't, you get nothing, which is the best possible outcome.</p>
+    <p>At 25, a non-smoker can typically get ₹1 crore of cover until age 60 for around ₹10,000 a year, give or take. Lock in that low premium young. A rough rule for the amount: ten to fifteen times your annual income, plus any loans.</p>
+  </div>
+
+  <aside class="warn rv">
+    <p class="warn-h">The policy your uncle wants to sell you</p>
+    <p>Endowment plans, money-back policies and many ULIPs combine insurance with investment. They're sold hard in India, often by relatives, often as “safe” and “tax-saving”. The problem is that they usually do both jobs badly: the life cover is tiny and the returns are often around 4–6 percent a year once you dig into the illustration, barely above inflation, with large penalties if you stop paying. The rule of thumb that protects you: <strong>never mix insurance and investment.</strong> Buy pure term for protection; invest separately for growth. If you've already bought one, don't panic-surrender it before checking the surrender value; ask a fee-only adviser.</p>
+  </aside>
+</section>
+
+<!-- ═════════════ CH4 DEBT ═════════════ -->
+<section class="chapter dark" id="ch-debt" data-rail="Debt">
+  <header class="ch-head rv">
+    <p class="ch-num">04</p>
+    <h2>The 42 percent trap</h2>
+    <p class="ch-dek">Credit cards, credit scores, BNPL and the loans worth taking.</p>
+  </header>
+  <div class="prose rv">
+    <p>A credit card is a strange object. Used one way, it gives you a free month of credit, cashback, airport lounges, fraud protection and a strong credit score. Used another way, it charges you the highest interest rate you'll ever legally pay. The difference is one habit: <strong>pay the full statement balance, every month, by the due date.</strong></p>
+    <p>Card companies make it easy not to. Every bill shows a small “minimum amount due”, typically around 5 percent of the balance. Pay just that, and the rest rolls over at roughly 3–3.75 percent <em>a month</em>, which is 36–45 percent a year. Worse, you usually lose the interest-free period on new purchases too. Watch what happens:</p>
+  </div>
+
+  <figure class="calc wide rv" id="card">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Card balance <output id="cc-bal-o"></output></span><input type="range" id="cc-bal" min="10000" max="300000" step="5000" value="50000"></label>
+        <label class="ctrl"><span>Monthly interest <output id="cc-r-o"></output></span><input type="range" id="cc-r" min="2" max="4" step=".05" value="3.5"></label>
+        <label class="ctrl"><span>You pay each month <output id="cc-p-o"></output></span><input type="range" id="cc-p" min="5" max="100" step="1" value="5"></label>
+        <p class="ctrl-note">Minimum due modelled as 5% of the balance or ₹200, whichever is higher. Ignores GST on interest and late fees, which make it worse.</p>
+      </div>
+      <div class="sal-out">
+        <p class="big-l">Time to clear it</p>
+        <p class="big" id="cc-time">—</p>
+        <p class="sub-l" id="cc-int"></p>
+      </div>
+    </div>
+    <div class="chart" id="cc-chart"></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Your credit score</h3>
+    <p>Your <strong>CIBIL score</strong> (and similar scores from Experian, Equifax and CRIF High Mark) is a number from 300 to 900 that lenders use to decide whether to lend to you and at what rate. Above about 750 is considered good. It matters more than you think: it will decide the interest rate on your home loan in ten years, and a percentage point on a ₹50 lakh loan is lakhs of rupees.</p>
+    <p>What builds it: paying every bill on time (the biggest factor), using a small fraction of your credit limit (under 30 percent is a common guide), a long history, and not applying for lots of credit at once. What destroys it: a single missed payment, settling a loan for less than you owe, and maxed-out cards. Check your score free once or twice a year, and look for errors.</p>
+
+    <h3 class="sub">BNPL and “no-cost EMI”</h3>
+    <p>Buy-now-pay-later and no-cost EMIs feel free, and sometimes almost are. But they make expensive things feel cheap, they stack up invisibly across apps, and they show up on your credit report. “No-cost” often means the discount you'd get paying upfront has been quietly removed, or there's a processing fee. The real question isn't “can I afford ₹6,666 a month?” It's “would I buy this for ₹80,000 cash today?” If not, the EMI is just a way of hiding the answer from yourself.</p>
+
+    <h3 class="sub">Good debt, bad debt</h3>
+    <p>A loan is reasonable when it buys something that grows in value or raises your income, at an interest rate below what that thing earns, with a payment you can comfortably afford. An education loan for a degree that genuinely raises your pay can qualify. A home loan, later, can make sense. A personal loan for a holiday, a wedding or a phone almost never does. A car loan at 25 is usually a lifestyle choice dressed up as a necessity; if you need one, a common rule is to keep the total EMIs on all loans under 30–40 percent of your take-home pay.</p>
+    <p>If you already have debt, list it by interest rate and attack the most expensive first (the “avalanche” method) while paying the minimum on the rest. Credit card debt before everything, including investing. Paying off a 42 percent loan is a guaranteed 42 percent return, and no investment on earth reliably beats that.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH5 INFLATION ═════════════ -->
+<section class="chapter light" id="ch-inflation" data-rail="Inflation">
+  <header class="ch-head rv">
+    <p class="ch-num">05</p>
+    <h2>The tax nobody votes for</h2>
+    <p class="ch-dek">Inflation, and why “safe” money in a savings account is quietly shrinking.</p>
+  </header>
+  <div class="prose rv">
+    <p>Ask your parents what a cinema ticket, a plate of samosas or a litre of petrol cost when they were 25. That's inflation: prices rising, year after year, so that each rupee buys a little less. India's consumer price inflation has averaged somewhere around 5–6 percent a year over the long run, though it swings from year to year and the RBI targets 4 percent.</p>
+    <p>Six percent sounds small. Compounded over a career, it's enormous. It means the money you keep “safely” in a savings account earning 2.5–3 percent is losing purchasing power every single year. The real return, what matters, is the return <em>after</em> inflation.</p>
+  </div>
+
+  <figure class="calc wide rv" id="infl">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Inflation per year <output id="in-r-o"></output></span><input type="range" id="in-r" min="3" max="9" step=".5" value="6"></label>
+        <label class="ctrl"><span>Years from now <output id="in-y-o"></output></span><input type="range" id="in-y" min="1" max="35" step="1" value="35"></label>
+      </div>
+      <div class="infl-cards">
+        <div class="ic"><p>₹1 lakh today buys what</p><b id="in-buy">₹0</b><span>will buy then</span></div>
+        <div class="ic"><p>A ₹40,000/month life costs</p><b id="in-life">₹0</b><span>a month then</span></div>
+        <div class="ic"><p>A ₹200 thali will cost</p><b id="in-thali">₹0</b><span>then</span></div>
+      </div>
+    </div>
+    <div class="chart" id="in-chart"></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>This is why “I'll just keep it in an FD” isn't really the safe choice for long-term money. A fixed deposit at 7 percent, after tax at even a modest slab and 6 percent inflation, is roughly treading water. To grow your wealth in real terms over decades, you need some money in assets that have historically beaten inflation by a comfortable margin, and in India, over long periods, that has mainly meant equities: ownership of businesses.</p>
+    <p>That's the uncomfortable trade at the heart of investing. Safe-looking assets lose quietly to inflation. Growth assets beat it, but bounce around violently along the way. The solution isn't to pick one; it's to use each for the right job, and to give the growth assets enough time.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH6 COMPOUNDING ═════════════ -->
+<section class="chapter dark" id="ch-compound" data-rail="Compounding">
+  <header class="ch-head rv">
+    <p class="ch-num">06</p>
+    <h2>Your unfair advantage is time</h2>
+    <p class="ch-dek">Compounding, and the story of two friends.</p>
+  </header>
+  <div class="prose rv">
+    <p>Compounding is what happens when your returns start earning returns. ₹1 lakh growing at 11 percent becomes ₹1.11 lakh after a year. The next year, the 11 percent is calculated on ₹1.11 lakh, not ₹1 lakh. The growth is slow, slow, slow, and then suddenly enormous, because the curve bends upward. Most of the money arrives in the last decade.</p>
+    <p>Here's the story that makes it real. <strong>Ishaan</strong> starts investing ₹10,000 a month at 25. At 35, life gets busy and expensive, so he stops, and never invests another rupee; he just leaves the money alone. His friend <strong>Dev</strong> spends his twenties enjoying himself, starts at 35, and invests ₹10,000 a month without fail all the way to 60. Dev puts in two and a half times as much money. Who has more at 60?</p>
+  </div>
+
+  <figure class="calc wide rv" id="race">
+    <div class="race-top">
+      <div class="racer r1"><p>Ishaan</p><span id="race-a-in"></span><b id="race-a">₹0</b></div>
+      <div class="racer r2"><p>Dev</p><span id="race-b-in"></span><b id="race-b">₹0</b></div>
+    </div>
+    <div class="chart tall" id="race-chart"></div>
+    <div class="ctrls row">
+      <label class="ctrl"><span>Annual return <output id="race-r-o"></output></span><input type="range" id="race-r" min="6" max="14" step=".5" value="11"></label>
+      <label class="ctrl"><span>Ishaan stops at age <output id="race-s-o"></output></span><input type="range" id="race-s" min="27" max="45" step="1" value="35"></label>
+      <button class="btn" id="race-play">▶ Replay the race</button>
+    </div>
+  </figure>
+
+  <div class="prose rv">
+    <p>At 11 percent a year (roughly what the Nifty 50, including dividends, has returned over the past twenty years, though the future may differ), Ishaan ends up with nearly <strong>twice as much as Dev</strong>, having invested less than half as much. Ten years of head start beat twenty-five years of effort. You cannot buy those years back later at any price.</p>
+    <p>This is the single most important idea in personal finance for someone your age. Your salary is at its lowest, but your time horizon is at its longest, and time is the exponent in the formula. Start now, even small. ₹2,000 a month at 25 is worth more than you think, because you are not investing ₹2,000. You're planting it.</p>
+
+    <h3 class="sub">Now add the step-up</h3>
+    <p>Your salary won't stay at your first-job level. A powerful habit is the <strong>step-up SIP</strong>: increase your monthly investment by a fixed percentage every year, ideally when you get a raise, before the raise has a chance to become lifestyle. Try it below. A 10 percent annual step-up often does more than doubling the return assumption ever could.</p>
+  </div>
+
+  <figure class="calc wide rv" id="sip">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Start with, per month <output id="sip-m-o"></output></span><input type="range" id="sip-m" min="1000" max="100000" step="500" value="10000"></label>
+        <label class="ctrl"><span>Increase it every year by <output id="sip-u-o"></output></span><input type="range" id="sip-u" min="0" max="20" step="1" value="10"></label>
+        <label class="ctrl"><span>Expected return <output id="sip-r-o"></output></span><input type="range" id="sip-r" min="5" max="14" step=".5" value="11"></label>
+        <label class="ctrl"><span>Invest from 25 until age <output id="sip-y-o"></output></span><input type="range" id="sip-y" min="30" max="60" step="1" value="60"></label>
+      </div>
+      <div class="sal-out">
+        <p class="big-l">Value at the end</p>
+        <p class="big" id="sip-total">₹0</p>
+        <p class="sub-l" id="sip-note"></p>
+      </div>
+    </div>
+    <div class="chart" id="sip-chart"></div>
+    <div class="legend" id="sip-legend"><span><i style="background:var(--c1)"></i>Growth</span><span><i style="background:var(--c2)"></i>Money you put in</span></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>Two honest warnings about every chart like this. First, returns are never smooth: the real path includes years of minus 20 or minus 50 percent, and the line above hides them. Second, a crore in 35 years is not a crore today; divide by roughly 7.7 to see it in today's rupees at 6 percent inflation. Neither changes the lesson. Compounding is real, it rewards whoever starts first, and it punishes whoever interrupts it.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH7 WHERE TO PUT IT ═════════════ -->
+<section class="chapter light" id="ch-invest" data-rail="Investing">
+  <header class="ch-head rv">
+    <p class="ch-num">07</p>
+    <h2>Where the money should live</h2>
+    <p class="ch-dek">A plain-English tour of every option a 25-year-old in India actually faces.</p>
+  </header>
+  <div class="prose rv">
+    <p>The financial industry sells thousands of products, and most of them exist to make money for the industry. You need very few. Here they are, from safest to riskiest. Tap any card for the details.</p>
+  </div>
+
+  <div class="instr wide" id="instr"></div>
+
+  <div class="prose rv">
+    <h3 class="sub">Risk and return, honestly</h3>
+    <p>Every option sits somewhere on a trade-off. Higher expected return always comes with a bumpier ride, and anyone promising high returns with no risk is either confused or lying. Hover over the map to compare. The ranges are illustrative, long-run and approximate; they're for intuition, not prediction.</p>
+  </div>
+
+  <figure class="calc wide rv" id="riskmap">
+    <div class="chart tall" id="risk-chart"></div>
+    <p class="chart-cap">Horizontal: how much the value can swing in a bad year. Vertical: typical long-run return range per year, before tax. Bars show ranges, not guarantees.</p>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">The index fund argument</h3>
+    <p>If you take one investing idea from this guide, take this one. An <strong>index fund</strong> simply buys every company in an index, like the Nifty 50 (India's fifty largest listed companies), in proportion to their size. No fund manager picking stocks, no star analyst, no drama. Just the market.</p>
+    <p>It sounds too simple to work, and it works remarkably well, because most professional fund managers fail to beat their index over long periods once fees are counted. S&amp;P's SPIVA scorecards for India have repeatedly found that a large majority of actively managed large-cap funds underperform their benchmark over ten years. An index fund guarantees you the market's return minus a tiny fee, and that turns out to beat most people trying to be clever.</p>
+    <p>A sensible starting portfolio for a 25-year-old can be almost boringly simple: a Nifty 50 index fund as the core, perhaps a flexi-cap or Nifty Next 50 / midcap index fund for some breadth, your EPF as the debt part, and nothing else until you understand why you'd want more.</p>
+
+    <h3 class="sub">Direct plans, always</h3>
+    <p>Every mutual fund in India comes in two versions: <strong>regular</strong>, sold through a distributor who earns a commission from your money every year, and <strong>direct</strong>, bought straight from the fund house or a direct-plan platform, with no commission. Same fund, same manager, same stocks. The only difference is the fee, called the <em>expense ratio</em>. The gap is often 0.5 to 1.5 percent a year. That sounds trivial. Watch it compound:</p>
+  </div>
+
+  <figure class="calc wide rv" id="fees">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Monthly SIP <output id="fe-m-o"></output></span><input type="range" id="fe-m" min="1000" max="50000" step="500" value="10000"></label>
+        <label class="ctrl"><span>Extra yearly fee <output id="fe-f-o"></output></span><input type="range" id="fe-f" min=".1" max="2" step=".05" value="1"></label>
+        <label class="ctrl"><span>Years <output id="fe-y-o"></output></span><input type="range" id="fe-y" min="5" max="40" step="1" value="35"></label>
+      </div>
+      <div class="sal-out">
+        <p class="big-l">That fee costs you</p>
+        <p class="big neg" id="fe-lost">₹0</p>
+        <p class="sub-l" id="fe-note"></p>
+      </div>
+    </div>
+    <div class="fee-bars" id="fee-bars"></div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">How much in equity?</h3>
+    <p>Your <strong>asset allocation</strong>, the split between growth assets (equity) and stable ones (debt: EPF, PPF, FDs, debt funds), matters more than which particular fund you pick. A rough old rule says hold “100 minus your age” in equity; at 25 that's 75 percent. With a 30-plus-year horizon and steady income, many planners consider 70–90 percent equity reasonable for long-term goals, as long as your emergency fund and insurance are already in place.</p>
+    <p>The crucial idea is <strong>matching money to time</strong>. Money you need within three years (a course, a deposit, a wedding) shouldn't be in equity at all, because a crash could arrive at exactly the wrong moment. Money for goals five to seven years away can be mixed. Money for retirement, three decades away, can be mostly equity, because time smooths out the bumps: according to NSE data, the Nifty 50 total return index has never delivered a negative return over any rolling ten-year period in its history so far.</p>
+  </div>
+
+  <figure class="calc wide rv" id="alloc">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Years until you need the money <output id="al-y-o"></output></span><input type="range" id="al-y" min="1" max="35" step="1" value="35"></label>
+        <div class="ctrl"><span>How would you react to a 30% fall?</span>
+          <div class="seg" id="al-t"><button data-v="0">Sell everything</button><button data-v="1" class="on">Feel sick, hold</button><button data-v="2">Buy more</button></div></div>
+      </div>
+      <div class="alloc-bar"><div class="ab-eq" id="al-eq"><span></span></div><div class="ab-debt" id="al-debt"><span></span></div></div>
+    </div>
+    <p class="calc-verdict" id="al-verdict"></p>
+  </figure>
+</section>
+
+<!-- ═════════════ CH8 TAX ON INVESTMENTS ═════════════ -->
+<section class="chapter dark" id="ch-tax" data-rail="Investment tax">
+  <header class="ch-head rv">
+    <p class="ch-num">08</p>
+    <h2>The tax on your gains</h2>
+    <p class="ch-dek">Short-term, long-term, and the free ₹1.25 lakh every year.</p>
+  </header>
+  <div class="prose rv">
+    <p>When you sell an investment for more than you paid, the profit is a <strong>capital gain</strong>, and it's taxed differently depending on what you held and for how long. For equity shares and equity mutual funds in 2026–27:</p>
+  </div>
+  <div class="taxgrid wide">
+    <div class="tg rv"><p class="tg-k">Held 12 months or less</p><b>20%</b><p>Short-term capital gains (STCG). One more reason not to trade in and out.</p></div>
+    <div class="tg rv" style="--d:.08s"><p class="tg-k">Held more than 12 months</p><b>12.5%</b><p>Long-term capital gains (LTCG), but only on gains above the yearly exemption.</p></div>
+    <div class="tg good rv" style="--d:.16s"><p class="tg-k">The exemption</p><b>₹1.25 L</b><p>The first ₹1.25 lakh of long-term equity gains each financial year is tax-free, across all your equity investments combined.</p></div>
+  </div>
+  <div class="prose rv">
+    <p>That last line hides a useful habit called <strong>tax harvesting</strong>. If your long-term gains are under ₹1.25 lakh in a year, you can sell some units and buy them straight back, “booking” the gain tax-free and resetting your purchase price higher. Done every year, it quietly reduces your future tax bill. It's legal and simple, though not worth stressing over in your first few years when the gains are small.</p>
+    <p>Other rules worth knowing: interest on FDs and savings accounts is added to your income and taxed at your slab rate. Debt mutual funds bought since April 2023 are also taxed at your slab rate, regardless of holding period. EPF and PPF interest is tax-free within their limits. Gains on crypto are taxed at a flat 30 percent, with 1 percent TDS on transactions, and losses can't be set off against anything. Every investment's tax treatment should be part of the comparison, but it should never be the reason to buy something.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH9 BIG PURCHASES ═════════════ -->
+<section class="chapter light" id="ch-spend" data-rail="Big purchases">
+  <header class="ch-head rv">
+    <p class="ch-num">09</p>
+    <h2>The real price of things</h2>
+    <p class="ch-dek">Lifestyle creep, the phone upgrade, the car, the wedding, and whether to buy a flat.</p>
+  </header>
+  <div class="prose rv">
+    <p>The biggest threat to a young earner's wealth isn't a market crash. It's <strong>lifestyle creep</strong>: the slow, invisible way spending rises to meet income. The raise comes, and within six months the old salary feels impossible to live on. The flat gets bigger, the phone gets newer, the weekends get pricier. Nothing is extravagant on its own. Together, they mean you're still saving the same ₹10,000 a month at 32 that you saved at 25.</p>
+    <p>The antidote is a simple rule: <strong>when your income rises, raise your savings first</strong>, by at least half the increase. Enjoy the other half guilt-free. You'll still feel richer every year, and your savings rate will climb instead of standing still.</p>
+    <p>It also helps to see the true cost of a purchase at 25. Money spent now isn't just that money; it's everything that money would have grown into. Try a few:</p>
+  </div>
+
+  <figure class="calc wide rv" id="realcost">
+    <div class="rc-chips" id="rc-chips"></div>
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Price today <output id="rc-p-o"></output></span><input type="range" id="rc-p" min="1000" max="1500000" step="1000" value="80000"></label>
+        <label class="ctrl"><span>Return if invested <output id="rc-r-o"></output></span><input type="range" id="rc-r" min="5" max="14" step=".5" value="11"></label>
+      </div>
+      <div class="rc-out">
+        <div><p>Invested from 25, at 60 it'd be</p><b id="rc-nom">₹0</b></div>
+        <div><p>In today's rupees (6% inflation)</p><b id="rc-real">₹0</b></div>
+      </div>
+    </div>
+    <p class="calc-verdict" id="rc-verdict"></p>
+  </figure>
+
+  <div class="prose rv">
+    <p>None of this means you shouldn't buy things. Money is for living, and a 25-year-old who saves every rupee and never travels has also made a mistake. The point is to spend on what you truly value and cut ruthlessly on what you don't. A common trick: wait 72 hours before any non-essential purchase over a set amount. Half the urges disappear.</p>
+
+    <h3 class="sub">The car</h3>
+    <p>A car loses value the moment you drive it home, costs fuel, insurance, parking and servicing every month, and in a big Indian city often sits in traffic. Some people genuinely need one. Many buy one at 25 because everyone else did. If you need one, a useful guide is the “20/4/10” rule: at least 20 percent down payment, a loan no longer than four years, and total car costs under 10 percent of your monthly income. Most first cars bought on a first salary fail all three tests.</p>
+
+    <h3 class="sub">The wedding</h3>
+    <p>Indian weddings can cost many times a year's salary, and the pressure to spend comes from every direction. It's your decision and your family's, and joyful celebrations are worth something. But a loan for a wedding is debt for a single day, and starting a marriage with a large EMI is a known source of stress. If a wedding is likely in the next few years, treat it as a goal: estimate it, and save for it in safe instruments, not equity.</p>
+
+    <h3 class="sub">Rent or buy?</h3>
+    <p>Your relatives will tell you rent is “wasted money”. At 25, it usually isn't. In big Indian cities, the rent on a flat has long been only about 2–4 percent of its price per year, while a home loan costs 8–9 percent in interest, plus maintenance, property tax and the down payment's lost growth. Renting also keeps you free to move for a better job, and early in a career, mobility is worth a lot. Buying a home is a fine goal for your thirties, when you know which city you'll live in, have a solid down payment (ideally 20 percent or more) and can keep the EMI under about 30–35 percent of take-home pay.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH10 MIND ═════════════ -->
+<section class="chapter dark" id="ch-mind" data-rail="Psychology">
+  <header class="ch-head rv">
+    <p class="ch-num">10</p>
+    <h2>Your brain is the risky asset</h2>
+    <p class="ch-dek">The psychology of money, tips, trading, and scams.</p>
+  </header>
+  <div class="prose rv">
+    <p>Morgan Housel's <em>The Psychology of Money</em> makes an argument that sounds odd until you've lived through a market crash: doing well with money has little to do with how smart you are and a lot to do with how you behave. A brilliant analyst who panics and sells at the bottom does worse than an ordinary person who sets up a SIP and forgets the password.</p>
+    <p>Studies of mutual fund investors keep finding a “behaviour gap”: investors earn less than the very funds they invest in, because they buy after prices rise (excited) and sell after they fall (scared). The fund compounds; the investor keeps jumping on and off.</p>
+    <ul class="ticks">
+      <li><b>Expect crashes.</b> Indian markets have fallen 20 percent or more many times, and more than 50 percent in 2008. A falling market is a sale on the things you're buying every month for the next thirty years. If you can't watch your portfolio drop by a third without selling, own less equity.</li>
+      <li><b>Look less.</b> Checking your portfolio daily makes you anxious and more likely to act. Once a quarter is plenty. Once a year, rebalance.</li>
+      <li><b>Don't compare.</b> Someone will always earn more, own more, and post more. Social media shows you everyone's highlights and nobody's EMIs.</li>
+      <li><b>Define enough.</b> Know what you're saving for: freedom, security, choices. Without a finish line, no amount ever feels like enough.</li>
+    </ul>
+
+    <h3 class="sub">The trading trap</h3>
+    <p>Trading apps make buying and selling stocks feel like a game, and futures and options (F&amp;O) feel like a shortcut to wealth. The regulator has measured how that goes. A SEBI study published in 2024 found that about nine out of ten individual traders in equity F&amp;O lost money over the three years it examined, with the average loss running into lakhs. The winners were mostly institutions and algorithmic traders on the other side. If you want to learn about markets with real money, cap it at a small “fun money” amount you can afford to lose entirely, and keep your real investing boring.</p>
+
+    <h3 class="sub">Finfluencers and tips</h3>
+    <p>Be sceptical of anyone online who makes money when you act on their advice: through referral links, paid groups, courses or by selling after you buy. SEBI has cracked down on unregistered advisers, and you can check whether someone is a SEBI-registered investment adviser (RIA) on SEBI's website. If an adviser is paid by commission, their advice is shaped by commission. Fee-only advice costs money upfront and is usually much cheaper over a lifetime.</p>
+  </div>
+
+  <figure class="scam wide rv" id="scam">
+    <div class="scam-head"><p class="scam-k">Spot the scam</p><p class="scam-s" id="scam-s"></p></div>
+    <div class="scam-body" id="scam-body" aria-live="polite"></div>
+  </figure>
+</section>
+
+<!-- ═════════════ CH11 GOALS ═════════════ -->
+<section class="chapter light" id="ch-goals" data-rail="The big goal">
+  <header class="ch-head rv">
+    <p class="ch-num">11</p>
+    <h2>How much is enough?</h2>
+    <p class="ch-dek">Goals, retirement, and the number that buys your freedom.</p>
+  </header>
+  <div class="prose rv">
+    <p>Retirement feels absurdly far away at 25. But “retirement” really means <em>the point at which work becomes optional</em>, and that's a goal worth caring about at any age. Maybe you never stop working, but you'd love the freedom to take a lower-paid job you love, a sabbatical, or to start something.</p>
+    <p>A widely used rule of thumb says you need about <strong>25 to 30 times your yearly expenses</strong> invested to support yourself indefinitely. (It comes from US research on “safe withdrawal rates”; in India, with higher inflation, many planners prefer 30–35 times to be safe.) The catch is that your expenses at 60 will be far higher in rupees than today. Here's what that means, and what it takes:</p>
+  </div>
+
+  <figure class="calc wide rv" id="fire">
+    <div class="calc-in">
+      <div class="ctrls">
+        <label class="ctrl"><span>Monthly expenses today <output id="fi-e-o"></output></span><input type="range" id="fi-e" min="15000" max="200000" step="1000" value="40000"></label>
+        <label class="ctrl"><span>Freedom at age <output id="fi-a-o"></output></span><input type="range" id="fi-a" min="40" max="65" step="1" value="55"></label>
+        <label class="ctrl"><span>Multiple of yearly expenses <output id="fi-x-o"></output></span><input type="range" id="fi-x" min="25" max="40" step="1" value="30"></label>
+        <label class="ctrl"><span>Inflation <output id="fi-i-o"></output> · Return <output id="fi-r-o"></output></span>
+          <span class="dual"><input type="range" id="fi-i" min="4" max="8" step=".5" value="6" aria-label="Inflation"><input type="range" id="fi-r" min="7" max="13" step=".5" value="11" aria-label="Return"></span></label>
+      </div>
+      <div class="fire-out">
+        <div><p>Your number at <span id="fi-age"></span></p><b id="fi-num">₹0</b><span id="fi-today"></span></div>
+        <div><p>Monthly SIP needed from 25 (flat)</p><b id="fi-flat">₹0</b></div>
+        <div><p>…or starting with, stepped up 10% a year</p><b id="fi-step">₹0</b></div>
+      </div>
+    </div>
+  </figure>
+
+  <div class="prose rv">
+    <p>The number looks frightening. The SIP needed to reach it, if you start at 25 and step it up with your raises, usually doesn't. That's compounding again: the same goal started at 35 costs roughly three times as much per month.</p>
+    <h3 class="sub">Your other goals</h3>
+    <p>Give every goal a name, an amount, a date and a home. <em>Emergency fund: ₹2 lakh, this year, liquid fund.</em> <em>Master's degree: ₹15 lakh, in four years, mostly debt funds and FDs.</em> <em>Home down payment: ₹25 lakh, in eight years, a balanced mix.</em> <em>Freedom: the number above, in thirty years, mostly equity.</em> When money has a job, you're much less tempted to raid it.</p>
+    <p>And a word about <strong>NPS</strong>, the National Pension System. It's a low-cost government-regulated retirement scheme that invests in a mix of equity and debt and locks your money until 60. If your employer offers to contribute to NPS for you, take it: under the new regime, your employer's contribution up to 14 percent of your basic pay is tax-deductible, which can turn taxable salary into retirement savings.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH12 CHECKLIST ═════════════ -->
+<section class="chapter dark" id="ch-checklist" data-rail="Checklist">
+  <header class="ch-head rv">
+    <p class="ch-num">12</p>
+    <h2>Your first ninety days</h2>
+    <p class="ch-dek">Everything above, as a to-do list. Your ticks are saved in this browser.</p>
+  </header>
+  <figure class="check wide rv" id="check">
+    <div class="ck-head">
+      <svg class="ck-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="ck-track"/><circle cx="60" cy="60" r="52" class="ck-fill" id="ck-fill"/></svg>
+      <div><p class="ck-n" id="ck-n">0 / 0</p><p class="ck-l" id="ck-l"></p></div>
+      <button class="btn ghost small" id="ck-reset">Reset</button>
+    </div>
+    <div class="ck-cols" id="ck-cols"></div>
+  </figure>
+
+  <div class="rules wide rv">
+    <p class="rules-h">The whole guide on one card</p>
+    <ol>
+      <li>Know your in-hand pay, and file a return every year.</li>
+      <li>Save first, automatically, the day after payday.</li>
+      <li>Six months of expenses, somewhere boring.</li>
+      <li>Your own health insurance. Term cover if anyone depends on you.</li>
+      <li>Pay the full card bill. Every month. Forever.</li>
+      <li>Never mix insurance and investment.</li>
+      <li>Low-cost index funds, direct plans, monthly SIP.</li>
+      <li>Step it up with every raise.</li>
+      <li>Match the money to the time you need it.</li>
+      <li>Don't touch EPF when you switch jobs.</li>
+      <li>Ignore tips, apps that feel like games, and anyone promising guaranteed returns.</li>
+      <li>Do nothing when the market falls. Or buy more.</li>
+    </ol>
+  </div>
+
+  <div class="prose rv closing">
+    <p>Ishaan, by the way, worked out where his nine thousand went. He kept the provident fund, chose the new tax regime, and set up a ₹12,000 SIP for the day after payday. He bought his own health policy and his parents', moved his fun money into a separate account, and stopped checking the market. It wasn't exciting. That's the point.</p>
+    <p>Getting rich slowly is the only way that reliably works, and the slowest part is the first few years, when the numbers look tiny and nothing seems to happen. Be patient through that part. Thirty-five years from now, someone will be very grateful you started at 25. It'll be you.</p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sources" id="sources">
+  <div class="prose">
+    <h2>Sources &amp; further reading</h2>
+    <ul>
+      <li>Tax slabs and rebate, FY 2026–27: <a href="https://www.businesstoday.in/personal-finance/tax/story/tax-slabs-fy-2026-27-what-budget-2026-changed-for-individual-taxpayers-and-which-regime-works-best-514044-2026-02-01">Business Today</a> · <a href="https://scroll.in/latest/1090410/scroll_in">Scroll: no changes in Budget 2026; new Act from 1 April</a> · <a href="https://www.bajajfinserv.in/income-tax-changes-for-fy-2026-27">Bajaj Finserv</a></li>
+      <li>EPF interest 8.25% for 2025–26: <a href="https://www.businesstoday.in/personal-finance/story/your-epf-balance-is-about-to-rise-epfo-orders-8-25-interest-credit-541245-2026-07-06">Business Today</a></li>
+      <li>PPF 7.1% for Oct–Dec 2026: <a href="https://www.businesstoday.in/personal-finance/story/small-savings-scheme-interest-rates-unchanged-for-q3-fy27-check-ppf-scss-ssy-rates-558892-2026-09-30">Business Today</a></li>
+      <li>Capital gains rates unchanged for FY27: <a href="https://www.business-standard.com/budget/news/budget-2026-ltcg-tax-rates-unchanged-for-fy27-fm-sitharaman-126020100424_1.html">Business Standard</a> · <a href="https://www.icicipruamc.com/blob/knowledgecentre/tax_reckoner/Tax%20Reckoner%202026-27.pdf">ICICI Pru tax reckoner 2026–27</a></li>
+      <li>Nifty 50 TRI long-run returns: <a href="https://www.bajajamc.com/knowledge-centre/nifty-50-historical-returns">Bajaj AMC</a> · <a href="https://archives.nseindia.com/content/indices/25_Years_Journey_of_Nifty50_2022-01.pdf">NSE: 25 years of Nifty 50</a></li>
+      <li>SEBI (2024). Study on analysis of profit and loss of individual traders in equity F&amp;O.</li>
+      <li>S&amp;P Dow Jones Indices. SPIVA India Scorecard (published twice yearly).</li>
+      <li>Housel, M. (2020). <em>The Psychology of Money</em>. Harriman House.</li>
+      <li>Warren, E. &amp; Warren Tyagi, A. (2005). <em>All Your Worth</em>. Free Press. (The 50/30/20 rule.)</li>
+      <li>Bengen, W. (1994). Determining withdrawal rates using historical data. <em>Journal of Financial Planning</em>.</li>
+      <li>Official portals: EPFO member passbook, Income Tax e-filing portal (AIS, ITR), SEBI investor website and list of registered investment advisers, RBI.</li>
+    </ul>
+    <p class="fine">Calculators use simplified assumptions (constant returns, monthly compounding, an approximate CTC structure) and are for illustration only. Past returns don't guarantee future returns. Not investment, tax or legal advice.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <p>Long readable notes. No. 09 · Slow Rich.</p>
+  <nav><a href="/lrn/">All notes</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>

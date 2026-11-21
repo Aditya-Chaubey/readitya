@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Memory Palace — lrn</title>
+<meta name="description" content="How to build a memory palace, explained simply: what the method of loci is, where it came from, whether it really works, and a step-by-step guide to building your own, with numbers, names, languages and spaced review.">
+<meta name="theme-color" content="#14223b">
+<meta property="og:title" content="The Memory Palace">
+<meta property="og:description" content="A 2,500-year-old trick for remembering almost anything. What it is, whether it works, and how to build your own.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="palace.css">
+<script src="palace.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-build">Build one</a><a href="#ch-yours">Your palace</a></nav>
+</header>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <div class="bp-grid" aria-hidden="true"></div>
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lc">lrn</span> · No. 11 · Mind</p>
+      <h1 id="title"><span class="t1">The</span> <span class="t2">Memory</span> <span class="t3">Palace</span></h1>
+      <p class="deck">A 2,500-year-old trick for remembering almost anything, by storing it inside a building you already know. What it is, whether it really works, and how to build your own, step by step.</p>
+      <p class="byline">By Aditya Chaubey · <time datetime="2026-11-21">November 2026</time> · 40 min · 11 interactives</p>
+    </div>
+    <figure class="hero-fig" aria-label="Blueprint drawing of a classical palace with a glowing doorway">
+      <svg viewBox="0 0 560 460" id="facade">
+        <defs>
+          <radialGradient id="doorglow" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#ffd98a" stop-opacity=".95"/><stop offset=".5" stop-color="#e9b257" stop-opacity=".5"/><stop offset="1" stop-color="#e9b257" stop-opacity="0"/></radialGradient>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d38d"/><stop offset=".5" stop-color="#d6a84f"/><stop offset="1" stop-color="#f6e2a8"/></linearGradient>
+        </defs>
+        <g class="dim" stroke="#7fa3d6" stroke-width="1" fill="none" opacity=".55">
+          <path d="M60 430h440M60 424v12M500 424v12"/><path d="M30 120v300M24 120h12M24 420h12"/>
+        </g>
+        <g class="annot" font-family="IBM Plex Mono" font-size="10" fill="#9fbbe3" opacity=".8">
+          <text x="250" y="450">fig. 1 — the palace</text><text x="8" y="270" transform="rotate(-90 8 270)">elevation</text>
+          <text x="420" y="82">loci: ∞</text>
+        </g>
+        <g class="draw-me" stroke="url(#gold)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M70 410h420M80 398h400M90 386h380"/>
+          <path d="M100 386V200M470 386V200"/>
+          <path d="M90 200h390M84 188h402"/>
+          <path d="M84 188 285 96 486 188Z"/>
+          <path d="M140 176 285 112 430 176"/>
+          <circle cx="285" cy="152" r="14"/>
+          <path d="M138 205v181M156 205v181M206 205v181M224 205v181M346 205v181M364 205v181M414 205v181M432 205v181"/>
+          <path d="M132 205h30M200 205h30M340 205h30M408 205h30M132 386h30M200 386h30M340 386h30M408 386h30"/>
+          <path d="M252 386V290a33 33 0 0 1 66 0v96"/>
+          <path d="M172 250h20v40h-20zM378 250h20v40h-20z"/>
+        </g>
+        <path class="door-light" d="M252 386V290a33 33 0 0 1 66 0v96Z" fill="url(#doorglow)"/>
+        <ellipse class="door-spill" cx="285" cy="404" rx="80" ry="10" fill="#ffd98a" opacity="0"/>
+        <g class="you" opacity="0"><circle cx="285" cy="372" r="6" fill="#ffd98a"/><circle cx="285" cy="372" r="14" fill="#ffd98a" opacity=".25"/></g>
+      </svg>
+    </figure>
+  </div>
+  <a class="hero-cue" href="#story"><span>Step inside</span><i aria-hidden="true"></i></a>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ OPENING ═════════════ -->
+<section class="prose opening">
+  <p class="dropcap">Around 500 BC, so the story goes, a Greek poet named Simonides of Ceos was hired to recite a poem at a banquet. Halfway through the evening, a messenger called him outside. While he was gone, the roof of the banquet hall collapsed, crushing everyone inside so badly that their families couldn't recognise them.</p>
+  <p>Simonides could. He closed his eyes, pictured the hall, and walked around the table in his mind, seeing who had been sitting where. One by one, he named every guest.</p>
+  <p>The Roman orator Cicero told that story four centuries later, and said it taught Simonides something important: <em>memory loves places.</em> If you want to remember things in order, put them in locations you know, and walk past them in your mind. Greek and Roman speakers used it to deliver hours-long speeches without notes. Medieval monks used it to memorise entire books. Today, people at memory championships use it to memorise a shuffled deck of cards in well under a minute.</p>
+  <p class="lead">They call it the method of loci. Most people call it a memory palace.</p>
+  <p>Here's the good news: you already own one. Close your eyes and picture your home. Walk from the front door to the kitchen. Notice where the shoes go, the sofa, the switchboard, the smell of the kitchen. You can do it effortlessly, in detail, without ever having tried to memorise it. That ability, your brain's extraordinary memory for places, is the engine of the whole technique.</p>
+  <p>This guide explains how it works in plain language, looks honestly at the science of whether it does, and then walks you through building your first palace. By the end, you'll have memorised a shopping list you'll struggle to forget, and you'll have the tools to memorise speeches, vocabulary, numbers and names.</p>
+</section>
+
+<div class="meander" aria-hidden="true"></div>
+
+<!-- ═════════════ CH1 WHAT ═════════════ -->
+<section class="chapter paper" id="ch-what" data-rail="What it is">
+  <header class="ch-head rv">
+    <p class="ch-num">I</p>
+    <h2>What is a memory palace?</h2>
+    <p class="ch-dek">A place you know, a route through it, and strange pictures left along the way.</p>
+  </header>
+  <div class="prose rv">
+    <p>Before we explain anything, let's measure your memory as it is today. It takes one minute. You'll come back to this score later.</p>
+  </div>
+
+  <figure class="card wide rv" id="round1">
+    <div class="r1-body" id="r1-body" aria-live="polite"></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>Most people remember somewhere between five and seven of those ten words, usually the first few and the last few. That's not a failing. Lists of unconnected words are exactly the kind of thing human memory is bad at. Nothing ties them together, so they slip away.</p>
+    <p>A memory palace fixes that by giving every item somewhere to live. It has three ingredients:</p>
+  </div>
+
+  <div class="trio wide">
+    <article class="tri rv"><div class="tri-art"><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln" d="M10 80h100M20 80V40l40-28 40 28v40M48 80V56h24v24"/><rect class="fl" x="28" y="48" width="12" height="12"/><rect class="fl" x="80" y="48" width="12" height="12"/></svg></div><p class="tri-n">01</p><h3>A place</h3><p>Somewhere you know extremely well: your home, your school, your office, the route to the market. You need to be able to walk it in your mind without effort.</p></article>
+    <article class="tri rv" style="--d:.1s"><div class="tri-art"><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln dash" d="M14 70C30 20 50 80 64 44S98 18 108 30"/><circle class="fl" cx="14" cy="70" r="6"/><circle class="fl" cx="64" cy="44" r="6"/><circle class="fl" cx="108" cy="30" r="6"/></svg></div><p class="tri-n">02</p><h3>A route</h3><p>A fixed path through that place, with specific stopping points called <strong>loci</strong> (Latin for “places”; one is a <em>locus</em>): the door, the sofa, the TV, the table. Always walked in the same order.</p></article>
+    <article class="tri rv" style="--d:.2s"><div class="tri-art"><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln" d="M60 10l12 26 28 3-21 19 6 28-25-14-25 14 6-28-21-19 28-3z"/><circle class="fl" cx="60" cy="46" r="8"/></svg></div><p class="tri-n">03</p><h3>Vivid images</h3><p>Each thing you want to remember becomes a bizarre, exaggerated, moving picture, placed at one locus and interacting with it. The stranger the image, the better it sticks.</p></article>
+  </div>
+
+  <div class="prose rv">
+    <p>To remember, you simply take a mental walk along the route. As you arrive at each locus, the image you left there pops back into your head, and with it, the item. Because the route has an order, your list comes back in order too, forwards or backwards, and you can even jump straight to the seventh item.</p>
+
+    <h3 class="sub">Why it works: your brain is a navigator</h3>
+    <p>For most of human history, remembering <em>where</em> things were (water, food, danger, the way home) was a matter of life and death. Remembering lists of abstract words never was. So our brains evolved to be superb at spatial and visual memory, and fairly poor at everything else.</p>
+    <p>Neuroscience backs this up. Deep in the brain, a seahorse-shaped structure called the <strong>hippocampus</strong> is central to both memory and navigation. In 2014, the Nobel Prize in medicine went to John O'Keefe and May-Britt and Edvard Moser for discovering “place cells” and “grid cells”, neurons that act like an internal map and GPS. A memory palace hijacks that map, piggybacking boring information onto a system that's brilliant at storing places.</p>
+    <p>Pictures help too. In a famous 1973 experiment, the psychologist Lionel Standing showed people 10,000 photographs, a few seconds each, over five days. Afterwards, they could pick out which pictures they'd seen with around 83 percent accuracy. Psychologists call this the <strong>picture superiority effect</strong>: images are remembered far better than words. A memory palace combines both superpowers: vivid pictures, stored in familiar places.</p>
+  </div>
+  <blockquote class="pull rv"><p>You're not improving your memory. You're translating information into the language your memory already speaks.</p></blockquote>
+</section>
+
+<!-- ═════════════ CH2 HISTORY ═════════════ -->
+<section class="chapter blue" id="ch-history" data-rail="History">
+  <header class="ch-head rv">
+    <p class="ch-num">II</p>
+    <h2>Twenty-five centuries of palaces</h2>
+    <p class="ch-dek">From Greek orators to medieval monks, Jesuit missionaries and modern memory athletes.</p>
+  </header>
+  <div class="prose rv">
+    <p>Before cheap paper and printing, a trained memory wasn't a party trick; it was an essential professional skill for lawyers, priests, scholars and politicians. Drag or scroll through the timeline.</p>
+  </div>
+  <figure class="timeline rv" id="timeline">
+    <div class="tl-track" id="tl-track"></div>
+    <div class="tl-ctrl"><button class="tl-btn" id="tl-prev" aria-label="Earlier">←</button><div class="tl-bar"><i id="tl-bar"></i></div><button class="tl-btn" id="tl-next" aria-label="Later">→</button></div>
+  </figure>
+  <div class="prose rv">
+    <p>In other cultures, similar ideas developed independently. The Australian writer and researcher Lynne Kelly has argued that many oral cultures, including Aboriginal Australians with their songlines, have long stored vast amounts of knowledge by linking it to features of the landscape, sung and walked in sequence. India's own oral traditions preserved the Vedas with astonishing accuracy for thousands of years, using intricate recitation patterns rather than locations: a reminder that there's more than one way to build a remarkable memory.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH3 EVIDENCE ═════════════ -->
+<section class="chapter paper" id="ch-evidence" data-rail="Does it work?">
+  <header class="ch-head rv">
+    <p class="ch-num">III</p>
+    <h2>Does it actually work?</h2>
+    <p class="ch-dek">Yes, remarkably well, for the right kind of job. Here's what the research says, and what it doesn't.</p>
+  </header>
+  <div class="prose rv">
+    <p>The method of loci is one of the most studied memory techniques in psychology, and the overall verdict is clear: it reliably improves recall of ordered lists, often dramatically. A 2021 meta-analysis by Twomey and Kroneisen, pooling decades of experiments, and a 2025 systematic review both concluded it is effective for adults. Here are four studies worth knowing. Tap each to see the result.</p>
+  </div>
+
+  <div class="studies wide" id="studies"></div>
+
+  <div class="prose rv">
+    <h3 class="sub">The honest caveats</h3>
+    <ul class="ticks">
+      <li><b>It's best for ordered lists of discrete things.</b> Speeches, sequences, steps, vocabulary, names, numbers, the planets, the bones of the hand. It's much less useful for understanding a concept or learning a skill.</li>
+      <li><b>It takes effort up front.</b> Creating good images is slower than reading a list once. The payoff comes when you need to remember for days, weeks or years, or when the list is long.</li>
+      <li><b>It takes practice.</b> In studies, people who've just learned the method improve a lot; people who've practised for weeks improve far more. Your first palace will feel clumsy. Your fifth won't.</li>
+      <li><b>It's a memory tool, not an understanding tool.</b> Memorising the steps of the Krebs cycle isn't the same as understanding it. The best students combine memory palaces with explaining ideas in their own words, practice questions and spaced review.</li>
+      <li><b>Not everyone pictures things the same way.</b> People with aphantasia (little or no mental imagery) can still use the method, leaning on spatial layout, words, sounds and stories instead of pictures. More on that at the end.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═════════════ CH4 BUILD ═════════════ -->
+<section class="chapter blue" id="ch-build" data-rail="Build one">
+  <header class="ch-head rv">
+    <p class="ch-num">IV</p>
+    <h2>Build your first palace</h2>
+    <p class="ch-dek">Seven steps. We'll do them together, using an ordinary Indian flat and a shopping list.</p>
+  </header>
+  <div class="prose rv">
+    <p>We'll memorise a ten-item shopping list: <strong>tomatoes, paneer, bread, eggs, bananas, toothpaste, batteries, rice, coriander, detergent.</strong> Don't try to memorise it now. Just read the steps.</p>
+  </div>
+
+  <ol class="steps wide" id="steps">
+    <li class="step rv"><span class="sn">1</span><div><h3>Choose a place you know by heart</h3><p>Start with your own home. You need to be able to walk through it mentally, effortlessly, seeing details. Bigger isn't better; familiar is. Your childhood home, your hostel, your office and your daily walk all make great palaces later.</p></div></li>
+    <li class="step rv"><span class="sn">2</span><div><h3>Plan a route, and never change it</h3><p>Decide on a path, say, in through the front door, clockwise around the living room, into the kitchen, then the bathroom, bedroom and balcony. Always walk it in the same direction. The order of the route becomes the order of your list.</p></div></li>
+    <li class="step rv"><span class="sn">3</span><div><h3>Pick your loci</h3><p>Choose specific, distinct stopping points along the route: the shoe rack, the sofa, the TV, the table. Make them different from each other (five identical chairs will blur together), spaced a little apart, and well lit in your imagination. Start with ten.</p></div></li>
+    <li class="step rv"><span class="sn">4</span><div><h3>Turn each item into a concrete picture</h3><p>Tomatoes are easy: picture tomatoes. Abstract things need a stand-in: “democracy” might become a ballot box, the name “Sunil” might become a sun shining on a nail. We'll cover tricks for numbers and words in the next chapter.</p></div></li>
+    <li class="step rv"><span class="sn">5</span><div><h3>Make the picture ridiculous</h3><p>This is the step people skip, and it's the one that matters most. A tomato sitting on your doormat is forgettable. Giant tomatoes exploding against the door as you open it, splattering juice into your chappals, is not. Try the image maker below.</p></div></li>
+    <li class="step rv"><span class="sn">6</span><div><h3>Make it interact with the locus</h3><p>Don't just put the image near the spot. Make it <em>do something</em> to the spot: crush it, melt it, burst out of it, use it. The interaction glues the image to the place.</p></div></li>
+    <li class="step rv"><span class="sn">7</span><div><h3>Walk it back, then review</h3><p>Walk the route once or twice right away, recalling each image. Then review it later today, tomorrow, and in a few days. Each walk makes the memory stronger and faster to retrieve.</p></div></li>
+  </ol>
+
+  <div class="prose rv">
+    <h3 class="sub">Step 5, the secret ingredient: make it unforgettable</h3>
+    <p>Our memories evolved to keep what's surprising, emotional, funny, disgusting or dangerous, and to throw away what's ordinary. Memory teachers have lists of principles for making images stick; here are the six that matter most. Take a boring item, a carton of milk, and switch them on one by one.</p>
+  </div>
+
+  <figure class="card wide rv vivid-card" id="vivid">
+    <div class="vv-grid">
+      <div class="vv-stage" id="vv-stage" aria-hidden="true"><div class="vv-locus">🚪</div><div class="vv-item" id="vv-item">🥛</div><div class="vv-fx" id="vv-fx"></div></div>
+      <div class="vv-side">
+        <div class="vv-toggles" id="vv-toggles"></div>
+        <p class="vv-desc" id="vv-desc" aria-live="polite"></p>
+        <div class="vv-meter"><span>Memorability</span><div><i id="vv-bar"></i></div><b id="vv-n">1/10</b></div>
+      </div>
+    </div>
+  </figure>
+
+  <div class="prose rv">
+    <h3 class="sub">Now walk the palace</h3>
+    <p>Here's the flat, with ten loci along a route. Press play and walk through it. At each stop, read the image slowly and really picture it, including the sounds and smells. Take your time: about ten seconds per room. This is the memorising.</p>
+  </div>
+
+  <figure class="plan-card full rv" id="flat">
+    <div class="pl-grid">
+      <div class="pl-map"><svg viewBox="0 0 760 470" id="flat-svg" role="img" aria-label="Floor plan of a flat with ten numbered loci along a route"></svg></div>
+      <aside class="pl-scene" id="pl-scene" aria-live="polite"></aside>
+    </div>
+    <div class="pl-ctrl"><button class="btn ghost" id="pl-prev">← Back</button><button class="btn" id="pl-play">▶ Walk the palace</button><button class="btn ghost" id="pl-next">Next →</button></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>Done? Don't scroll back. Now close your eyes for a moment and walk it again yourself, from the front door to the balcony. Then test yourself:</p>
+  </div>
+
+  <figure class="card wide rv" id="round2">
+    <div class="r2-body" id="r2-body" aria-live="polite"></div>
+  </figure>
+
+  <div class="prose rv">
+    <p>If it worked the way it does for most people, you just remembered a list better than in the first test, in order, after one walk. Try this: tell someone the list tomorrow without looking. Or, more impressively, recite it backwards.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH5 ABSTRACT ═════════════ -->
+<section class="chapter paper" id="ch-abstract" data-rail="Numbers & words">
+  <header class="ch-head rv">
+    <p class="ch-num">V</p>
+    <h2>Turning anything into a picture</h2>
+    <p class="ch-dek">Words, names, foreign vocabulary and numbers, made concrete.</p>
+  </header>
+  <div class="prose rv">
+    <p>Shopping lists are easy because the items are already things you can see. Most of what you'll want to remember isn't. The skill of memory palaces is really the skill of turning the abstract into the concrete. There are four main tricks.</p>
+    <ul class="ticks">
+      <li><b>Sounds-like.</b> Break a word or name into sound-alike pictures. “Priyanka” might become a <em>pre</em>-paid <em>yank</em> on a rope; “Mitochondria” a <em>mighty kite</em> stuck in a <em>condo</em>. It doesn't have to be perfect; it just has to point you back to the word.</li>
+      <li><b>Symbols.</b> Represent an idea with something that stands for it: justice becomes scales, the French Revolution a guillotine, inflation a balloon.</li>
+      <li><b>Foreign words: the keyword method.</b> Find an English (or Hindi) word that sounds like the foreign word, and link it to the meaning. The Spanish <em>pato</em> (duck) sounds like “pot”: picture a duck wearing a pot as a helmet. In 1975, Richard Atkinson and Michael Raugh found that students learning Russian vocabulary this way remembered substantially more than students using rote repetition.</li>
+      <li><b>Names and faces.</b> Find a striking feature of the face, turn the name into an image, and connect them. Mr Patel with big eyebrows: picture a petal growing out of each eyebrow.</li>
+    </ul>
+
+    <h3 class="sub">Numbers: the Major System</h3>
+    <p>Numbers are the hardest things to remember because they mean nothing. The classic solution, around since the 1600s and refined since, is the <strong>Major System</strong>: give each digit a consonant sound, then add vowels freely to make words. Once you know the code, any number becomes a picture.</p>
+  </div>
+
+  <div class="major wide rv" id="major-key"></div>
+
+  <figure class="card wide rv" id="major">
+    <label class="mj-in"><span>Type any number: a PIN, a date, a phone number</span><input id="mj-input" inputmode="numeric" value="1947" maxlength="16" autocomplete="off"></label>
+    <div class="mj-out" id="mj-out" aria-live="polite"></div>
+    <p class="card-note">Each pair of digits becomes one word from a standard Major System list. 1947 (Indian independence) = <b>19 → tub</b>, <b>47 → rock</b>: picture a bathtub draped in the tricolour crashing onto a giant rock on the 15th of August. Place it at a locus and you'll never forget it.</p>
+  </figure>
+
+  <div class="prose rv">
+    <p>Memory athletes go further. Many learn a fixed image for every number from 00 to 99 (like the list above) and then a <strong>Person–Action–Object</strong> system, where each card or number pair has a person, an action and an object, so six digits compress into one scene: Shah Rukh Khan (person) juggling (action) a pressure cooker (object). That's how a shuffled deck of 52 cards becomes about eighteen scenes, placed along a single palace route. You don't need any of this to start. But it shows how far the idea scales.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH6 KEEP IT ═════════════ -->
+<section class="chapter blue" id="ch-keep" data-rail="Keep it">
+  <header class="ch-head rv">
+    <p class="ch-num">VI</p>
+    <h2>Making it last</h2>
+    <p class="ch-dek">The forgetting curve, and the review schedule that beats it.</p>
+  </header>
+  <div class="prose rv">
+    <p>In the 1880s, the German psychologist Hermann Ebbinghaus spent years memorising lists of nonsense syllables and testing himself, to measure how quickly memories fade. The result is the <strong>forgetting curve</strong>: without review, we lose a large chunk of new information within a day, and then the loss slows down.</p>
+    <p>A memory palace makes the curve much flatter, because vivid images in familiar places are stickier. But the real trick is <strong>spaced review</strong>: walking the palace again just as you're about to forget. Each review resets the curve and makes it shallower, so the gaps between reviews can get longer and longer. Add reviews below and watch.</p>
+  </div>
+
+  <figure class="card paper-card wide rv" id="curve">
+    <div class="cv-top">
+      <div class="cv-chips" id="cv-chips"></div>
+      <div class="seg" id="cv-mode"><button data-v="rote" class="on">Rote learning</button><button data-v="palace">Memory palace</button></div>
+    </div>
+    <div class="chart tall" id="cv-chart"></div>
+    <div class="legend" id="cv-legend"></div>
+    <p class="card-note" id="cv-note"></p>
+  </figure>
+
+  <div class="prose rv">
+    <p>The curves here are schematic, not data from one study; real forgetting depends on the material and the person. But the shape is well established. A good simple schedule for a new palace: walk it <strong>right away, later the same day, the next day, after three days, after a week, and after a month</strong>. After that, an occasional walk keeps it alive for years.</p>
+    <p>Reviews work best as <em>active recall</em>: walk the route and try to retrieve each image before checking, rather than rereading your notes. Retrieval itself strengthens memory, a finding psychologists call the <strong>testing effect</strong>.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH7 USES ═════════════ -->
+<section class="chapter paper" id="ch-uses" data-rail="What to use it for">
+  <header class="ch-head rv">
+    <p class="ch-num">VII</p>
+    <h2>What to use it for</h2>
+    <p class="ch-dek">Where a memory palace shines, where it's overkill, and where it won't help at all.</p>
+  </header>
+  <div class="uses wide" id="uses"></div>
+  <div class="prose rv">
+    <h3 class="sub">Giving a speech without notes</h3>
+    <p>This is the original use. Don't memorise the speech word for word; memorise its key points. Turn each main idea into an image and place it at a locus. Opening joke at the front door, the problem on the sofa, your first argument on the TV, the story about your grandmother at the dining table. Then, while you speak, you simply walk the house. Some historians think the English phrases <em>“in the first place”</em> and <em>“in the second place”</em> are fossils of this ancient habit.</p>
+    <h3 class="sub">Studying for exams</h3>
+    <p>Use palaces for the parts of a subject that really are lists: the order of reactions, the causes of a war, the cranial nerves, Articles of the Constitution, the names of the Mughal emperors in order. Give each subject its own palace (your school for history, your college for biology), so lists don't collide. Combine it with practice questions and explaining concepts aloud for the understanding part.</p>
+  </div>
+</section>
+
+<!-- ═════════════ CH8 YOURS ═════════════ -->
+<section class="chapter blue" id="ch-yours" data-rail="Your palace">
+  <header class="ch-head rv">
+    <p class="ch-num">VIII</p>
+    <h2>Now build yours</h2>
+    <p class="ch-dek">Name your own loci, add what you want to remember, and write your images. It's saved in this browser.</p>
+  </header>
+  <div class="prose rv">
+    <p>Pick a place you know well, list ten stops along a route, then fill in what you want to remember and the ridiculous image that links them. When you're done, switch to <b>Walk</b> mode and test yourself: the items hide, and you recall them from the loci alone.</p>
+  </div>
+  <figure class="builder wide rv" id="builder">
+    <div class="bd-top">
+      <label class="bd-name"><span>Palace name</span><input id="bd-name" placeholder="e.g. My grandparents' house in Lucknow" maxlength="60"></label>
+      <div class="seg" id="bd-mode"><button data-v="edit" class="on">Build</button><button data-v="walk">Walk & test</button></div>
+    </div>
+    <ol class="bd-list" id="bd-list"></ol>
+    <div class="bd-foot"><button class="btn ghost small" id="bd-example">Fill with an example</button><button class="btn ghost small" id="bd-clear">Clear all</button><span class="bd-saved" id="bd-saved"></span></div>
+  </figure>
+</section>
+
+<!-- ═════════════ CH9 TROUBLESHOOTING ═════════════ -->
+<section class="chapter paper" id="ch-faq" data-rail="Troubleshooting">
+  <header class="ch-head rv">
+    <p class="ch-num">IX</p>
+    <h2>Troubleshooting</h2>
+    <p class="ch-dek">Answers to the questions everyone has after their first palace.</p>
+  </header>
+  <div class="faq wide" id="faq"></div>
+</section>
+
+<!-- ═════════════ CLOSING ═════════════ -->
+<section class="chapter blue closing-ch" id="ch-end" data-rail="Your first week">
+  <header class="ch-head rv">
+    <p class="ch-num">X</p>
+    <h2>Your first week</h2>
+    <p class="ch-dek">Seven small exercises. Tick them off as you go; they're saved in this browser.</p>
+  </header>
+  <figure class="week wide rv" id="week">
+    <div class="wk-head"><svg class="wk-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="wk-track"/><circle cx="60" cy="60" r="52" class="wk-fill" id="wk-fill"/></svg><div><p class="wk-n" id="wk-n">0 / 7</p><p class="wk-l" id="wk-l"></p></div></div>
+    <ol class="wk-list" id="wk-list"></ol>
+  </figure>
+  <div class="prose rv closing">
+    <p>Simonides walked back into a ruined banquet hall in his mind and gave every family their dead. It's a grim origin for such a playful technique, but it captures what memory palaces really are: a way of making the things you care about findable again.</p>
+    <p>You've already built one today. The tomatoes are still exploding against that front door, the pressure cooker is still firing bananas at the ceiling, and the balcony is still foaming over onto the street. Tomorrow, you'll find you still remember them. That's when it gets fun.</p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sources" id="sources">
+  <div class="prose">
+    <h2>Sources &amp; further reading</h2>
+    <ul>
+      <li>Cicero, <em>De Oratore</em>, Book II (55 BC): the Simonides story. <em>Rhetorica ad Herennium</em>, Book III (c. 80s BC). Quintilian, <em>Institutio Oratoria</em>, Book XI.</li>
+      <li>Yates, F. (1966). <em>The Art of Memory</em>. Routledge.</li>
+      <li>Spence, J. (1984). <em>The Memory Palace of Matteo Ricci</em>. Viking.</li>
+      <li>Foer, J. (2011). <em>Moonwalking with Einstein</em>. Penguin.</li>
+      <li>Kelly, L. (2016). <em>The Memory Code</em>. Allen &amp; Unwin.</li>
+      <li>Maguire, E. et al. (2003). Routes to remembering: the brains behind superior memory. <em>Nature Neuroscience</em>.</li>
+      <li>Dresler, M. et al. (2017). Mnemonic training reshapes brain networks to support superior memory. <em>Neuron</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5439266">PMC</a> · <a href="https://med.stanford.edu/news/all-news/2017/03/memorization-tool-bulks-up-brains-internal-connections.html">Stanford Medicine</a></li>
+      <li>Reser, D. et al. (2021). Australian Aboriginal techniques for memorization: translation into a medical and allied health education setting. <em>PLOS ONE</em>. <a href="https://www.pubmed.gov/34003873/">PubMed</a> · <a href="https://www.monash.edu/medicine/news/latest/2021-articles/new-study-finds-ancient-australian-aboriginal-memory-tool-superior-to-memory-palace-learning-among-medical-students">Monash</a></li>
+      <li>Twomey, C. &amp; Kroneisen, M. (2021). The effectiveness of the loci method as a mnemonic device: a meta-analysis. <em>Quarterly Journal of Experimental Psychology</em>.</li>
+      <li>The method of loci in the context of psychological research: a systematic review and meta-analysis (2025). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12514325/">PMC</a></li>
+      <li>Standing, L. (1973). Learning 10,000 pictures. <em>Quarterly Journal of Experimental Psychology</em>.</li>
+      <li>Atkinson, R. &amp; Raugh, M. (1975). An application of the mnemonic keyword method to the acquisition of a Russian vocabulary. <em>Journal of Experimental Psychology: Human Learning and Memory</em>.</li>
+      <li>Ebbinghaus, H. (1885). <em>Über das Gedächtnis</em> (Memory: A Contribution to Experimental Psychology).</li>
+      <li>Roediger, H. &amp; Karpicke, J. (2006). Test-enhanced learning. <em>Psychological Science</em>.</li>
+    </ul>
+    <p class="fine">The forgetting-curve figure is a schematic illustration. Floor plan, images and examples are original to this guide.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <p>Long readable notes. No. 11 · The Memory Palace.</p>
+  <nav><a href="/lrn/">All notes</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>
