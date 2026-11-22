@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Devoted — lrn</title>
+<meta name="description" content="How to be a great boyfriend, grown-up edition: how a gentleman treats his partner, drawn from Gottman's Love Lab, Gable, Aron, Fromm, Perel, Sue Johnson and the Art of Manliness. Attention, curiosity, rituals, listening, fighting fair, repair, equality, courtesy, romance and, if it comes to it, ending well.">
+<meta name="theme-color" content="#1b1116">
+<meta property="og:title" content="Devoted: How a Gentleman Loves">
+<meta property="og:description" content="Not roses and grand gestures. What fifty years of relationship science says a great partner actually does, day to day.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="love.css">
+<script src="love.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the story</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<svg class="thread" id="thread" aria-hidden="true" preserveAspectRatio="none"><path id="thread-path"/></svg>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-fight">Fight fair</a><a href="#ch-month">Your month</a></nav>
+</header>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <canvas class="embers" id="embers" aria-hidden="true"></canvas>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="kicker"><span class="lc">lrn</span> · No. 13 · Love</p>
+    <h1 id="title"><span class="w1">Devoted</span><span class="w2">How a gentleman loves</span></h1>
+    <figure class="weave" aria-hidden="true">
+      <svg viewBox="0 0 900 140" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="gRose" x1="0" x2="1"><stop offset="0" stop-color="#e88a9b" stop-opacity="0"/><stop offset=".15" stop-color="#e88a9b"/><stop offset=".85" stop-color="#f3b3bf"/><stop offset="1" stop-color="#f3b3bf" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gGold" x1="0" x2="1"><stop offset="0" stop-color="#e6c07a" stop-opacity="0"/><stop offset=".15" stop-color="#e6c07a"/><stop offset=".85" stop-color="#f5dca6"/><stop offset="1" stop-color="#f5dca6" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path class="strand s1" stroke="url(#gRose)" d="M0 70 C 60 70, 90 20, 150 20 S 240 120, 300 120 S 390 20, 450 70 S 540 120, 600 120 S 690 20, 750 20 S 840 70, 900 70"/>
+        <path class="strand s2" stroke="url(#gGold)" d="M0 70 C 60 70, 90 120, 150 120 S 240 20, 300 20 S 390 120, 450 70 S 540 20, 600 20 S 690 120, 750 120 S 840 70, 900 70"/>
+        <circle class="knot" cx="450" cy="70" r="5"/>
+      </svg>
+    </figure>
+    <p class="deck">Forget the roses-and-grand-gestures version. This is what fifty years of relationship science, and a few centuries of gentlemanly instinct, say a great partner actually does on an ordinary Tuesday.</p>
+    <p class="byline">By Aditya Chaubey · <time datetime="2026-11-22">November 2026</time> · 45 min · 12 interactives</p>
+    <a class="scroll-cue" href="#story"><span>Begin</span><i></i></a>
+  </div>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ INTRO ═════════════ -->
+<section class="intro paper">
+  <div class="col">
+    <p class="dropcap rv">Most advice on being a good boyfriend is written for fifteen-year-olds. Remember her birthday. Buy flowers. Text back. None of it is wrong, exactly, but it treats love as a set of tricks you perform to keep someone pleased, and it gets almost everything that matters backwards.</p>
+    <p class="rv">The psychologist John Gottman spent four decades watching couples in a flat at the University of Washington that everyone called the Love Lab. He filmed them eating breakfast, reading the paper, arguing about money. What predicted whether they'd still be together years later was not the anniversary dinners or the expensive gifts. It was hundreds of tiny, forgettable moments: whether he looked up when she spoke, how he started a disagreement, whether he could say <em>“you're right, I hadn't thought of that.”</em></p>
+    <p class="rv">That's the good news buried in the research. Being a great partner isn't a talent you're born with. It's a set of habits, and habits can be learned. In 1956 Erich Fromm called it <em>The Art of Loving</em> for exactly that reason: like any art, he argued, love needs knowledge, practice and devotion.</p>
+    <aside class="fromm rv" aria-label="Fromm's four elements of love">
+      <p class="fr-h">Fromm's four elements of mature love</p>
+      <div class="fr-grid">
+        <div><b>Care</b><span>Active concern for her life and growth. You water what you love.</span></div>
+        <div><b>Responsibility</b><span>Being ready to respond to what she needs, voiced or not. Not duty: response.</span></div>
+        <div><b>Respect</b><span>Seeing her as she is, and wanting her to grow in her own way, not yours.</span></div>
+        <div><b>Knowledge</b><span>Knowing her deeply enough that care, response and respect hit the mark.</span></div>
+      </div>
+    </aside>
+    <p class="rv">This guide is built on that idea, and on the research that has since tested it: Gottman's lab, Shelly Gable's work on good news, Arthur Aron's experiments on novelty, Sue Johnson's emotionally focused therapy, Esther Perel on desire, and the long tradition of the gentleman that the <a href="https://www.artofmanliness.com/people/relationships/4-horseman/" target="_blank" rel="noopener">Art of Manliness</a> has spent years dusting off. It's written to men in relationships with women, because that's who asked, but almost all of it is simply how good people love each other.</p>
+    <p class="rv note">A word on the numbers: many famous relationship statistics come from Gottman's own institute and haven't been independently replicated at the same strength. Where a figure is solid, I say so. Where it's a rule of thumb, I say that too.</p>
+  </div>
+</section>
+
+<!-- ═════════════ I. CHARACTER ═════════════ -->
+<section class="chapter dark" id="ch-man" data-rail="The man she chose">
+  <div class="col">
+    <p class="ch-num rv">I</p>
+    <h2 class="rv">The man she chose</h2>
+    <p class="lede rv">Before anything you do <em>for</em> her, there's who you are without her. A great relationship is two whole people choosing each other, not two halves clinging on.</p>
+    <p class="rv">The fastest way to become a worse boyfriend is to make her your entire world. It sounds romantic. In practice it means she becomes responsible for your mood, your social life and your sense of worth, and that's a weight no one can carry gracefully. The man worth being with has a life she can join: work he cares about, friends he sees, a body he looks after, interests he'd pursue even if she weren't watching.</p>
+    <p class="rv">Esther Perel, whose book <em>Mating in Captivity</em> is the best thing written on long-term desire, puts it sharply: desire needs a little distance. We're drawn to our partner most when we see them in their element, confident, absorbed, admired by others. A man who has handed his whole self over to the relationship has, without meaning to, made himself less interesting to it.</p>
+    <div class="pillars rv">
+      <div class="pillar"><span class="p-i">◎</span><h3>Own your life</h3><p>Purpose, work, health, money in order. You bring a full cup, you don't arrive with an empty one.</p></div>
+      <div class="pillar"><span class="p-i">⚓</span><h3>Steady, not stormy</h3><p>Emotional stability is attractive and kind. Your moods are your job to manage, not hers.</p></div>
+      <div class="pillar"><span class="p-i">✦</span><h3>Your word holds</h3><p>Do what you say, show up when you said, and if you can't, say so early. Trust is built in small deposits.</p></div>
+      <div class="pillar"><span class="p-i">❖</span><h3>Keep your people</h3><p>Friends, family, your own rituals. A man with a life is a man she gets to choose again, every day.</p></div>
+    </div>
+    <blockquote class="pull rv"><p>“Love is not primarily a relationship to a specific person; it is an attitude, an orientation of character.”</p><cite>Erich Fromm, <em>The Art of Loving</em> (1956)</cite></blockquote>
+    <p class="rv">This chapter is short because it's the subject of a whole other note. If you want the long version, read <a href="/lrn/healthy-masculinity/">A Good Man</a>. Everything below assumes you're working on being him.</p>
+  </div>
+</section>
+
+<!-- ═════════════ II. BIDS ═════════════ -->
+<section class="chapter paper" id="ch-bids" data-rail="Turn toward">
+  <div class="col">
+    <p class="ch-num rv">II</p>
+    <h2 class="rv">Turn toward her</h2>
+    <p class="lede rv">The single most important skill in a relationship looks like nothing at all. It's what you do when she says, “Oh, look at that.”</p>
+    <p class="rv">Gottman calls these moments <strong>bids for connection</strong>. A bid is any small attempt to get your attention, interest or warmth: a comment about a bird outside, a sigh at her laptop, a meme she sends you, a hand on your shoulder. Every bid quietly asks a question: <em>are you with me?</em></p>
+    <p class="rv">You can answer in three ways. <b>Turn toward</b>: engage, even briefly. <b>Turn away</b>: miss it or ignore it, usually because you're on your phone. <b>Turn against</b>: answer with irritation. The answer seems trivial each time. Added up over months, it's everything.</p>
+
+    <figure class="widget rv" id="bids">
+      <figcaption class="w-head"><span class="w-tag">Interactive 1</span><h3>Answer the bid</h3><p>Six ordinary moments. Choose how you'd honestly respond.</p></figcaption>
+      <div class="w-body" id="bids-body"></div>
+    </figure>
+
+    <p class="rv">In a study following newlywed couples over six years, the couples who were still married had turned toward each other's bids about <strong>86%</strong> of the time back in the lab. The couples who had divorced: about <strong>33%</strong>. That difference was not built from grand moments. It was built from <em>“Hmm? Show me.”</em></p>
+
+    <figure class="widget chart-w rv" id="bid-chart">
+      <figcaption class="w-head"><span class="w-tag">The Love Lab</span><h3>How often partners turned toward bids</h3><p>Newlywed couples, measured in the lab, grouped by where they were six years later.</p></figcaption>
+      <div class="w-body"><svg id="bid-svg" viewBox="0 0 640 230" role="img" aria-label="Bar chart: couples still married turned toward bids 86% of the time, divorced couples 33%."></svg></div>
+      <p class="src">Source: Gottman &amp; Gottman, via the Gottman Institute. Lab-observation averages, not a guarantee for any couple.</p>
+    </figure>
+
+    <div class="howto rv">
+      <h3>How to get better at bids</h3>
+      <ul>
+        <li><b>Notice them.</b> Most missed bids aren't rejected, they're simply not seen. Phone face-down when she's talking to you.</li>
+        <li><b>Small is enough.</b> You don't need to drop everything. “Ha, that's great, give me two minutes and I'll look properly” is turning toward.</li>
+        <li><b>Learn her quiet bids.</b> Some people bid loudly. Others sigh, linger in the doorway, or ask “are you busy?” Learn hers.</li>
+        <li><b>Make bids yourself.</b> Connection isn't only her job. Send the article, point out the sunset, reach for her hand.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ III. LOVE MAPS ═════════════ -->
+<section class="chapter blush" id="ch-know" data-rail="Know her">
+  <div class="col">
+    <p class="ch-num rv">III</p>
+    <h2 class="rv">Know her, and keep knowing her</h2>
+    <p class="lede rv">Gottman's first principle of a lasting relationship is the least glamorous: know your partner's inner world in detail, and keep the map updated.</p>
+    <p class="rv">He calls it a <strong>love map</strong>: the part of your mind where you store what matters to her. Her worries this week, the colleague who drives her mad, the dream she's slightly embarrassed about, how she takes her chai, what her childhood was really like. Couples with detailed love maps weather stress far better, because when life gets hard, each one already knows where the other is.</p>
+    <p class="rv">The catch is that people change. The woman you met at 24 is not the woman you're with at 28. Her ambitions shift, her friendships rotate, her fears evolve. A love map drawn in the first six months and never updated slowly becomes a map of a stranger. Curiosity isn't a phase of dating. It's the whole job.</p>
+
+    <figure class="widget rv" id="lovemap">
+      <figcaption class="w-head"><span class="w-tag">Interactive 2</span><h3>How detailed is your love map?</h3><p>Tick the ones you could answer right now, confidently, without asking her. Saved on this device only.</p></figcaption>
+      <div class="w-body">
+        <div class="lm-grid" id="lm-grid"></div>
+        <div class="lm-foot"><div class="lm-score"><span id="lm-n">0</span><small>/ 20</small></div><p id="lm-verdict">Start ticking.</p></div>
+      </div>
+    </figure>
+
+    <div class="howto rv">
+      <h3>Better questions than “how was your day?”</h3>
+      <div class="qs" id="qs"></div>
+      <button class="btn ghost" id="qs-more">Show me another</button>
+    </div>
+    <p class="rv">Open questions beat closed ones (“what was the best part?” rather than “was it good?”). And remember what she tells you. Asking how the difficult meeting went, the day after she mentioned it, says more about your love than flowers ever will.</p>
+  </div>
+</section>
+
+<!-- ═════════════ IV. HER FAN ═════════════ -->
+<section class="chapter paper" id="ch-fan" data-rail="Be her fan">
+  <div class="col">
+    <p class="ch-num rv">IV</p>
+    <h2 class="rv">Be her biggest fan</h2>
+    <p class="lede rv">Everyone knows a good partner shows up when things go wrong. The research says how you respond when things go <em>right</em> may matter even more.</p>
+    <p class="rv">In 2004 the psychologist Shelly Gable and her colleagues studied what happens when people share good news with their partners. They found four ways of responding, and only one of them helps. Couples who believed their partner usually responded with genuine enthusiasm reported more intimacy, more trust and more satisfaction, in dating and married couples alike. A follow-up in 2006 linked it to relationships lasting longer.</p>
+
+    <figure class="widget rv" id="acr">
+      <figcaption class="w-head"><span class="w-tag">Interactive 3</span><h3>“I got the promotion!”</h3><p>She's just told you. Tap each of the four responses.</p></figcaption>
+      <div class="w-body">
+        <div class="acr">
+          <span class="ax ax-y1">Active</span><span class="ax ax-y2">Passive</span><span class="ax ax-x1">Constructive</span><span class="ax ax-x2">Destructive</span>
+          <button class="acr-c" data-k="ac"><b>Active · Constructive</b><span>“That's huge! You've worked so hard for this. Tell me everything, what did they say?”</span></button>
+          <button class="acr-c" data-k="ad"><b>Active · Destructive</b><span>“Won't that mean longer hours? You're already stretched.”</span></button>
+          <button class="acr-c" data-k="pc"><b>Passive · Constructive</b><span>“Oh nice, well done.” (goes back to his phone)</span></button>
+          <button class="acr-c" data-k="pd"><b>Passive · Destructive</b><span>“Cool. Did you see what happened with my project today?”</span></button>
+        </div>
+        <div class="acr-out" id="acr-out" aria-live="polite"><p>Tap a response to see what it does.</p></div>
+      </div>
+    </figure>
+    <p class="src rv">Gable, Reis, Impett &amp; Asher (2004); Gable, Gonzaga &amp; Strachman (2006). The 2004 studies were correlational.</p>
+
+    <p class="rv">Active-constructive responding feels obvious on paper, and is surprisingly rare in life. The passive version, a mild “nice, well done,” is what most of us do most days, and it quietly tells her that her joy is a minor event. The fix is simple: ask questions, relive it with her, and let her see you're proud.</p>
+    <h3 class="sub rv">Her ambitions are not a threat</h3>
+    <p class="rv">This extends to her whole life. A good man wants his partner to win. He's genuinely glad when she earns more, gets the opportunity abroad, or finds work that excites her more than his excites him. He doesn't sulk when she's busy, compete with her achievements, or quietly need her to stay smaller so he feels bigger. In India, where many women still face pressure to put careers second after marriage, the man who says “we'll figure out the logistics, you should go for it” is rarer and more valuable than he should be.</p>
+    <p class="rv">And be her fan in public. Praise her in front of your friends and family. Tell her parents what she's achieved. Never make her the butt of a joke to get a laugh at a party. The way you speak about her when she's in the room, and when she isn't, is the way the world learns to treat her.</p>
+  </div>
+</section>
+
+<!-- ═════════════ V. SMALL THINGS ═════════════ -->
+<section class="chapter dark" id="ch-small" data-rail="Small things often">
+  <div class="col">
+    <p class="ch-num rv">V</p>
+    <h2 class="rv">Small things, often</h2>
+    <p class="lede rv">Grand gestures make good films and poor relationships. What lasts is built from rituals so small you'd barely call them effort.</p>
+    <p class="rv">Gottman's motto is <em>small things often</em>. When he and his team followed up couples who had been through their workshops, the ones who kept improving had something in common: they spent a few extra hours a week on a handful of tiny rituals. His original book called it the “magic five hours.” Here's what's in them. Toggle the rituals you'd realistically keep and see how little time it takes.</p>
+
+    <figure class="widget dark-w rv" id="rituals">
+      <figcaption class="w-head"><span class="w-tag">Interactive 4</span><h3>Your weekly rituals</h3><p>Switch on the habits you'd keep. The meter adds up a week.</p></figcaption>
+      <div class="w-body">
+        <div class="rit-list" id="rit-list"></div>
+        <div class="rit-meter"><div class="rit-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="rr-bg"/><circle cx="60" cy="60" r="52" class="rr-fg" id="rit-arc"/></svg><div class="rit-val"><b id="rit-h">0h 00m</b><span>per week</span></div></div><p id="rit-note">That's less time than one film.</p></div>
+      </div>
+    </figure>
+    <p class="src rv">Rituals adapted from Gottman &amp; Silver, <em>The Seven Principles for Making Marriage Work</em>.</p>
+
+    <h3 class="sub rv">Admiration, said out loud</h3>
+    <p class="rv">Underneath the rituals is something Gottman calls <strong>fondness and admiration</strong>: a habit of mind that scans for what she does well rather than what she gets wrong. Most men feel admiration. Far fewer say it. Say it, specifically: not “you look nice” but “you handled your father so gracefully tonight, I was proud of you.”</p>
+    <p class="rv">A useful practice: once a day, notice one thing she did that you appreciate, and tell her. It takes ten seconds. It also slowly rewires what you notice, which matters, because the couples who drift apart usually didn't stop loving each other. They stopped seeing the good.</p>
+  </div>
+</section>
+
+<!-- ═════════════ VI. LISTEN ═════════════ -->
+<section class="chapter paper" id="ch-hear" data-rail="Hear her">
+  <div class="col">
+    <p class="ch-num rv">VI</p>
+    <h2 class="rv">Hear her, don't fix her</h2>
+    <p class="lede rv">When she comes to you upset, you have about four seconds before the instinct to solve kicks in. Learning to wait is one of the most loving things you'll ever do.</p>
+    <p class="rv">Men are often taught that being useful means fixing problems. So she describes a bad day and he responds with a five-point plan. It feels like help. It often lands as: <em>your feelings are a problem I want to get rid of quickly.</em> She didn't want a consultant. She wanted company.</p>
+    <p class="rv">Sue Johnson, who developed emotionally focused therapy, boils secure love down to one question that every partner is silently asking: <em>“Are you there for me?”</em> Her answer is three letters, A.R.E.</p>
+    <div class="are rv">
+      <div><b>A</b><h3>Accessible</h3><p>Can I reach you? You're open, not distracted or defensive, when she needs you.</p></div>
+      <div><b>R</b><h3>Responsive</h3><p>Will you respond to what I feel? You take in her emotion and show it matters.</p></div>
+      <div><b>E</b><h3>Engaged</h3><p>Will you stay close? You're present, attentive, emotionally involved.</p></div>
+    </div>
+    <p class="rv">The simplest tool in this whole guide is one question: <strong>“Do you want me to help, or do you want me to just listen?”</strong> Ask it, and do what she says. Sometimes she'll want solutions, and then your fixing instinct is welcome. But you'll be invited in rather than barging in.</p>
+
+    <figure class="widget rv" id="hear">
+      <figcaption class="w-head"><span class="w-tag">Interactive 5</span><h3>Help or hear?</h3><p>She says something. Pick what you'd say back.</p></figcaption>
+      <div class="w-body" id="hear-body"></div>
+    </figure>
+
+    <div class="howto rv">
+      <h3>The listening toolkit</h3>
+      <ul>
+        <li><b>Validate before anything else.</b> “That sounds exhausting” or “no wonder you're angry.” Validation isn't agreement. It's saying her feelings make sense.</li>
+        <li><b>Take her side, for now.</b> When she's venting about her boss, this is not the moment to argue the boss's case. Be on her team first.</li>
+        <li><b>Reflect back.</b> “So it's less the deadline and more that he didn't credit you?” She feels understood, and you check you've got it right.</li>
+        <li><b>Stay with silence.</b> Don't rush to fill it. Sometimes the most important thing comes after a pause.</li>
+        <li><b>Follow up.</b> Ask about it again tomorrow. That's how she knows you were really listening.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ VII. FIGHT FAIR ═════════════ -->
+<section class="chapter dark" id="ch-fight" data-rail="Fight fair">
+  <div class="col">
+    <p class="ch-num rv">VII</p>
+    <h2 class="rv">Fight like a gentleman</h2>
+    <p class="lede rv">Every couple argues. Happy couples aren't the ones who never fight. They're the ones who fight without doing damage.</p>
+    <p class="rv">The most famous finding from the Love Lab is that four specific behaviours during conflict predicted, more than anything else, which couples would eventually split. Gottman called them the <strong>Four Horsemen</strong>. Each has an antidote. Flip the cards.</p>
+
+    <figure class="widget dark-w rv" id="horsemen">
+      <figcaption class="w-head"><span class="w-tag">Interactive 6</span><h3>The Four Horsemen and their antidotes</h3><p>Tap or press a card to turn it over.</p></figcaption>
+      <div class="w-body"><div class="hm-grid" id="hm-grid"></div></div>
+    </figure>
+    <p class="rv">Contempt deserves special mention. It's the eye-roll, the sneer, the mocking imitation, the “you're pathetic.” Gottman found it to be the single strongest predictor of divorce, because it says not “I'm upset with what you did” but “I'm above you.” A gentleman can be angry. He is never contemptuous.</p>
+
+    <h3 class="sub rv">How you start decides how you finish</h3>
+    <p class="rv">Gottman's team found they could usually tell how a conflict discussion would end from its first three minutes, and in one study the first three minutes of a newlywed couple's argument predicted their marriage's outcome six years later. A <strong>harsh startup</strong>, opening with blame, criticism or sarcasm, almost always ends badly. A <strong>gentle startup</strong> describes how you feel about a specific situation and what you need, without attacking who she is. Try rewriting a few.</p>
+
+    <figure class="widget dark-w rv" id="startup">
+      <figcaption class="w-head"><span class="w-tag">Interactive 7</span><h3>Soften the startup</h3><p>Here's the harsh version. Pick the gentle one.</p></figcaption>
+      <div class="w-body" id="startup-body"></div>
+    </figure>
+
+    <h3 class="sub rv">The magic ratio</h3>
+    <p class="rv">Negativity isn't fatal. What matters is how much warmth surrounds it. In Gottman's studies, stable couples showed roughly <strong>five positive interactions for every negative one</strong> during conflict: a touch, a smile, a joke, a “fair point,” an apology. Couples near 1:1 were in trouble. Treat 5:1 as a rule of thumb rather than a law, but the principle holds: you can afford a hard conversation if your account is in credit.</p>
+
+    <figure class="widget dark-w rv" id="ratio">
+      <figcaption class="w-head"><span class="w-tag">Interactive 8</span><h3>Balance the scale</h3><p>Slide the moments in a typical argument and watch the balance.</p></figcaption>
+      <div class="w-body">
+        <svg id="scale" viewBox="0 0 520 240" role="img" aria-label="A balance scale comparing positive and negative moments"></svg>
+        <div class="sliders">
+          <label><span>Positive moments <b id="pos-v">5</b></span><input type="range" id="pos" min="0" max="20" value="10"></label>
+          <label><span>Negative moments <b id="neg-v">2</b></span><input type="range" id="neg" min="0" max="10" value="2"></label>
+        </div>
+        <p class="ratio-out" id="ratio-out" aria-live="polite"></p>
+      </div>
+    </figure>
+
+    <h3 class="sub rv">When you're flooded, stop</h3>
+    <p class="rv">Sometimes an argument tips into what Gottman calls <strong>flooding</strong>. Your heart races (in his lab, above about 100 beats a minute), your body is in fight-or-flight, and you literally cannot take in what she's saying. Pushing on now is how people say the unforgivable thing.</p>
+    <p class="rv">The gentleman's move is a proper time-out, done well: say you're flooded, promise to come back, and then actually calm down for at least twenty minutes. Stress hormones take that long to clear. Don't spend it rehearsing your case. Walk, breathe, read. Then return, as you promised. Walking out without a word is stonewalling. Pausing with a promise is maturity.</p>
+
+    <figure class="widget dark-w rv" id="flood">
+      <figcaption class="w-head"><span class="w-tag">Interactive 9</span><h3>The twenty-minute reset</h3><p>What to say, then a timer with a breathing guide.</p></figcaption>
+      <div class="w-body">
+        <div class="fl-wrap">
+          <div class="fl-say"><p class="fl-q">Say this:</p><p class="fl-line">“I'm getting too worked up to listen properly, and I don't want to say something I'll regret. Can we take twenty minutes? I'll come back and we'll finish this.”</p></div>
+          <div class="fl-timer"><div class="fl-orb" id="fl-orb"><span id="fl-t">20:00</span><small id="fl-s">ready</small></div>
+            <div class="fl-btns"><button class="btn" id="fl-go">Start the reset</button><button class="btn ghost" id="fl-reset">Reset</button></div></div>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ VIII. REPAIR ═════════════ -->
+<section class="chapter paper" id="ch-repair" data-rail="Repair">
+  <div class="col">
+    <p class="ch-num rv">VIII</p>
+    <h2 class="rv">Repair, and accept what won't change</h2>
+    <p class="lede rv">Here's the most hopeful finding in all of this: even couples who fight badly do fine if they're good at repairing afterwards.</p>
+    <p class="rv">In Gottman's 1998 study of newlyweds, most couples who showed the Four Horsemen early on still ended up stable, so long as they learned to make up well. The skill isn't never hurting each other. It's what you do next.</p>
+
+    <h3 class="sub rv">Most problems are permanent, and that's fine</h3>
+    <p class="rv">Gottman estimates that about <strong>69%</strong> of a couple's conflicts are <em>perpetual</em>: they come from lasting differences in personality or values, and they never fully go away. She's a planner, you're spontaneous. She wants to see family every weekend, you need quiet. Happy couples don't solve these. They learn to talk about them with humour and affection, and to live with them. Only about a third are <em>solvable</em>, and those deserve a proper fix. Can you tell which is which?</p>
+
+    <figure class="widget rv" id="sorter">
+      <figcaption class="w-head"><span class="w-tag">Interactive 10</span><h3>Perpetual or solvable?</h3><p>Sort each conflict. Then see what each kind needs.</p></figcaption>
+      <div class="w-body" id="sorter-body"></div>
+    </figure>
+
+    <h3 class="sub rv">How to apologise like a man</h3>
+    <p class="rv">A real apology is one of the strongest things a man can offer, and one of the rarest. Not “sorry you feel that way,” which is an accusation in disguise. Not “sorry, but…,” which cancels itself. Build a real one below, and notice which parts make it land.</p>
+
+    <figure class="widget rv" id="apology">
+      <figcaption class="w-head"><span class="w-tag">Interactive 11</span><h3>Build an apology</h3><p>You forgot her important work dinner and made her late. Choose what goes in.</p></figcaption>
+      <div class="w-body">
+        <div class="ap-parts" id="ap-parts"></div>
+        <div class="ap-letter"><p class="ap-text" id="ap-text"></p><div class="ap-meter"><i id="ap-bar"></i></div><p class="ap-verdict" id="ap-verdict"></p></div>
+      </div>
+    </figure>
+
+    <div class="howto rv">
+      <h3>Repair phrases worth keeping in your pocket</h3>
+      <div class="phrases">
+        <span>“That came out wrong. Let me try again.”</span>
+        <span>“You're right, I hadn't seen it that way.”</span>
+        <span>“I'm feeling defensive. Can you say that more gently?”</span>
+        <span>“What do you need from me right now?”</span>
+        <span>“I love you. We'll figure this out.”</span>
+        <span>“Can we start over?”</span>
+        <span>“I can see my part in this.”</span>
+        <span>“Let's take a break and come back.”</span>
+      </div>
+    </div>
+    <p class="rv">And the other half of repair: <strong>accept hers</strong>. When she reaches out with a joke, a touch or a softer tone in the middle of a fight, take it. Holding out for total victory is how men win arguments and lose relationships.</p>
+  </div>
+</section>
+
+<!-- ═════════════ IX. EQUAL ═════════════ -->
+<section class="chapter blush" id="ch-equal" data-rail="Equal partner">
+  <div class="col">
+    <p class="ch-num rv">IX</p>
+    <h2 class="rv">Be an equal partner</h2>
+    <p class="lede rv">In 1998 Gottman published a finding that caused a stir: in his newlywed study, the husbands' willingness to accept their wives' influence was one of the strongest predictors of a happy, stable marriage.</p>
+    <p class="rv"><strong>Accepting influence</strong> means letting her opinions actually change your decisions. Not humouring her and doing what you'd planned anyway. Not treating every disagreement as a contest for control. It sounds like “good point, let's do it your way” and “I hadn't considered that, give me a day to think.” Gottman found that women, on average, already accepted their husbands' influence. The men who didn't reciprocate were the ones whose marriages tended to struggle.</p>
+    <p class="rv">This is where the old idea of the man as the household's final word quietly retires. A gentleman leads, often. He takes initiative, takes responsibility, takes the hard call when it's his to take. But he leads <em>with</em> her, not over her.</p>
+
+    <div class="equal-grid rv">
+      <div class="eq"><h3>The load</h3><p>Household work isn't helping her out. It's your home too. Share the thinking as well as the doing: noticing the milk is low, remembering the plumber, planning the week. <a href="/lrn/healthy-masculinity/#ch-home">A Good Man</a> has a full audit.</p></div>
+      <div class="eq"><h3>Money</h3><p>Talk about it early and honestly: what you earn, what you owe, what you want. Splitting bills is a choice you make together, not a rule you impose. Never use money as power.</p></div>
+      <div class="eq"><h3>Decisions</h3><p>Big decisions (where to live, whose job moves, when to marry) are joint. Neither of you should learn about a major plan after it's already decided.</p></div>
+      <div class="eq"><h3>Families</h3><p>In India especially, this is where many relationships are tested. When your family is unfair to her, you speak up, privately and firmly. She shouldn't have to fight your relatives alone.</p></div>
+    </div>
+
+    <h3 class="sub rv">The family test</h3>
+    <p class="rv">Indian relationships come with an extended cast: parents who have opinions about her job, aunts who comment on her clothes, a mother who struggles to share her son. A boyfriend who stays silent in these moments to keep the peace is choosing his own comfort over her dignity. You don't have to be rude to your parents. You do have to be clear: <em>she is my partner, and I won't let her be treated that way.</em> Handle your family; let her handle hers. And when you meet her parents, show up as the man you'd want your sister to bring home: punctual, respectful, curious about them, and not in a hurry to leave.</p>
+  </div>
+</section>
+
+<!-- ═════════════ X. COURTESY ═════════════ -->
+<section class="chapter paper" id="ch-courtesy" data-rail="Courtesy & trust">
+  <div class="col">
+    <p class="ch-num rv">X</p>
+    <h2 class="rv">Courtesy, safety and trust</h2>
+    <p class="lede rv">Chivalry isn't dead. It just grew up. The point was never that she can't open a door. It was that you're paying attention to her comfort, and the world sees you do it.</p>
+    <p class="rv">The old courtesies survive because the instinct behind them is good: consideration made visible. The modern gentleman keeps the instinct and drops the condescension. If she'd rather open her own door or split the bill, that's not a rejection of your manners. Respecting her preference <em>is</em> the manners.</p>
+
+    <figure class="widget rv" id="courtesy">
+      <figcaption class="w-head"><span class="w-tag">Interactive 12</span><h3>The gentleman's courtesies, updated</h3><p>Tap a card to see the modern version.</p></figcaption>
+      <div class="w-body"><div class="ct-grid" id="ct-grid"></div></div>
+    </figure>
+
+    <h3 class="sub rv">Her safety is your business, her freedom is hers</h3>
+    <p class="rv">In Indian cities, a woman getting home late carries a calculation most men never have to make. A good partner makes it lighter: drops her home or rides with her when he can, asks her to message when she's in, keeps his phone on until she does. But protectiveness has a twin that looks similar and isn't. Telling her what she can wear, where she can go, or who she can see is not care. It's control, and it's a red flag.</p>
+    <h3 class="sub rv">Privacy and trust</h3>
+    <p class="rv">Don't go through her phone. Don't demand passwords or track her location unless you've both agreed to share. If you feel the urge, the problem is either your insecurity or a real trust issue, and both need a conversation, not surveillance. What she shares with you privately, her secrets, her photos, her family's troubles, stays with you, forever, including after a breakup. Sharing intimate images without consent isn't just ugly; in India it's a crime under the IT Act.</p>
+    <p class="rv">On jealousy: a flicker of it is human. Acting on it with interrogations, sulking or ultimatums is not. Trust her friendships, including with men. Be someone she never needs to hide anything from, and extend her the same.</p>
+  </div>
+</section>
+
+<!-- ═════════════ XI. ROMANCE ═════════════ -->
+<section class="chapter dark" id="ch-fire" data-rail="Keep the fire">
+  <div class="col">
+    <p class="ch-num rv">XI</p>
+    <h2 class="rv">Keep the fire lit</h2>
+    <p class="lede rv">The early rush fades in almost every relationship. That's not a sign something is wrong. It's the moment the real romance begins, and it takes intention.</p>
+    <p class="rv">Arthur Aron's research offers the most practical tool. In a 2000 study, couples were brought into a lab and asked to do a seven-minute task together. Some did something mundane. Others did something novel and mildly exciting: crawling through an obstacle course tied together at the wrist and ankle. The couples who did the novel task reported a bigger rise in relationship quality afterwards. Surveys of real couples showed the same thing: shared new experiences push back the boredom that slowly erodes satisfaction.</p>
+    <p class="rv">The lesson isn't that you need skydiving. It's that the tenth visit to the same café is comfort, not romance. Learn something together. Go somewhere neither of you has been. Let her see you nervous and new at something.</p>
+
+    <figure class="widget dark-w rv" id="dates">
+      <figcaption class="w-head"><span class="w-tag">Bonus</span><h3>The novelty generator</h3><p>Ideas for dates that are actually new. Set your budget and energy.</p></figcaption>
+      <div class="w-body">
+        <div class="dt-ctl">
+          <div class="seg" role="group" aria-label="Budget"><span>Budget</span><button data-b="0" class="on">Free</button><button data-b="1">Under ₹2k</button><button data-b="2">Splurge</button></div>
+          <div class="seg" role="group" aria-label="Energy"><span>Energy</span><button data-e="0">Cosy</button><button data-e="1" class="on">Out</button><button data-e="2">Adventure</button></div>
+        </div>
+        <div class="dt-card" id="dt-card" aria-live="polite"><p class="dt-t" id="dt-t"></p><p class="dt-d" id="dt-d"></p></div>
+        <button class="btn" id="dt-go">Another idea</button>
+      </div>
+    </figure>
+
+    <h3 class="sub rv">Romance that grown-ups notice</h3>
+    <div class="romance rv">
+      <div><h3>Pursue her, still</h3><p>Flirt with the woman you've been with for years. Plan dates; don't just “see what happens.” Dress up for her sometimes.</p></div>
+      <div><h3>Write it down</h3><p>A handwritten letter, a note in her bag before a hard day. Specific, sincere words beat expensive things.</p></div>
+      <div><h3>Remember</h3><p>The book she mentioned, the restaurant from your first trip, the song from that night. Being remembered is being loved.</p></div>
+      <div><h3>Touch without agenda</h3><p>A hand on her back, holding hands on a walk, a long hug. Affection shouldn't only ever be a prelude to something else.</p></div>
+    </div>
+
+    <h3 class="sub rv">About the “five love languages”</h3>
+    <p class="rv">You've probably heard that everyone has one primary love language and you should learn hers. In 2024, psychologists Emily Impett, Haeyoung Park and Amy Muise reviewed the research and found little support for it. Most people value all five (words, time, gifts, help, touch), and expressing any of them was linked to satisfaction regardless of the partner's stated “language.” Their better metaphor: love is a <em>balanced diet</em>. Offer all of it, and ask her what she's hungry for this week.</p>
+    <p class="rv">On intimacy, one rule covers most of it: her enthusiasm, not just her agreement, is what you're after. Ask, listen, stay curious about what she enjoys, and never make her feel she owes you anything.</p>
+  </div>
+</section>
+
+<!-- ═════════════ XII. ENDINGS ═════════════ -->
+<section class="chapter paper" id="ch-end" data-rail="If it ends">
+  <div class="col">
+    <p class="ch-num rv">XII</p>
+    <h2 class="rv">If it ends, end it well</h2>
+    <p class="lede rv">Not every relationship should last forever. You learn the most about a man's character from how he behaves when it's over.</p>
+    <p class="rv">Sometimes, despite real effort, two good people aren't right for each other. Values diverge, futures pull apart, or the love simply isn't there any more. Staying out of guilt or fear isn't kindness. But ending it is where many otherwise decent men behave worst.</p>
+    <ol class="rules rv">
+      <li><b>In person, if it's safe.</b> Not by text, not by fading out. She gave you her time and trust; she deserves your face.</li>
+      <li><b>Honest, but kind.</b> Give a real reason, gently. Don't invent one, and don't list every flaw.</li>
+      <li><b>No ghosting, no slow fade.</b> Making her guess is cowardice dressed up as avoiding conflict.</li>
+      <li><b>Don't ask her to make you feel better.</b> If you're ending it, you don't get to be comforted by her.</li>
+      <li><b>Her secrets stay secret.</b> Everything she told you, every photo, every private moment. For life.</li>
+      <li><b>No bad-mouthing.</b> Not to mutual friends, not online. “It didn't work out, and she's a good person” is all anyone needs.</li>
+      <li><b>If she ends it, accept it.</b> You can be sad. You can ask once to understand. You cannot pressure, guilt or pursue. No means no here too.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═════════════ XIII. MONTH ═════════════ -->
+<section class="chapter dark finale" id="ch-month" data-rail="Your month">
+  <div class="col">
+    <p class="ch-num rv">XIII</p>
+    <h2 class="rv">Your month</h2>
+    <p class="lede rv">Reading about love is easy. Here's how to turn this note into habits. First, an honest look in the mirror.</p>
+
+    <figure class="widget dark-w rv" id="mirror">
+      <figcaption class="w-head"><span class="w-tag">Self-check</span><h3>The mirror</h3><p>Rate yourself honestly on each. It stays on your device.</p></figcaption>
+      <div class="w-body"><div class="mr-list" id="mr-list"></div><div class="mr-out" id="mr-out"></div></div>
+    </figure>
+
+    <figure class="widget dark-w rv" id="plan">
+      <figcaption class="w-head"><span class="w-tag">Four weeks</span><h3>The thirty-day plan</h3><p>One focus each week. Tick as you go; it's saved on this device.</p></figcaption>
+      <div class="w-body"><div class="plan" id="plan-body"></div><div class="plan-foot"><span id="plan-n">0 of 16</span><button class="btn ghost small" id="plan-reset">Reset</button></div></div>
+    </figure>
+
+    <blockquote class="pull big rv"><p>“The way to love anything is to realise that it may be lost.”</p><cite>G. K. Chesterton</cite></blockquote>
+    <p class="rv closing">Being a great partner isn't about being perfect. You'll miss bids, start harshly, get defensive, forget things. She will too. What makes a relationship last is two people who keep turning back toward each other, again and again, for years. That's devotion. It's not a feeling you wait for. It's something you do.</p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sources paper" id="sources">
+  <div class="col">
+    <h2>Sources and further reading</h2>
+    <ol>
+      <li>Gottman, J. &amp; Silver, N. <em>The Seven Principles for Making Marriage Work</em> (1999; rev. 2015). Love maps, fondness and admiration, turning toward, accepting influence, perpetual problems.</li>
+      <li>The Gottman Institute, <a href="https://www.gottman.com/blog/turn-toward-instead-of-away/" target="_blank" rel="noopener">“Turn Toward Instead of Away”</a>. The 86% and 33% figures.</li>
+      <li>University of Washington News (1998), <a href="https://www.washington.edu/news/1998/02/20/husbands-willingness-to-be-influenced-by-wife-share-power-are-key-predictors-of-newlywed-happiness-stability-uw-study-shows/" target="_blank" rel="noopener">“Husbands' willingness to be influenced by wife… key predictors of newlywed happiness”</a>. Gottman, Coan, Carrère &amp; Swanson, <em>Journal of Marriage and the Family</em>.</li>
+      <li>Carrère, S. &amp; Gottman, J. (1999). <a href="https://www.gottman.com/blog/the-research-predicting-divorce-among-newlyweds-from-the-first-three-minutes-of-a-marital-conflict-discussion/" target="_blank" rel="noopener">Predicting divorce among newlyweds from the first three minutes of a marital conflict discussion</a>. <em>Family Process</em>.</li>
+      <li>The Gottman Institute, <a href="https://www.gottman.com/blog/the-magic-relationship-ratio-according-science/" target="_blank" rel="noopener">“The Magic Relationship Ratio, According to Science”</a>.</li>
+      <li>The Gottman Institute, <a href="https://www.gottman.com/blog/weekend-homework-assignment-physiological-self-soothing/" target="_blank" rel="noopener">“Physiological self-soothing”</a>. Flooding and the twenty-minute break.</li>
+      <li>The Art of Manliness, <a href="https://www.artofmanliness.com/people/relationships/4-horseman/" target="_blank" rel="noopener">“The 4 Horsemen of the Marriage Apocalypse (and How to Rein Them In)”</a>.</li>
+      <li>Gable, S. L., Reis, H. T., Impett, E. A. &amp; Asher, E. R. (2004). <a href="https://pubmed.ncbi.nlm.nih.gov/15301629/" target="_blank" rel="noopener">What do you do when things go right?</a> <em>Journal of Personality and Social Psychology</em>, 87, 228–245.</li>
+      <li>Gable, S. L., Gonzaga, G. C. &amp; Strachman, A. (2006). Will you be there for me when things go right? <em>JPSP</em>, 91, 904–917.</li>
+      <li>Aron, A., Norman, C. C., Aron, E. N., McKenna, C. &amp; Heyman, R. E. (2000). <a href="https://pubmed.ncbi.nlm.nih.gov/10707334/" target="_blank" rel="noopener">Couples' shared participation in novel and arousing activities and experienced relationship quality</a>. <em>JPSP</em>, 78, 273–284.</li>
+      <li>Impett, E. A., Park, H. G. &amp; Muise, A. (2024). <a href="https://journals.sagepub.com/doi/10.1177/09637214231217663" target="_blank" rel="noopener">Popular psychology through a scientific lens: Evaluating love languages</a>. <em>Current Directions in Psychological Science</em>.</li>
+      <li>Fromm, E. <em>The Art of Loving</em> (1956).</li>
+      <li>Perel, E. <em>Mating in Captivity: Unlocking Erotic Intelligence</em> (2006).</li>
+      <li>Johnson, S. <em>Hold Me Tight: Seven Conversations for a Lifetime of Love</em> (2008).</li>
+      <li>Greater Good Science Center, <a href="https://ggia.berkeley.edu/practice/exciting_activities_for_couples" target="_blank" rel="noopener">“Exciting Activities for Couples”</a>.</li>
+    </ol>
+    <p class="src">This note is general guidance, not therapy. If a relationship involves fear, control or violence, that's not a communication problem; reach out to someone you trust or a professional. In India, the women's helpline is 181 and Tele-MANAS (mental health) is 14416.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <nav aria-label="Footer"><a href="/lrn/">All notes</a><a href="/lrn/healthy-masculinity/">A Good Man</a><a href="/lrn/conversation/">Good Company</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>

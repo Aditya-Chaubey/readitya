@@ -26,6 +26,19 @@ export interface Story {
 
 export const STORIES: Story[] = [
   {
+    slug: 'boyfriend',
+    title: 'Devoted: How a Gentleman Loves',
+    deck: 'How to be a great boyfriend, grown-up edition: turning toward her, love maps, celebrating her wins, small rituals, listening, fighting fair, repair, equality, courtesy and keeping the fire lit. Built on Gottman, Gable, Aron and Fromm.',
+    topic: 'Style & manners',
+    date: '2026-11-22',
+    minutes: 45,
+    interactives: 12,
+    cover: '/lrn/_covers/boyfriend.svg',
+    bg: '#1b1116',
+    fg: '#f6ebe3',
+    accent: '#e88a9b',
+  },
+  {
     slug: 'healthy-masculinity',
     title: 'A Good Man: What It Takes in the Modern World',
     deck: 'Character, the old codes rewritten, strength pointed well, composure, class, partnership, friendship and mentorship, with a golden-mean compass, a mental-load audit and a four-week plan.',
