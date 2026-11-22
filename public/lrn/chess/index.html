@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Long Game — lrn</title>
+<meta name="description" content="Chess for adults: a complete, research-backed guide to learning chess as a grown-up. The pieces, how adults really improve, openings, tactics, checkmates, strategy, endgames, how to think, ratings, etiquette and a 12-week plan, with 13 playable boards.">
+<meta name="theme-color" content="#1a120c">
+<meta property="og:title" content="The Long Game: Chess for Adults">
+<meta property="og:description" content="It is not too late. A complete guide to learning, loving and getting properly good at chess, with a playable coach bot and 13 interactive boards.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chess.css">
+<script src="engine.js" defer></script>
+<script src="data.js" defer></script>
+<script src="chess.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the guide</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<!-- shared gradients for the pieces -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gIvory" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#d9c7a4"/><stop offset=".28" stop-color="#fffaf0"/><stop offset=".55" stop-color="#f4e8d0"/><stop offset="1" stop-color="#b9a07a"/></linearGradient>
+    <linearGradient id="gEbony" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#2a221c"/><stop offset=".3" stop-color="#5d4e43"/><stop offset=".55" stop-color="#2e2620"/><stop offset="1" stop-color="#0c0a08"/></linearGradient>
+    <radialGradient id="gShine" cx=".35" cy=".3" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+</svg>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-tactics">Tactics</a><a href="#ch-play">Play the coach</a></nav>
+</header>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="lamp" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lc">lrn</span> · No. 16 · Games</p>
+      <h1 id="title"><span class="t1">The</span> <span class="t2">Long</span> <span class="t3">Game</span></h1>
+      <p class="sub">Chess for adults</p>
+      <p class="deck">How to learn the world’s great game as a grown-up, enjoy every hour of it, and get properly good. The rules, the science of how adults improve, openings, tactics, checkmates, plans, endgames, ratings and etiquette, with thirteen boards you can play on.</p>
+      <div class="hero-meta"><span>≈ 60 min read</span><span>13 playable boards</span><span>One coach bot</span></div>
+      <a class="cta" href="#story">Begin the game <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="hero-board" aria-label="An animated chessboard replaying the Opera Game of 1858">
+      <div class="stage" id="heroStage"><div class="b3" id="heroBoard"></div></div>
+      <figcaption>
+        <span class="tick" id="heroTick">1. e4</span>
+        <span class="who">Paul Morphy vs the Duke of Brunswick &amp; Count Isouard · Paris Opera, 1858</span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span></span></div>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ INTRO ═════════════ -->
+<section class="sec paper" id="ch-intro" data-rail="Why now">
+  <div class="wrap">
+    <p class="eyebrow rv">The opening move</p>
+    <h2 class="rv">It is not too late. <em>It is the perfect time.</em></h2>
+    <p class="lede rv">Most people learn chess at nine, forget it at eleven, and spend the next twenty years vaguely remembering that the horse moves in an L. Then something happens. A friend sets up a board at a party, or a series about an orphan prodigy turns up on Netflix, or they watch an eighteen-year-old from Chennai become world champion. They think: <em>I wish I were good at this.</em></p>
+    <p class="rv">This guide is for that person. It is for the thirty-year-old who plays on the metro, the forty-year-old who wants a hobby that isn’t a screen pretending to be a hobby, and anyone who has ever lost a game in eleven moves and wondered what on earth happened. It doesn’t assume you remember the rules. It does assume you are an adult, which means you want to know <em>why</em>, you have limited time, and you can tell the difference between a shortcut and a good habit.</p>
+    <p class="rv">Here is the good news, backed by research we will get to: adults learn chess well. You won’t become a grandmaster, and neither will almost anyone who starts at any age. But beating most of the people you know, understanding what masters are doing, and reaching a solid club rating are open to anyone willing to practise a little, the right way. And the game rewards you long before you are good at it.</p>
+  </div>
+  <div class="wide stats rv" aria-label="Chess in numbers">
+    <div class="stat"><b data-count="1500">1,500</b><span>years of history, from India’s <em>chaturanga</em> onward</span></div>
+    <div class="stat"><b>4.8×10<sup>44</sup></b><span>legal positions. Nobody has solved it, and nobody will soon</span></div>
+    <div class="stat"><b data-count="267">267</b><b class="u">M+</b><span>members on Chess.com alone by mid-2026</span></div>
+    <div class="stat"><b data-count="18">18</b><span>Gukesh D’s age when he became world champion in 2024</span></div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">What is in here</h3>
+    <ol class="toc rv" id="toc"></ol>
+    <aside class="note rv"><b>How to use this guide.</b> Read it straight through once; it builds like a game does. Then come back to the boards. Every board on this page is live: pieces move, puzzles check your answers, and the coach bot at the end will play you as often as you like. Your progress in the drills and the 12-week plan is saved in your browser.</aside>
+  </div>
+</section>
+
+<!-- ═════════════ I. THE PIECES ═════════════ -->
+<section class="sec felt" id="ch-pieces" data-rail="The pieces">
+  <div class="wrap">
+    <p class="chap rv"><span>I</span>The board &amp; the army</p>
+    <h2 class="rv">Sixty-four squares, <em>thirty-two pieces</em>, one goal</h2>
+    <p class="lede rv">Chess is a war game with perfect information. Nothing is hidden and nothing is left to chance: no dice, no cards. Both armies are identical, and White moves first. You win by attacking the enemy king so that it cannot escape. That is checkmate, from the Persian <em>shāh māt</em>: “the king is helpless.”</p>
+    <p class="rv">The game was born in India around the sixth century as <em>chaturanga</em>, named after the four divisions of an ancient army: infantry, cavalry, elephants and chariots. Those became our pawns, knights, bishops and rooks. It travelled to Persia as <em>shatranj</em>, spread with the Islamic world, and reached Europe around the year 1000. The pieces were slow back then. The game we play today was born in Spain around 1475, when the queen, until then a feeble piece that crept one square diagonally, suddenly gained her modern power. Contemporaries called the new version “<em>mad queen’s chess</em>”. Games became faster, sharper and more beautiful, and the rules have barely changed since.</p>
+  </div>
+
+  <div class="timeline rv" id="timeline" tabindex="0" aria-label="A timeline of chess history">
+    <div class="tl-track">
+      <article><b>c. 600</b><h4>Chaturanga</h4><p>Played in Gupta-era India on an 8×8 board. The four army divisions become the pieces.</p></article>
+      <article><b>c. 800</b><h4>Shatranj</h4><p>Persia and the Abbasid world. Masters like al-Adli and as-Suli write the first chess books and problems.</p></article>
+      <article><b>c. 1000</b><h4>Europe</h4><p>Through Spain and Sicily. The vizier becomes a queen, the elephant a bishop.</p></article>
+      <article><b>c. 1475</b><h4>The mad queen</h4><p>In Spain the queen and bishop gain long-range moves. Modern chess is born.</p></article>
+      <article><b>1849</b><h4>Staunton pieces</h4><p>Nathaniel Cooke’s design, sold by Jaques of London and endorsed by Howard Staunton, becomes the standard set.</p></article>
+      <article><b>1886</b><h4>First world champion</h4><p>Wilhelm Steinitz beats Johannes Zukertort in the first official world championship match.</p></article>
+      <article><b>1970</b><h4>Elo ratings</h4><p>FIDE adopts Arpad Elo’s rating system. Every player now has a number.</p></article>
+      <article><b>1997</b><h4>Deep Blue</h4><p>IBM’s machine beats world champion Garry Kasparov in a six-game match.</p></article>
+      <article><b>2000</b><h4>Anand</h4><p>Viswanathan Anand becomes India’s first world champion. He would win the title five times.</p></article>
+      <article><b>2020</b><h4>The boom</h4><p>Lockdowns and <em>The Queen’s Gambit</em> send millions of adults back to the board.</p></article>
+      <article><b>2024</b><h4>Gukesh</h4><p>India wins both Olympiad golds in Budapest. In December, Gukesh D becomes the youngest undisputed world champion.</p></article>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="rv">The six pieces</h3>
+    <p class="rv">Each side starts with eight pawns, two rooks, two knights, two bishops, a queen and a king. The board is placed so that each player has a light square in the bottom-right corner (“light on the right”), and the queen starts on her own colour: white queen on a light square, black queen on a dark one. Then pick up a piece below and see what it can do.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study dark rv" id="stPieces">
+      <div class="st-tag">Study 01 · Meet the army</div>
+      <div class="st-grid">
+        <div class="board" id="bdPieces"></div>
+        <div class="st-side">
+          <div class="chips" id="pcTabs" role="tablist" aria-label="Pieces and special moves"></div>
+          <h4 id="pcName">Knight</h4>
+          <p class="pc-val" id="pcVal"></p>
+          <p id="pcLine"></p>
+          <p class="pc-fact" id="pcFact"></p>
+          <p class="hint">Drag or tap the piece to move it. Gold dots are squares it can reach; rings are captures.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="rv">The rules everyone forgets</h3>
+    <div class="rules rv">
+      <div><h4>Castling</h4><p>Once per game, the king moves two squares towards a rook, and the rook hops over to the other side. It is the only move where two pieces move at once. You can’t castle if the king or that rook has already moved, if a piece stands between them, if you are in check, or if the king would pass through or land on an attacked square.</p></div>
+      <div><h4>En passant</h4><p>If a pawn makes its two-square first move and lands right beside an enemy pawn, that enemy pawn may capture it as if it had moved only one square. The catch: it must be done immediately, on the very next move, or the right is lost. French for “in passing”.</p></div>
+      <div><h4>Promotion</h4><p>A pawn that reaches the far rank becomes a queen, rook, bishop or knight, your choice, even if you still have your original queen. Two queens is legal, and sometimes necessary.</p></div>
+      <div><h4>Check, mate &amp; stalemate</h4><p>A king under attack is “in check” and you must get out of it at once: move, block or capture. No way out is checkmate, and the game is over. If the side to move is <em>not</em> in check but has no legal move, it is stalemate, a draw. Stalemate rescues more losing positions than any other trick.</p></div>
+      <div><h4>Other draws</h4><p>A game is drawn by agreement; when the same position appears three times; after fifty moves by each side with no capture or pawn move; or when neither side has enough material left to mate (a lone king plus a single bishop or knight cannot force it).</p></div>
+      <div><h4>Notation</h4><p>Squares are named by file (a–h, left to right from White’s side) and rank (1–8). Moves are written with a piece letter (K, Q, R, B, N; pawns get none) and the square: <span class="mv">Nf3</span>, <span class="mv">e4</span>. “x” is a capture, “+” check, “#” mate, and O-O / O-O-O are short and long castling.</p></div>
+    </div>
+    <p class="rv">That last point matters more than it looks. Reading notation unlocks every chess book ever written, and adults who learn it early improve faster because they can study. The quickest way in is to learn the board itself.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study rv" id="stCoords">
+      <div class="st-tag">Study 02 · Know your squares</div>
+      <div class="st-grid">
+        <div class="board" id="bdCoords"></div>
+        <div class="st-side">
+          <h4>Thirty seconds. How many squares?</h4>
+          <p>A square name appears. Tap it on the board as fast as you can. Strong players know every square by name the way you know the keys on a keyboard. It makes reading, calculating and blindfold visualising far easier.</p>
+          <div class="co-target" id="coTarget" aria-live="polite">—</div>
+          <div class="co-row"><span>Score <b id="coScore">0</b></span><span>Time <b id="coTime">30</b></span><span>Best <b id="coBest">0</b></span></div>
+          <div class="btns"><button class="btn gold" id="coGo">Start</button><button class="btn" id="coFlip">Play from Black’s side</button></div>
+          <p class="hint">Over 20 is good. Over 35 and you know the board cold.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ II. HOW ADULTS LEARN ═════════════ -->
+<section class="sec paper" id="ch-learn" data-rail="How adults learn">
+  <div class="wrap">
+    <p class="chap rv"><span>II</span>The science of getting better</p>
+    <h2 class="rv">Masters don’t think faster. <em>They see differently.</em></h2>
+    <p class="lede rv">In the 1940s, the Dutch psychologist and chess master Adriaan de Groot asked strong players and world-class grandmasters to think aloud while choosing moves. He expected the best players to calculate deeper or consider more options. They didn’t. Grandmasters looked at about as many moves as weaker players. The difference was that the right moves came to them first.</p>
+    <p class="rv">Then he showed players a real position for a few seconds and asked them to reconstruct it. Masters rebuilt it almost perfectly. Club players managed a handful of pieces. In 1973 William Chase and Herbert Simon repeated the experiment with a twist: they also used <em>random</em> positions, pieces scattered without any chess logic. The master’s magic vanished. On random boards, everyone remembered just a few pieces.</p>
+    <p class="rv">The explanation, called <strong>chunking</strong>, is the most useful idea in this guide. A master doesn’t see twenty-five pieces. They see six or seven familiar patterns: a castled king, a fianchettoed bishop, a pawn chain. Each pattern is one “chunk” in memory, with good moves attached. Simon and his colleagues estimated that a master has tens of thousands of these patterns. Later work by Fernand Gobet suggested masters do keep a small edge even on random boards, but the lesson stands: <em>chess skill is mostly stored knowledge of patterns</em>, built by exposure to real positions. Try it yourself.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study rv" id="stMemory">
+      <div class="st-tag">Study 03 · The five-second glimpse</div>
+      <div class="st-grid">
+        <div class="board" id="bdMemory"></div>
+        <div class="st-side">
+          <h4>Spot the vanished piece</h4>
+          <p>You will see a position for five seconds. Then one piece disappears. Tap the square where it was. Some positions come from real openings; others are the same pieces scattered at random. Notice which kind is easier.</p>
+          <div class="mem-ring" id="memRing" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17"/><circle class="arc" cx="20" cy="20" r="17"/></svg><span id="memSec">5</span></div>
+          <p class="mem-msg" id="memMsg" aria-live="polite">Six rounds: three real, three random.</p>
+          <div class="mem-score" id="memScore"><div><span>Real positions</span><i><b id="memRealBar"></b></i><em id="memReal">0 / 0</em></div><div><span>Random positions</span><i><b id="memRandBar"></b></i><em id="memRand">0 / 0</em></div></div>
+          <div class="btns"><button class="btn gold" id="memGo">Start</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="rv">So how do you build the patterns?</h3>
+    <p class="rv">Through practice, but the kind matters. In a 2005 study, Neil Charness and colleagues surveyed hundreds of tournament players about how they had spent their chess lives. The strongest predictor of skill was <strong>serious study alone</strong>: solving positions, analysing games, working through books. Not tournament play, and certainly not casual blitz. The grandmasters in their samples had put in roughly 5,000 hours of solitary study in their first decade of serious play, about five times as much as intermediate players.</p>
+    <p class="rv">That doesn’t mean hours are everything. When Guillermo Campitelli and Fernand Gobet surveyed Argentine players, they found that every master had practised at least about 3,000 hours, but some players with far more practice never got there. A later reanalysis by David Hambrick and colleagues found that among grandmasters, the practice they had needed ranged from about 800 to over 24,000 hours. People differ, a lot. Practice is necessary, not sufficient, and that is liberating. You are not racing anyone. You are getting better than you were.</p>
+
+    <div class="cards3 rv">
+      <div class="c3"><span class="ic" data-piece="wp"></span><h4>Solve, don’t scroll</h4><p>Puzzles are concentrated pattern training. Fifteen focused minutes beat an hour of half-watching videos.</p></div>
+      <div class="c3"><span class="ic" data-piece="wn"></span><h4>Play slow, then look back</h4><p>Play games long enough to think (15 minutes or more each), then review them. The review is where you learn.</p></div>
+      <div class="c3"><span class="ic" data-piece="wb"></span><h4>Replay master games</h4><p>Cover the moves and guess each one. It fills your head with good patterns, quickly.</p></div>
+    </div>
+
+    <h3 class="rv">“Aren’t I too old?”</h3>
+    <p class="rv">Starting age matters for the very top. Gobet and Campitelli found that players who began serious chess before thirteen were far more likely to reach international level, and almost every elite grandmaster started young. But that is a question about the last one per cent. For everything below it, adults have real advantages: patience, the habit of studying, money for a good book, and the ability to sit with a problem.</p>
+    <p class="rv">Ageing is kinder to chess players than you might fear. Roring and Charness, studying thousands of FIDE-rated players across the lifespan, found that decline after the peak is gradual, gentler for players who start strong, and that staying active helps. Experienced older players also find good moves more efficiently, searching less but recognising more. Chess is one of the few competitive pursuits you can keep improving at in your forties and still enjoy in your eighties.</p>
+
+    <blockquote class="pull rv"><p>When you see a good move, look for a better one.</p><cite>Chess proverb, often credited to Emanuel Lasker</cite></blockquote>
+
+    <p class="rv">There is a warning built into all this pattern power. In 2008 Merim Bilalić, Peter McLeod and Fernand Gobet showed experts positions with a familiar, decent solution and a shorter, better one. The experts said they were looking for alternatives, but eye-tracking showed their gaze kept returning to the familiar idea. Psychologists call it the <strong>Einstellung effect</strong>: the first good idea blinds you to a better one. The fix is a habit we will build in Chapter VIII: always ask what else there is.</p>
+  </div>
+</section>
+
+<!-- ═════════════ III. OPENINGS ═════════════ -->
+<section class="sec walnut" id="ch-openings" data-rail="Openings">
+  <div class="wrap">
+    <p class="chap rv"><span>III</span>The first dozen moves</p>
+    <h2 class="rv">Openings are not memory tests. <em>They are a race to get dressed.</em></h2>
+    <p class="lede rv">The opening is the first ten to fifteen moves, when both sides bring their pieces into play. There are thousands of named lines, millions of words of theory, and an entire industry selling courses. Ignore nearly all of it for now. At club level, games are decided by tactics and blunders long before opening theory matters. What you need is a handful of principles and one or two simple setups you understand.</p>
+    <ol class="principles rv">
+      <li><b>Fight for the centre.</b> The four squares d4, e4, d5 and e5 are the high ground. Pieces in the centre reach more squares. Start with a centre pawn: 1.e4 or 1.d4.</li>
+      <li><b>Develop your pieces.</b> Bring knights and bishops off the back rank, usually towards the centre. Each move should bring a new piece into play.</li>
+      <li><b>Castle early.</b> Usually within the first ten moves. It tucks the king away and connects the rooks.</li>
+      <li><b>Don’t move the same piece twice</b> without a good reason, and don’t grab pawns at the cost of development.</li>
+      <li><b>Keep the queen at home</b> for a while. Bring her out too early and enemy pieces develop by chasing her.</li>
+      <li><b>Connect your rooks</b> and put them on open or half-open files. When the back rank is clear between them, the opening is done.</li>
+    </ol>
+    <p class="rv">Watch those principles at work in some of the most respected openings ever played, plus two traps every beginner should know. The tracker counts each side’s progress: centre pawns, minor pieces developed, and whether the king is safe.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study dark rv" id="stOpen">
+      <div class="st-tag">Study 04 · The opening explorer</div>
+      <div class="chips wrapchips" id="opTabs" role="tablist" aria-label="Openings"></div>
+      <div class="st-grid">
+        <div class="board" id="bdOpen"></div>
+        <div class="st-side">
+          <h4 id="opName">Italian Game</h4>
+          <p class="op-meta" id="opMeta"></p>
+          <div class="op-note" id="opNote" aria-live="polite"></div>
+          <div class="btns ctl"><button class="btn icon" id="opFirst" aria-label="Start">⏮</button><button class="btn icon" id="opPrev" aria-label="Back">‹</button><button class="btn gold icon" id="opPlay" aria-label="Play">▶</button><button class="btn icon" id="opNext" aria-label="Forward">›</button><button class="btn icon" id="opLast" aria-label="End">⏭</button></div>
+          <ol class="movelist" id="opMoves"></ol>
+          <div class="tracker" id="opTrack"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="rv">An adult’s repertoire</h3>
+    <p class="rv">Pick one opening as White and one defence each against 1.e4 and 1.d4, and stick with them for months. You learn far more by seeing the same structures again and again than by dabbling. Good choices for improving adults:</p>
+    <div class="rep rv">
+      <div><b>As White</b><p>The <em>Italian Game</em> (classical, teaches every principle) or the <em>London System</em> (the same setup against almost anything; lovely when you are short on study time).</p></div>
+      <div><b>Against 1.e4</b><p>1…e5, leading to open, principled games; or the <em>Caro-Kann</em>, solid and hard to blow up.</p></div>
+      <div><b>Against 1.d4</b><p>The <em>Queen’s Gambit Declined</em>, a defence world champions have trusted for over a century.</p></div>
+    </div>
+    <p class="rv">Learn the first six to eight moves and, more importantly, the <em>ideas</em>: where your pieces belong, which pawn breaks you want, and what the typical plans are. When your opponent leaves the book on move four, which they will, the principles take over.</p>
+  </div>
+</section>
+
+<!-- ═════════════ IV. TACTICS ═════════════ -->
+<section class="sec paper" id="ch-tactics" data-rail="Tactics">
+  <div class="wrap">
+    <p class="chap rv"><span>IV</span>Where games are won</p>
+    <h2 class="rv">“Chess is ninety-nine per cent <em>tactics</em>”</h2>
+    <p class="lede rv">The line is usually credited to the German master Richard Teichmann, and it is an exaggeration that is nearly true below master level. A tactic is a short, forcing sequence (checks, captures, threats) that wins material or delivers mate. Strategy tells you where to go. Tactics are how you actually get there, and how you lose when you are not careful.</p>
+    <p class="rv">Almost every tactic is built from a few basic motifs. Learn their names, because naming a pattern helps you spot it. Tap each card.</p>
+  </div>
+  <div class="wide">
+    <div class="motifs rv" id="motifs"></div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">Loose pieces drop off</h3>
+    <p class="rv">Grandmaster John Nunn boiled amateur chess down to four letters: <strong>LPDO</strong>, “loose pieces drop off”. A loose piece is one that is undefended, or attacked by something cheaper than itself. Most tactics, forks especially, feed on loose pieces. Training your eye to spot them, on both sides of the board, is the fastest single upgrade you can make.</p>
+  </div>
+  <div class="wide">
+    <div class="study rv" id="stLoose">
+      <div class="st-tag">Study 05 · Loose pieces</div>
+      <div class="st-grid">
+        <div class="board" id="bdLoose"></div>
+        <div class="st-side">
+          <h4>Which black pieces are in trouble?</h4>
+          <p>White to move. Tap every black piece that is <em>loose</em>: attacked and undefended, or attacked by a cheaper white piece. Then press Check.</p>
+          <p class="lo-pos">Position <b id="loIdx">1</b> of <span id="loN">4</span></p>
+          <p class="lo-msg" id="loMsg" aria-live="polite"></p>
+          <div class="btns"><button class="btn gold" id="loCheck">Check</button><button class="btn" id="loNext">Next position</button></div>
+          <p class="hint">Remember piece values: pawn 1, knight 3, bishop 3, rook 5, queen 9.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="rv">Now put the motifs to work. These ten positions are arranged from easy to tricky. Each is a clean example of one idea. Play the winning move on the board. If the puzzle needs more than one move, the computer will reply and you finish the job.</p>
+  </div>
+  <div class="wide">
+    <div class="study dark rv" id="stGym">
+      <div class="st-tag">Study 06 · The tactics gym</div>
+      <div class="gym-list" id="gymList" role="tablist" aria-label="Puzzles"></div>
+      <div class="st-grid">
+        <div class="board" id="bdGym"></div>
+        <div class="st-side">
+          <p class="gym-num" id="gymNum">Puzzle 1 · White to move</p>
+          <h4 id="gymName">Back rank</h4>
+          <p id="gymTheme"></p>
+          <div class="gym-msg" id="gymMsg" aria-live="polite">Find the best move.</div>
+          <div class="btns"><button class="btn" id="gymHint">Hint</button><button class="btn" id="gymShow">Show me</button><button class="btn gold" id="gymNext">Next puzzle</button></div>
+          <p class="gym-why" id="gymWhy"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">How to train tactics</h3>
+    <p class="rv">Solve puzzles every day, a few at a time, and prize <em>accuracy over speed</em>. Calculate the whole line before you move, as you would in a game, rather than trying moves to see if the app approves. When you get one wrong, set it up and work out why. Repetition is powerful: the <em>Woodpecker Method</em> of grandmasters Axel Smith and Hans Tikkanen has you solve the same set of puzzles several times, faster each cycle, until the patterns become reflexes. Both Lichess and Chess.com have huge free puzzle libraries sorted by theme.</p>
+  </div>
+</section>
+
+<!-- ═════════════ V. CHECKMATE ═════════════ -->
+<section class="sec oxblood" id="ch-mate" data-rail="Checkmate">
+  <div class="wrap">
+    <p class="chap rv"><span>V</span>The patterns of the end</p>
+    <h2 class="rv">Checkmates have <em>shapes</em></h2>
+    <p class="lede rv">Mate rarely appears from nowhere. Again and again the same few geometries show up: a king boxed in by its own pawns, a knight jumping into a crowded corner, two bishops crossing like scissors. Players have named them for centuries. Once you know them, you start seeing them in your games two or three moves early, for your opponent as well as for you.</p>
+    <p class="rv">In each pattern below, watch the final move, then look at the cage: every square around the king is either blocked by one of its own pieces or covered by an attacker.</p>
+  </div>
+  <div class="wide">
+    <div class="study gold rv" id="stMates">
+      <div class="st-tag">Study 07 · The checkmate gallery</div>
+      <div class="chips wrapchips" id="mtTabs" role="tablist" aria-label="Mating patterns"></div>
+      <div class="st-grid">
+        <div class="board" id="bdMates"></div>
+        <div class="st-side">
+          <h4 id="mtName">Back-rank mate</h4>
+          <p class="mt-move" id="mtMove"></p>
+          <p id="mtNote"></p>
+          <ul class="legend" id="mtLegend"><li><i class="lg-x"></i>Covered by an attacker</li><li><i class="lg-b"></i>Blocked by its own piece</li><li><i class="lg-k"></i>The mated king</li></ul>
+          <div class="btns"><button class="btn gold" id="mtReplay">Replay</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ VI. STRATEGY ═════════════ -->
+<section class="sec felt" id="ch-strategy" data-rail="Strategy">
+  <div class="wrap">
+    <p class="chap rv"><span>VI</span>Thinking in plans</p>
+    <h2 class="rv">When there is no tactic, <em>improve something</em></h2>
+    <p class="lede rv">Most positions don’t contain a combination. What do you do then? You make the position better, one move at a time. Strategy is the art of knowing what “better” means: which pieces are good, which squares matter, which pawns are strong and which are a liability.</p>
+    <p class="rv">Wilhelm Steinitz, the first world champion, was the first to describe chess this way. Small, lasting advantages add up, and the side that collects more of them eventually gets a winning tactic as a reward. Here are the ideas that matter most.</p>
+  </div>
+  <div class="wide">
+    <div class="ideas" id="ideas"></div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">Three questions for any quiet position</h3>
+    <ol class="principles rv">
+      <li><b>Which is my worst piece?</b> Find the piece doing the least, a bishop staring at its own pawns or a knight on the rim, and give it a job. It is the most reliable plan in chess.</li>
+      <li><b>Where are the weaknesses?</b> Look for loose pawns, holes your opponent can no longer guard with a pawn, and a king without cover. Aim your pieces at them.</li>
+      <li><b>What does my opponent want?</b> Before improving your own position, ask what they would do if it were their move again. Stopping their plan in advance is called <em>prophylaxis</em>, and it is a hallmark of strong players.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═════════════ VII. ENDGAMES ═════════════ -->
+<section class="sec paper" id="ch-endgame" data-rail="Endgames">
+  <div class="wrap">
+    <p class="chap rv"><span>VII</span>Where the king fights</p>
+    <h2 class="rv">Study the end <em>at the beginning</em></h2>
+    <p class="lede rv">José Raúl Capablanca, the Cuban world champion famous for making chess look effortless, opened his classic <em>Chess Fundamentals</em> with endings, not openings. With few pieces on the board, you see clearly what each piece can do. The king, a coward all game, becomes a fighter. And because so many games come down to a few pieces, knowing a handful of endings wins you points that your opponents throw away.</p>
+    <p class="rv">Start with pawn endings. The first idea is a lovely shortcut called <strong>the rule of the square</strong>. Can a king catch a runaway pawn? Draw a square from the pawn to its promotion rank. If the defending king is inside that square, or can step into it on its move, it catches the pawn. If not, the pawn queens. No counting needed.</p>
+  </div>
+  <div class="wide">
+    <div class="study rv" id="stSquare">
+      <div class="st-tag">Study 08 · The rule of the square</div>
+      <div class="st-grid">
+        <div class="board" id="bdSquare"></div>
+        <div class="st-side">
+          <h4>Can the king catch the pawn?</h4>
+          <p>Tap any empty square to place the black king. The gold area is the pawn’s “square”, running from the pawn to its queening rank. With White to move, the king must already stand inside it. With Black to move, it is enough that the king can step into it.</p>
+          <div class="seg" role="radiogroup" aria-label="Who moves first"><button class="on" data-turn="b" role="radio" aria-checked="true">Black to move</button><button data-turn="w" role="radio" aria-checked="false">White to move</button></div>
+          <p class="sq-verdict" id="sqVerdict" aria-live="polite"></p>
+          <div class="btns"><button class="btn gold" id="sqRace">Race!</button><button class="btn" id="sqPawn">Move the pawn</button></div>
+          <p class="hint">A pawn on its starting square can move two squares at once, so count it as if it stood one square further up.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">Opposition: when kings stand face to face</h3>
+    <p class="rv">When two kings stand facing each other with one square between them, the side that does <em>not</em> have to move is said to “have the opposition”. Neither king may step next to the other, so the side to move must give way. In king-and-pawn endings, this tiny duel decides whether a pawn promotes or the game is drawn. The rule of thumb: in front of your pawn, take the opposition; behind it, your king should lead the pawn, not follow it.</p>
+    <h3 class="rv">The first mate every adult should own</h3>
+    <p class="rv">King and queen against a lone king is a certain win, but beginners botch it all the time, usually by stalemating. The method is to use the queen to build a box around the enemy king, shrink it a knight’s move away, never giving pointless checks, and then march your own king up to help. The queen can’t mate alone. Practise it here until you can do it in under twenty moves.</p>
+  </div>
+  <div class="wide">
+    <div class="study dark rv" id="stKQK">
+      <div class="st-tag">Study 09 · Queen &amp; king vs king</div>
+      <div class="st-grid">
+        <div class="board" id="bdKQK"></div>
+        <div class="st-side">
+          <h4>Checkmate the lone king</h4>
+          <p>You are White. The computer defends as stubbornly as it can. Watch out for stalemate: always leave the black king at least one legal move until the final blow.</p>
+          <div class="kq-row"><span>Moves <b id="kqMoves">0</b></span><span>Best <b id="kqBest">—</b></span></div>
+          <p class="kq-msg" id="kqMsg" aria-live="polite">Shrink the box.</p>
+          <label class="tog"><input type="checkbox" id="kqBox" checked><span></span>Show the king’s box</label>
+          <div class="btns"><button class="btn" id="kqHint">Hint</button><button class="btn" id="kqUndo">Take back</button><button class="btn gold" id="kqNew">New position</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="rv">After that, learn king and rook against king (the same idea with a smaller cage), then two of the most important positions in chess: the <strong>Lucena position</strong>, the standard way to win with rook and pawn against rook, and the <strong>Philidor position</strong>, the standard way to draw it. Rook endings are the most common endings in practice, and these two positions turn up constantly. Jeremy Silman’s <em>Complete Endgame Course</em> teaches all of this graded by rating, so you only learn what you need now.</p>
+  </div>
+</section>
+
+<!-- ═════════════ VIII. HOW TO THINK ═════════════ -->
+<section class="sec night" id="ch-think" data-rail="How to think">
+  <div class="wrap">
+    <p class="chap rv"><span>VIII</span>A routine for every move</p>
+    <h2 class="rv">Most games are lost, <em>not won</em></h2>
+    <p class="lede rv">At club level, the player who blunders less usually wins. And most blunders are not deep mistakes. They are skipped steps: a move played without noticing that the opponent’s last move created a threat, or that the piece you just moved was guarding something. The cure is a short routine, used on every move of every slow game, until it becomes automatic.</p>
+  </div>
+  <div class="wide">
+    <div class="routine rv" id="routine">
+      <div class="rt"><b>1</b><h4>What did they just do?</h4><p>Every move changes something. What does their last move attack? What did it stop defending? Is there a threat?</p></div>
+      <div class="rt"><b>2</b><h4>Checks, captures, threats</h4><p>Scan every forcing move, for you <em>and</em> for them. Forcing moves are where tactics live.</p></div>
+      <div class="rt"><b>3</b><h4>Candidate moves</h4><p>Alexander Kotov’s advice: list two or three sensible options before you analyse any of them. This is the antidote to Einstellung.</p></div>
+      <div class="rt"><b>4</b><h4>Calculate &amp; compare</h4><p>Look at the forcing lines first. Picture the position after each candidate and ask which leaves you better.</p></div>
+      <div class="rt"><b>5</b><h4>Blunder check</h4><p>Before you touch the piece: what are their checks, captures and threats after my move? Is anything left loose?</p></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="rv">It sounds slow, and at first it is. That is why improving players should play mostly <em>slow</em> games: rapid at fifteen minutes or more per side, or classical. With practice the routine compresses into a few seconds of habit, the way checking your mirrors does when you drive.</p>
+    <h3 class="rv">Time, tilt and the mind</h3>
+    <p class="rv">Use your clock. Beginners often lose with half their time unused, having played critical moves instantly. Spend time at the moments that matter: when the position changes character, after captures, and when you are about to commit to a plan. Conversely, don’t sink twenty minutes into the opening and then blitz out the middlegame.</p>
+    <p class="rv">Then there is <em>tilt</em>, the poker word for playing badly because you are upset. After a painful loss, the urge to immediately play again (“just one more”) is strong and almost always a mistake. Losing streaks online usually come from playing angry or tired. A good rule: after two losses in a row, stop and do something else. Review the games tomorrow.</p>
+    <blockquote class="pull rv"><p>Help your pieces so they can help you.</p><cite>Paul Morphy, as often quoted</cite></blockquote>
+  </div>
+</section>
+
+<!-- ═════════════ IX. PLAYING ═════════════ -->
+<section class="sec walnut" id="ch-play" data-rail="Playing">
+  <div class="wrap">
+    <p class="chap rv"><span>IX</span>Clocks, ratings &amp; real opponents</p>
+    <h2 class="rv">Where, how fast, <em>and against whom</em></h2>
+    <p class="lede rv">You can play chess against anyone in the world at any hour, for free. The two big sites are <strong>Lichess</strong>, free, open-source and ad-free, run as a charity; and <strong>Chess.com</strong>, the largest, with lessons, bots and a polished app. Both are excellent. Play on whichever you enjoy, and use both for puzzles and analysis.</p>
+  </div>
+
+  <div class="wide">
+    <div class="clocks rv">
+      <div class="clock-art" aria-hidden="true"><svg viewBox="0 0 320 190" id="clockSvg">
+        <defs><linearGradient id="ckWood" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6b4129"/><stop offset="1" stop-color="#3a2216"/></linearGradient><radialGradient id="ckFace" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#e6dac2"/></radialGradient></defs>
+        <rect x="18" y="56" width="284" height="118" rx="14" fill="url(#ckWood)"/>
+        <rect x="18" y="56" width="284" height="118" rx="14" fill="none" stroke="#c9a25a" stroke-opacity=".5"/>
+        <rect class="ck-btn ck-l" x="70" y="38" width="56" height="20" rx="6" fill="#c9a25a"/>
+        <rect class="ck-btn ck-r" x="194" y="38" width="56" height="20" rx="6" fill="#c9a25a"/>
+        <g transform="translate(98 116)"><circle r="44" fill="url(#ckFace)" stroke="#c9a25a" stroke-width="3"/><g stroke="#3a2a1c" stroke-width="2">
+          <path d="M0-38v7M0 38v-7M-38 0h7M38 0h-7"/></g><path d="M8-40 l6-8 l4 3 z" fill="#7d2630"/><line class="ck-hand ck-hl" x1="0" y1="0" x2="0" y2="-32" stroke="#1b1612" stroke-width="2.5" stroke-linecap="round"/><circle r="3.5" fill="#1b1612"/></g>
+        <g transform="translate(222 116)"><circle r="44" fill="url(#ckFace)" stroke="#c9a25a" stroke-width="3"/><g stroke="#3a2a1c" stroke-width="2">
+          <path d="M0-38v7M0 38v-7M-38 0h7M38 0h-7"/></g><path d="M8-40 l6-8 l4 3 z" fill="#7d2630"/><line class="ck-hand ck-hr" x1="0" y1="0" x2="0" y2="-32" stroke="#1b1612" stroke-width="2.5" stroke-linecap="round"/><circle r="3.5" fill="#1b1612"/></g>
+      </svg></div>
+      <div class="tc-grid">
+        <div class="tc"><b>Bullet</b><span>Under 3 min</span><p>Reflexes and mouse speed. Fun, addictive, terrible for learning.</p></div>
+        <div class="tc"><b>Blitz</b><span>3–10 min</span><p>Fast pattern recognition. Good as a treat, not a diet.</p></div>
+        <div class="tc best"><b>Rapid</b><span>10–60 min</span><p>Enough time to think. The sweet spot for improvers: try 15+10.</p></div>
+        <div class="tc"><b>Classical</b><span>60 min +</span><p>Tournament chess. Deep, tiring, and the most instructive of all.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="rv">Notation like “15+10” means fifteen minutes per player, plus ten seconds added after every move (the <em>increment</em>). Increments are kind to adults. You will never lose a won position just because the clock ran out.</p>
+    <h3 class="rv">What your rating means</h3>
+    <p class="rv">Every rated player has a number, based on the system the Hungarian-American physics professor Arpad Elo designed and FIDE adopted in 1970. Your rating rises when you score better than expected and falls when you score worse, and the expectation depends on the gap between you and your opponent. A 200-point gap means the stronger player is expected to score about 76 per cent. A 400-point gap, about 91 per cent. Online ratings run on similar systems (Lichess uses Glicko-2) but on different scales, so don’t compare your Chess.com number with a FIDE one.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study dark rv" id="stElo">
+      <div class="st-tag">Study 10 · The rating calculator</div>
+      <div class="elo-grid">
+        <div class="elo-ctl">
+          <label>Your rating <b id="eloMeV">1200</b><input type="range" id="eloMe" min="400" max="2800" step="10" value="1200"></label>
+          <label>Opponent’s rating <b id="eloOpV">1400</b><input type="range" id="eloOp" min="400" max="2800" step="10" value="1400"></label>
+          <div class="seg" role="radiogroup" aria-label="K-factor"><button data-k="40" role="radio" aria-checked="false">New (K 40)</button><button class="on" data-k="20" role="radio" aria-checked="true">Standard (K 20)</button><button data-k="10" role="radio" aria-checked="false">2400+ (K 10)</button></div>
+          <div class="elo-out">
+            <div><span>Expected score</span><b id="eloExp">24%</b></div>
+            <div class="w"><span>If you win</span><b id="eloW">+15</b></div>
+            <div class="d"><span>Draw</span><b id="eloD">+5</b></div>
+            <div class="l"><span>If you lose</span><b id="eloL">−5</b></div>
+          </div>
+          <p class="hint">FIDE formula: expected score E = 1 / (1 + 10<sup>−d/400</sup>), where d is your rating minus your opponent’s. Change = K × (result − E).</p>
+        </div>
+        <figure class="elo-fig"><svg id="eloSvg" viewBox="0 0 560 330" role="img" aria-label="Expected score against rating difference"></svg><figcaption>Expected score against rating difference. Hover to read the curve.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="rv">Over the board: the etiquette</h3>
+    <p class="rv">Playing a person across a real board is a different joy: the weight of the pieces, the click of the clock, the handshake. A few customs, some of them actual rules, will make you welcome anywhere.</p>
+  </div>
+  <div class="wide">
+    <div class="etiq rv">
+      <div><h4>Touch-move</h4><p>In serious games, if you deliberately touch one of your pieces, you must move it if it has a legal move. Touch an enemy piece and you must capture it if you can. Let go of a piece on a square and the move stands.</p></div>
+      <div><h4>“J’adoube”</h4><p>To straighten a crooked piece, say “adjust” or “j’adoube” (French: “I adjust”) <em>before</em> touching it. Only on your own turn.</p></div>
+      <div><h4>Shake hands</h4><p>Before and after the game. Win or lose, a handshake and “good game” are the custom everywhere.</p></div>
+      <div><h4>Resign with grace</h4><p>When the position is hopeless, tip your king over or offer your hand. No sighing, no excuses. Among beginners, though, play on: your opponent may yet stalemate you.</p></div>
+      <div><h4>Quiet hands</h4><p>No talking during play, no tapping, no hovering your hand over the board. Press the clock with the same hand that moved the piece.</p></div>
+      <div><h4>Phones away</h4><p>At tournaments, having a phone on you can mean an instant loss. Engines in pockets are the scourge of modern chess, and arbiters are strict.</p></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="rv">To find over-the-board chess, look for a local club (many cities have weekend meetups in cafés and parks), or enter a rated tournament. In India, tournaments are organised under the All India Chess Federation, and rated events run almost every weekend in major cities. Your first tournament will be nerve-racking and wonderful. Bring water, a pen for your scoresheet and a snack, and expect to lose a couple of games. Everybody does.</p>
+    <h3 class="rv">Now play the coach</h3>
+    <p class="rv">Here is a full game of chess against a computer opponent built for this page. It is gentle at the lowest level and can be properly annoying at the highest. Keep <strong>Coach mode</strong> on: when you leave something hanging, it will tell you and offer a takeback, which is exactly what a kind teacher would do. Use the routine from Chapter VIII on every move.</p>
+  </div>
+
+  <div class="wide">
+    <div class="study dark rv" id="stBot">
+      <div class="st-tag">Study 11 · Play the coach</div>
+      <div class="st-grid bot-grid">
+        <div class="bot-board">
+          <div class="cap-row" id="botCapTop"></div>
+          <div class="board" id="bdBot"></div>
+          <div class="cap-row" id="botCapBot"></div>
+        </div>
+        <div class="st-side">
+          <div class="bot-status" id="botStatus" aria-live="polite">Your move. You play White.</div>
+          <div class="coach" id="botCoach" hidden></div>
+          <div class="bot-opts">
+            <div class="seg small" id="botLevel" role="radiogroup" aria-label="Strength"><button data-lv="1" role="radio" aria-checked="false">Beginner</button><button class="on" data-lv="2" role="radio" aria-checked="true">Club</button><button data-lv="3" role="radio" aria-checked="false">Strong</button></div>
+            <div class="seg small" id="botSide" role="radiogroup" aria-label="Your colour"><button class="on" data-side="w" role="radio" aria-checked="true">Play White</button><button data-side="b" role="radio" aria-checked="false">Play Black</button></div>
+            <label class="tog"><input type="checkbox" id="botCoachOn" checked><span></span>Coach mode</label>
+          </div>
+          <ol class="movelist bot-moves" id="botMoves"></ol>
+          <div class="btns"><button class="btn" id="botUndo">Take back</button><button class="btn" id="botHint">Hint</button><button class="btn" id="botFlip">Flip</button><button class="btn gold" id="botNew">New game</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ X. MYTHS ═════════════ -->
+<section class="sec paper" id="ch-myths" data-rail="Myths">
+  <div class="wrap">
+    <p class="chap rv"><span>X</span>What people get wrong</p>
+    <h2 class="rv">Eight chess myths, <em>checked</em></h2>
+    <p class="lede rv">Chess attracts legends: geniuses who see twenty moves ahead, the game as brain medicine, computers that have “solved” it. Some are true, some are half-true, and some are just wrong. Make your call, then see what the evidence says.</p>
+  </div>
+  <div class="wide">
+    <div class="study rv" id="stMyths">
+      <div class="st-tag">Study 12 · Myth or move?</div>
+      <div class="myth-card" id="mythCard">
+        <p class="my-n" id="myN">1 / 8</p>
+        <p class="my-q" id="myQ"></p>
+        <div class="btns my-btns"><button class="btn" data-a="Myth">Myth</button><button class="btn" data-a="True">True</button><button class="btn" data-a="Sort of">Sort of</button></div>
+        <div class="my-a" id="myA" hidden><b id="myVerdict"></b><p id="myR"></p><button class="btn gold" id="myNext">Next</button></div>
+        <p class="my-score" id="myScore"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ XI. THE PLAN ═════════════ -->
+<section class="sec felt" id="ch-plan" data-rail="The plan">
+  <div class="wrap">
+    <p class="chap rv"><span>XI</span>Twelve weeks to a club player</p>
+    <h2 class="rv">From pawn <em>to queen</em></h2>
+    <p class="lede rv">Here is everything above turned into a plan: about thirty to forty-five minutes a day, five days a week, for twelve weeks. It front-loads what matters most at the start (board vision, safety and tactics) and adds openings, endings and strategy in the order you will need them. Tick things off as you go; the pawn walks up the board with you.</p>
+  </div>
+  <div class="wide">
+    <div class="study dark rv" id="stPlan">
+      <div class="st-tag">Study 13 · The twelve-week plan</div>
+      <div class="plan-grid">
+        <div class="plan-file" id="planFile" aria-hidden="true"></div>
+        <div>
+          <div class="plan-head"><div><span>Rank</span><b id="planRank">Beginner</b></div><div><span>Done</span><b id="planPct">0%</b></div></div>
+          <div class="plan-weeks" id="planWeeks"></div>
+          <button class="btn small" id="planReset">Reset plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <h3 class="rv">The bookshelf</h3>
+    <div class="books rv">
+      <div class="book"><i style="--c:#7d2630"></i><b>Bobby Fischer Teaches Chess</b><span>Fischer, Margulies &amp; Mosenfelder</span><p>A programmed-learning classic. Hundreds of back-rank and mating puzzles, one per page. Perfect for week one.</p></div>
+      <div class="book"><i style="--c:#183329"></i><b>Logical Chess: Move by Move</b><span>Irving Chernev</span><p>Thirty-three master games with every single move explained. The best introduction to how strong players think.</p></div>
+      <div class="book"><i style="--c:#3a2418"></i><b>Chess Fundamentals</b><span>José Raúl Capablanca</span><p>A world champion’s own primer, starting with the endings. Short, elegant and still right a century later.</p></div>
+      <div class="book"><i style="--c:#2b3a5a"></i><b>Silman’s Complete Endgame Course</b><span>Jeremy Silman</span><p>Endings organised by rating band. Learn only what you need for your level, then come back.</p></div>
+      <div class="book"><i style="--c:#5a3a1a"></i><b>The Woodpecker Method</b><span>Axel Smith &amp; Hans Tikkanen</span><p>1,128 tactical puzzles and a repetition system to burn them into memory. For when you are ready to work.</p></div>
+      <div class="book"><i style="--c:#1d2a24"></i><b>Think Like a Grandmaster</b><span>Alexander Kotov</span><p>The original candidate-moves method. Dated in places, but the thinking routine it describes still underpins modern training.</p></div>
+    </div>
+    <h3 class="rv">The last word</h3>
+    <p class="rv">A game of chess is a conversation between two minds, conducted entirely in moves. You will lose hundreds of games on the way to getting good, and that is not failure. It is how the patterns get in. Every strong player you admire has lost more games than you have played.</p>
+    <p class="rv">So set up a board. Play slowly. Look at what your opponent just did. Check for loose pieces. Castle. And when you see a good move, look for a better one. The game has waited fifteen hundred years for you. It is happy to wait while you think.</p>
+    <p class="sign rv">Good game. <span>— lrn</span></p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sec sources" id="sources">
+  <div class="wrap">
+    <h2>Sources &amp; further reading</h2>
+    <ol class="refs">
+      <li>de Groot, A. D. (1946/1965). <em>Thought and Choice in Chess</em>. Mouton.</li>
+      <li>Chase, W. G. &amp; Simon, H. A. (1973). Perception in chess. <em>Cognitive Psychology</em>, 4(1), 55–81. <a href="https://doi.org/10.1016/0010-0285(73)90004-2">doi</a></li>
+      <li>Gobet, F. &amp; Simon, H. A. (1996). Recall of rapidly presented random chess positions is a function of skill. <em>Psychonomic Bulletin &amp; Review</em>, 3(2), 159–163. <a href="https://doi.org/10.3758/BF03212414">doi</a></li>
+      <li>Charness, N., Tuffiash, M., Krampe, R., Reingold, E. &amp; Vasyukova, E. (2005). The role of deliberate practice in chess expertise. <em>Applied Cognitive Psychology</em>, 19(2), 151–165. <a href="https://doi.org/10.1002/acp.1106">doi</a></li>
+      <li>Gobet, F. &amp; Campitelli, G. (2007). The role of domain-specific practice, handedness, and starting age in chess. <em>Developmental Psychology</em>, 43(1), 159–172. <a href="https://doi.org/10.1037/0012-1649.43.1.159">doi</a></li>
+      <li>Campitelli, G. &amp; Gobet, F. (2011). Deliberate practice: necessary but not sufficient. <em>Current Directions in Psychological Science</em>, 20(5), 280–285. <a href="https://researchonline.lse.ac.uk/id/eprint/102854">LSE Research Online</a></li>
+      <li>Hambrick, D. Z. et al. (2014). Deliberate practice: is that all it takes to become an expert? <em>Intelligence</em>, 45, 34–45. <a href="https://doi.org/10.1016/j.intell.2013.04.001">doi</a></li>
+      <li>Roring, R. W. &amp; Charness, N. (2007). A multilevel model analysis of expertise in chess across the life span. <em>Psychology and Aging</em>, 22(2), 291–299. <a href="https://doi.org/10.1037/0882-7974.22.2.291">doi</a></li>
+      <li>Vaci, N., Gula, B. &amp; Bilalić, M. (2015). Is age really cruel to experts? Compensatory effects of activity. <em>Psychology and Aging</em>, 30(4), 740–754. <a href="https://doi.org/10.1037/pag0000056">doi</a></li>
+      <li>Bilalić, M., McLeod, P. &amp; Gobet, F. (2008). Why good thoughts block better ones: the mechanism of the pernicious Einstellung (set) effect. <em>Cognition</em>, 108(3), 652–661. <a href="https://pubmed.ncbi.nlm.nih.gov/18565505/">PubMed</a></li>
+      <li>Sala, G. &amp; Gobet, F. (2016). Do the benefits of chess instruction transfer to academic and cognitive skills? A meta-analysis. <em>Educational Research Review</em>, 18, 46–57. <a href="https://researchonline.lse.ac.uk/id/eprint/102237">LSE Research Online</a></li>
+      <li>Burgoyne, A. P. et al. (2016). The relationship between cognitive ability and chess skill: a comprehensive meta-analysis. <em>Intelligence</em>, 59, 72–83. <a href="https://doi.org/10.1016/j.intell.2016.08.002">doi</a></li>
+      <li>Verghese, J. et al. (2003). Leisure activities and the risk of dementia in the elderly. <em>New England Journal of Medicine</em>, 348, 2508–2516. <a href="https://doi.org/10.1056/NEJMoa022252">doi</a></li>
+      <li>Tromp, J. (2021). Chess position ranking: the number of legal positions, about 4.8 × 10<sup>44</sup>. <a href="https://tromp.github.io/chess/chess.html">John’s Chess Playground</a></li>
+      <li>Elo, A. (1978). <em>The Rating of Chessplayers, Past and Present</em>. Arco. FIDE rating regulations: <a href="https://handbook.fide.com/">FIDE Handbook</a>.</li>
+      <li>Chess.com member numbers: <a href="https://www.chess.com/news/view/chesscom-reaches-250-million-members">Chess.com reaches 250 million members</a> and the company’s Q2 2026 board report.</li>
+      <li>Murray, H. J. R. (1913). <em>A History of Chess</em>. Oxford University Press. Yalom, M. (2004). <em>Birth of the Chess Queen</em>. HarperCollins.</li>
+      <li>Kotov, A. (1971). <em>Think Like a Grandmaster</em>. Batsford. Nunn, J. — “loose pieces drop off”, from his writing on practical play.</li>
+      <li>FIDE Laws of Chess (castling, en passant, promotion, draws, touch-move, time controls). <a href="https://handbook.fide.com/chapter/E012023">FIDE Handbook</a></li>
+    </ol>
+    <p class="fine">Every illustration, chess piece and board on this page is an original drawing made for it. The playing engine is written for this page from scratch; it is a teaching partner, not a grandmaster.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <nav aria-label="Footer"><a href="/lrn/">All notes</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>

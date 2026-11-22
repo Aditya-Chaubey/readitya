@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Jane Method — lrn</title>
+<meta name="description" content="A field guide to being Patrick Jane from The Mentalist: the suit without the tie, the tea, the couch, the eye that misses nothing, cold reading, real lie-detection science, mentalism tricks and charm, with the con left out. Light spoilers only.">
+<meta name="theme-color" content="#141a26">
+<meta property="og:title" content="The Jane Method: How to Be Patrick Jane">
+<meta property="og:description" content="Tea, tricks and tells. A playful, research-backed guide to the most charming man in the room.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../_shared/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,50;1,9..144,300..800,100&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Caveat:wght@500;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="jane.css">
+<script src="jane.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#story">Skip to the guide</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="mast" id="top">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="24" height="24">lrn<span>.</span></a>
+  <nav aria-label="Site"><a href="/lrn/">All notes</a><a href="#ch-eye">The eye</a><a href="#ch-academy">30 days</a></nav>
+</header>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<section class="hero" aria-labelledby="title">
+  <canvas class="motes" id="motes" aria-hidden="true"></canvas>
+  <div class="cards-fly" id="cardsFly" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kicker"><span class="lc">lrn</span> · No. 15 · Mind &amp; manner</p>
+      <h1 id="title"><span class="t1">The</span> <span class="t2">Jane</span> <span class="t3">Method</span></h1>
+      <p class="sub">How to be Patrick Jane <em>(minus the con)</em></p>
+      <p class="deck">A field guide to the most charming man in any room: the suit with no tie, the endless tea, the couch, the eye that misses nothing, and the old carnival tricks behind it all. Mostly harmless. Lightly spoiled.</p>
+      <p class="byline">By Aditya Chaubey · <time datetime="2026-11-22">November 2026</time> · 40 min · 11 exhibits to play with</p>
+      <p class="spoil"><span>Spoiler level</span> Pilot premise and personality only. No Red John reveals, no endings.</p>
+    </div>
+    <figure class="hero-cup" aria-hidden="true">
+      <svg viewBox="0 0 420 420" id="heroCup">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="58%" r="50%"><stop offset="0" stop-color="#f3c573" stop-opacity=".55"/><stop offset="1" stop-color="#f3c573" stop-opacity="0"/></radialGradient>
+          <linearGradient id="porc" x1="0" x2="1"><stop offset="0" stop-color="#cfe0ec"/><stop offset=".45" stop-color="#f7fbfe"/><stop offset="1" stop-color="#9fbcd2"/></linearGradient>
+          <linearGradient id="porcD" x1="0" x2="1"><stop offset="0" stop-color="#8fb0c8"/><stop offset=".5" stop-color="#d9e7f1"/><stop offset="1" stop-color="#7c9db6"/></linearGradient>
+          <radialGradient id="teaG" cx="40%" cy="40%" r="70%"><stop offset="0" stop-color="#b5652a"/><stop offset="1" stop-color="#5a2a0e"/></radialGradient>
+          <linearGradient id="goldG" x1="0" x2="1"><stop offset="0" stop-color="#a87a2a"/><stop offset=".5" stop-color="#f3d27e"/><stop offset="1" stop-color="#a87a2a"/></linearGradient>
+        </defs>
+        <circle cx="210" cy="250" r="200" fill="url(#glow)"/>
+        <g class="steam">
+          <path d="M180 170c-18-30 22-46 4-80s18-48 6-74"/>
+          <path d="M212 166c-14-28 20-44 6-76s14-46 4-70"/>
+          <path d="M244 172c-18-26 18-40 2-70s16-44 8-66"/>
+        </g>
+        <ellipse cx="210" cy="338" rx="168" ry="40" fill="#0b0f17" opacity=".45"/>
+        <ellipse cx="210" cy="322" rx="160" ry="38" fill="url(#porcD)"/>
+        <ellipse cx="210" cy="316" rx="160" ry="36" fill="url(#porc)"/>
+        <ellipse cx="210" cy="316" rx="150" ry="32" fill="none" stroke="url(#goldG)" stroke-width="3"/>
+        <ellipse cx="210" cy="318" rx="86" ry="18" fill="#9fbcd2" opacity=".6"/>
+        <path d="M318 210c48-6 62 22 50 46s-40 32-72 26" fill="none" stroke="url(#porcD)" stroke-width="20" stroke-linecap="round"/>
+        <path d="M318 210c48-6 62 22 50 46s-40 32-72 26" fill="none" stroke="#f7fbfe" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+        <path d="M96 196h228c0 58-18 92-40 108-14 10-38 14-74 14s-60-4-74-14c-22-16-40-50-40-108z" fill="url(#porc)"/>
+        <path d="M120 236c40 10 140 10 180 0" fill="none" stroke="#3f6f99" stroke-width="3" opacity=".75"/>
+        <path d="M128 252c10-8 20 8 30 0s20 8 30 0 20 8 30 0 20 8 30 0 20 8 30 0" fill="none" stroke="#3f6f99" stroke-width="2.5" opacity=".7"/>
+        <g fill="#3f6f99" opacity=".75"><circle cx="150" cy="272" r="4"/><circle cx="210" cy="276" r="4"/><circle cx="270" cy="272" r="4"/></g>
+        <ellipse cx="210" cy="196" rx="114" ry="22" fill="url(#porcD)"/>
+        <ellipse cx="210" cy="198" rx="104" ry="17" fill="url(#teaG)"/>
+        <ellipse class="shine" cx="182" cy="194" rx="34" ry="5" fill="#f6c88a" opacity=".55"/>
+        <ellipse cx="210" cy="196" rx="114" ry="22" fill="none" stroke="url(#goldG)" stroke-width="4"/>
+      </svg>
+    </figure>
+  </div>
+  <a class="scroll-cue" href="#story" aria-label="Start reading"><span>Begin the case</span><i></i></a>
+</section>
+
+<main id="story">
+
+<!-- ═════════════ INTRO ═════════════ -->
+<section class="intro paper">
+  <div class="col">
+    <article class="dossier rv" aria-label="Case file">
+      <div class="d-tab">CBI · Consultant file</div>
+      <div class="d-grid">
+        <div class="mug">
+          <svg viewBox="0 0 160 190" aria-hidden="true"><rect x="0" y="0" width="160" height="190" fill="#e8dcc4"/><g stroke="#b9a986" stroke-width="1"><line x1="0" y1="40" x2="160" y2="40"/><line x1="0" y1="80" x2="160" y2="80"/><line x1="0" y1="120" x2="160" y2="120"/><line x1="0" y1="160" x2="160" y2="160"/></g><path d="M44 96h72c0 26-8 40-18 46-6 4-12 5-18 5s-12-1-18-5c-10-6-18-20-18-46z" fill="#f4f8fb" stroke="#1c2230" stroke-width="2.5"/><path d="M116 104c16-2 20 8 16 16s-12 10-22 8" fill="none" stroke="#1c2230" stroke-width="2.5"/><ellipse cx="80" cy="96" rx="36" ry="7" fill="#7a3b14" stroke="#1c2230" stroke-width="2.5"/><ellipse cx="80" cy="152" rx="54" ry="9" fill="#f4f8fb" stroke="#1c2230" stroke-width="2.5"/><path d="M68 84c-6-10 8-14 2-24M88 82c-6-10 8-14 2-24" fill="none" stroke="#1c2230" stroke-width="2" stroke-linecap="round"/><text x="80" y="182" text-anchor="middle" font-family="Courier Prime, monospace" font-size="11" fill="#1c2230">No. 0001</text></svg>
+          <p class="hand">Subject refused to be photographed. Sent this instead.</p>
+        </div>
+        <dl>
+          <dt>Name</dt><dd>Patrick Jane</dd>
+          <dt>Occupation</dt><dd>Consultant, California Bureau of Investigation. Formerly a TV “psychic”.</dd>
+          <dt>Raised</dt><dd>On the carnival circuit, as the boy wonder in his father's mind-reading act</dd>
+          <dt>Habits</dt><dd>Tea. Naps. Telling people things they'd rather he didn't know.</dd>
+          <dt>Vehicle</dt><dd>A vintage Citroën DS that he refuses to replace</dd>
+          <dt>Known associates</dt><dd>Agent Teresa Lisbon and her team: Cho, Rigsby, Van Pelt</dd>
+          <dt>Weakness</dt><dd>Cannot leave a mystery alone. Or a buffet.</dd>
+        </dl>
+      </div>
+      <div class="stamp" aria-hidden="true">Charming</div>
+    </article>
+
+    <p class="dropcap rv">For seven seasons, from 2008 to 2015, a man in a three-piece suit and no tie wandered into crime scenes, helped himself to the suspects' biscuits, and told a grieving widow something about her husband that nobody else in the room had noticed. By lunchtime he'd worked out who did it. Then he lay down on a leather couch and had a nap.</p>
+    <p class="rv">That man is <strong>Patrick Jane</strong>, played by Simon Baker in CBS's <em>The Mentalist</em>. In the show's first episode we learn the essentials. Jane used to be a celebrity psychic, and a very good fake one. On television, he mocked a serial killer called Red John, and Red John took a terrible revenge on his family. Jane quit the act, admitted there's no such thing as psychics, and now consults for the California Bureau of Investigation. He uses every trick of the con man's trade to catch people who are lying.</p>
+    <p class="rv">The show's creator, Bruno Heller, has said he imagined someone in the mould of Cary Grant: a man with grace, physical and otherwise. That's the bit worth studying. Strip away the TV writing and most of what makes Jane magnetic is <span class="hl">learnable</span>. He pays attention, notices things, stays calm, plays a little, and carries a few good tricks in his pocket.</p>
+    <aside class="margin rv"><span class="hand">One honest caveat before we start:</span> Jane is always right because the writers make him right. You won't be. The goal is to borrow his <em>habits</em>, not his hit rate, and to leave the cruel bits on the screen where they belong.</aside>
+
+    <div class="six rv" aria-label="The six ingredients">
+      <h3 class="six-h">The six ingredients of a Jane</h3>
+      <div class="six-grid" id="sixGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ I. THE LOOK ═════════════ -->
+<section class="chapter dusk" id="ch-look" data-rail="The look">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">I</span><p class="ch-k">Chapter one</p><h2>The Look</h2><p class="ch-d">Dress like a man who just remembered he's handsome.</p></header>
+    <p class="rv">Jane's uniform is a three-piece suit, usually in a soft grey, charcoal or a brownish tone, worn with <strong>no tie</strong> and the top button of the shirt undone. It shouldn't work. A waistcoat is the most formal thing in a man's wardrobe, and an open collar is the least. Put them together and you get the look of someone who was invited to the gala but would rather be talking to the waiters.</p>
+    <p class="rv">That's the whole trick of his style: <span class="hl">formal pieces, relaxed attitude</span>. The suit says he takes the room seriously. The missing tie says he doesn't take himself seriously. Add slightly tousled hair, brown shoes and an easy, lopsided smile, and you have a man who looks put together without looking like he tried.</p>
+    <div class="rules rv">
+      <div class="rule"><b>Fit beats fabric.</b> A ₹9,000 suit from a good local tailor that fits you beats a ₹60,000 one that doesn't. Shoulders should end where yours end, and the jacket should button without pulling into an X.</div>
+      <div class="rule"><b>The waistcoat does the work.</b> It's what makes a tieless suit look deliberate. Leave the bottom button undone; that's tradition, not sloppiness.</div>
+      <div class="rule"><b>One open button.</b> Not two. Jane is relaxed, not on holiday in Goa.</div>
+      <div class="rule"><b>Warm, quiet colours.</b> Greys, blue-greys, browns, a white or pale blue shirt. Nothing shiny, nothing loud.</div>
+      <div class="rule"><b>Posture is part of the outfit.</b> Jane leans, strolls and puts his hands in his pockets. He never hurries. A man who doesn't rush looks like a man in control.</div>
+    </div>
+
+    <figure class="exhibit rv" id="wardrobe">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit A</span><h3>Dress the consultant</h3><p>Build an outfit and see how Jane it is.</p></figcaption>
+      <div class="ex-body wd">
+        <div class="wd-fig"><svg viewBox="0 0 240 450" id="wdSvg" role="img" aria-label="Outfit preview"></svg></div>
+        <div class="wd-ctl" id="wdCtl"></div>
+        <div class="wd-meter"><div class="wd-bar"><span id="wdBar"></span></div><p id="wdVerdict" aria-live="polite"></p></div>
+      </div>
+    </figure>
+
+    <h3 class="sub-h rv">The car</h3>
+    <figure class="ds rv" id="ds">
+      <svg viewBox="0 0 640 250" role="img" aria-label="Illustration of a pale blue vintage Citroën DS rising on its suspension">
+        <defs>
+          <linearGradient id="dsBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9cbe3"/><stop offset=".55" stop-color="#7fa8c9"/><stop offset="1" stop-color="#4f7795"/></linearGradient>
+          <linearGradient id="dsRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#d9d2c2"/></linearGradient>
+          <linearGradient id="dsGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3a52"/><stop offset=".6" stop-color="#4f6c8c"/><stop offset="1" stop-color="#22324a"/></linearGradient>
+        </defs>
+        <ellipse cx="320" cy="226" rx="270" ry="10" fill="#000" opacity=".25" class="ds-shadow"/>
+        <g class="wheel"><circle cx="152" cy="190" r="34" fill="#1b1d22"/><circle cx="152" cy="190" r="19" fill="#c9ccd1"/><circle cx="152" cy="190" r="6" fill="#7d828a"/></g>
+        <g class="wheel"><circle cx="458" cy="190" r="34" fill="#1b1d22"/><circle cx="458" cy="190" r="19" fill="#c9ccd1"/><circle cx="458" cy="190" r="6" fill="#7d828a"/></g>
+        <g class="ds-body">
+          <path d="M40 172c0-15 18-27 58-35l104-22c16-19 36-34 64-40h126c30 2 82 30 130 52 26 12 44 22 46 36v20c0 9-8 13-18 13h-60c-2-6-10-10-18-10H210c-2-24-26-40-58-40s-56 18-58 40H60c-12 0-20-6-20-14z" fill="url(#dsBody)"/>
+          <path d="M266 75h126c22 2 50 14 82 32H214c14-16 30-28 52-32z" fill="url(#dsRoof)"/>
+          <path d="M222 106c12-12 26-22 46-25h58v25z" fill="url(#dsGlass)"/>
+          <path d="M334 81h56c18 2 40 12 62 25H334z" fill="url(#dsGlass)"/>
+          <path d="M60 150h520" stroke="#e8eef3" stroke-width="2.5" opacity=".7"/>
+          <path d="M330 110v66M214 112l-6 64" stroke="#3d5f7b" stroke-width="1.5" opacity=".7"/>
+          <path d="M44 170h40M560 176h46" stroke="#e1e5ea" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="60" cy="148" r="8" fill="#fff7d6"/><circle cx="80" cy="144" r="7" fill="#fff7d6"/>
+          <path d="M574 150h18" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/>
+          <path d="M300 126h18M420 126h18" stroke="#e1e5ea" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <defs><linearGradient id="beamG" x1="1" x2="0"><stop offset="0" stop-color="#fff7d6" stop-opacity=".55"/><stop offset="1" stop-color="#fff7d6" stop-opacity="0"/></linearGradient></defs>
+        <g class="ds-beam"><path d="M54 140L-30 116v64L54 156z" fill="url(#beamG)"/></g>
+      </svg>
+      <figcaption>A pale blue Citroën DS. When the engine starts, a DS rises on its hydropneumatic suspension like it's waking up. Scroll back and watch it.</figcaption>
+    </figure>
+    <p class="rv">Jane drives a vintage <strong>Citroën DS</strong>, the futuristic French saloon that first appeared in 1955 and looked like a spaceship parked among bullock carts. Car databases put his at a DS 21 Pallas from the early 1970s. It's slow, quirky and beautiful, and he'll hear no criticism of it.</p>
+    <p class="rv">The lesson isn't “buy a vintage car.” It's that <span class="hl">a man is more interesting when he owns one beautiful, slightly impractical thing and looks after it</span>. A fountain pen, a mechanical watch, an old Royal Enfield, a battered acoustic guitar. Something with a story that people ask about.</p>
+  </div>
+</section>
+
+<!-- ═════════════ II. TEA ═════════════ -->
+<section class="chapter tea" id="ch-tea" data-rail="Tea">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">II</span><p class="ch-k">Chapter two</p><h2>The Ritual</h2><p class="ch-d">Never trust a man who doesn't stop for tea.</p></header>
+    <p class="rv">Jane drinks tea the way other detectives drink coffee: constantly, but with far more ceremony. It's always in a proper cup on a saucer, never a mug. He makes it in the CBI kitchen, carries it to crime scenes, and sips it while other people panic.</p>
+    <p class="rv">This isn't just a quirk. The tea does three useful jobs:</p>
+    <ol class="trio rv">
+      <li><b>It buys time.</b> Making tea is a five-minute pause nobody questions. It's where Jane does his thinking while looking as though he's doing nothing.</li>
+      <li><b>It's a prop.</b> A cup gives your hands somewhere to be and your face a reason to be calm. Hard to look rattled while holding a saucer.</li>
+      <li><b>It disarms.</b> Jane often offers tea to suspects and witnesses. Hospitality lowers people's guard, which is precisely why it works. In India we already know this: no serious conversation ever happened without chai.</li>
+    </ol>
+
+    <figure class="exhibit rv" id="brew">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit B</span><h3>The perfect cup</h3><p>Pick a tea, steep it properly, and use the time to think.</p></figcaption>
+      <div class="ex-body brew">
+        <div class="brew-pick" id="brewPick" role="radiogroup" aria-label="Choose a tea"></div>
+        <div class="brew-stage">
+          <svg viewBox="0 0 260 220" id="brewCup" aria-hidden="true">
+            <g class="bsteam"><path d="M104 70c-12-18 12-26 2-46"/><path d="M130 66c-12-18 12-26 2-46"/><path d="M156 70c-12-18 12-26 2-46"/></g>
+            <ellipse cx="130" cy="196" rx="104" ry="18" fill="#cfe0ec" stroke="#1c2230" stroke-width="2.5"/>
+            <path d="M200 104c30-4 38 14 30 30s-26 20-44 16" fill="none" stroke="#1c2230" stroke-width="12" stroke-linecap="round"/>
+            <path d="M200 104c30-4 38 14 30 30s-26 20-44 16" fill="none" stroke="#f4f8fb" stroke-width="6" stroke-linecap="round"/>
+            <path d="M56 92h148c0 40-12 64-28 74-10 7-26 10-46 10s-36-3-46-10c-16-10-28-34-28-74z" fill="#f4f8fb" stroke="#1c2230" stroke-width="2.5"/>
+            <ellipse cx="130" cy="92" rx="74" ry="14" fill="#f4f8fb" stroke="#1c2230" stroke-width="2.5"/>
+            <ellipse cx="130" cy="94" rx="66" ry="10" id="brewTea" fill="#e9d9b8"/>
+            <path d="M120 40v54" stroke="#1c2230" stroke-width="1.5" id="brewString"/>
+            <rect x="110" y="26" width="20" height="16" rx="2" fill="#d9a441" stroke="#1c2230" stroke-width="1.5" id="brewTag"/>
+          </svg>
+          <div class="brew-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" class="r-bg"/><circle cx="50" cy="50" r="44" class="r-fg" id="brewRing"/></svg><div class="brew-time"><b id="brewT">4:00</b><small id="brewMeta">95°C · 4 min</small></div></div>
+        </div>
+        <p class="brew-note" id="brewNote"></p>
+        <div class="btns"><button class="btn" id="brewGo">Start steeping</button><button class="btn ghost" id="brewFast" disabled>Fast-forward ×20</button></div>
+        <p class="src">Times and temperatures are standard starting points for each style. Adjust to taste. Jane never tells us his blend; fans assume something black and English.</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ III. THE COUCH ═════════════ -->
+<section class="chapter paper" id="ch-couch" data-rail="The couch">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">III</span><p class="ch-k">Chapter three</p><h2>The Couch</h2><p class="ch-d">The fine art of looking idle while thinking.</p></header>
+    <figure class="couch rv" aria-hidden="true">
+      <svg viewBox="0 0 600 230">
+        <defs><linearGradient id="lea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a4b2a"/><stop offset="1" stop-color="#5a2e18"/></linearGradient></defs>
+        <ellipse cx="300" cy="214" rx="250" ry="10" fill="#1c2230" opacity=".15"/>
+        <rect x="70" y="60" width="460" height="90" rx="26" fill="url(#lea)" stroke="#1c2230" stroke-width="3"/>
+        <rect x="90" y="122" width="420" height="58" rx="16" fill="#7a3f22" stroke="#1c2230" stroke-width="3"/>
+        <path d="M300 124v56" stroke="#1c2230" stroke-width="2" opacity=".5"/>
+        <rect x="40" y="96" width="66" height="96" rx="24" fill="url(#lea)" stroke="#1c2230" stroke-width="3"/>
+        <rect x="494" y="96" width="66" height="96" rx="24" fill="url(#lea)" stroke="#1c2230" stroke-width="3"/>
+        <path d="M90 196v14M510 196v14" stroke="#1c2230" stroke-width="6" stroke-linecap="round"/>
+        <g class="sleeper">
+          <path d="M128 124c30-14 260-16 330-6 10 2 14 8 12 14H124c-4-2-2-6 4-8z" fill="#5b6470" stroke="#1c2230" stroke-width="2.5"/>
+          <circle cx="470" cy="104" r="20" fill="#e8c4a0" stroke="#1c2230" stroke-width="2.5"/>
+          <path d="M452 96c2-16 26-20 36-6 4-6 10-2 8 4 6 2 4 10-2 12" fill="#c9a26b" stroke="#1c2230" stroke-width="2.5"/>
+          <path d="M462 108c3 2 6 2 9 0" stroke="#1c2230" stroke-width="2" fill="none"/>
+          <path d="M108 118c10-6 22-4 26 4" fill="#6b4a2e" stroke="#1c2230" stroke-width="2.5"/>
+        </g>
+        <g class="zz" font-family="Fraunces, serif" font-style="italic" fill="#1c2230"><text x="500" y="70" font-size="22">z</text><text x="520" y="50" font-size="28">z</text><text x="546" y="26" font-size="34">z</text></g>
+        <g transform="translate(560 190)"><ellipse cx="0" cy="14" rx="22" ry="5" fill="#cfe0ec" stroke="#1c2230" stroke-width="2"/><path d="M-14 -4h28c0 10-4 16-14 16S-14 6-14 -4z" fill="#f4f8fb" stroke="#1c2230" stroke-width="2"/></g>
+      </svg>
+    </figure>
+    <p class="rv">Every office has a man who seems to do nothing and still gets the answer first. At the CBI it's Jane, horizontal on a battered brown leather couch while the agents work the phones. The couch is a running joke throughout the series, and later he makes a point of finding one wherever he goes.</p>
+    <p class="rv">It looks like laziness. It's actually closer to a well-researched thinking strategy. Psychologists call it <strong>incubation</strong>: stepping away from a problem you're stuck on often helps you solve it. A 2009 meta-analysis by Ut Na Sio and Thomas Ormerod pooled 117 studies and found a real incubation effect. It was strongest for creative problems, the kind with more than one way in, and when the break was filled with something undemanding. Lying on a couch counts.</p>
+    <p class="rv">Short naps help too. A well-known NASA study of long-haul pilots found that a planned cockpit rest, averaging about 26 minutes of sleep, improved performance by around 34% and alertness by 54%. Jane would call that vindication.</p>
+
+    <figure class="exhibit rv" id="rat">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit C</span><h3>The couch test</h3><p>Each set of three words shares one hidden link word. <i>cottage · swiss · cake</i> → <b>cheese</b>. Solve what you can, then take a couch break and come back to the rest.</p></figcaption>
+      <div class="ex-body">
+        <div class="rat-list" id="ratList"></div>
+        <div class="btns"><button class="btn" id="ratBreak">Lie on the couch (40 s)</button><button class="btn ghost" id="ratGive">Show answers</button></div>
+        <p class="rat-score" id="ratScore" aria-live="polite"></p>
+        <div class="rat-over" id="ratOver" hidden><div class="ro-in"><p class="hand">Don't think about the words.</p><p class="ro-t" id="ratT">40</p><p class="ro-s">Watch the ceiling. Count the tiles. Imagine a very good biscuit.</p></div></div>
+        <p class="src">Puzzles in the style of Mednick's Remote Associates Test, the standard lab measure of this kind of thinking.</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ IV. THE EYE ═════════════ -->
+<section class="chapter night" id="ch-eye" data-rail="The eye">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">IV</span><p class="ch-k">Chapter four</p><h2>The Eye</h2><p class="ch-d">Everyone sees. Hardly anyone notices.</p></header>
+    <p class="rv">Jane's signature move is walking into a room and, within a minute, saying something about a stranger that makes them go pale. It isn't magic. It's <strong>observation plus inference</strong>, the same engine Sherlock Holmes runs on. He looks at hands, shoes, posture, what's out of place and what's missing. Then he makes a quick, educated guess and watches how people react to it.</p>
+    <p class="rv">You can train this. Start with four places most people never look:</p>
+    <div class="look4 rv">
+      <div><b>Hands</b><span>Calluses, rings or the pale band where one used to be, bitten nails, ink, paint, tremors.</span></div>
+      <div><b>Shoes</b><span>Cost versus care. Worn heels, fresh polish, mud, the wrong shoes for the outfit.</span></div>
+      <div><b>Wear and tear</b><span>Which side the bag strap has rubbed, a sun-darkened forearm, a faded patch where a badge usually goes.</span></div>
+      <div><b>What's missing</b><span>The phone they aren't checking, the photo that isn't on the desk, the question they never ask.</span></div>
+    </div>
+    <p class="rv">The second half of the skill matters more and gets talked about less: <span class="hl">hold your conclusions loosely</span>. Every clue has several explanations. Jane picks the right one because the script says so. Your job is to come up with two or three possible stories, then quietly watch for the evidence that rules them out.</p>
+
+    <figure class="exhibit dark rv" id="stranger">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit D</span><h3>Read the stranger</h3><p>A man is waiting at a Bengaluru bus stop. Tap anything that catches your eye.</p></figcaption>
+      <div class="ex-body st">
+        <div class="st-fig"><svg viewBox="0 0 360 520" id="stSvg" role="img" aria-label="Illustration of a man at a bus stop with seven clues to tap"></svg></div>
+        <div class="st-panel"><p class="st-count"><b id="stN">0</b> / 7 clues found</p><div id="stOut" aria-live="polite"><p class="st-empty">Tap the glowing spots, or look closer and find them yourself.</p></div></div>
+      </div>
+    </figure>
+
+    <figure class="exhibit dark rv" id="desk">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit E</span><h3>Twelve seconds</h3><p>You'll see a desk for twelve seconds. Then it disappears and I ask you about it. Ready?</p></figcaption>
+      <div class="ex-body dk">
+        <div class="dk-stage" id="dkStage">
+          <svg viewBox="0 0 600 360" id="dkSvg" aria-hidden="true"></svg>
+          <div class="dk-cover" id="dkCover"><button class="btn" id="dkGo">Show me the desk</button></div>
+          <div class="dk-timer" id="dkTimer" hidden><span id="dkT">12</span></div>
+        </div>
+        <div class="dk-q" id="dkQ" hidden></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ V. COLD READING ═════════════ -->
+<section class="chapter velvet" id="ch-reading" data-rail="Cold reading">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">V</span><p class="ch-k">Chapter five</p><h2>The Old Act</h2><p class="ch-d">How a fake psychic reads a stranger, and why it works on almost everyone.</p></header>
+    <p class="rv">Before the CBI, Jane made a fortune as a psychic. In the show he's open about it: he was a fraud, he knew it, and he was brilliant at it. His main tool was <strong>cold reading</strong>, a set of conversational techniques that make you feel someone has seen straight into your soul when they've mostly been reading the averages.</p>
+    <p class="rv">Try it on yourself first. Then I'll show you how it was done.</p>
+
+    <figure class="exhibit gold rv" id="reading">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit F</span><h3>Your reading</h3><p>Give me two small details. I'll do the rest.</p></figcaption>
+      <div class="ex-body rd" id="rdBody">
+        <div class="rd-step" id="rdStep1">
+          <label>Your birth month <select id="rdMonth"></select></label>
+          <label>Pick the image that calls to you
+            <span class="rd-sym" id="rdSym" role="radiogroup"></span>
+          </label>
+          <button class="btn" id="rdGo">Read me</button>
+        </div>
+        <div class="rd-step" id="rdStep2" hidden>
+          <div class="rd-card" id="rdCard"></div>
+          <div class="rd-rate"><p>How accurate was that, from 0 to 5?</p><div id="rdStars" role="radiogroup" aria-label="Accuracy rating"></div></div>
+        </div>
+        <div class="rd-step" id="rdStep3" hidden></div>
+      </div>
+    </figure>
+
+    <p class="rv">That's the <strong>Barnum effect</strong> (also called the Forer effect). In 1949 the psychologist Bertram Forer gave his students a personality test and then handed each one a “personalised” profile. Students rated how well it described them on a scale of 0 to 5, and the average was <strong>4.26</strong>. Every student had received exactly the same text, mostly lifted from a newsstand astrology book.</p>
+
+    <div class="tech rv" id="tech" aria-label="Cold reading techniques"></div>
+
+    <p class="rv">The show often opens a case with Jane taking apart some other fake medium or guru, and that's the real value of knowing the techniques. Once you've seen the machinery you can't stop seeing it, whether in a palmist on a train, a “godman” with a suspiciously good grasp of your family troubles, or a scam call that seems to know just enough. <span class="hl">Learn cold reading the way you'd learn self-defence: to protect yourself, never to use it on someone.</span></p>
+  </div>
+</section>
+
+<!-- ═════════════ VI. TELLS ═════════════ -->
+<section class="chapter paper" id="ch-tells" data-rail="Spotting lies">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">VI</span><p class="ch-k">Chapter six</p><h2>Reading Lies</h2><p class="ch-d">The bit where science is ruder than television.</p></header>
+    <p class="rv">On screen, Jane can tell you're lying from a flicker of the eyes. In reality, people are terrible at spotting lies, and that includes the professionals. In 2006 Charles Bond and Bella DePaulo pooled 206 studies covering 24,483 judges. On average, people picked out lies and truths correctly <strong>54% of the time</strong>, where 50% is a coin toss.</p>
+
+    <figure class="coin-fig rv" id="coinFig">
+      <div class="cf-row">
+        <div class="cf-bar"><span class="cf-l">Coin toss</span><div class="cf-track"><i style="--w:50%"></i></div><b>50%</b></div>
+        <div class="cf-bar me"><span class="cf-l">Average person</span><div class="cf-track"><i style="--w:53%"></i></div><b>53%</b></div>
+        <div class="cf-bar me"><span class="cf-l">Police, judges, “experts”</span><div class="cf-track"><i style="--w:55%"></i></div><b>55%</b></div>
+        <div class="cf-bar jane"><span class="cf-l">Patrick Jane</span><div class="cf-track"><i style="--w:100%"></i></div><b>~100%</b></div>
+      </div>
+      <figcaption>Lie-detection accuracy. The first three bars are from Bond &amp; DePaulo (2006). The last one is from the writers' room.</figcaption>
+    </figure>
+
+    <p class="rv">Why so bad? Because the “tells” everyone believes in mostly don't exist. A huge 2003 review of 158 possible cues found that the strongest signs of lying are weak and are about what people <em>say</em>, not how they twitch. Liars tend to give fewer details, sound less engaged and tell stories that hang together less well. Gaze aversion and fidgeting, the classic movie tells, barely register.</p>
+    <p class="rv">Here's the twist, though. Watch what Jane actually does in most episodes. He rarely relies on a twitch alone. He <strong>provokes</strong>. He sets a trap, plants a rumour, stages a little scene, then watches what the guilty person <em>does</em>. Researchers have reached something similar. The most promising methods make lying harder work: unexpected questions, asking for the story backwards, and checking claims against evidence.</p>
+
+    <figure class="exhibit rv" id="myths">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit G</span><h3>Myth or method?</h3><p>Eight popular beliefs about lying. Which ones survive the research?</p></figcaption>
+      <div class="ex-body"><div class="my-card" id="myCard" aria-live="polite"></div></div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ VII. MIND GAMES ═════════════ -->
+<section class="chapter night" id="ch-mind" data-rail="Mind games">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">VII</span><p class="ch-k">Chapter seven</p><h2>Mind Games</h2><p class="ch-d">Suggestion, hypnosis and the art of knowing what you'll say next.</p></header>
+    <p class="rv">The word <em>mentalist</em> comes from stage magic. It means a performer who appears to read minds, predict choices and plant suggestions. Jane does all three. Sometimes he hypnotises a witness to recover a memory, and sometimes he nudges a suspect into blurting out what they've been hiding.</p>
+    <p class="rv">Hypnosis is real, but not the way TV shows it. The American Psychological Association's hypnosis division describes it as a state of focused attention, with less awareness of the surroundings and a greater readiness to respond to suggestion. It's used clinically for pain and anxiety. It can't make anyone do something against their will, and memories “recovered” under hypnosis are notoriously unreliable, which is why courts treat them with suspicion.</p>
+    <p class="rv">The everyday version of Jane's mind-reading is much simpler: <strong>people are more predictable than they think</strong>. Ask a room to think of something, and most minds land on the same typical answer. Mentalists stack those odds and keep an escape route for the misses. Let's see if you're typical.</p>
+
+    <figure class="exhibit dark rv" id="predict">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit H</span><h3>I knew you'd say that</h3><p>Answer quickly, without overthinking. My prediction is already sealed in the envelope.</p></figcaption>
+      <div class="ex-body pr" id="prBody"></div>
+    </figure>
+
+    <p class="rv">Jane also mentions keeping a <strong>memory palace</strong>, the ancient technique of storing information in an imaginary building. It's one of the few things on his list that works exactly as well off screen as on it. lrn has a whole note on how to build one: <a href="/lrn/memory-palace/">The Memory Palace</a>.</p>
+  </div>
+</section>
+
+<!-- ═════════════ VIII. SLEIGHT ═════════════ -->
+<section class="chapter velvet" id="ch-sleight" data-rail="Sleight of hand">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">VIII</span><p class="ch-k">Chapter eight</p><h2>Sleight of Hand</h2><p class="ch-d">Every good party has one man with a coin and a straight face.</p></header>
+    <p class="rv">Jane grew up in a carnival, and it shows. He palms objects, does card and coin tricks, picks the odd lock and pockets a thing or two that isn't his. In the show it's usually for a case. At a dinner party, a few good tricks make you the most interesting man at the table, especially with kids, grandparents and anyone who's bored.</p>
+    <p class="rv">Magic is also the best practical lesson in <strong>attention</strong> you'll ever get. A trick works because the audience looks where you want them to look and remembers what you want them to remember. That's misdirection, and once you understand it you'll see it everywhere, from advertising to politics.</p>
+
+    <figure class="exhibit gold rv" id="trick">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit I</span><h3>The vanishing card</h3><p>Choose a card <em>in your head</em>. Don't click it. Just remember it.</p></figcaption>
+      <div class="ex-body tk">
+        <div class="tk-row" id="tkRow"></div>
+        <p class="tk-say" id="tkSay" aria-live="polite">Look at all six. Pick one silently and fix it in your mind.</p>
+        <div class="btns"><button class="btn" id="tkGo">I've got my card</button><button class="btn ghost" id="tkHow" hidden>How did you do that?</button></div>
+        <div class="tk-how" id="tkHowBox" hidden></div>
+      </div>
+    </figure>
+
+    <div class="learn rv">
+      <h3>Your first three tricks</h3>
+      <ol>
+        <li><b>The French drop.</b> The classic coin vanish: you seem to take a coin from one hand and it's gone. Two minutes to learn and a lifetime to make it smooth. Practise in a mirror, then on one forgiving friend.</li>
+        <li><b>A self-working card trick.</b> Tricks that work by maths, such as the 21-card trick or the “key card” principle, let you focus entirely on performing. Performance is 80% of magic.</li>
+        <li><b>The coin roll.</b> Walking a coin across your knuckles is less a trick than a fidget with style. Perfect for meetings, if you can stop people staring.</li>
+      </ol>
+      <p>If you want a proper course, <em>Mark Wilson's Complete Course in Magic</em> is the classic beginner's bible, <em>The Royal Road to Card Magic</em> covers cards and <em>Modern Coin Magic</em> covers coins. Ten minutes a day for a month gets you a trick worth showing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ IX. CHARM ═════════════ -->
+<section class="chapter dusk" id="ch-charm" data-rail="Charm">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">IX</span><p class="ch-k">Chapter nine</p><h2>The Charm</h2><p class="ch-d">Make people feel seen, then make them laugh.</p></header>
+    <p class="rv">Strip away the tricks and Jane's real superpower is how he makes people feel. Children adore him. Elderly witnesses tell him things they've told nobody. Even suspects find themselves smiling. His charm comes from four habits, and none of them needs a script.</p>
+    <div class="charm4 rv">
+      <div class="c4"><span class="c4-n">1</span><b>Specific attention</b><p>He notices the particular thing about you, not the generic one. “Nice shirt” is forgettable. “You've ironed that collar twice, big day?” is unforgettable.</p></div>
+      <div class="c4"><span class="c4-n">2</span><b>Playfulness</b><p>He teases, jokes and treats awkward moments as games. He laughs at himself first, which gives everyone else permission to relax.</p></div>
+      <div class="c4"><span class="c4-n">3</span><b>Unhurried warmth</b><p>He's never checking his watch. Slowness reads as confidence, and confidence reads as safety.</p></div>
+      <div class="c4"><span class="c4-n">4</span><b>Kindness to the small</b><p>Watch how he treats the receptionist, a scared kid, a grieving parent. Gentle and patient, almost every time. That's the tell of real charm.</p></div>
+    </div>
+    <p class="rv">The research agrees: attention is the heart of being liked. A Harvard study of conversations found that people who asked more questions, especially follow-ups, were liked more by their partners. Dale Carnegie said it in 1936 with less data: a person's name is, to that person, the sweetest sound in any language. For more on this, see lrn's note on <a href="/lrn/conversation/">the art of conversation</a>.</p>
+    <p class="rv">The danger is that the same skills, slightly adjusted, become manipulation. Jane crosses that line a lot. You shouldn't. Here's a quick calibration.</p>
+
+    <figure class="exhibit rv" id="sorter">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit J</span><h3>Charming, too much, or a con?</h3><p>Decide where each move belongs.</p></figcaption>
+      <div class="ex-body"><div class="so-list" id="soList"></div><p class="so-score" id="soScore" aria-live="polite"></p></div>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ X. SHADOW ═════════════ -->
+<section class="chapter shadow" id="ch-shadow" data-rail="The shadow">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">X</span><p class="ch-k">Chapter ten</p><h2>Behind the Smile</h2><p class="ch-d">The parts of Jane you shouldn't copy, and the one you should.</p></header>
+    <p class="rv">It's easy to forget, between the tea and the jokes, that Jane is a deeply wounded man. The grin, the pranks and the showing off sit on top of a grief he barely talks about and a guilt he can't put down. The show is clear-eyed about what that costs him and the people around him. So here's the honest list of what to leave on screen:</p>
+    <div class="dont rv">
+      <div><b>He lies to his friends.</b> Constantly, and usually “for their own good.” It works in a plot. In life, every lie spends trust you might need later.</div>
+      <div><b>He humiliates people.</b> Reading a stranger's secrets aloud in front of others is cruel, even when it's accurate. Most observations are best kept to yourself or offered privately and kindly.</div>
+      <div><b>He thinks rules are for other people.</b> Lisbon pays for his stunts with her bosses again and again. Charm that leaves other people cleaning up isn't charm. It's a bill someone else gets.</div>
+      <div><b>He hides his pain behind performance.</b> Humour is a great coping tool and a terrible place to live. Jane would have benefited from a good therapist far more than another clever trick.</div>
+    </div>
+    <blockquote class="pull rv"><p>Every Jane needs a Lisbon: someone who likes you enough to tell you <em>no</em>.</p></blockquote>
+    <p class="rv">That's the part to copy. The heart of the show is that Jane, for all his brilliance, isn't a lone genius. He's held together by a team who refuse to give up on him, and above all by Lisbon, who calls him out, covers for him, and keeps him human. A man who's clever without anyone to check him becomes insufferable. A man who has someone like that becomes better.</p>
+    <p class="rv help">If something heavy sits under your own smile, talking helps more than performing. In India, <strong>Tele-MANAS</strong> offers free, confidential support around the clock on <a href="tel:14416">14416</a>.</p>
+
+    <h3 class="sub-h rv">The Jane code</h3>
+    <p class="rv">Eight principles worth keeping. Tap to turn each card over.</p>
+    <div class="code" id="code"></div>
+  </div>
+</section>
+
+<!-- ═════════════ XI. ACADEMY ═════════════ -->
+<section class="chapter paper closing" id="ch-academy" data-rail="30 days">
+  <div class="col">
+    <header class="ch-head rv"><span class="ch-n">XI</span><p class="ch-k">Chapter eleven</p><h2>The Jane Academy</h2><p class="ch-d">Thirty days, ten minutes each. Tick them off as you go.</p></header>
+    <p class="rv">You won't become Patrick Jane in a month. Nobody does, Patrick Jane included. But thirty days of small, specific drills will make you noticeably more observant, calmer, harder to fool and better company. Your progress saves in this browser.</p>
+    <figure class="exhibit rv" id="academy">
+      <figcaption class="ex-head"><span class="ex-tag">Exhibit K</span><h3>Thirty days of drills</h3><p><b id="acN">0</b> of 30 complete · <span id="acRank">Rank: Civilian</span></p></figcaption>
+      <div class="ex-body"><div class="ac-bar"><span id="acBar"></span></div><ol class="ac" id="ac"></ol><div class="btns"><button class="btn ghost" id="acReset">Reset</button></div></div>
+    </figure>
+    <p class="rv sign-off">Be curious about people, not clever at them. Notice everything and announce only the kind things. Keep a trick in your pocket and a kettle on the stove. And when in doubt, have a nap.</p>
+    <p class="rv fin hand">Case closed. Tea's getting cold.</p>
+  </div>
+</section>
+
+<!-- ═════════════ SOURCES ═════════════ -->
+<section class="sources" id="sources">
+  <div class="col">
+    <h2>Sources &amp; further reading</h2>
+    <ol>
+      <li><em>The Mentalist</em> (CBS, 2008–2015), created by Bruno Heller. Series overview: <a href="https://en.wikipedia.org/wiki/The_Mentalist">Wikipedia</a>. Character notes, including Heller's Cary Grant comparison: <a href="https://en.wikipedia.org/wiki/Patrick_Jane">Patrick Jane</a>.</li>
+      <li>Internet Movie Cars Database. <a href="https://www.imcdb.org/vehicle.php?id=208520">1971 Citroën DS 21 Pallas in <em>The Mentalist</em></a>.</li>
+      <li>Forer, B. R. (1949). The fallacy of personal validation: a classroom demonstration of gullibility. <em>Journal of Abnormal and Social Psychology</em>, 44(1), 118–123. <a href="https://doi.org/10.1037/h0059240">doi</a></li>
+      <li>Bond, C. F. &amp; DePaulo, B. M. (2006). Accuracy of deception judgments. <em>Personality and Social Psychology Review</em>, 10(3), 214–234. <a href="https://pubmed.ncbi.nlm.nih.gov/16859438/">PubMed</a></li>
+      <li>DePaulo, B. M. et al. (2003). Cues to deception. <em>Psychological Bulletin</em>, 129(1), 74–118. <a href="https://doi.org/10.1037/0033-2909.129.1.74">doi</a></li>
+      <li>Wiseman, R. et al. (2012). The eyes don't have it: lie detection and neuro-linguistic programming. <em>PLOS ONE</em>, 7(7), e40259. <a href="https://doi.org/10.1371/journal.pone.0040259">doi</a></li>
+      <li>Vrij, A. et al. (2008). Increasing cognitive load to facilitate lie detection: the benefit of recalling an event in reverse order. <em>Law and Human Behavior</em>, 32, 253–265. <a href="https://scholar.google.com/scholar?q=Vrij+2008+recalling+an+event+in+reverse+order">Google Scholar</a></li>
+      <li>Sio, U. N. &amp; Ormerod, T. C. (2009). Does incubation enhance problem solving? A meta-analytic review. <em>Psychological Bulletin</em>, 135(1), 94–120. <a href="https://doi.org/10.1037/a0014212">doi</a></li>
+      <li>Rosekind, M. R. et al. (1994). <em>Crew factors in flight operations IX: Effects of planned cockpit rest on crew performance and alertness in long-haul operations</em>. NASA Technical Memorandum 108839. <a href="https://ntrs.nasa.gov/search?q=planned%20cockpit%20rest%20crew%20performance">NASA NTRS</a></li>
+      <li>Mednick, S. A. (1962). The associative basis of the creative process. <em>Psychological Review</em>, 69(3), 220–232. <a href="https://doi.org/10.1037/h0048850">doi</a></li>
+      <li>Elkins, G. R. et al. (2015). Advancing research and practice: the revised APA Division 30 definition of hypnosis. <em>International Journal of Clinical and Experimental Hypnosis</em>, 63(1), 1–9. <a href="https://doi.org/10.1080/00207144.2014.961870">doi</a></li>
+      <li>Kubovy, M. &amp; Psotka, J. (1976). The predominance of seven and the apparent spontaneity of numerical choices. <em>Journal of Experimental Psychology: Human Perception and Performance</em>, 2(2), 291–294. <a href="https://doi.org/10.1037/0096-1523.2.2.291">doi</a></li>
+      <li>Huang, K. et al. (2017). It doesn't hurt to ask: question-asking increases liking. <em>Journal of Personality and Social Psychology</em>, 113(3), 430–452. <a href="https://doi.org/10.1037/pspi0000097">doi</a></li>
+      <li>Rowland, I. <em>The Full Facts Book of Cold Reading</em>. The standard practitioner's account of the techniques.</li>
+      <li>Brown, D. (2006). <em>Tricks of the Mind</em>. Channel 4 Books. A working mentalist on suggestion, memory, cold reading and why psychics fool people.</li>
+      <li>Carnegie, D. (1936). <em>How to Win Friends and Influence People</em>. Simon &amp; Schuster.</li>
+      <li>Wilson, M. (1975). <em>Mark Wilson's Complete Course in Magic</em>. Courage Books.</li>
+    </ol>
+    <p class="fine">An independent fan guide. <em>The Mentalist</em> and its characters belong to their owners. All illustrations on this page are original drawings, and no imagery from the show is used.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a class="brand" href="/lrn/"><img src="../_shared/mark.svg" alt="" width="22" height="22">lrn<span>.</span></a>
+  <nav aria-label="Footer"><a href="/lrn/">All notes</a><a href="#top">Back to top</a></nav>
+</footer>
+</body>
+</html>
