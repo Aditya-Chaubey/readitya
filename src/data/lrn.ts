@@ -26,6 +26,32 @@ export interface Story {
 
 export const STORIES: Story[] = [
   {
+    slug: 'investing-101',
+    title: 'Investing 101: Build Wealth on Purpose',
+    deck: 'From your first rupee to a portfolio you can stick with. Learn stocks, bonds, funds, costs and strategy, with 11 hands-on tools, an India starting guide and a searchable glossary.',
+    topic: 'Money',
+    date: '2026-11-23',
+    minutes: 40,
+    interactives: 11,
+    cover: '/lrn/investing-101/cover.jpg',
+    bg: '#11281f',
+    fg: '#fffaf0',
+    accent: '#f4c675',
+  },
+  {
+    slug: 'agentic-ai',
+    title: 'The Agentic Playbook: How to Make Real Use of AI Agents',
+    deck: 'What agents are, how they work, where they shine and how to brief them; context engineering, design patterns, tools and MCP, models and costs, evals and traces, prompt injection, a 97-term glossary and the best resources.',
+    topic: 'AI',
+    date: '2026-11-23',
+    minutes: 120,
+    interactives: 20,
+    cover: '/lrn/_covers/agentic-ai.svg',
+    bg: '#f6f3ec',
+    fg: '#13161d',
+    accent: '#ff5a36',
+  },
+  {
     slug: 'chess',
     title: 'The Long Game: Chess for Adults',
     deck: 'Learn chess as a grown-up and get properly good: the pieces, how adults really improve, openings, tactics, checkmates, strategy, endgames, ratings and etiquette, with a coach bot and 13 playable boards.',
